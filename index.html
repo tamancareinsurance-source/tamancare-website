@@ -661,9 +661,304 @@ footer {
 }
 @media (max-width: 480px) {
   .hero-btns { flex-direction: column; }
-  .hero-btns .btn-primary, .hero-btns .btn-outline, .hero-btns .btn-whatsapp { width: 100%; justify-content: center; text-align: center; }
+  .hero-btns .btn-instant-quote, .hero-btns .btn-primary, .hero-btns .btn-outline, .hero-btns .btn-whatsapp { width: 100%; justify-content: center; text-align: center; }
   .companies-logos { grid-template-columns: repeat(2, 1fr); }
   .testi-grid { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════
+   INSTANT QUOTE MODAL — CSS
+═══════════════════════════════════════════════ */
+
+/* "Get Instant Quote" hero button */
+.btn-instant-quote {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+  color: var(--black); padding: 15px 32px; border-radius: 4px;
+  font-family: var(--font-body); font-size: 14px; font-weight: 700;
+  letter-spacing: 0.5px; border: none; cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+}
+.btn-instant-quote::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.18) 60%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.btn-instant-quote:hover::before { transform: translateX(100%); }
+.btn-instant-quote:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 48px rgba(201,168,76,0.45);
+}
+.btn-iq-icon { font-size: 12px; opacity: 0.7; }
+.btn-iq-arrow { transition: transform 0.3s; }
+.btn-instant-quote:hover .btn-iq-arrow { transform: translateX(4px); }
+
+/* Overlay */
+.iq-overlay {
+  display: none; position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0,0,0,0.82); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center;
+  padding: 20px;
+  animation: iqFadeIn 0.25s ease;
+}
+.iq-overlay.open { display: flex; }
+
+@keyframes iqFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes iqSlideUp {
+  from { opacity: 0; transform: translateY(32px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes iqShake {
+  0%,100% { transform: translateX(0); }
+  20%,60% { transform: translateX(-6px); }
+  40%,80% { transform: translateX(6px); }
+}
+@keyframes iqSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes iqPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(201,168,76,0); }
+}
+
+/* Modal box */
+.iq-modal {
+  background: var(--black2);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  width: 100%; max-width: 640px;
+  max-height: 92vh; overflow-y: auto;
+  position: relative;
+  animation: iqSlideUp 0.35s cubic-bezier(0.22,1,0.36,1) both;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.08);
+}
+.iq-modal::-webkit-scrollbar { width: 4px; }
+.iq-modal::-webkit-scrollbar-track { background: var(--black3); }
+.iq-modal::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+/* Header */
+.iq-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 32px 36px 0;
+  gap: 16px;
+}
+.iq-header-badge {
+  font-size: 10px; letter-spacing: 3px; color: var(--gold);
+  font-weight: 600; margin-bottom: 10px;
+}
+.iq-title {
+  font-family: var(--font-display);
+  font-size: 32px; font-weight: 400; line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.iq-title em { color: var(--gold); font-style: italic; }
+.iq-subtitle { font-size: 13.5px; color: rgba(255,255,255,0.5); }
+
+.iq-close {
+  flex-shrink: 0; margin-top: 4px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5); width: 36px; height: 36px;
+  border-radius: 50%; cursor: pointer; display: flex;
+  align-items: center; justify-content: center;
+  transition: all 0.25s;
+}
+.iq-close:hover { background: rgba(201,168,76,0.15); border-color: var(--gold); color: var(--gold); }
+
+/* Progress bar */
+.iq-progress-bar {
+  height: 2px; background: rgba(255,255,255,0.06);
+  margin: 20px 36px 0;
+  border-radius: 2px; overflow: hidden;
+}
+.iq-progress-fill {
+  height: 100%; width: 50%;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  transition: width 0.5s cubic-bezier(0.22,1,0.36,1);
+  border-radius: 2px;
+}
+
+/* Steps */
+.iq-step { padding: 24px 36px 32px; }
+.iq-step-label {
+  font-size: 10.5px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 20px; font-weight: 500;
+}
+
+/* Type selection cards */
+.iq-type-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+}
+.iq-type-card {
+  background: var(--black3); border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 6px; padding: 24px 16px 20px;
+  cursor: pointer; text-align: center;
+  transition: all 0.3s ease; position: relative; overflow: hidden;
+  font-family: var(--font-body);
+}
+.iq-type-card::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.iq-type-card:hover {
+  border-color: rgba(201,168,76,0.6); background: rgba(201,168,76,0.06);
+  transform: translateY(-3px);
+}
+.iq-type-card:hover::before { opacity: 1; }
+.iq-type-card.selected {
+  border-color: var(--gold); background: rgba(201,168,76,0.1);
+  box-shadow: 0 0 0 1px rgba(201,168,76,0.3), 0 8px 32px rgba(201,168,76,0.15);
+}
+.iq-type-card.selected::before { opacity: 1; }
+.iq-type-icon { font-size: 32px; margin-bottom: 10px; }
+.iq-type-name { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+.iq-type-desc { font-size: 11.5px; color: rgba(255,255,255,0.4); }
+.iq-type-check {
+  position: absolute; top: 10px; right: 12px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--gold); color: var(--black);
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: scale(0.5);
+  transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+.iq-type-card.selected .iq-type-check { opacity: 1; transform: scale(1); }
+
+.iq-step1-hint {
+  text-align: center; margin-top: 18px;
+  font-size: 12px; color: rgba(255,255,255,0.2);
+  letter-spacing: 1px;
+}
+
+/* Selected badge */
+.iq-selected-type-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(201,168,76,0.1); border: 1px solid var(--border);
+  padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+  font-size: 12px; color: var(--gold); font-weight: 600; letter-spacing: 1px;
+}
+
+/* Form grid */
+.iq-form-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.iq-span-2 { grid-column: span 2; }
+.iq-form-group { display: flex; flex-direction: column; }
+
+.iq-label {
+  font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); margin-bottom: 7px; font-weight: 500;
+}
+.iq-req { color: var(--gold); }
+
+.iq-input {
+  width: 100%; padding: 11px 14px;
+  background: var(--black3); border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 4px; color: var(--white);
+  font-family: var(--font-body); font-size: 13.5px;
+  outline: none; transition: border-color 0.25s, box-shadow 0.25s;
+  -webkit-appearance: none;
+}
+.iq-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+}
+.iq-input::placeholder { color: rgba(255,255,255,0.25); }
+.iq-input.iq-error {
+  border-color: #e05656;
+  animation: iqShake 0.4s ease;
+}
+.iq-select { cursor: pointer; }
+.iq-select option { background: #1a1a1a; }
+
+/* Radio group */
+.iq-radio-group { display: flex; gap: 20px; flex-wrap: wrap; padding-top: 4px; }
+.iq-radio-label {
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer; font-size: 13.5px; color: rgba(255,255,255,0.75);
+  transition: color 0.2s;
+}
+.iq-radio-label:hover { color: var(--gold); }
+.iq-radio-label input[type="radio"] {
+  appearance: none; -webkit-appearance: none;
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 1.5px solid rgba(201,168,76,0.4);
+  background: var(--black3); cursor: pointer;
+  transition: all 0.2s; flex-shrink: 0;
+  position: relative;
+}
+.iq-radio-label input[type="radio"]:checked {
+  border-color: var(--gold); background: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
+}
+.iq-radio-label input[type="radio"]:checked::after {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px; height: 6px; border-radius: 50%; background: var(--black);
+}
+
+/* Actions */
+.iq-form-actions {
+  display: flex; gap: 12px; margin-top: 24px; justify-content: flex-end;
+}
+.iq-btn-back {
+  padding: 12px 22px; background: transparent;
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 4px;
+  color: rgba(255,255,255,0.5); font-family: var(--font-body);
+  font-size: 13px; cursor: pointer; transition: all 0.25s;
+}
+.iq-btn-back:hover { border-color: rgba(255,255,255,0.35); color: var(--white); }
+.iq-btn-submit {
+  padding: 13px 28px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+  border: none; border-radius: 4px; cursor: pointer;
+  font-family: var(--font-body); font-size: 14px; font-weight: 700;
+  color: var(--black); letter-spacing: 0.5px;
+  transition: all 0.3s; display: flex; align-items: center; gap: 8px;
+  min-width: 200px; justify-content: center;
+  animation: iqPulse 2.5s infinite;
+}
+.iq-btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(201,168,76,0.4);
+}
+.iq-btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+/* Loader spinner */
+.iq-loader {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid rgba(0,0,0,0.25);
+  border-top-color: var(--black);
+  animation: iqSpin 0.7s linear infinite;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .iq-header { padding: 24px 20px 0; }
+  .iq-step { padding: 20px 20px 28px; }
+  .iq-title { font-size: 26px; }
+  .iq-type-grid { grid-template-columns: 1fr; gap: 10px; }
+  .iq-type-card { padding: 16px 14px; display: flex; align-items: center; gap: 14px; text-align: left; }
+  .iq-type-icon { font-size: 26px; margin-bottom: 0; flex-shrink: 0; }
+  .iq-type-name { font-size: 14px; }
+  .iq-type-check { top: 50%; transform: translateY(-50%) scale(0.5); right: 14px; }
+  .iq-type-card.selected .iq-type-check { transform: translateY(-50%) scale(1); }
+  .iq-form-grid { grid-template-columns: 1fr; }
+  .iq-span-2 { grid-column: span 1; }
+  .iq-form-actions { flex-direction: column-reverse; }
+  .iq-btn-submit, .iq-btn-back { width: 100%; }
+  .iq-progress-bar { margin: 16px 20px 0; }
 }
 </style>
 </head>
@@ -733,7 +1028,11 @@ footer {
       </div>
     </div>
     <div class="hero-btns">
-      <a href="#calculators" class="btn-primary">Get Free Quote</a>
+      <button class="btn-instant-quote" onclick="openQuoteModal()">
+        <span class="btn-iq-icon">✦</span>
+        Get Instant Quote
+        <span class="btn-iq-arrow">→</span>
+      </button>
       <a href="tel:9068541300" class="btn-outline">📞 Call Now</a>
       <a href="https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20free%20insurance%20consultation" target="_blank" class="btn-whatsapp">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -1359,6 +1658,181 @@ footer {
   <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<!-- ═══════════════════════════════════════════════
+     INSTANT QUOTE MODAL
+═══════════════════════════════════════════════ -->
+<div id="quoteModal" class="iq-overlay" onclick="iqOverlayClick(event)">
+  <div class="iq-modal" role="dialog" aria-modal="true" aria-label="Get Instant Quote">
+
+    <!-- Header -->
+    <div class="iq-header">
+      <div class="iq-header-left">
+        <div class="iq-header-badge">✦ INSTANT ENQUIRY</div>
+        <h2 class="iq-title">Get Your <em>Best Quote</em></h2>
+        <p class="iq-subtitle">Fill in a few details — we'll connect you instantly on WhatsApp.</p>
+      </div>
+      <button class="iq-close" onclick="closeQuoteModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="2" y1="2" x2="16" y2="16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="16" y1="2" x2="2" y2="16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="iq-progress-bar">
+      <div class="iq-progress-fill" id="iqProgressFill"></div>
+    </div>
+
+    <!-- STEP 1: Type Selection -->
+    <div class="iq-step" id="iqStep1">
+      <div class="iq-step-label">STEP 1 OF 2 &nbsp;·&nbsp; Select Insurance Type</div>
+      <div class="iq-type-grid">
+        <button class="iq-type-card" data-type="car" onclick="selectInsuranceType('car')">
+          <div class="iq-type-icon">🚗</div>
+          <div class="iq-type-name">Car Insurance</div>
+          <div class="iq-type-desc">Comprehensive &amp; Third-Party</div>
+          <div class="iq-type-check">✓</div>
+        </button>
+        <button class="iq-type-card" data-type="bike" onclick="selectInsuranceType('bike')">
+          <div class="iq-type-icon">🏍️</div>
+          <div class="iq-type-name">Bike Insurance</div>
+          <div class="iq-type-desc">Two-Wheeler Protection</div>
+          <div class="iq-type-check">✓</div>
+        </button>
+        <button class="iq-type-card" data-type="health" onclick="selectInsuranceType('health')">
+          <div class="iq-type-icon">🏥</div>
+          <div class="iq-type-name">Health Insurance</div>
+          <div class="iq-type-desc">Individual &amp; Family Plans</div>
+          <div class="iq-type-check">✓</div>
+        </button>
+      </div>
+      <div class="iq-step1-hint">Select an option above to proceed</div>
+    </div>
+
+    <!-- STEP 2: Dynamic Form Fields -->
+    <div class="iq-step" id="iqStep2" style="display:none;">
+      <div class="iq-step-label">STEP 2 OF 2 &nbsp;·&nbsp; Your Details</div>
+      <div class="iq-selected-type-badge" id="iqSelectedBadge"></div>
+
+      <!-- Vehicle Form (Car / Bike) -->
+      <div id="iqVehicleForm" style="display:none;">
+        <div class="iq-form-grid">
+          <div class="iq-form-group iq-span-2">
+            <label class="iq-label">Full Name <span class="iq-req">*</span></label>
+            <input class="iq-input" id="vName" type="text" placeholder="Enter your full name" autocomplete="off">
+          </div>
+          <div class="iq-form-group">
+            <label class="iq-label">Mobile Number <span class="iq-req">*</span></label>
+            <input class="iq-input" id="vPhone" type="tel" placeholder="10-digit mobile" maxlength="10" autocomplete="off">
+          </div>
+          <div class="iq-form-group">
+            <label class="iq-label">Vehicle Number <span class="iq-req">*</span></label>
+            <input class="iq-input" id="vNumber" type="text" placeholder="e.g. PB01AB1234" autocomplete="off">
+          </div>
+          <div class="iq-form-group">
+            <label class="iq-label">Vehicle Model <span class="iq-req">*</span></label>
+            <input class="iq-input" id="vModel" type="text" placeholder="e.g. Honda City, Pulsar 150" autocomplete="off">
+          </div>
+          <div class="iq-form-group">
+            <label class="iq-label">Manufacturing Year <span class="iq-req">*</span></label>
+            <input class="iq-input" id="vYear" type="number" placeholder="e.g. 2020" min="1990" max="2026" autocomplete="off">
+          </div>
+          <div class="iq-form-group">
+            <label class="iq-label">Policy Expiry Date</label>
+            <input class="iq-input" id="vExpiry" type="date">
+          </div>
+          <div class="iq-form-group">
+            <label class="iq-label">Previous NCB (%)</label>
+            <select class="iq-input iq-select" id="vNcb">
+              <option value="">Select NCB</option>
+              <option value="0% (None)">0% (New / No NCB)</option>
+              <option value="20%">20%</option>
+              <option value="25%">25%</option>
+              <option value="35%">35%</option>
+              <option value="45%">45%</option>
+              <option value="50%">50%</option>
+            </select>
+          </div>
+          <div class="iq-form-group">
+            <label class="iq-label">Claim in Last Year? <span class="iq-req">*</span></label>
+            <select class="iq-input iq-select" id="vClaim">
+              <option value="">Select</option>
+              <option value="No">No</option>
+              <option value="Yes">Yes</option>
+            </select>
+          </div>
+          <div class="iq-form-group iq-span-2">
+            <label class="iq-label">Insurance Type <span class="iq-req">*</span></label>
+            <div class="iq-radio-group">
+              <label class="iq-radio-label"><input type="radio" name="vInsType" value="Comprehensive"> Comprehensive</label>
+              <label class="iq-radio-label"><input type="radio" name="vInsType" value="Third Party"> Third Party</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Health Form -->
+      <div id="iqHealthForm" style="display:none;">
+        <div class="iq-form-grid">
+          <div class="iq-form-group iq-span-2">
+            <label class="iq-label">Full Name <span class="iq-req">*</span></label>
+            <input class="iq-input" id="hName" type="text" placeholder="Enter your full name" autocomplete="off">
+          </div>
+          <div class="iq-form-group">
+            <label class="iq-label">Mobile Number <span class="iq-req">*</span></label>
+            <input class="iq-input" id="hPhone" type="tel" placeholder="10-digit mobile" maxlength="10" autocomplete="off">
+          </div>
+          <div class="iq-form-group">
+            <label class="iq-label">Age <span class="iq-req">*</span></label>
+            <input class="iq-input" id="hAge" type="number" placeholder="e.g. 32" min="1" max="99" autocomplete="off">
+          </div>
+          <div class="iq-form-group">
+            <label class="iq-label">City <span class="iq-req">*</span></label>
+            <input class="iq-input" id="hCity" type="text" placeholder="Your city" autocomplete="off">
+          </div>
+          <div class="iq-form-group">
+            <label class="iq-label">Number of Members <span class="iq-req">*</span></label>
+            <select class="iq-input iq-select" id="hMembers">
+              <option value="">Select</option>
+              <option value="1 (Individual)">1 (Individual)</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5+">5 or more</option>
+            </select>
+          </div>
+          <div class="iq-form-group">
+            <label class="iq-label">Coverage Amount <span class="iq-req">*</span></label>
+            <select class="iq-input iq-select" id="hCover">
+              <option value="">Select</option>
+              <option value="₹3 Lakh">₹3 Lakh</option>
+              <option value="₹5 Lakh">₹5 Lakh</option>
+              <option value="₹10 Lakh">₹10 Lakh</option>
+              <option value="₹15 Lakh">₹15 Lakh</option>
+              <option value="₹20 Lakh+">₹20 Lakh+</option>
+            </select>
+          </div>
+          <div class="iq-form-group iq-span-2">
+            <label class="iq-label">Any Existing Disease? <span class="iq-req">*</span></label>
+            <div class="iq-radio-group">
+              <label class="iq-radio-label"><input type="radio" name="hDisease" value="No"> No</label>
+              <label class="iq-radio-label"><input type="radio" name="hDisease" value="Yes"> Yes</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="iq-form-actions">
+        <button class="iq-btn-back" onclick="iqGoBack()">← Back</button>
+        <button class="iq-btn-submit" id="iqSubmitBtn" onclick="iqSubmit()">
+          <span id="iqBtnText">Send via WhatsApp &nbsp;✦</span>
+          <span id="iqBtnLoader" style="display:none;" class="iq-loader"></span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- POPUP OFFER -->
 <div class="popup-overlay" id="popup">
   <div class="popup-box">
@@ -1484,6 +1958,209 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// ═══════════════════════════════════════════════
+// INSTANT QUOTE MODAL — JavaScript
+// ═══════════════════════════════════════════════
+let iqSelectedType = null;
+
+function openQuoteModal() {
+  const modal = document.getElementById('quoteModal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Reset to step 1
+  iqSelectedType = null;
+  document.querySelectorAll('.iq-type-card').forEach(c => c.classList.remove('selected'));
+  showStep(1);
+}
+
+function closeQuoteModal() {
+  document.getElementById('quoteModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function iqOverlayClick(e) {
+  if (e.target === e.currentTarget) closeQuoteModal();
+}
+
+// ESC key closes modal
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeQuoteModal();
+});
+
+function showStep(step) {
+  document.getElementById('iqStep1').style.display = step === 1 ? 'block' : 'none';
+  document.getElementById('iqStep2').style.display = step === 2 ? 'block' : 'none';
+  document.getElementById('iqProgressFill').style.width = step === 1 ? '50%' : '100%';
+}
+
+function selectInsuranceType(type) {
+  iqSelectedType = type;
+  // Highlight card
+  document.querySelectorAll('.iq-type-card').forEach(c => c.classList.remove('selected'));
+  document.querySelector(`.iq-type-card[data-type="${type}"]`).classList.add('selected');
+
+  // Short delay for UX
+  setTimeout(() => {
+    showStep(2);
+    // Show/hide forms
+    const isVehicle = type === 'car' || type === 'bike';
+    document.getElementById('iqVehicleForm').style.display = isVehicle ? 'block' : 'none';
+    document.getElementById('iqHealthForm').style.display = type === 'health' ? 'block' : 'none';
+    // Update badge
+    const labels = { car: '🚗 Car Insurance', bike: '🏍️ Bike Insurance', health: '🏥 Health Insurance' };
+    document.getElementById('iqSelectedBadge').textContent = labels[type];
+    // Scroll to top of modal
+    document.querySelector('.iq-modal').scrollTop = 0;
+  }, 180);
+}
+
+function iqGoBack() {
+  showStep(1);
+  document.querySelector('.iq-modal').scrollTop = 0;
+}
+
+function iqGetVal(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+function iqGetRadio(name) {
+  const checked = document.querySelector(`input[name="${name}"]:checked`);
+  return checked ? checked.value : '';
+}
+
+function iqMarkError(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.classList.add('iq-error');
+    el.addEventListener('input', () => el.classList.remove('iq-error'), { once: true });
+    el.addEventListener('change', () => el.classList.remove('iq-error'), { once: true });
+  }
+}
+
+async function iqSubmit() {
+  let msg = '';
+  let formspreeData = {};
+  let valid = true;
+
+  if (iqSelectedType === 'car' || iqSelectedType === 'bike') {
+    const name    = iqGetVal('vName');
+    const phone   = iqGetVal('vPhone');
+    const vno     = iqGetVal('vNumber');
+    const model   = iqGetVal('vModel');
+    const year    = iqGetVal('vYear');
+    const expiry  = iqGetVal('vExpiry');
+    const ncb     = iqGetVal('vNcb');
+    const claim   = iqGetVal('vClaim');
+    const insType = iqGetRadio('vInsType');
+
+    if (!name)    { iqMarkError('vName');   valid = false; }
+    if (!phone || phone.length < 10) { iqMarkError('vPhone'); valid = false; }
+    if (!vno)     { iqMarkError('vNumber'); valid = false; }
+    if (!model)   { iqMarkError('vModel');  valid = false; }
+    if (!year)    { iqMarkError('vYear');   valid = false; }
+    if (!claim)   { iqMarkError('vClaim');  valid = false; }
+    if (!insType) { valid = false; }
+
+    if (!valid) return;
+
+    const typeLabel = iqSelectedType === 'car' ? 'Car' : 'Bike';
+
+    msg = `New Insurance Enquiry%0A%0A`
+        + `Type: ${typeLabel} Insurance%0A`
+        + `Name: ${name}%0A`
+        + `Phone: ${phone}%0A`
+        + `Vehicle No: ${vno}%0A`
+        + `Model: ${model}%0A`
+        + `Year: ${year}%0A`
+        + (expiry  ? `Policy Expiry: ${expiry}%0A` : '')
+        + (ncb     ? `Previous NCB: ${ncb}%0A`    : '')
+        + `Claim Last Year: ${claim}%0A`
+        + `Insurance Type: ${insType}`;
+
+    formspreeData = {
+      _subject:        `New ${typeLabel} Insurance Enquiry — Taman Care`,
+      'Insurance Type': typeLabel + ' Insurance',
+      'Name':          name,
+      'Phone':         phone,
+      'Vehicle No':    vno,
+      'Vehicle Model': model,
+      'Mfg Year':      year,
+      'Policy Expiry': expiry  || 'N/A',
+      'Previous NCB':  ncb     || 'N/A',
+      'Claim Last Year': claim,
+      'Coverage Type': insType,
+    };
+
+  } else if (iqSelectedType === 'health') {
+    const name    = iqGetVal('hName');
+    const phone   = iqGetVal('hPhone');
+    const age     = iqGetVal('hAge');
+    const city    = iqGetVal('hCity');
+    const members = iqGetVal('hMembers');
+    const cover   = iqGetVal('hCover');
+    const disease = iqGetRadio('hDisease');
+
+    if (!name)    { iqMarkError('hName');    valid = false; }
+    if (!phone || phone.length < 10) { iqMarkError('hPhone'); valid = false; }
+    if (!age)     { iqMarkError('hAge');     valid = false; }
+    if (!city)    { iqMarkError('hCity');    valid = false; }
+    if (!members) { iqMarkError('hMembers'); valid = false; }
+    if (!cover)   { iqMarkError('hCover');   valid = false; }
+    if (!disease) { valid = false; }
+
+    if (!valid) return;
+
+    msg = `New Insurance Enquiry%0A%0A`
+        + `Type: Health Insurance%0A`
+        + `Name: ${name}%0A`
+        + `Phone: ${phone}%0A`
+        + `Age: ${age}%0A`
+        + `City: ${city}%0A`
+        + `Members: ${members}%0A`
+        + `Coverage: ${cover}%0A`
+        + `Existing Disease: ${disease}`;
+
+    formspreeData = {
+      _subject:           'New Health Insurance Enquiry — Taman Care',
+      'Insurance Type':   'Health Insurance',
+      'Name':             name,
+      'Phone':            phone,
+      'Age':              age,
+      'City':             city,
+      'No. of Members':   members,
+      'Coverage Amount':  cover,
+      'Existing Disease': disease,
+    };
+  }
+
+  // ── Show loading state
+  const btn    = document.getElementById('iqSubmitBtn');
+  const btnTxt = document.getElementById('iqBtnText');
+  const loader = document.getElementById('iqBtnLoader');
+  btn.disabled         = true;
+  btnTxt.style.display = 'none';
+  loader.style.display = 'inline-block';
+
+  // ── Fire Formspree in background (don't block WhatsApp redirect)
+  try {
+    await fetch('https://formspree.io/f/xaqllkaq', {
+      method:  'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body:    JSON.stringify(formspreeData),
+    });
+  } catch (err) {
+    // Silent fail — WhatsApp redirect still works
+    console.warn('Formspree submission failed:', err);
+  }
+
+  // ── Restore button & open WhatsApp
+  btn.disabled         = false;
+  btnTxt.style.display = 'inline';
+  loader.style.display = 'none';
+  window.open(`https://wa.me/919068541300?text=${msg}`, '_blank');
+  closeQuoteModal();
+}
 </script>
 </body>
 </html>
