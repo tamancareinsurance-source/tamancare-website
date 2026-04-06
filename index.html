@@ -48,8 +48,8 @@ body {
 
 /* ── NAV ── */
 #navbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  padding: 18px 5%;
+  position: fixed; top: 40px; left: 0; right: 0; z-index: 1000;
+  padding: 14px 5%;
   display: flex; align-items: center; justify-content: space-between;
   transition: all 0.4s ease;
   border-bottom: 1px solid transparent;
@@ -59,16 +59,19 @@ body {
   border-bottom: 1px solid var(--border);
   padding: 12px 5%;
   backdrop-filter: blur(20px);
+  top: 0;
 }
 .nav-logo {
   display: flex; align-items: center; gap: 10px; text-decoration: none;
+  padding-top: 4px;
 }
 .nav-logo-img {
-  height: 48px; width: auto;
+  height: 48px; width: auto; display: block;
   filter: drop-shadow(0 2px 8px rgba(201,168,76,0.35));
-  transition: filter 0.3s;
+  transition: height 0.4s ease, filter 0.3s ease;
+  vertical-align: middle;
 }
-#navbar.scrolled .nav-logo-img { height: 40px; }
+#navbar.scrolled .nav-logo-img { height: 36px; }
 .nav-logo-img:hover { filter: drop-shadow(0 4px 16px rgba(201,168,76,0.6)); }
 
 .nav-links { display: flex; gap: 32px; list-style: none; }
@@ -101,12 +104,14 @@ body {
 .hamburger span { width: 24px; height: 2px; background: var(--gold); border-radius: 2px; transition: all 0.3s; }
 
 .mobile-menu {
-  display: none; position: fixed; top: 70px; left: 0; right: 0;
+  display: none; position: fixed; top: 116px; left: 0; right: 0;
   background: rgba(10,10,10,0.98); backdrop-filter: blur(20px);
   padding: 24px 5%; z-index: 999;
   border-bottom: 1px solid var(--border);
   flex-direction: column; gap: 16px;
+  transition: top 0.4s ease;
 }
+body.scrolled-header .mobile-menu { top: 70px; }
 .mobile-menu.open { display: flex; }
 .mobile-menu a {
   color: var(--white); text-decoration: none; font-size: 16px;
@@ -119,7 +124,7 @@ body {
   background: var(--black);
   display: flex; align-items: center;
   position: relative; overflow: hidden;
-  padding: 100px 5% 60px;
+  padding: 140px 5% 60px;
 }
 .hero-bg {
   position: absolute; inset: 0;
@@ -563,17 +568,7 @@ footer {
 .footer-copy { font-size: 12.5px; color: rgba(255,255,255,0.3); }
 .footer-rera { font-size: 12px; color: rgba(255,255,255,0.25); }
 
-/* ── FLOATING WA ── */
-.float-wa {
-  position: fixed; bottom: 28px; right: 28px; z-index: 9999;
-  width: 58px; height: 58px; border-radius: 50%;
-  background: #25D366; display: flex; align-items: center; justify-content: center;
-  font-size: 28px; text-decoration: none; color: #fff;
-  box-shadow: 0 6px 30px rgba(37,211,102,0.5);
-  animation: pulse-wa 2.5s ease infinite;
-  transition: transform 0.3s;
-}
-.float-wa:hover { transform: scale(1.1); }
+
 
 /* ── POPUP ── */
 .popup-overlay {
@@ -610,6 +605,8 @@ footer {
 
 /* ── URGENCY BAR ── */
 .urgency-bar {
+  position: relative;
+  z-index: 1001;
   background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 100%);
   padding: 10px; text-align: center;
   font-size: 13px; font-weight: 600; color: var(--black);
@@ -621,10 +618,6 @@ footer {
 @keyframes fadeInDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
 @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
 @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
-@keyframes pulse-wa {
-  0%,100% { box-shadow: 0 6px 30px rgba(37,211,102,0.5); }
-  50% { box-shadow: 0 6px 50px rgba(37,211,102,0.8), 0 0 0 12px rgba(37,211,102,0.15); }
-}
 
 /* Scroll reveal */
 .reveal {
@@ -658,6 +651,9 @@ footer {
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .calc-card { padding: 28px 20px; }
+  #hero { padding-top: 130px; }
+  #navbar { top: 36px; }
+  .urgency-bar { font-size: 11.5px; padding: 8px 10px; }
 }
 @media (max-width: 480px) {
   .hero-btns { flex-direction: column; }
@@ -1653,10 +1649,7 @@ footer {
   </div>
 </footer>
 
-<!-- FLOATING WHATSAPP -->
-<a class="float-wa" href="https://wa.me/919068541300?text=Hello%2C%20I%20need%20insurance%20help" target="_blank" title="Chat on WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
+
 
 <!-- ═══════════════════════════════════════════════
      INSTANT QUOTE MODAL
@@ -1856,7 +1849,14 @@ footer {
 // ── NAVBAR SCROLL
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 60);
+  const scrolled = window.scrollY > 60;
+  navbar.classList.toggle('scrolled', scrolled);
+  // When scrolled, navbar moves to top:0 (urgency bar scrolls away naturally)
+  // Update mobile menu offset accordingly
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (mobileMenu) {
+    mobileMenu.style.top = scrolled ? '70px' : '116px';
+  }
 });
 
 // ── MOBILE MENU
@@ -2163,300 +2163,131 @@ async function iqSubmit() {
 }
 </script>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- TAMAN CARE AI CHATBOT WIDGET                   -->
-<!-- ═══════════════════════════════════════════════ -->
+<!-- TAMAN CARE AI CHATBOT WIDGET v2 -->
 <style>
 #tc-fab {
   position: fixed; bottom: 28px; right: 28px; z-index: 9999;
-  width: 60px; height: 60px; border-radius: 50%;
-  background: var(--gold); border: none; cursor: pointer;
-  box-shadow: 0 8px 32px rgba(201,168,76,0.45);
+  width: 62px; height: 62px; border-radius: 50%;
+  background: #c9a84c; border: none; cursor: pointer;
+  box-shadow: 0 6px 28px rgba(201,168,76,0.5);
   display: flex; align-items: center; justify-content: center;
   transition: transform 0.2s, box-shadow 0.2s;
-  animation: tcPulse 2.5s infinite;
+  animation: tcPulse 2.8s infinite;
 }
-#tc-fab:hover { transform: scale(1.08); box-shadow: 0 12px 40px rgba(201,168,76,0.6); }
-#tc-fab svg { width: 28px; height: 28px; fill: #0a0a0a; transition: opacity 0.2s; }
-#tc-fab .tc-close { display: none; }
-#tc-fab.open .tc-open { display: none; }
-#tc-fab.open .tc-close { display: block; }
-@keyframes tcPulse {
-  0%,100% { box-shadow: 0 8px 32px rgba(201,168,76,0.45); }
-  50% { box-shadow: 0 8px 48px rgba(201,168,76,0.7); }
-}
-#tc-badge {
-  position: absolute; top: -4px; right: -4px;
-  width: 20px; height: 20px; border-radius: 50%;
+#tc-fab:hover { transform: scale(1.08); }
+#tc-fab .ico-open { display: flex; }
+#tc-fab .ico-close { display: none; }
+#tc-fab.open .ico-open { display: none; }
+#tc-fab.open .ico-close { display: flex; }
+#tc-fab svg { width: 28px; height: 28px; fill: #0a0a0a; }
+@keyframes tcPulse { 0%,100% { box-shadow: 0 6px 28px rgba(201,168,76,0.5); } 50% { box-shadow: 0 6px 46px rgba(201,168,76,0.75); } }
+#tc-notif {
+  position: absolute; top: -3px; right: -3px; width: 19px; height: 19px; border-radius: 50%;
   background: #e53e3e; color: #fff; font-size: 11px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  border: 2px solid #0a0a0a; animation: tcBounce 0.4s ease;
+  display: flex; align-items: center; justify-content: center; border: 2px solid #0a0a0a;
 }
-@keyframes tcBounce { from { transform: scale(0); } to { transform: scale(1); } }
-#tc-window {
-  position: fixed; bottom: 104px; right: 28px; z-index: 9998;
-  width: 360px; max-height: 560px;
-  background: #0a0a0a; border-radius: 16px;
-  border: 1px solid rgba(201,168,76,0.3);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.1);
-  display: flex; flex-direction: column; overflow: hidden;
-  transform: scale(0.85) translateY(20px); transform-origin: bottom right;
+#tc-win {
+  position: fixed; bottom: 104px; right: 28px; z-index: 9998; width: 360px;
+  background: #0a0a0a; border-radius: 16px; border: 1px solid rgba(201,168,76,0.28);
+  box-shadow: 0 20px 70px rgba(0,0,0,0.75); display: flex; flex-direction: column;
+  overflow: hidden; max-height: 560px;
+  transform: scale(0.87) translateY(18px); transform-origin: bottom right;
   opacity: 0; pointer-events: none;
   transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s ease;
   font-family: 'Outfit', sans-serif;
 }
-#tc-window.open {
-  transform: scale(1) translateY(0); opacity: 1; pointer-events: all;
+#tc-win.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+#tc-hd {
+  background: #111; padding: 13px 16px; display: flex; align-items: center; gap: 11px;
+  border-bottom: 1px solid rgba(201,168,76,0.14); flex-shrink: 0;
 }
-#tc-head {
-  background: #111; padding: 14px 16px;
-  display: flex; align-items: center; gap: 10px;
-  border-bottom: 1px solid rgba(201,168,76,0.15); flex-shrink: 0;
+.tc-av {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(201,168,76,0.12); border: 1.5px solid #c9a84c;
+  display: flex; align-items: center; justify-content: center; font-size: 17px;
 }
-#tc-head .tc-av {
-  width: 38px; height: 38px; border-radius: 50%;
-  background: rgba(201,168,76,0.12); border: 1.5px solid var(--gold);
-  display: flex; align-items: center; justify-content: center; font-size: 18px;
-}
-#tc-head .tc-info { flex: 1; }
-#tc-head .tc-name { font-size: 13.5px; font-weight: 600; color: var(--gold); }
-#tc-head .tc-status { font-size: 11px; color: #888; display: flex; align-items: center; gap: 4px; }
-#tc-head .tc-dot { width: 6px; height: 6px; border-radius: 50%; background: #25D366; }
-#tc-head .tc-pill {
-  font-size: 10px; background: rgba(201,168,76,0.12);
-  color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
-  padding: 3px 9px; border-radius: 20px; letter-spacing: 0.3px;
-}
+.tc-hd-info { flex: 1; }
+.tc-hd-name { font-size: 13.5px; font-weight: 600; color: #c9a84c; }
+.tc-hd-sub { font-size: 11px; color: #888; display: flex; align-items: center; gap: 5px; }
+.tc-green { width: 6px; height: 6px; border-radius: 50%; background: #25D366; }
+.tc-hd-badge { font-size: 10px; background: rgba(201,168,76,0.12); color: #c9a84c; border: 1px solid rgba(201,168,76,0.28); padding: 3px 9px; border-radius: 20px; }
 #tc-msgs {
-  flex: 1; overflow-y: auto; padding: 14px; display: flex;
-  flex-direction: column; gap: 9px;
-  scrollbar-width: thin; scrollbar-color: var(--gold) #111;
+  flex: 1; overflow-y: auto; padding: 14px 12px; display: flex; flex-direction: column; gap: 10px;
+  scrollbar-width: thin; scrollbar-color: #c9a84c44 #111;
 }
 #tc-msgs::-webkit-scrollbar { width: 4px; }
-#tc-msgs::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
-.tc-row { display: flex; flex-direction: column; }
-.tc-bubble-row { display: flex; align-items: flex-end; gap: 6px; }
-.tc-bubble-row.user { flex-direction: row-reverse; }
-.tc-icon {
-  width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.4);
-  display: flex; align-items: center; justify-content: center; font-size: 12px;
-}
-.tc-bubble {
-  max-width: 80%; padding: 9px 13px; font-size: 13px; line-height: 1.55;
-  animation: tcFade 0.2s ease;
-}
-@keyframes tcFade { from { opacity:0; transform: translateY(5px); } to { opacity:1; transform:none; } }
-.tc-bubble.bot { background: #1a1a1a; color: #f0ece4; border-radius: 4px 12px 12px 12px; border: 1px solid rgba(201,168,76,0.15); }
-.tc-bubble.user { background: var(--gold); color: #0a0a0a; border-radius: 12px 4px 12px 12px; font-weight: 500; }
-.tc-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; padding-left: 30px; }
-.tc-chip {
-  background: #1a1a1a; border: 1px solid rgba(201,168,76,0.4); color: var(--gold);
-  font-size: 11.5px; padding: 5px 12px; border-radius: 20px; cursor: pointer;
-  transition: all 0.15s; font-family: 'Outfit', sans-serif; font-weight: 500;
-}
-.tc-chip:hover { background: var(--gold); color: #0a0a0a; }
-.tc-cta { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 6px; padding-left: 30px; }
-.tc-btn-call, .tc-btn-wa {
-  font-size: 11.5px; font-weight: 600; padding: 6px 13px; border-radius: 6px;
-  text-decoration: none; display: flex; align-items: center; gap: 5px;
-  cursor: pointer; border: 1px solid; font-family: 'Outfit', sans-serif;
-  transition: opacity 0.2s;
-}
-.tc-btn-call { background: rgba(201,168,76,0.12); color: var(--gold); border-color: rgba(201,168,76,0.4); }
-.tc-btn-wa { background: rgba(37,211,102,0.1); color: #25D366; border-color: rgba(37,211,102,0.4); }
-.tc-btn-call:hover, .tc-btn-wa:hover { opacity: 0.8; }
-.tc-typing {
-  display: flex; align-items: center; gap: 4px;
-  padding: 8px 12px; background: #1a1a1a; border: 1px solid rgba(201,168,76,0.15);
-  border-radius: 4px 12px 12px 12px; width: fit-content;
-}
-.tc-typing span {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
-  animation: tcDot 1s infinite;
-}
+#tc-msgs::-webkit-scrollbar-thumb { background: #c9a84c44; border-radius: 2px; }
+.tc-grp { display: flex; flex-direction: column; gap: 4px; }
+.tc-row { display: flex; align-items: flex-end; gap: 6px; }
+.tc-row.u { flex-direction: row-reverse; }
+.tc-ico { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.35); display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.tc-bub { max-width: 82%; padding: 9px 13px; font-size: 13px; line-height: 1.55; animation: tcFd 0.22s ease; }
+@keyframes tcFd { from { opacity:0; transform: translateY(5px); } to { opacity:1; transform:none; } }
+.tc-bub.b { background: #1a1a1a; color: #f0ece4; border-radius: 4px 12px 12px 12px; border: 1px solid rgba(201,168,76,0.13); }
+.tc-bub.u { background: #c9a84c; color: #0a0a0a; border-radius: 12px 4px 12px 12px; font-weight: 500; }
+.tc-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; padding-left: 30px; }
+.tc-chip { background: #1a1a1a; border: 1px solid rgba(201,168,76,0.38); color: #c9a84c; font-size: 11.5px; padding: 5px 12px; border-radius: 20px; cursor: pointer; transition: all 0.15s; font-family: 'Outfit', sans-serif; font-weight: 500; }
+.tc-chip:hover { background: #c9a84c; color: #0a0a0a; }
+.tc-cta { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 7px; padding-left: 30px; }
+.tc-call { font-size: 11.5px; font-weight: 600; padding: 7px 14px; border-radius: 6px; text-decoration: none; display: flex; align-items: center; gap: 5px; background: rgba(201,168,76,0.12); color: #c9a84c; border: 1px solid rgba(201,168,76,0.38); font-family: 'Outfit', sans-serif; cursor: pointer; transition: opacity 0.2s; }
+.tc-call:hover { opacity: 0.8; }
+.tc-typing { display: flex; align-items: center; gap: 4px; padding: 8px 12px; background: #1a1a1a; border: 1px solid rgba(201,168,76,0.13); border-radius: 4px 12px 12px 12px; width: fit-content; }
+.tc-typing span { width: 6px; height: 6px; border-radius: 50%; background: #c9a84c; animation: tcDt 1s infinite; }
 .tc-typing span:nth-child(2) { animation-delay: 0.2s; }
 .tc-typing span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes tcDot { 0%,80%,100%{opacity:0.2} 40%{opacity:1} }
-#tc-input-row {
-  display: flex; align-items: center; gap: 8px; padding: 10px 12px;
-  border-top: 1px solid rgba(201,168,76,0.15); background: #111; flex-shrink: 0;
-}
-#tc-input {
-  flex: 1; background: #1a1a1a; border: 1px solid rgba(201,168,76,0.25);
-  border-radius: 20px; padding: 8px 14px; color: #f0ece4; font-size: 13px;
-  outline: none; font-family: 'Outfit', sans-serif;
-}
-#tc-input::placeholder { color: #555; }
-#tc-input:focus { border-color: rgba(201,168,76,0.6); }
-#tc-send {
-  width: 34px; height: 34px; border-radius: 50%; background: var(--gold);
-  border: none; cursor: pointer; display: flex; align-items: center;
-  justify-content: center; flex-shrink: 0; transition: background 0.2s;
-}
-#tc-send:hover { background: var(--gold2); }
-#tc-send svg { width: 15px; height: 15px; fill: #0a0a0a; }
-#tc-footer {
-  padding: 7px 14px; text-align: center; font-size: 10px; color: #444;
-  border-top: 1px solid rgba(201,168,76,0.08); background: #0a0a0a; flex-shrink: 0;
-}
-@media (max-width: 420px) {
-  #tc-window { width: calc(100vw - 24px); right: 12px; bottom: 90px; }
-  #tc-fab { right: 16px; bottom: 16px; }
-}
+@keyframes tcDt { 0%,80%,100%{opacity:0.2} 40%{opacity:1} }
+#tc-inp-row { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-top: 1px solid rgba(201,168,76,0.13); background: #111; flex-shrink: 0; }
+#tc-inp { flex: 1; background: #1a1a1a; border: 1px solid rgba(201,168,76,0.22); border-radius: 20px; padding: 8px 14px; color: #f0ece4; font-size: 13px; outline: none; font-family: 'Outfit', sans-serif; }
+#tc-inp::placeholder { color: #555; }
+#tc-inp:focus { border-color: rgba(201,168,76,0.55); }
+#tc-snd { width: 34px; height: 34px; border-radius: 50%; background: #c9a84c; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; }
+#tc-snd:hover { background: #e8c96e; }
+#tc-snd svg { width: 15px; height: 15px; fill: #0a0a0a; }
+#tc-foot { padding: 6px 14px; text-align: center; font-size: 10px; color: #333; background: #0a0a0a; flex-shrink: 0; }
+@media (max-width: 420px) { #tc-win { width: calc(100vw - 24px); right: 12px; bottom: 88px; } #tc-fab { right: 14px; bottom: 14px; } }
 </style>
-
-<!-- FAB Button -->
-<button id="tc-fab" onclick="tcToggle()" aria-label="Chat with Insurance Advisor">
-  <div id="tc-badge">1</div>
-  <svg class="tc-open" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
-  <svg class="tc-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+<button id="tc-fab" onclick="tcToggle()" aria-label="Chat with Advisor">
+  <div id="tc-notif">1</div>
+  <span class="ico-open"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg></span>
+  <span class="ico-close"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></span>
 </button>
-
-<!-- Chat Window -->
-<div id="tc-window">
-  <div id="tc-head">
+<div id="tc-win">
+  <div id="tc-hd">
     <div class="tc-av">🛡️</div>
-    <div class="tc-info">
-      <div class="tc-name">Taman Care Advisor</div>
-      <div class="tc-status"><span class="tc-dot"></span> Online — replies instantly</div>
+    <div class="tc-hd-info">
+      <div class="tc-hd-name">Taman Care Advisor</div>
+      <div class="tc-hd-sub"><span class="tc-green"></span> Online &middot; Replies instantly</div>
     </div>
-    <div class="tc-pill">AI Powered</div>
+    <div class="tc-hd-badge">AI Powered</div>
   </div>
   <div id="tc-msgs"></div>
-  <div id="tc-input-row">
-    <input id="tc-input" type="text" placeholder="Type a message…" />
-    <button id="tc-send" onclick="tcSend()">
-      <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
-    </button>
+  <div id="tc-inp-row">
+    <input id="tc-inp" type="text" placeholder="Ask anything about insurance&hellip;" />
+    <button id="tc-snd" onclick="tcSend()"><svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></button>
   </div>
-  <div id="tc-footer">Powered by Taman Care Insurance · Chandigarh</div>
+  <div id="tc-foot">Taman Care Insurance &middot; Chandigarh &middot; 9068541300</div>
 </div>
-
 <script>
-(function() {
-  var tcOpen = false;
-  var tcHistory = [];
-  var tcMsgs = document.getElementById('tc-msgs');
-  var tcInp = document.getElementById('tc-input');
-  var tcStep = 0;
-
-  var TC_SYSTEM = "You are an expert Insurance Advisor chatbot for \"Taman Care Insurance Services\" based in Chandigarh, India.\nYour goal: help users understand insurance (Health, Car, Bike, Life, Commercial), recommend best policy, collect lead info (Name + Phone), push towards action (Call/WhatsApp/Quote).\nTone: Professional but friendly, simple English, helpful, NOT robotic.\nRULES:\n- Ask questions step by step — not all at once\n- Keep responses SHORT (max 3-4 lines, no paragraphs)\n- Always guide toward a decision\n- If confused → simplify\n- If ready → collect name and phone\nSTEP FLOW:\n1. Greet & ask insurance type (Health / Car / Bike / Life / Not sure)\n2. Ask 2-3 qualification questions based on type\n3. Give 2-3 simple plan recommendations (mention HDFC, ICICI, Star Health, Bajaj etc.)\n4. Ask for name and phone to share best quote\n5. Thank them, say advisor calls within 30 mins. Add [SHOW_CTA] at the very end of your message.\nOBJECTIONS:\n- 'just checking' → 'No worries 😊 Let me show best options in 30 seconds.'\n- 'too expensive' → 'I can suggest budget-friendly plans from ₹X/month.'\n- confused → 'Just tell me your age and I'll suggest best plan 👍'\nALWAYS highlight: ✔ Fast claims ✔ Best price ✔ Trusted service ✔ 500+ happy clients\nIf unrelated question → politely bring back to insurance.\nPhone: 9068541300 | WhatsApp: wa.me/919068541300\nFORMATTING: Plain text only. No markdown. Line breaks ok. Conversational. Short.\nWhen you have collected name and phone, end message with exactly: [SHOW_CTA]";
-
-  window.tcToggle = function() {
-    tcOpen = !tcOpen;
-    var fab = document.getElementById('tc-fab');
-    var win = document.getElementById('tc-window');
-    var badge = document.getElementById('tc-badge');
-    fab.classList.toggle('open', tcOpen);
-    win.classList.toggle('open', tcOpen);
-    if (tcOpen) {
-      badge.style.display = 'none';
-      if (tcMsgs.children.length === 0) tcGreet();
-      setTimeout(function(){ tcInp.focus(); }, 300);
-    }
-  };
-
-  function tcAddBot(text, chips, showCta) {
-    var hasCta = text.indexOf('[SHOW_CTA]') > -1;
-    var clean = text.replace('[SHOW_CTA]','').trim();
-    var row = document.createElement('div');
-    row.className = 'tc-row';
-    var br = document.createElement('div');
-    br.className = 'tc-bubble-row';
-    br.innerHTML = '<div class="tc-icon">🛡️</div><div class="tc-bubble bot">'+clean.replace(/\n/g,'<br>')+'</div>';
-    row.appendChild(br);
-    if (chips && chips.length) {
-      var cr = document.createElement('div'); cr.className = 'tc-chips';
-      chips.forEach(function(c) {
-        var btn = document.createElement('button'); btn.className = 'tc-chip'; btn.textContent = c;
-        btn.onclick = function(){ cr.remove(); tcSend(c); };
-        cr.appendChild(btn);
-      });
-      row.appendChild(cr);
-    }
-    if (hasCta || showCta) {
-      var cta = document.createElement('div'); cta.className = 'tc-cta';
-      cta.innerHTML = '<a class="tc-btn-call" href="tel:9068541300">📞 Call: 9068541300</a><a class="tc-btn-wa" href="https://wa.me/919068541300" target="_blank">💬 WhatsApp</a>';
-      row.appendChild(cta);
-    }
-    tcMsgs.appendChild(row);
-    tcMsgs.scrollTop = tcMsgs.scrollHeight;
-  }
-
-  function tcAddUser(text) {
-    var row = document.createElement('div'); row.className = 'tc-row';
-    var br = document.createElement('div'); br.className = 'tc-bubble-row user';
-    br.innerHTML = '<div class="tc-bubble user">'+text+'</div>';
-    row.appendChild(br); tcMsgs.appendChild(row);
-    tcMsgs.scrollTop = tcMsgs.scrollHeight;
-  }
-
-  function tcShowTyping() {
-    var row = document.createElement('div'); row.className = 'tc-row'; row.id = 'tc-typing';
-    var br = document.createElement('div'); br.className = 'tc-bubble-row';
-    br.innerHTML = '<div class="tc-icon">🛡️</div><div class="tc-typing"><span></span><span></span><span></span></div>';
-    row.appendChild(br); tcMsgs.appendChild(row);
-    tcMsgs.scrollTop = tcMsgs.scrollHeight;
-    return row;
-  }
-
-  async function tcCallAI(msg) {
-    tcHistory.push({ role: 'user', content: msg });
-    var res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: TC_SYSTEM,
-        messages: tcHistory
-      })
-    });
-    var data = await res.json();
-    var reply = (data.content && data.content[0] && data.content[0].text) || 'Sorry, please call us at 9068541300.';
-    tcHistory.push({ role: 'assistant', content: reply });
-    return reply;
-  }
-
-  window.tcSend = async function(override) {
-    var text = override || tcInp.value.trim();
-    if (!text) return;
-    tcInp.value = '';
-    tcAddUser(text);
-    var t = tcShowTyping();
-    try {
-      var reply = await tcCallAI(text);
-      t.remove();
-      var chips = [];
-      if (tcStep === 0) {
-        chips = ['Health Insurance','Car Insurance','Bike Insurance','Life Insurance','Not sure'];
-        tcStep = 1;
-      } else if (tcStep === 1) {
-        chips = ['Yes','No','Tell me more'];
-        tcStep = 2;
-      } else { tcStep++; }
-      tcAddBot(reply, chips);
-    } catch(e) {
-      t.remove();
-      tcAddBot('Connection issue. Please call or WhatsApp us!', [], true);
-    }
-  };
-
-  tcInp.addEventListener('keydown', function(e){ if(e.key==='Enter') tcSend(); });
-
-  function tcGreet() {
-    var t = tcShowTyping();
-    setTimeout(function(){
-      t.remove();
-      tcAddBot(
-        'Hi! 👋 Welcome to Taman Care Insurance Services.\n\nI\'m your personal advisor. What type of insurance are you looking for today?',
-        ['Health Insurance','Car Insurance','Bike Insurance','Life Insurance','Not sure']
-      );
-    }, 900);
-  }
+(function(){
+'use strict';
+var faqData=[{q:"what is insurance",a:"Insurance is a contract where you pay a small premium and the company covers big unexpected losses like hospital bills, car damage, or death."},{q:"why do i need insurance",a:"Insurance protects you financially from unexpected events. Without it, one big event can wipe out your savings."},{q:"what is a premium",a:"Premium is the amount you pay to keep your insurance active. It can be monthly, quarterly, or yearly."},{q:"what is a sum insured",a:"Sum insured is the maximum amount the insurance company will pay. Higher sum insured means better protection."},{q:"what is a policy",a:"A policy is the official document outlining your coverage, terms, exclusions, and premium details."},{q:"what is a claim",a:"A claim is a formal request to the insurance company to pay for a covered loss or expense."},{q:"what is a nominee",a:"A nominee is the person who receives the insurance money if the policyholder passes away. Always keep this updated."},{q:"what is deductible",a:"Deductible is the amount you pay from your pocket before insurance kicks in. Higher deductible = lower premium."},{q:"what is waiting period",a:"Waiting period is the time after buying insurance during which certain claims are not allowed (30 days to 4 years)."},{q:"what is grace period",a:"Grace period is extra time (15-30 days) after premium due date to pay without losing coverage."},{q:"is insurance mandatory",a:"Third-party car and bike insurance is mandatory by law. Health and life insurance are optional but highly recommended."},{q:"at what age should i buy insurance",a:"The earlier the better! Buying in your 20s gives you lower premiums. Don't wait until you're sick or old."},{q:"what is health insurance",a:"Health insurance covers medical expenses like hospitalization, surgery, and treatments. It protects your savings from hospital bills."},{q:"what does health insurance cover",a:"It covers hospitalization, day-care procedures, ambulance, ICU, surgery, pre & post hospitalization expenses, and sometimes OPD."},{q:"what is not covered in health insurance",a:"Most policies exclude cosmetic surgery, self-harm injuries, pre-existing diseases (during waiting period), and dental treatment."},{q:"best health insurance",a:"Top plans: HDFC ERGO Optima Restore, Star Health Comprehensive, ICICI Lombard Complete Health, and Care Health Insurance."},{q:"how much health cover do i need",a:"Minimum Rs.5 lakh for individuals, Rs.10-15 lakh for families. With rising medical costs, Rs.10 lakh+ is ideal."},{q:"what is cashless hospitalization",a:"Cashless means you don't pay bills at the hospital — the insurer pays directly. Works only at network hospitals."},{q:"what is pre existing disease",a:"A pre-existing disease is any illness you had before buying insurance. Most policies cover it after 2-4 years waiting period."},{q:"is health insurance premium tax deductible",a:"Yes! Under Section 80D, you can claim up to Rs.25,000 deduction (Rs.50,000 for senior citizens)."},{q:"what is critical illness insurance",a:"It pays a lump sum if you're diagnosed with cancer, heart attack, or kidney failure — regardless of actual expenses."},{q:"what is car insurance",a:"Car insurance covers financial losses due to accidents, theft, fire, and third-party liabilities for your vehicle."},{q:"types of car insurance",a:"(1) Third-Party Only — covers damage to others. (2) Comprehensive — covers your car AND third-party. Comprehensive is recommended."},{q:"what is idv",a:"IDV (Insured Declared Value) is your car's current market value. Your claim cannot exceed the IDV."},{q:"what is ncb",a:"NCB (No Claim Bonus) is a discount on renewal premium for not claiming in the previous year. Goes up to 50%!"},{q:"what is zero depreciation",a:"Zero depreciation means full replacement cost is paid without deducting for depreciation. Very useful for new cars."},{q:"what is bike insurance",a:"Bike insurance covers financial loss from accidents, theft, fire, and third-party liabilities for your two-wheeler."},{q:"is bike insurance mandatory",a:"Yes! Third-party bike insurance is mandatory by law. Riding without it can lead to fine or legal action."},{q:"what is life insurance",a:"Life insurance pays a sum of money to your family if you pass away, providing financial security to your loved ones."},{q:"what is term insurance",a:"Term insurance provides large life cover for a fixed period at very low premium. Pure protection, no maturity benefit."},{q:"best term insurance",a:"Top plans: LIC Tech Term, HDFC Click 2 Protect, Max Life Smart Secure, ICICI Prudential iProtect Smart."},{q:"how much term insurance do i need",a:"Ideally 10-15 times your annual income. If you earn Rs.5 lakh/year, aim for Rs.50-75 lakh cover minimum."},{q:"what is ulip",a:"ULIP combines life insurance with market-linked investment. Part of premium goes to cover, part to investment."},{q:"is life insurance premium tax deductible",a:"Yes! Under Section 80C, you can claim up to Rs.1.5 lakh deduction on life insurance premiums paid."},{q:"how to file a health insurance claim",a:"Two ways: (1) Cashless — get pre-authorization at network hospital. (2) Reimbursement — pay bills and submit documents later."},{q:"how to file a car insurance claim",a:"Report accident to insurer, get claim number, surveyor inspects car, repair at garage, company pays garage directly."},{q:"claim settlement ratio",a:"CSR shows what % of claims an insurer settles. Higher is better. Look for companies with 95%+ CSR."},{q:"how long does claim take",a:"Cashless claims: processed within hours. Reimbursement claims: 7-30 days after submitting all documents."},{q:"how to reduce insurance premium",a:"Choose higher deductibles, maintain NCB, compare plans, buy online, avoid unnecessary add-ons, and stay healthy."},{q:"cheap insurance",a:"Budget options: Care Health from Rs.4000/year, Niva Bupa, government Ayushman Bharat (free for eligible)."},{q:"tax benefit on health insurance",a:"Section 80D: Rs.25,000 deduction for self/spouse/children + Rs.25,000 for parents (Rs.50,000 if senior citizens)."},{q:"tax benefit on life insurance",a:"Section 80C: Life insurance premiums up to Rs.1.5 lakh per year can be deducted from taxable income."},{q:"what is insurance lapse",a:"Lapsed policy means no coverage. For health, you lose NCB and waiting period credits. For car/bike, it's illegal to drive."},{q:"how to renew insurance",a:"Online through insurer website, through your advisor, or by calling us at 9068541300. Taman Care helps with all renewals."},{q:"what is family health insurance",a:"A single policy covering all family members — spouse, children, parents. One premium, shared sum insured."},{q:"best family health insurance",a:"Niva Bupa ReAssure, HDFC ERGO Optima Restore, Care Family, Star Family Health Optima are popular choices."},{q:"what is restoration benefit",a:"If your sum insured gets used up, restoration benefit automatically refills it for subsequent claims in the same year."},{q:"what is no claim bonus",a:"NCB is a discount you earn for each claim-free year. It can grow up to 50% discount on renewal premium."},{q:"what is personal accident insurance",a:"Covers accidental death, permanent/temporary disability, and medical expenses due to accidents. Very affordable."},{q:"what is group insurance",a:"Insurance provided by employer to employees. Usually cheaper but coverage ends when you leave the company."},{q:"what is top up health insurance",a:"Top-up provides extra coverage beyond a threshold. Very cost-effective way to enhance your base health cover."},{q:"how to choose insurance plan",a:"Compare based on coverage, premium, claim settlement ratio, network hospitals, and exclusions. We compare 20+ insurers for you."},{q:"best insurance company",a:"Top-rated: HDFC ERGO, ICICI Lombard, Star Health, LIC, Bajaj Allianz, Tata AIG, Niva Bupa — all IRDAI regulated."},{q:"what is free look period",a:"Free look period (15-30 days) allows you to cancel a newly bought policy and get a full refund if not satisfied."},{q:"what is co-payment",a:"Co-payment means you share part of the claim with the insurer. E.g., 10% co-pay means you pay 10% of the bill."},{q:"what is comprehensive insurance",a:"Comprehensive insurance covers your own damage + third-party liability. Much better protection than third-party only."}];
+function tcFindFaq(input){var lower=input.toLowerCase().replace(/[^a-z0-9 ]/g,' ');var words=lower.split(' ').filter(function(w){return w.length>2;});var best=null;var bestScore=0;faqData.forEach(function(f){var fLower=f.q.toLowerCase();var score=0;words.forEach(function(w){if(fLower.indexOf(w)>-1)score+=w.length>5?3:2;});if(fLower.indexOf(lower.trim())>-1)score+=10;if(score>bestScore){bestScore=score;best=f;}});return bestScore>=3?best:null;}
+function tcIntent(input){var l=input.toLowerCase();if(/\b(cheap|affordable|budget|low cost|low premium)\b/.test(l))return'cheap';if(/\b(best|recommend|suggest|top|good plan)\b/.test(l))return'best';if(/\b(claim|accident|hospital|treatment)\b/.test(l))return'claim';if(/\b(price|cost|premium|how much|rate|charges)\b/.test(l))return'price';if(/\b(buy|purchase|take|get|want|need|apply)\b/.test(l))return'buy';if(/\b(health|medical|hospitaliz)\b/.test(l))return'health';if(/\b(car|vehicle|four wheeler)\b/.test(l))return'car';if(/\b(bike|motorcycle|two wheeler|scooter)\b/.test(l))return'bike';if(/\b(life|death|family|term|beneficiary)\b/.test(l))return'life';if(/\b(tax|80d|80c|deduction)\b/.test(l))return'tax';if(/\b(renew|renewal|expire|lapse)\b/.test(l))return'renewal';return null;}
+var TC={open:false,history:[],step:0};
+var TC_SYS="You are an expert Insurance Advisor chatbot for 'Taman Care Insurance Services' based in Chandigarh, India.\nYour job: help users with Health, Car, Bike, Life, Commercial insurance. Collect Name+Phone as leads. Guide them to call.\nTONE: Professional, friendly, simple English. SHORT responses (3-4 lines max).\nRULES:\n- Ask one question at a time\n- After user shows intent to buy or after 2-3 exchanges, ask for Name and Phone\n- After collecting both Name and Phone: 'Thanks [Name]! Our team will contact you shortly. Call now: 9068541300'\n- NEVER mention WhatsApp\n- Always end with action: call 9068541300\nHIGHLIGHT: Fast claims, Best price, Trusted, 500+ happy clients\nFORMAT: Plain text only. No markdown. Short. Conversational.\nAfter collecting both name and phone, end with exactly: [LEAD_CAPTURED]";
+var msgs=document.getElementById('tc-msgs');
+var inp=document.getElementById('tc-inp');
+function tcAddBot(text,chips,showCta){var hasCta=text.indexOf('[LEAD_CAPTURED]')>-1;var clean=text.replace('[LEAD_CAPTURED]','').trim();var grp=document.createElement('div');grp.className='tc-grp';var row=document.createElement('div');row.className='tc-row';row.innerHTML='<div class="tc-ico">\u{1f6e1}\ufe0f</div><div class="tc-bub b">'+clean.replace(/\n/g,'<br>')+'</div>';grp.appendChild(row);if(chips&&chips.length){var cr=document.createElement('div');cr.className='tc-chips';chips.forEach(function(c){var b=document.createElement('button');b.className='tc-chip';b.textContent=c;b.onclick=function(){cr.remove();tcSend(c);};cr.appendChild(b);});grp.appendChild(cr);}if(hasCta||showCta){var ct=document.createElement('div');ct.className='tc-cta';ct.innerHTML='<a class="tc-call" href="tel:9068541300">\u{1f4de} Call: 9068541300</a>';grp.appendChild(ct);}msgs.appendChild(grp);msgs.scrollTop=msgs.scrollHeight;}
+function tcAddUser(t){var grp=document.createElement('div');grp.className='tc-grp';var row=document.createElement('div');row.className='tc-row u';row.innerHTML='<div class="tc-bub u">'+t+'</div>';grp.appendChild(row);msgs.appendChild(grp);msgs.scrollTop=msgs.scrollHeight;}
+function tcShowTyping(){var t=document.createElement('div');t.className='tc-grp';t.id='tc-tp';t.innerHTML='<div class="tc-row"><div class="tc-ico">\u{1f6e1}\ufe0f</div><div class="tc-typing"><span></span><span></span><span></span></div></div>';msgs.appendChild(t);msgs.scrollTop=msgs.scrollHeight;return t;}
+async function tcCallAI(msg){TC.history.push({role:'user',content:msg});var res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:TC_SYS,messages:TC.history})});var data=await res.json();var reply=(data.content&&data.content[0]&&data.content[0].text)||'Sorry, please call us at 9068541300.';TC.history.push({role:'assistant',content:reply});return reply;}
+window.tcSend=async function(override){var text=(override||inp.value).trim();if(!text)return;inp.value='';tcAddUser(text);var faq=tcFindFaq(text);if(faq&&TC.step<2){setTimeout(function(){tcAddBot(faq.a+'\n\nWant the best plan for this? I can help! 😊',['Yes, help me','Tell me more','Not now']);TC.step++;},650);return;}var intent=tcIntent(text);if(intent==='cheap'&&TC.step<2){setTimeout(function(){tcAddBot('I can suggest budget-friendly plans starting from Rs.299/month!\n\nWhich type of insurance?',['Health Insurance','Car Insurance','Bike Insurance','Life Insurance']);TC.step++;},650);return;}if(intent==='best'&&TC.step<2){setTimeout(function(){tcAddBot('Great! I will find the best plan from 20+ top insurers for you.\n\nWhat type of insurance do you need?',['Health Insurance','Car Insurance','Bike Insurance','Life Insurance']);TC.step++;},650);return;}var t=tcShowTyping();try{var reply=await tcCallAI(text);t.remove();var chips=[];if(TC.step===0){chips=['Health Insurance','Car Insurance','Bike Insurance','Life Insurance','Not sure'];TC.step=1;}else if(TC.step===1){TC.step=2;}else{TC.step++;}tcAddBot(reply,chips);}catch(e){t.remove();tcAddBot('Connection issue. Please call us directly!',null,true);}};
+window.tcToggle=function(){TC.open=!TC.open;var fab=document.getElementById('tc-fab');var win=document.getElementById('tc-win');var not=document.getElementById('tc-notif');fab.classList.toggle('open',TC.open);win.classList.toggle('open',TC.open);if(TC.open){not.style.display='none';if(!msgs.children.length)tcGreet();setTimeout(function(){inp.focus();},320);}};
+function tcGreet(){var t=tcShowTyping();setTimeout(function(){t.remove();tcAddBot('Hi! Welcome to Taman Care Insurance Services.\n\nI am your personal advisor. What type of insurance are you looking for today?\n\n✔ Fast claims  ✔ Best price  ✔ 500+ happy clients',['Health Insurance','Car Insurance','Bike Insurance','Life Insurance','Not sure']);},950);}
+inp.addEventListener('keydown',function(e){if(e.key==='Enter')tcSend();});
 })();
 </script>
-<!-- END TAMAN CARE AI CHATBOT WIDGET -->
+<!-- END TAMAN CARE AI CHATBOT WIDGET v2 -->
+
 </body>
 </html>
