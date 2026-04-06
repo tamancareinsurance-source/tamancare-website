@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.tamancareinsurance.com/sitemap.xml
+Sitemap: https://tamaninsurance-source.github.io/tamancare-website/sitemap.xml
