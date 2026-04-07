@@ -957,6 +957,287 @@ footer {
   .iq-btn-submit, .iq-btn-back { width: 100%; }
   .iq-progress-bar { margin: 16px 20px 0; }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   INSURANCE COMPARISON SECTION — Taman Care
+   CSS variables inherited from :root (--black, --gold, --white, etc.)
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── Hero band ── */
+.ic-hero {
+  position: relative;
+  background: var(--black);
+  padding: 72px 5% 48px;
+  text-align: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.ic-hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.ic-hero-content { position: relative; z-index: 1; }
+.ic-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5vw, 60px);
+  font-weight: 300; line-height: 1.1;
+  color: var(--white); margin-bottom: 12px;
+}
+.ic-hero-title em { color: var(--gold); font-style: normal; font-weight: 600; }
+.ic-hero-sub { color: rgba(255,255,255,0.55); font-size: 15px; margin-bottom: 40px; }
+
+/* ── Category Pills ── */
+.ic-cats {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 12px; margin-top: 8px;
+}
+.ic-cat {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(201,168,76,0.2);
+  border-radius: 12px; padding: 16px 22px;
+  cursor: pointer; transition: all 0.28s ease;
+  font-family: var(--font-body); color: rgba(255,255,255,0.65);
+  min-width: 88px;
+}
+.ic-cat:hover {
+  border-color: var(--gold); background: rgba(201,168,76,0.07);
+  color: var(--white); transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(201,168,76,0.15);
+}
+.ic-cat.active {
+  border-color: var(--gold); background: rgba(201,168,76,0.12);
+  color: var(--white);
+  box-shadow: 0 0 0 1px rgba(201,168,76,0.3), 0 8px 28px rgba(201,168,76,0.2);
+}
+.ic-cat-icon { font-size: 24px; }
+.ic-cat-label { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; }
+
+/* ── Main wrapper ── */
+.ic-wrap {
+  background: var(--black2);
+  padding: 48px 5% 64px;
+}
+
+/* ── Section head row ── */
+.ic-section-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px; margin-bottom: 32px;
+}
+.ic-sh-title {
+  font-family: var(--font-display); font-size: clamp(22px, 3vw, 30px);
+  color: var(--white); font-weight: 400;
+}
+.ic-sh-sub { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+.ic-sh-trust { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.ic-trust-badge {
+  background: rgba(201,168,76,0.08); border: 1px solid var(--border);
+  color: var(--gold); font-size: 11px; padding: 5px 12px; border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* ── Horizontal scroll container ── */
+.ic-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  /* custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) var(--black3);
+}
+.ic-scroll-container::-webkit-scrollbar { height: 5px; }
+.ic-scroll-container::-webkit-scrollbar-track { background: var(--black3); border-radius: 3px; }
+.ic-scroll-container::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ── Cards grid ── */
+.ic-cards {
+  display: flex; gap: 18px;
+  min-width: max-content;
+  padding: 8px 2px 4px;
+}
+
+/* ── Individual comparison card ── */
+.ic-card {
+  background: var(--black3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  width: 280px; min-width: 280px;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+  transition: all 0.32s ease;
+}
+.ic-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0; transition: opacity 0.32s;
+}
+.ic-card:hover {
+  border-color: rgba(201,168,76,0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.12);
+}
+.ic-card:hover::before { opacity: 1; }
+
+/* Best value badge */
+.ic-card.best-value::after {
+  content: '⭐ Best Value';
+  position: absolute; top: 14px; right: -22px;
+  background: var(--gold); color: var(--black);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+  padding: 4px 28px; transform: rotate(40deg);
+}
+
+/* ── Card header ── */
+.ic-card-head {
+  background: rgba(201,168,76,0.06);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 20px 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.ic-card-logo {
+  width: 44px; height: 44px; border-radius: 8px;
+  background: rgba(201,168,76,0.12); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: var(--gold);
+  letter-spacing: -0.5px; flex-shrink: 0;
+}
+.ic-card-insurer { font-size: 14px; font-weight: 600; color: var(--white); }
+.ic-card-plan { font-size: 11.5px; color: rgba(255,255,255,0.45); margin-top: 2px; line-height: 1.4; }
+
+/* ── Card body ── */
+.ic-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+
+/* Premium + Sum row */
+.ic-card-pricing {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  border-bottom: 1px solid var(--border); padding-bottom: 14px;
+}
+.ic-price-block {}
+.ic-price-label { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; }
+.ic-price-value {
+  font-family: var(--font-display); font-size: 22px; color: var(--gold);
+  font-weight: 600; line-height: 1;
+}
+.ic-price-freq { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+.ic-sum-block { text-align: right; }
+.ic-sum-label { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; }
+.ic-sum-value { font-size: 15px; font-weight: 600; color: var(--white); }
+
+/* Key features list */
+.ic-features { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.ic-feat {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 12.5px; color: rgba(255,255,255,0.6); line-height: 1.5;
+}
+.ic-feat-icon { color: var(--gold); font-size: 10px; flex-shrink: 0; margin-top: 4px; }
+
+/* CSR row */
+.ic-csr-row {
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(201,168,76,0.05); border: 1px solid var(--border);
+  border-radius: 6px; padding: 8px 12px;
+}
+.ic-csr-label { font-size: 11px; color: rgba(255,255,255,0.4); }
+.ic-csr-value { font-size: 13px; font-weight: 700; color: var(--gold); }
+
+/* ── Card CTAs ── */
+.ic-card-footer { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 8px; }
+.ic-cta-primary {
+  display: block; text-align: center;
+  background: var(--gold); color: var(--black);
+  padding: 11px 16px; border-radius: 6px;
+  font-size: 13px; font-weight: 700; text-decoration: none;
+  letter-spacing: 0.5px; transition: all 0.28s;
+}
+.ic-cta-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+.ic-cta-row { display: flex; gap: 8px; }
+.ic-cta-outline {
+  flex: 1; text-align: center;
+  border: 1px solid rgba(201,168,76,0.4); color: rgba(255,255,255,0.75);
+  padding: 9px 10px; border-radius: 6px;
+  font-size: 12px; font-weight: 500; text-decoration: none;
+  transition: all 0.28s;
+}
+.ic-cta-outline:hover { border-color: var(--gold); color: var(--gold); }
+.ic-cta-advisor {
+  flex: 1; text-align: center;
+  background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.6);
+  padding: 9px 10px; border-radius: 6px;
+  font-size: 12px; font-weight: 500; text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.28s;
+}
+.ic-cta-advisor:hover { background: rgba(255,255,255,0.08); color: var(--white); }
+
+/* ── Advisor CTA strip ── */
+.ic-advisor-strip {
+  margin-top: 40px;
+  background: rgba(201,168,76,0.06);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+}
+.ic-advisor-left { display: flex; align-items: center; gap: 16px; }
+.ic-advisor-icon { font-size: 32px; }
+.ic-advisor-title { font-family: var(--font-display); font-size: 18px; color: var(--white); }
+.ic-advisor-sub { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 3px; }
+.ic-advisor-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.ic-btn-primary {
+  background: var(--gold); color: var(--black);
+  padding: 12px 24px; border-radius: 6px;
+  font-size: 13px; font-weight: 700; text-decoration: none;
+  letter-spacing: 0.5px; transition: all 0.28s; white-space: nowrap;
+}
+.ic-btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+.ic-btn-wa {
+  background: #25D366; color: #fff;
+  padding: 12px 20px; border-radius: 6px;
+  font-size: 13px; font-weight: 600; text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+  transition: all 0.28s; white-space: nowrap;
+}
+.ic-btn-wa:hover { background: #1db954; transform: translateY(-1px); }
+
+/* ── Why row ── */
+.ic-why-row {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 12px; margin-top: 36px;
+}
+.ic-why-item {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px 20px; flex: 1; min-width: 160px; max-width: 220px;
+}
+.ic-why-icon { font-size: 22px; }
+.ic-why-text { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+.ic-why-text strong { color: var(--white); display: block; font-size: 13px; margin-bottom: 1px; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .ic-hero { padding: 56px 4% 36px; }
+  .ic-cat { padding: 12px 16px; min-width: 76px; }
+  .ic-cat-icon { font-size: 20px; }
+  .ic-wrap { padding: 36px 4% 48px; }
+  .ic-section-head { flex-direction: column; gap: 10px; }
+  .ic-sh-trust { gap: 6px; }
+  .ic-advisor-strip { flex-direction: column; align-items: flex-start; }
+  .ic-why-item { min-width: 140px; }
+}
+@media (max-width: 480px) {
+  .ic-cats { gap: 8px; }
+  .ic-cat { padding: 10px 12px; min-width: 68px; }
+  .ic-card { width: 252px; min-width: 252px; }
+  .ic-price-value { font-size: 19px; }
+  .ic-advisor-strip { padding: 18px; }
+  .ic-advisor-btns { flex-direction: column; width: 100%; }
+  .ic-btn-primary, .ic-btn-wa { justify-content: center; }
+}
+/* END COMPARISON CSS */
+
 </style>
 </head>
 <body>
@@ -974,6 +1255,7 @@ footer {
   </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#compare">Compare Plans</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#why">Why Us</a></li>
     <li><a href="#calculators">Calculators</a></li>
@@ -989,6 +1271,7 @@ footer {
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#compare" onclick="toggleMenu()">Compare Plans</a>
   <a href="#services" onclick="toggleMenu()">Services</a>
   <a href="#why" onclick="toggleMenu()">Why Choose Us</a>
   <a href="#calculators" onclick="toggleMenu()">Calculators</a>
@@ -1062,6 +1345,121 @@ footer {
     <span>✦ Pan India Services</span>
   </div>
 </div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     INSURANCE COMPARISON SECTION — Policybazaar-style but elevated
+     Added to Taman Care Insurance Services homepage
+     ══════════════════════════════════════════════════════════════════ -->
+<section id="compare" style="padding:0;background:var(--black2);">
+
+  <!-- ── CATEGORY SELECTOR ── -->
+  <div class="ic-hero">
+    <div class="ic-hero-bg"></div>
+    <div class="ic-hero-content">
+      <div class="section-tag" style="margin:0 auto 12px;">Compare & Save</div>
+      <h2 class="ic-hero-title">Find Your <em>Best</em> Plan</h2>
+      <p class="ic-hero-sub">Compare top insurers instantly. Pick your category below.</p>
+
+      <!-- Category Pills -->
+      <div class="ic-cats" id="icCats">
+        <button class="ic-cat active" data-cat="health"  onclick="icSelect(this,'health')">
+          <span class="ic-cat-icon">🏥</span>
+          <span class="ic-cat-label">Health</span>
+        </button>
+        <button class="ic-cat" data-cat="car" onclick="icSelect(this,'car')">
+          <span class="ic-cat-icon">🚗</span>
+          <span class="ic-cat-label">Car</span>
+        </button>
+        <button class="ic-cat" data-cat="bike" onclick="icSelect(this,'bike')">
+          <span class="ic-cat-icon">🏍️</span>
+          <span class="ic-cat-label">Bike</span>
+        </button>
+        <button class="ic-cat" data-cat="term" onclick="icSelect(this,'term')">
+          <span class="ic-cat-icon">🛡️</span>
+          <span class="ic-cat-label">Term Life</span>
+        </button>
+        <button class="ic-cat" data-cat="commercial" onclick="icSelect(this,'commercial')">
+          <span class="ic-cat-icon">🚛</span>
+          <span class="ic-cat-label">Commercial</span>
+        </button>
+        <button class="ic-cat" data-cat="critical" onclick="icSelect(this,'critical')">
+          <span class="ic-cat-icon">❤️‍🩹</span>
+          <span class="ic-cat-label">Critical Illness</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COMPARISON CARDS AREA ── -->
+  <div class="ic-wrap">
+
+    <!-- Section header row -->
+    <div class="ic-section-head" id="icSectionHead">
+      <div>
+        <div class="ic-sh-title" id="icShTitle">Top Health Insurance Plans</div>
+        <div class="ic-sh-sub" id="icShSub">Comparing 6 trusted insurers · Updated April 2025</div>
+      </div>
+      <div class="ic-sh-trust">
+        <span class="ic-trust-badge">✦ IRDAI Regulated</span>
+        <span class="ic-trust-badge">✦ Instant Policy</span>
+        <span class="ic-trust-badge">✦ Expert Guided</span>
+      </div>
+    </div>
+
+    <!-- Scroll container for cards -->
+    <div class="ic-scroll-container">
+      <div class="ic-cards" id="icCards">
+        <!-- JS renders cards here -->
+      </div>
+    </div>
+
+    <!-- Advisor CTA strip -->
+    <div class="ic-advisor-strip">
+      <div class="ic-advisor-left">
+        <div class="ic-advisor-icon">🎯</div>
+        <div>
+          <div class="ic-advisor-title">Not sure which plan suits you?</div>
+          <div class="ic-advisor-sub">Talk to Taman — get personalised advice, absolutely free.</div>
+        </div>
+      </div>
+      <div class="ic-advisor-btns">
+        <a class="ic-btn-primary" href="tel:9068541300">📞 Call Now</a>
+        <a class="ic-btn-wa" href="https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20free%20insurance%20comparison" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Why Compare With Us -->
+    <div class="ic-why-row">
+      <div class="ic-why-item">
+        <span class="ic-why-icon">📊</span>
+        <div class="ic-why-text"><strong>20+ Insurers</strong><br>Side-by-side</div>
+      </div>
+      <div class="ic-why-item">
+        <span class="ic-why-icon">💰</span>
+        <div class="ic-why-text"><strong>Lowest Premium</strong><br>Guaranteed</div>
+      </div>
+      <div class="ic-why-item">
+        <span class="ic-why-icon">⚡</span>
+        <div class="ic-why-text"><strong>Instant Policy</strong><br>Zero paperwork</div>
+      </div>
+      <div class="ic-why-item">
+        <span class="ic-why-icon">🤝</span>
+        <div class="ic-why-text"><strong>Expert Guidance</strong><br>Always free</div>
+      </div>
+      <div class="ic-why-item">
+        <span class="ic-why-icon">📋</span>
+        <div class="ic-why-text"><strong>Claim Support</strong><br>24/7 dedicated</div>
+      </div>
+    </div>
+
+  </div><!-- /ic-wrap -->
+</section>
+<!-- ── END COMPARISON SECTION ── -->
+
 
 <!-- ABOUT -->
 <section id="about">
@@ -1604,6 +2002,7 @@ footer {
       <div class="footer-col-title">Quick Links</div>
       <ul class="footer-links">
         <li><a href="#hero">Home</a></li>
+        <li><a href="#compare">Compare Plans</a></li>
         <li><a href="#about">About Taman</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#why">Why Choose Us</a></li>
@@ -2289,6 +2688,306 @@ inp.addEventListener('keydown',function(e){if(e.key==='Enter')tcSend();});
 })();
 </script>
 <!-- END TAMAN CARE AI CHATBOT WIDGET v2 -->
+
+
+<!-- ── COMPARISON SECTION JAVASCRIPT ── -->
+<script>
+/* ═══════════════════════════════════════════════════════════
+   Insurance Comparison Data & Renderer — Taman Care
+   ═══════════════════════════════════════════════════════════ */
+
+// ── Plan data by category ──────────────────────────────────
+var IC_PLANS = {
+  health: [
+    {
+      logo:'HDFC', insurer:'HDFC ERGO', plan:'Optima Restore',
+      premium:'₹7,200', freq:'/year (age 30)', sum:'₹10 Lakh',
+      csr:'98.5%', best:true,
+      features:['Restore benefit — auto refills sum insured','Cashless at 10,000+ hospitals','No room-rent capping','Pre & post hospitalisation 60/180 days'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20quote%20for%20HDFC%20ERGO%20Optima%20Restore'
+    },
+    {
+      logo:'STAR', insurer:'Star Health', plan:'Comprehensive',
+      premium:'₹6,500', freq:'/year (age 30)', sum:'₹10 Lakh',
+      csr:'99.06%', best:false,
+      features:['In-house claim settlement','Day-care procedures covered','OPD benefit included','Free annual health checkup'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20quote%20for%20Star%20Health%20Comprehensive'
+    },
+    {
+      logo:'NIVA', insurer:'Niva Bupa', plan:'ReAssure 2.0',
+      premium:'₹6,900', freq:'/year (age 30)', sum:'₹10 Lakh',
+      csr:'91.06%', best:false,
+      features:['Unlimited restore benefit','Lock the clock premium freeze','Booster benefit — grows each year','Mental illness covered'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20quote%20for%20Niva%20Bupa%20ReAssure'
+    },
+    {
+      logo:'CARE', insurer:'Care Health', plan:'Care Advantage',
+      premium:'₹5,800', freq:'/year (age 30)', sum:'₹10 Lakh',
+      csr:'89.36%', best:false,
+      features:['Affordable premium','NCB up to 50%','Annual health checkup','AYUSH treatment covered'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20quote%20for%20Care%20Health%20Advantage'
+    },
+    {
+      logo:'ICICI', insurer:'ICICI Lombard', plan:'Complete Health',
+      premium:'₹7,800', freq:'/year (age 30)', sum:'₹10 Lakh',
+      csr:'86.73%', best:false,
+      features:['iHealth App integration','Domiciliary hospitalisation','Critical illness rider available','Cashless claim in 3 hours'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20quote%20for%20ICICI%20Lombard%20Complete%20Health'
+    },
+    {
+      logo:'BAJAJ', insurer:'Bajaj Allianz', plan:'Health Guard',
+      premium:'₹6,100', freq:'/year (age 30)', sum:'₹10 Lakh',
+      csr:'92.05%', best:false,
+      features:['No medical test upto 45 yrs','Maternity cover available','Organ donor cover','Emergency ambulance included'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20quote%20for%20Bajaj%20Allianz%20Health%20Guard'
+    }
+  ],
+  car: [
+    {
+      logo:'HDFC', insurer:'HDFC ERGO', plan:'Comprehensive',
+      premium:'₹8,400', freq:'/year (1000cc car)', sum:'IDV: ₹3.5 Lakh',
+      csr:'98.5%', best:true,
+      features:['Zero depreciation add-on','24/7 roadside assistance','NCB up to 50%','Cashless at 6,500+ garages'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20car%20insurance%20quote%20from%20HDFC%20ERGO'
+    },
+    {
+      logo:'ICICI', insurer:'ICICI Lombard', plan:'Comprehensive',
+      premium:'₹9,100', freq:'/year (1000cc car)', sum:'IDV: ₹3.5 Lakh',
+      csr:'86.73%', best:false,
+      features:['Garage pick & drop','Instant claim settlement','Engine protect add-on','Tyre protect add-on'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20car%20insurance%20quote%20from%20ICICI%20Lombard'
+    },
+    {
+      logo:'TATA', insurer:'Tata AIG', plan:'Motor Secure',
+      premium:'₹7,900', freq:'/year (1000cc car)', sum:'IDV: ₹3.5 Lakh',
+      csr:'95.42%', best:false,
+      features:['Return to invoice add-on','Key replacement covered','Consumable expenses','Personal accident cover'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20car%20insurance%20quote%20from%20Tata%20AIG'
+    },
+    {
+      logo:'BAJAJ', insurer:'Bajaj Allianz', plan:'Car Secure',
+      premium:'₹7,600', freq:'/year (1000cc car)', sum:'IDV: ₹3.5 Lakh',
+      csr:'92.05%', best:false,
+      features:['Unlimited garage network','Spot claim settlement','Depreciation guard','Bi-fuel vehicle cover'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20car%20insurance%20quote%20from%20Bajaj%20Allianz'
+    },
+    {
+      logo:'RELIANCE', insurer:'Reliance General', plan:'Comprehensive',
+      premium:'₹7,200', freq:'/year (1000cc car)', sum:'IDV: ₹3.5 Lakh',
+      csr:'84.22%', best:false,
+      features:['Budget-friendly premium','Easy online renewal','Cashless garages','Legal liability cover'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20car%20insurance%20quote%20from%20Reliance'
+    }
+  ],
+  bike: [
+    {
+      logo:'HDFC', insurer:'HDFC ERGO', plan:'Bike Secure',
+      premium:'₹1,800', freq:'/year (150cc bike)', sum:'IDV: ₹55,000',
+      csr:'98.5%', best:true,
+      features:['Own damage cover','Personal accident ₹15 lakh','Zero depreciation add-on','Roadside assistance'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20bike%20insurance%20quote%20from%20HDFC%20ERGO'
+    },
+    {
+      logo:'BAJAJ', insurer:'Bajaj Allianz', plan:'Bike Guard',
+      premium:'₹1,600', freq:'/year (150cc bike)', sum:'IDV: ₹55,000',
+      csr:'92.05%', best:false,
+      features:['Affordable premium','Cashless network','NCB up to 50%','Pillion rider cover'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20bike%20insurance%20quote%20from%20Bajaj%20Allianz'
+    },
+    {
+      logo:'ICICI', insurer:'ICICI Lombard', plan:'Two Wheeler',
+      premium:'₹2,100', freq:'/year (150cc bike)', sum:'IDV: ₹55,000',
+      csr:'86.73%', best:false,
+      features:['Instant claim settlement','Engine protection','Digital policy issuance','24/7 support'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20bike%20insurance%20quote%20from%20ICICI%20Lombard'
+    },
+    {
+      logo:'TATA', insurer:'Tata AIG', plan:'Bike Shield',
+      premium:'₹1,750', freq:'/year (150cc bike)', sum:'IDV: ₹55,000',
+      csr:'95.42%', best:false,
+      features:['Wide cashless network','Consumable cover','Key loss cover','Roadside towing'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20bike%20insurance%20quote%20from%20Tata%20AIG'
+    }
+  ],
+  term: [
+    {
+      logo:'HDFC', insurer:'HDFC Life', plan:'Click 2 Protect Super',
+      premium:'₹9,800', freq:'/year (30 yr, ₹1Cr)', sum:'₹1 Crore',
+      csr:'99.36%', best:true,
+      features:['Income benefit option','Waiver of premium on disability','Terminal illness benefit','Return of premium option'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20term%20insurance%20quote%20from%20HDFC%20Life'
+    },
+    {
+      logo:'MAX', insurer:'Max Life', plan:'Smart Secure Plus',
+      premium:'₹9,400', freq:'/year (30 yr, ₹1Cr)', sum:'₹1 Crore',
+      csr:'99.51%', best:false,
+      features:['Highest CSR in industry','Accident death benefit','Critical illness rider','Monthly income option'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20term%20insurance%20quote%20from%20Max%20Life'
+    },
+    {
+      logo:'LIC', insurer:'LIC', plan:'Tech Term',
+      premium:'₹10,200', freq:'/year (30 yr, ₹1Cr)', sum:'₹1 Crore',
+      csr:'98.62%', best:false,
+      features:['Government-backed trust','Option to increase cover','Surrender value option','Joint life cover'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20term%20insurance%20quote%20from%20LIC'
+    },
+    {
+      logo:'ICICI', insurer:'ICICI Prudential', plan:'iProtect Smart',
+      premium:'₹9,600', freq:'/year (30 yr, ₹1Cr)', sum:'₹1 Crore',
+      csr:'97.80%', best:false,
+      features:['34 critical illness covered','Accidental death benefit','Waiver of premium','Flexible payout options'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20term%20insurance%20quote%20from%20ICICI%20Prudential'
+    },
+    {
+      logo:'TATA', insurer:'Tata AIA', plan:'Sampoorna Raksha',
+      premium:'₹8,900', freq:'/year (30 yr, ₹1Cr)', sum:'₹1 Crore',
+      csr:'99.07%', best:false,
+      features:['Lowest premium option','Increasing cover benefit','Joint life cover','Whole life option to 100 yr'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20term%20insurance%20quote%20from%20Tata%20AIA'
+    }
+  ],
+  commercial: [
+    {
+      logo:'HDFC', insurer:'HDFC ERGO', plan:'Commercial Vehicle',
+      premium:'₹28,000', freq:'/year (truck)', sum:'IDV: ₹8 Lakh',
+      csr:'98.5%', best:true,
+      features:['Third-party liability cover','Goods in transit cover','Driver personal accident','Fleet discount available'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20commercial%20vehicle%20insurance%20quote%20from%20HDFC%20ERGO'
+    },
+    {
+      logo:'BAJAJ', insurer:'Bajaj Allianz', plan:'Fleet Insurance',
+      premium:'₹25,500', freq:'/year (truck)', sum:'IDV: ₹8 Lakh',
+      csr:'92.05%', best:false,
+      features:['Fleet discount up to 30%','GCV/PCV both covered','Nationwide claim service','Legal liability cover'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20commercial%20vehicle%20insurance%20quote%20from%20Bajaj%20Allianz'
+    },
+    {
+      logo:'TATA', insurer:'Tata AIG', plan:'Commercial Motor',
+      premium:'₹26,800', freq:'/year (truck)', sum:'IDV: ₹8 Lakh',
+      csr:'95.42%', best:false,
+      features:['24/7 breakdown assistance','Competitive fleet pricing','Quick claim settlement','All commercial vehicles'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20commercial%20vehicle%20insurance%20quote%20from%20Tata%20AIG'
+    },
+    {
+      logo:'NATIONAL', insurer:'National Insurance', plan:'Commercial GCV',
+      premium:'₹23,000', freq:'/year (truck)', sum:'IDV: ₹8 Lakh',
+      csr:'74.35%', best:false,
+      features:['Government insurer','Pan India network','Affordable premium','Third-party mandatory cover'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20commercial%20vehicle%20insurance%20quote%20from%20National%20Insurance'
+    }
+  ],
+  critical: [
+    {
+      logo:'HDFC', insurer:'HDFC ERGO', plan:'Critical Illness',
+      premium:'₹4,800', freq:'/year (sum ₹10L)', sum:'₹10 Lakh',
+      csr:'98.5%', best:true,
+      features:['15 critical illnesses covered','Lump sum on diagnosis','No hospitalisation required','Tax benefit under 80D'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20critical%20illness%20quote%20from%20HDFC%20ERGO'
+    },
+    {
+      logo:'STAR', insurer:'Star Health', plan:'Cancer Care Gold',
+      premium:'₹5,200', freq:'/year (sum ₹10L)', sum:'₹10 Lakh',
+      csr:'99.06%', best:false,
+      features:['Cancer-specific policy','Early & major stage cover','Income benefit option','Second medical opinion'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20critical%20illness%20quote%20from%20Star%20Health'
+    },
+    {
+      logo:'ICICI', insurer:'ICICI Lombard', plan:'Critical Illness',
+      premium:'₹5,500', freq:'/year (sum ₹10L)', sum:'₹10 Lakh',
+      csr:'86.73%', best:false,
+      features:['20 critical illnesses','Survival period 30 days only','Premium waiver on claim','Maternity critical cover'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20critical%20illness%20quote%20from%20ICICI%20Lombard'
+    },
+    {
+      logo:'MAX', insurer:'Max Bupa', plan:'CritiCare',
+      premium:'₹4,500', freq:'/year (sum ₹10L)', sum:'₹10 Lakh',
+      csr:'95.63%', best:false,
+      features:['11 critical illnesses','No survival period clause','Annual premium payment','Easy claim process'],
+      quote:'https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20critical%20illness%20quote%20from%20Max%20Bupa'
+    }
+  ]
+};
+
+// ── Section titles ──────────────────────────────────────────
+var IC_TITLES = {
+  health:     'Top Health Insurance Plans',
+  car:        'Top Car Insurance Plans',
+  bike:       'Top Bike Insurance Plans',
+  term:       'Top Term Life Insurance Plans',
+  commercial: 'Top Commercial Vehicle Plans',
+  critical:   'Top Critical Illness Plans'
+};
+var IC_SUBS = {
+  health:     'Comparing 6 trusted health insurers · Updated 2025',
+  car:        'Comparing 5 top car insurers · Updated 2025',
+  bike:       'Comparing 4 trusted bike insurers · Updated 2025',
+  term:       'Comparing 5 top term life plans · Updated 2025',
+  commercial: 'Comparing 4 commercial insurers · Updated 2025',
+  critical:   'Comparing 4 critical illness plans · Updated 2025'
+};
+
+// ── Render cards ────────────────────────────────────────────
+function icRenderCards(cat) {
+  var plans = IC_PLANS[cat] || [];
+  var html = '';
+  plans.forEach(function(p) {
+    var bestClass = p.best ? ' best-value' : '';
+    var featuresHtml = p.features.map(function(f) {
+      return '<div class="ic-feat"><span class="ic-feat-icon">✦</span><span>' + f + '</span></div>';
+    }).join('');
+    html += '<div class="ic-card' + bestClass + '">' +
+      '<div class="ic-card-head">' +
+        '<div class="ic-card-logo">' + p.logo.substring(0,4) + '</div>' +
+        '<div><div class="ic-card-insurer">' + p.insurer + '</div>' +
+        '<div class="ic-card-plan">' + p.plan + '</div></div>' +
+      '</div>' +
+      '<div class="ic-card-body">' +
+        '<div class="ic-card-pricing">' +
+          '<div class="ic-price-block">' +
+            '<div class="ic-price-label">Premium</div>' +
+            '<div class="ic-price-value">' + p.premium + '</div>' +
+            '<div class="ic-price-freq">' + p.freq + '</div>' +
+          '</div>' +
+          '<div class="ic-sum-block">' +
+            '<div class="ic-sum-label">Cover</div>' +
+            '<div class="ic-sum-value">' + p.sum + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="ic-features">' + featuresHtml + '</div>' +
+        '<div class="ic-csr-row">' +
+          '<span class="ic-csr-label">Claim Settlement Ratio</span>' +
+          '<span class="ic-csr-value">' + p.csr + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ic-card-footer">' +
+        '<a class="ic-cta-primary" href="' + p.quote + '" target="_blank">Get Free Quote →</a>' +
+        '<div class="ic-cta-row">' +
+          '<a class="ic-cta-outline" href="' + p.quote + '" target="_blank">Buy Now</a>' +
+          '<a class="ic-cta-advisor" href="tel:9068541300">Talk to Advisor</a>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  });
+  document.getElementById('icCards').innerHTML = html;
+  document.getElementById('icShTitle').textContent = IC_TITLES[cat] || '';
+  document.getElementById('icShSub').textContent = IC_SUBS[cat] || '';
+}
+
+// ── Category selector ───────────────────────────────────────
+function icSelect(btn, cat) {
+  var btns = document.querySelectorAll('.ic-cat');
+  btns.forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  icRenderCards(cat);
+}
+
+// ── Init on DOM ready ───────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  icRenderCards('health');
+});
+</script>
+<!-- ── END COMPARISON SECTION JS ── -->
+
 
 </body>
 </html>
