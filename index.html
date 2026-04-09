@@ -2022,6 +2022,62 @@ footer {
   .cta-banner-btn { width: 100%; justify-content: center; }
 }
 
+/* ══════════════════════════════════════════════
+   TASK 1 — ABOUT LOGO / PORTRAIT SIZE INCREASE
+   ══════════════════════════════════════════════ */
+.about-portrait img {
+  width: 100%;
+  height: auto;
+  transform: scale(1.15);
+  transform-origin: center center;
+}
+
+/* ══════════════════════════════════════════════
+   TASK 2 — PREMIUM HOVER EFFECTS
+   ══════════════════════════════════════════════ */
+.service-card,
+.why-card,
+.company-logo-box {
+  transition: all 0.4s ease !important;
+}
+.service-card:hover,
+.why-card:hover,
+.company-logo-box:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 20px 60px rgba(201,168,76,0.2) !important;
+}
+
+/* ══════════════════════════════════════════════
+   TASK 3 — SCROLL REVEAL
+   ══════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease !important;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none !important;
+}
+
+/* ══════════════════════════════════════════════
+   TASK 4 — BUTTON MICRO INTERACTIONS
+   ══════════════════════════════════════════════ */
+.btn-primary,
+.btn-outline,
+.nav-cta {
+  transition: all 0.3s ease !important;
+}
+.btn-primary:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 10px 40px rgba(201,168,76,0.4) !important;
+}
+
+/* ══════════════════════════════════════════════
+   TASK 5 — SMOOTH SCROLL
+   ══════════════════════════════════════════════ */
+html { scroll-behavior: smooth; }
+
 </style>
 </head>
 <body>
@@ -4089,6 +4145,53 @@ if (navCta && !navCta.onclick) {
     openQuoteFlow(null);
   });
 }
+</script>
+
+<!-- ══════════════════════════════════════════════
+     TASK 3 — SCROLL REVEAL JS
+     ══════════════════════════════════════════════ -->
+<script>
+(function() {
+  // Elements to animate on scroll
+  var revealSelectors = [
+    'section',
+    '.section-tag',
+    '.section-title',
+    '.section-subtitle',
+    '.gold-divider',
+    '.service-card',
+    '.why-card',
+    '.company-logo-box',
+    '.testi-card',
+    '.stat-box',
+    '.about-quote',
+    '.about-body',
+    '.calc-card'
+  ];
+
+  // Add .reveal class to matching elements (skip hero to avoid conflict with entry animations)
+  revealSelectors.forEach(function(sel) {
+    document.querySelectorAll(sel).forEach(function(el) {
+      if (!el.closest('#hero') && !el.classList.contains('reveal')) {
+        el.classList.add('reveal');
+      }
+    });
+  });
+
+  // IntersectionObserver — triggers .visible
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    io.observe(el);
+  });
+})();
 </script>
 </body>
 </html>
