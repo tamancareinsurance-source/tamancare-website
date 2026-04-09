@@ -327,7 +327,6 @@ section { padding: 100px 5%; }
   border-radius: 4px; padding: 36px 28px;
   position: relative; overflow: hidden;
   transition: all 0.4s ease; cursor: default;
-  group: true;
 }
 .service-card::before {
   content:''; position: absolute;
@@ -2864,6 +2863,15 @@ html { scroll-behavior: smooth; }
         </a>
         <a href="tel:9068541300" title="Call">📞</a>
         <a href="#contact" title="Email">✉️</a>
+        <a href="https://www.instagram.com/tamancare.insurance" target="_blank" title="Instagram" aria-label="Follow on Instagram" style="font-size:18px;">📸</a>
+      </div>
+      <p class="footer-insta-text">📸 Follow us on Instagram<br><a href="https://www.instagram.com/tamancare.insurance" target="_blank" style="color:var(--gold);text-decoration:none;">@tamancare.insurance</a></p>
+      <!-- Meet with Taman -->
+      <div style="margin-top:18px;padding:14px 16px;border:1px solid var(--border);border-radius:6px;background:rgba(201,168,76,0.05);">
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Book a Meeting</p>
+        <a href="https://wa.me/919068541300?text=Hello%2C%20I%20want%20to%20schedule%20a%20meeting%20with%20Taman" target="_blank" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--gold);font-weight:600;text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='var(--gold2)'" onmouseout="this.style.color='var(--gold)'">
+          📅 Meet with Taman <span style="font-size:11px;opacity:0.7;">→</span>
+        </a>
       </div>
     </div>
     <div>
@@ -2910,6 +2918,23 @@ html { scroll-behavior: smooth; }
         <span>Mon–Sat: 9AM–7PM<br>Claims: 24/7</span>
       </div>
     </div>
+  </div>
+  <!-- Payment Methods -->
+  <div style="padding:20px 0 14px;border-top:1px solid var(--border);margin-top:40px;">
+    <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Secure Payment Methods</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+      <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:5px 12px;font-size:12px;font-weight:700;color:rgba(255,255,255,0.65);">💳 UPI</span>
+      <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:5px 12px;font-size:12px;font-weight:700;color:rgba(255,255,255,0.65);">🏦 Net Banking</span>
+      <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:5px 12px;font-size:12px;font-weight:700;color:rgba(255,255,255,0.65);">💰 PhonePe</span>
+      <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:5px 12px;font-size:12px;font-weight:700;color:rgba(255,255,255,0.65);">📲 GPay</span>
+      <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:5px 12px;font-size:12px;font-weight:700;color:rgba(255,255,255,0.65);">💳 Debit/Credit Card</span>
+    </div>
+  </div>
+  <!-- Fraud Disclaimer -->
+  <div style="padding:12px 16px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:6px;margin-bottom:20px;">
+    <p style="font-size:11.5px;color:rgba(255,255,255,0.5);line-height:1.7;">
+      ⚠️ <strong style="color:var(--gold);">Fraud Alert:</strong> Taman Care Insurance never asks for OTP, CVV, or advance cash payments. Always verify before transferring money. Beware of fraudsters impersonating our brand. Report suspicious activity: <a href="tel:9068541300" style="color:var(--gold);text-decoration:none;font-weight:600;">90685 41300</a>
+    </p>
   </div>
   <div class="footer-bottom">
     <div class="footer-copy">© 2025 Taman Care Insurance Services. All rights reserved. | Taman Aggarwal, Chandigarh</div>
@@ -3759,6 +3784,19 @@ function iqRestart() {
 #tc-snd svg { width: 15px; height: 15px; fill: #0a0a0a; }
 #tc-foot { padding: 6px 14px; text-align: center; font-size: 10px; color: #333; background: #0a0a0a; flex-shrink: 0; }
 @media (max-width: 420px) { #tc-win { width: calc(100vw - 24px); right: 12px; bottom: 88px; } #tc-fab { right: 14px; bottom: 14px; } }
+/* ── POPUP CSS ── */
+.premium-popup { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(6px); }
+.premium-popup.show { display: flex; }
+.popup-box { background: #111; padding: 36px 32px; border-radius: 12px; border: 1px solid rgba(201,168,76,0.3); text-align: center; max-width: 460px; width: 90%; position: relative; box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.08); animation: popupSlideIn 0.35s cubic-bezier(0.22,1,0.36,1) both; }
+@keyframes popupSlideIn { from { opacity:0; transform: scale(0.92) translateY(20px); } to { opacity:1; transform: none; } }
+.popup-box h3 { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--white); margin-bottom: 10px; }
+.popup-box h3 span { color: var(--gold); }
+.popup-box p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.8; margin-bottom: 6px; }
+.popup-btn { display: inline-block; margin-top: 10px; padding: 13px 28px; background: var(--gold); color: #000; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.5px; transition: all 0.3s; }
+.popup-btn:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,0.4); }
+.popup-close-btn { position: absolute; top: 12px; right: 16px; font-size: 22px; color: rgba(255,255,255,0.35); cursor: pointer; background: none; border: none; transition: color 0.3s; line-height: 1; }
+.popup-close-btn:hover { color: var(--white); }
+.footer-insta-text { font-size: 12px; margin-top: 8px; color: rgba(255,255,255,0.5); }
 </style>
 <button id="tc-fab" onclick="tcToggle()" aria-label="Chat with Advisor">
   <div id="tc-notif">1</div>
@@ -4192,6 +4230,53 @@ if (navCta && !navCta.onclick) {
     io.observe(el);
   });
 })();
+</script>
+<!-- ══ PREMIUM POPUP (Task 5) ══ -->
+<div class="premium-popup" id="premiumPopup">
+  <div class="popup-box">
+    <button class="popup-close-btn" onclick="closePremiumPopup()" aria-label="Close">✕</button>
+    <div style="font-size:36px;margin-bottom:12px;">🛡️</div>
+    <h3>Get a <span>Free Quote</span><br>in 60 Seconds</h3>
+    <p>Compare 20+ top insurers instantly.<br>Best coverage, lowest premium — guaranteed.</p>
+    <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;">✅ 500+ happy clients &nbsp;|&nbsp; ⭐ 5-star rated</p>
+    <a class="popup-btn" href="https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20free%20insurance%20quote" target="_blank">
+      💬 Get Free Quote on WhatsApp
+    </a>
+    <p style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:14px;">No spam. No obligation. 100% free.</p>
+  </div>
+</div>
+
+<script>
+// ── POPUP JS (Task 7) ──────────────────────────────────────────
+(function() {
+  var popup = document.getElementById('premiumPopup');
+  if (!popup) return;
+
+  // Show popup after 8 seconds if not dismissed this session
+  if (!sessionStorage.getItem('popupDismissed')) {
+    setTimeout(function() {
+      popup.classList.add('show');
+    }, 8000);
+  }
+
+  // Close on backdrop click
+  popup.addEventListener('click', function(e) {
+    if (e.target === popup) closePremiumPopup();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePremiumPopup();
+  });
+})();
+
+function closePremiumPopup() {
+  var popup = document.getElementById('premiumPopup');
+  if (popup) {
+    popup.classList.remove('show');
+    sessionStorage.setItem('popupDismissed', '1');
+  }
+}
 </script>
 </body>
 </html>
