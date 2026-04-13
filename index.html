@@ -3258,9 +3258,70 @@ html { scroll-behavior: smooth; }
   flex-shrink: 0;
 }
 
+/* ── MOBILE HEADER ALIGNMENT FIX ── */
 @media (max-width: 768px) {
+  /* Claims ticker: single-line on mobile, hide overflow stats */
+  #claimsTickerBar {
+    padding: 7px 4% !important;
+    flex-wrap: nowrap !important;
+    overflow: hidden !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    align-items: center !important;
+  }
+  #claimsTickerBar > div:last-child {
+    display: none !important;
+  }
+  #claimsTickerBar > div:first-child {
+    gap: 6px !important;
+    flex-shrink: 0 !important;
+  }
+  #claimsTickerBar #claimsCounter {
+    font-size: 15px !important;
+  }
+  #claimsTickerBar span[style*="11px"] {
+    font-size: 10px !important;
+  }
+
+  /* Urgency bar: sits right below 36px ticker */
   .urgency-bar {
-    top: 33px !important;
+    top: 36px !important;
+    font-size: 11px !important;
+    padding: 7px 4% !important;
+    height: auto !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Navbar: sits below ticker (36px) + urgency (~32px) = ~68px */
+  #navbar {
+    top: 68px !important;
+  }
+  #navbar.scrolled {
+    top: 0 !important;
+  }
+
+  /* Hero: push content below all three fixed bars */
+  #hero {
+    padding-top: 148px !important;
+    padding-bottom: 60px !important;
+  }
+
+  /* Mobile menu: below navbar */
+  .mobile-menu {
+    top: 68px !important;
+  }
+  body.scrolled-header .mobile-menu {
+    top: 76px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #hero {
+    padding-top: 148px !important;
   }
 }
 </style><style>
@@ -5093,22 +5154,51 @@ html { scroll-behavior: smooth; }
 <script>const IQ_LOGO_URLS={"HDFC":"https://logo.clearbit.com/hdfcergo.com","ICICI":"https://logo.clearbit.com/icicilombard.com","STAR":"https://logo.clearbit.com/starhealth.in","BAJAJ":"https://logo.clearbit.com/bajajallianz.com","TATA":"https://logo.clearbit.com/tataaig.com","NIVA":"https://logo.clearbit.com/nivabupa.com","CARE":"https://logo.clearbit.com/careinsurance.com","MAX":"https://logo.clearbit.com/maxlifeinsurance.com","SBI":"https://logo.clearbit.com/sbilife.co.in","REL":"https://logo.clearbit.com/reliancegeneral.co.in"};
 
 // ── MEASURE BOTH TOP BARS HEIGHT DYNAMICALLY ──────────────────────────────
-(function() {
+function updateHeaderHeights() {
   var ticker = document.getElementById('claimsTickerBar');
   var urgency = document.querySelector('.urgency-bar');
-  var totalH = 0;
-  if (ticker) totalH += ticker.getBoundingClientRect().height;
-  if (urgency) totalH += urgency.getBoundingClientRect().height;
+  var tickerH = ticker ? ticker.getBoundingClientRect().height : 0;
+  var urgencyH = urgency ? urgency.getBoundingClientRect().height : 0;
+  var totalH = tickerH + urgencyH;
   if (totalH > 0) {
     document.documentElement.style.setProperty('--urgency-bar-height', totalH + 'px');
+    // Also update navbar top and hero padding dynamically
+    var navbarEl = document.getElementById('navbar');
+    var heroEl = document.getElementById('hero');
+    if (navbarEl && !navbarEl.classList.contains('scrolled')) {
+      navbarEl.style.top = totalH + 'px';
+    }
+    if (heroEl) {
+      var navH = navbarEl ? navbarEl.getBoundingClientRect().height : 76;
+      heroEl.style.paddingTop = (totalH + navH + 16) + 'px';
+    }
   }
-})();
+}
+// Run after layout
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', updateHeaderHeights);
+} else {
+  updateHeaderHeights();
+}
+window.addEventListener('resize', updateHeaderHeights);
+// Also run after fonts/images load
+window.addEventListener('load', updateHeaderHeights);
 
 // ── NAVBAR SCROLL
 const navbar = document.getElementById('navbar');
 function updateNavLayout() {
   const scrolled = window.scrollY > 60;
+  const wasScrolled = navbar.classList.contains('scrolled');
   navbar.classList.toggle('scrolled', scrolled);
+  // When unscrolling, restore dynamic top position
+  if (wasScrolled && !scrolled) {
+    updateHeaderHeights();
+  } else if (!scrolled) {
+    updateHeaderHeights();
+  }
+  if (scrolled) {
+    navbar.style.top = '0px';
+  }
   // Dynamically position mobile menu directly below navbar
   const mobileMenu = document.getElementById('mobileMenu');
   if (mobileMenu && mobileMenu.classList.contains('open')) {
