@@ -51,6 +51,9 @@
   --font-display: 'Cormorant Garamond', serif;
   --font-body: 'Outfit', sans-serif;
   --shadow-gold: 0 0 40px rgba(201,168,76,0.15);
+  --urgency-bar-height: 81px;
+  --navbar-height: 76px;
+  --header-total: calc(var(--urgency-bar-height) + var(--navbar-height));
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -72,7 +75,7 @@ body {
 
 /* ── NAV ── */
 #navbar {
-  position: fixed; top: 40px; left: 0; right: 0; z-index: 1000;
+  position: fixed; top: var(--urgency-bar-height); left: 0; right: 0; z-index: 1050;
   padding: 14px 5%;
   display: flex; align-items: center; justify-content: space-between;
   transition: all 0.4s ease;
@@ -128,14 +131,14 @@ body {
 .hamburger span { width: 24px; height: 2px; background: var(--gold); border-radius: 2px; transition: all 0.3s; }
 
 .mobile-menu {
-  display: none; position: fixed; top: 116px; left: 0; right: 0;
+  display: none; position: fixed; top: var(--header-total); left: 0; right: 0;
   background: rgba(10,10,10,0.98); backdrop-filter: blur(20px);
-  padding: 24px 5%; z-index: 999;
+  padding: 24px 5%; z-index: 1049;
   border-bottom: 1px solid var(--border);
   flex-direction: column; gap: 16px;
   transition: top 0.4s ease;
 }
-body.scrolled-header .mobile-menu { top: 70px; }
+body.scrolled-header .mobile-menu { top: var(--navbar-height); }
 .mobile-menu.open { display: flex; }
 .mobile-menu a {
   color: var(--white); text-decoration: none; font-size: 16px;
@@ -148,7 +151,7 @@ body.scrolled-header .mobile-menu { top: 70px; }
   background: var(--black);
   display: flex; align-items: center;
   position: relative; overflow: hidden;
-  padding: 140px 5% 60px;
+  padding: calc(var(--header-total) + 40px) 5% 60px;
 }
 .hero-bg {
   position: absolute; inset: 0;
@@ -750,7 +753,7 @@ footer {
 /* ── URGENCY BAR ── */
 .urgency-bar {
   position: relative;
-  z-index: 1001;
+  z-index: 999;
   background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 100%);
   padding: 10px; text-align: center;
   font-size: 13px; font-weight: 600; color: var(--black);
@@ -762,6 +765,11 @@ footer {
 @keyframes fadeInDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
 @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
 @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-inner { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-badge, .hero-headline, .hero-sub, .hero-trust, .hero-btns { animation: none; opacity: 1; transform: none; }
+}
 
 /* Scroll reveal */
 .reveal {
@@ -784,6 +792,7 @@ footer {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
 }
 @media (max-width: 768px) {
+  --urgency-bar-height: 37px;
   section { padding: 72px 5%; }
   .nav-links, .nav-cta { display: none; }
   .lang-switcher { display: none; }
@@ -796,8 +805,8 @@ footer {
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .calc-card { padding: 28px 20px; }
-  #hero { padding-top: 130px; }
-  #navbar { top: 36px; }
+  #hero { padding-top: calc(var(--urgency-bar-height, 74px) + var(--navbar-height, 76px) + 24px); }
+  #navbar { top: var(--urgency-bar-height, 74px); }
   .urgency-bar { font-size: 11.5px; padding: 8px 10px; }
 }
 @media (max-width: 480px) {
@@ -805,6 +814,9 @@ footer {
   .hero-btns .btn-instant-quote, .hero-btns .btn-primary, .hero-btns .btn-outline, .hero-btns .btn-whatsapp { width: 100%; justify-content: center; text-align: center; }
   .companies-logos { grid-template-columns: repeat(2, 1fr); }
   .testi-grid { grid-template-columns: 1fr; }
+  #hero { padding-top: calc(var(--urgency-bar-height, 74px) + var(--navbar-height, 76px) + 16px); }
+  .section-tag { font-size: 12px; }
+  .footer-copy, .footer-rera { font-size: 12px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -934,6 +946,7 @@ footer {
   box-shadow: 0 0 0 1px rgba(201,168,76,0.25), 0 8px 28px rgba(201,168,76,0.15);
 }
 .rq-option.selected::after { opacity: 1; }
+.rq-option > * { pointer-events: none; }
 .rq-opt-icon { font-size: 28px; margin-bottom: 8px; }
 .rq-opt-label {
   font-size: 13px;
@@ -1212,7 +1225,19 @@ footer {
   border-radius: 12px;
   border: 1px solid var(--border);
   box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  position: relative;
 }
+.compare-table-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 48px;
+  background: linear-gradient(to right, transparent, rgba(10,10,10,0.85));
+  pointer-events: none;
+  border-radius: 0 12px 12px 0;
+  transition: opacity 0.3s;
+}
+.compare-table-wrap.scrolled-end::after { opacity: 0; }
 .compare-table {
   width: 100%;
   min-width: 680px;
@@ -1455,10 +1480,11 @@ footer {
   border: 1px solid rgba(201,168,76,0.3);
   border-radius: 8px;
   width: 100%; max-width: 640px;
-  max-height: 92vh; overflow-y: auto;
+  max-height: calc(100dvh - 40px); overflow-y: auto;
   position: relative;
   animation: iqSlideUp 0.35s cubic-bezier(0.22,1,0.36,1) both;
   box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.08);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 .iq-modal::-webkit-scrollbar { width: 4px; }
 .iq-modal::-webkit-scrollbar-track { background: var(--black3); }
@@ -2844,9 +2870,363 @@ html { scroll-behavior: smooth; }
   opacity: 0;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   TASK 1–7: CONVERSION BOOST + UI ENHANCEMENTS (Added on top)
+═══════════════════════════════════════════════════════════════ */
+
+/* ── HERO HEADLINE UPDATE ── */
+.hero-headline-new {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6vw, 80px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  animation: fadeInUp 0.9s ease 0.1s both;
+}
+.hero-headline-new em { color: var(--gold); font-style: normal; font-weight: 600; }
+
+/* ── TRUST BADGE ROW ── */
+.hero-trust-badges {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  animation: fadeInUp 0.9s ease 0.3s both;
+}
+.htb-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 30px;
+  padding: 7px 16px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+}
+.htb-item .htb-icon { font-size: 15px; }
+.htb-item strong { color: var(--gold); }
+
+/* ── ENHANCED CTA BUTTONS ── */
+.btn-primary-glow {
+  background: var(--gold);
+  color: var(--black);
+  padding: 16px 34px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease;
+  box-shadow: 0 0 0 0 rgba(201,168,76,0);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.btn-primary-glow:hover::before { transform: translateX(100%); }
+.btn-primary-glow:hover {
+  background: var(--gold2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 40px rgba(201,168,76,0.55), 0 0 20px rgba(201,168,76,0.3);
+}
+
+.btn-compare-plans {
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+  padding: 14px 28px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-compare-plans:hover {
+  background: rgba(201,168,76,0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(201,168,76,0.25);
+}
+
+/* ── SAVE BADGE ── */
+.save-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #1a4a1a, #0f2e0f);
+  border: 1px solid #2d7a2d;
+  color: #4ade80;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+/* ── STICKY MOBILE CTA BAR ── */
+#sticky-mobile-cta {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9990;
+  background: rgba(10,10,10,0.97);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(201,168,76,0.25);
+  padding: 12px 16px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.5);
+}
+.sticky-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 6px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  transition: all 0.25s;
+  text-decoration: none;
+}
+.sticky-btn-icon { font-size: 18px; }
+.sticky-btn-call {
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+}
+.sticky-btn-wa {
+  background: #25D366;
+  color: #fff;
+}
+.sticky-btn-quote {
+  background: var(--gold);
+  color: var(--black);
+}
+.sticky-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+@media (max-width: 768px) {
+  #sticky-mobile-cta { display: grid; }
+  body { padding-bottom: 72px; }
+  #contact, #calculators, footer, #cta-banner { padding-bottom: calc(72px + 1.5rem); }
+}
+
+/* ── EXIT INTENT POPUP ── */
+#exit-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  padding: 20px;
+}
+#exit-popup.show { opacity: 1; pointer-events: all; }
+.exit-popup-box {
+  background: var(--black2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 44px 40px;
+  max-width: 460px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  transform: scale(0.88);
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.15);
+}
+#exit-popup.show .exit-popup-box { transform: scale(1); }
+.exit-popup-close {
+  position: absolute; top: 14px; right: 18px;
+  background: none; border: none; color: rgba(255,255,255,0.4);
+  font-size: 22px; cursor: pointer; transition: color 0.2s;
+}
+.exit-popup-close:hover { color: var(--white); }
+.exit-popup-emoji { font-size: 48px; margin-bottom: 12px; display: block; }
+.exit-popup-title {
+  font-family: var(--font-display);
+  font-size: 30px; color: var(--white);
+  margin-bottom: 10px; font-weight: 400;
+}
+.exit-popup-title span { color: var(--gold); }
+.exit-popup-sub {
+  font-size: 14px; color: rgba(255,255,255,0.55);
+  line-height: 1.8; margin-bottom: 24px;
+}
+.exit-popup-offer {
+  background: rgba(201,168,76,0.08);
+  border: 1px dashed rgba(201,168,76,0.4);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.exit-popup-btns { display: flex; flex-direction: column; gap: 10px; }
+.exit-dismiss {
+  background: none; border: none; color: rgba(255,255,255,0.3);
+  font-size: 12px; cursor: pointer; margin-top: 6px;
+  font-family: var(--font-body); transition: color 0.2s;
+}
+.exit-dismiss:hover { color: rgba(255,255,255,0.55); }
+
+/* ── TRUST SIGNALS STRIP ── */
+.trust-signals-strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 32px 5%;
+  background: var(--black2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.ts-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+.ts-icon {
+  width: 44px; height: 44px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.ts-num {
+  font-family: var(--font-display);
+  font-size: 22px; color: var(--gold); font-weight: 700;
+  line-height: 1;
+}
+.ts-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+@media (max-width: 600px) {
+  .trust-signals-strip { gap: 20px; }
+  .ts-item { flex: 1 1 calc(50% - 20px); }
+}
+
+/* ── 3D CARD HOVER ── */
+.service-card {
+  transform-style: preserve-3d;
+}
+.service-card:hover {
+  transform: translateY(-8px) perspective(600px) rotateX(2deg) !important;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.45), 0 0 0 1px rgba(201,168,76,0.15), 0 0 40px rgba(201,168,76,0.12) !important;
+}
+
+/* ── GOLD GLOW CTA PULSE ── */
+@keyframes goldPulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+  50% { box-shadow: 0 0 24px 6px rgba(201,168,76,0.35); }
+}
+.btn-instant-quote {
+  animation: iqPulse 2.5s infinite, goldPulseGlow 3s 2s infinite;
+}
+
+/* ── PLAN RECOMMENDER CATEGORY TABS FIX ── */
+.rq-category-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+.rq-cat-tab {
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(201,168,76,0.2);
+  border-radius: 30px;
+  padding: 8px 18px;
+  font-family: var(--font-body);
+  font-size: 13px; font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.rq-cat-tab.active, .rq-cat-tab:hover {
+  background: rgba(201,168,76,0.12);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ── COMPARE SECTION TAB HIGHLIGHT ── */
+.cmp-cat-btn.active {
+  background: var(--gold) !important;
+  color: var(--black) !important;
+  border-color: var(--gold) !important;
+}
+
+/* ── MOBILE SMOOTH SCROLL FIX ── */
+@media (max-width: 768px) {
+  html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+  .hero-btns { flex-direction: column; }
+  .hero-btns > * { width: 100%; text-align: center; justify-content: center; }
+  .trust-signals-strip { padding: 24px 5%; }
+}
+
+/* ── SPACING & READABILITY ── */
+.section-subtitle { line-height: 1.85; }
+.about-body { line-height: 1.95; }
+
+/* ── PERFORMANCE: REDUCE ANIMATION LAG ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+.reveal { will-change: opacity, transform; }
+.marquee-inner { will-change: transform; }
+
 </style>
 </head>
 <body>
+
+<!-- CLAIMS TICKER + URGENCY BAR -->
+<div id="claimsTickerBar" style="background:#0a0a0a;border-bottom:1px solid rgba(201,168,76,0.25);padding:8px 5%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+  <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+    <span style="width:7px;height:7px;border-radius:50%;background:#4ade80;display:inline-block;box-shadow:0 0 8px rgba(74,222,128,0.8);animation:tickerPulse 1.5s infinite;"></span>
+    <span style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);">Live · Claims Settled</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold);font-weight:700;" id="claimsCounter">₹21.5 Lakh</span>
+    <span style="font-size:11.5px;color:rgba(255,255,255,0.4);">this month</span>
+  </div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:11.5px;color:rgba(255,255,255,0.4);">🏆 <strong style="color:var(--gold2);">₹2.4 Cr</strong> total</span>
+    <span style="font-size:11.5px;color:rgba(255,255,255,0.4);">⚡ <strong style="color:var(--gold2);">48 hrs</strong> avg settlement</span>
+    <span style="font-size:11.5px;color:rgba(255,255,255,0.4);">✅ <strong style="color:var(--gold2);">98.5%</strong> success rate</span>
+  </div>
+</div>
+<style>
+@keyframes tickerPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
+</style>
 
 <!-- URGENCY BAR -->
 <div class="urgency-bar">
@@ -2874,7 +3254,7 @@ html { scroll-behavior: smooth; }
     <button class="lang-btn" onclick="setLang('pa')" id="langPa">ਪੰਜ</button>
   </div>
   <a class="nav-cta" onclick="openQuoteFlow(null)" style="cursor:pointer;" data-lang-content="nav_cta">Get Free Quote</a>
-  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu" role="button" tabindex="0">
     <span></span><span></span><span></span>
   </div>
 </nav>
@@ -2902,9 +3282,19 @@ html { scroll-behavior: smooth; }
   <div class="hero-grid"></div>
   <div class="hero-geo"></div>
   <div class="hero-content">
-    <div class="hero-badge">⭐ 500+ Happy Clients Across India</div>
+    <!-- SAVE BADGE -->
+    <div class="save-badge">🎯 Save up to 40% on Your Premium Today</div>
+
+    <!-- HERO HEADLINE -->
     <h1 class="hero-headline">Protect <em>Today,</em><br>Secure Tomorrow</h1>
-    <p class="hero-sub">Chandigarh's most trusted insurance advisor. We compare 20+ top insurers to get you the best coverage at the best price — with full claim support, always.</p>
+    <p class="hero-sub">Chandigarh's most trusted insurance advisor. Compare Car, Bike, Life, Commercial &amp; Family Health Plans — with 500+ happy clients across India.</p>
+
+    <!-- TRUST BADGES ROW -->
+    <div class="hero-trust-badges">
+      <span class="htb-item"><span class="htb-icon">✅</span> <strong>500+</strong>&nbsp;Clients Served</span>
+      <span class="htb-item"><span class="htb-icon">⚡</span> Compare Plans <strong>Instantly</strong></span>
+      <span class="htb-item"><span class="htb-icon">🛡️</span> Fast <strong>Claim Support</strong></span>
+    </div>
     <!-- Insurance Category Cards -->
     <div class="hero-categories">
       <a class="hero-cat-card" onclick="openQuoteFlow('car')" style="cursor:pointer;">
@@ -2916,39 +3306,30 @@ html { scroll-behavior: smooth; }
       <a class="hero-cat-card" onclick="openQuoteFlow('health')" style="cursor:pointer;">
         <span class="hero-cat-icon">🏥</span> Health Insurance
       </a>
-      <a class="hero-cat-card" onclick="openQuoteFlow(null)" style="cursor:pointer;">
+      <a class="hero-cat-card" onclick="openQuoteFlow('life')" style="cursor:pointer;">
         <span class="hero-cat-icon">🛡️</span> Life Insurance
+      </a>
+      <a class="hero-cat-card" onclick="openQuoteFlow('family')" style="cursor:pointer;">
+        <span class="hero-cat-icon">👨‍👩‍👧</span> Family Floater
+      </a>
+      <a class="hero-cat-card" onclick="openQuoteFlow('commercial')" style="cursor:pointer;">
+        <span class="hero-cat-icon">🚛</span> Commercial
       </a>
     </div>
 
-    <div class="hero-trust">
-      <div class="hero-trust-item">
-        <span class="hero-trust-icon">🏆</span>
-        <div class="hero-trust-text"><strong>500+</strong>Happy Clients</div>
-      </div>
-      <div class="hero-trust-item">
-        <span class="hero-trust-icon">🛡️</span>
-        <div class="hero-trust-text"><strong>20+</strong>Insurance Partners</div>
-      </div>
-      <div class="hero-trust-item">
-        <span class="hero-trust-icon">⚡</span>
-        <div class="hero-trust-text"><strong>24/7</strong>Claim Support</div>
-      </div>
-      <div class="hero-trust-item">
-        <span class="hero-trust-icon">📍</span>
-        <div class="hero-trust-text"><strong>Pan India</strong>Services</div>
-      </div>
-    </div>
     <div class="hero-btns">
-      <button class="btn-instant-quote" onclick="openQuoteFlow(null)">
+      <button class="btn-instant-quote btn-primary-glow" onclick="openQuoteFlow(null)">
         <span class="btn-iq-icon">✦</span>
         Get Instant Quote
         <span class="btn-iq-arrow">→</span>
       </button>
-      <a href="tel:9068541300" class="btn-outline">📞 Call Now</a>
+      <a href="#compare" class="btn-compare-plans">📊 Compare Plans</a>
+      <button onclick="openGapChecker()" class="btn-outline" style="display:inline-flex;align-items:center;gap:8px;">
+        🔍 Check My Coverage Gaps
+      </button>
       <a href="https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20free%20insurance%20consultation" target="_blank" class="btn-whatsapp">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp Now
+        Talk on WhatsApp
       </a>
     </div>
   </div>
@@ -2961,6 +3342,8 @@ html { scroll-behavior: smooth; }
     <span>✦ Car Insurance</span>
     <span>✦ Bike Insurance</span>
     <span>✦ Commercial Vehicle</span>
+    <span>✦ Family Floater Health</span>
+    <span>✦ Life Term Insurance</span>
     <span>✦ Instant Renewal</span>
     <span>✦ Claim Support</span>
     <span>✦ Free Consultation</span>
@@ -2970,11 +3353,155 @@ html { scroll-behavior: smooth; }
     <span>✦ Car Insurance</span>
     <span>✦ Bike Insurance</span>
     <span>✦ Commercial Vehicle</span>
+    <span>✦ Family Floater Health</span>
+    <span>✦ Life Term Insurance</span>
     <span>✦ Instant Renewal</span>
     <span>✦ Claim Support</span>
     <span>✦ Free Consultation</span>
     <span>✦ 500+ Happy Clients</span>
     <span>✦ Pan India Services</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PREMIUM INDEX — 3-LINE QUICK NAVIGATION
+══════════════════════════════════════════════════════ -->
+<div id="premiumIndex" style="background:var(--black2);border-bottom:1px solid rgba(201,168,76,0.15);">
+  <!-- Row 1: Category pills -->
+  <div style="display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;border-bottom:1px solid rgba(255,255,255,0.04);">
+    <div style="padding:0 5%;flex-shrink:0;display:flex;gap:4px;align-items:center;overflow-x:auto;scrollbar-width:none;">
+      <button onclick="piSetActive(this,'health')" class="pi-cat active" data-picat="health" data-lang-content="pi_health">🏥 Health</button>
+      <button onclick="piSetActive(this,'car')" class="pi-cat" data-picat="car" data-lang-content="pi_car">🚗 Car</button>
+      <button onclick="piSetActive(this,'bike')" class="pi-cat" data-picat="bike" data-lang-content="pi_bike">🏍️ Bike</button>
+      <button onclick="piSetActive(this,'life')" class="pi-cat" data-picat="life" data-lang-content="pi_life">🛡️ Life</button>
+      <button onclick="piSetActive(this,'family')" class="pi-cat" data-picat="family" data-lang-content="pi_family">👨‍👩‍👧 Family</button>
+      <button onclick="piSetActive(this,'commercial')" class="pi-cat" data-picat="commercial" data-lang-content="pi_commercial">🚛 Commercial</button>
+    </div>
+    <!-- Live price ticker right side -->
+    <div style="margin-left:auto;padding:0 5%;flex-shrink:0;display:flex;align-items:center;gap:8px;">
+      <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);" data-lang-content="pi_starts">Starts from</span>
+      <span id="piLivePrice" style="font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold);font-weight:700;">₹499/mo</span>
+    </div>
+  </div>
+  <!-- Row 2: Quick facts for selected category -->
+  <div id="piFactsRow" style="padding:8px 5%;display:flex;align-items:center;gap:20px;flex-wrap:wrap;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,0.04);">
+    <!-- Rendered by JS -->
+  </div>
+  <!-- Row 3: Quick action buttons -->
+  <div style="padding:8px 5%;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    <button onclick="openQuoteFlow(piActiveType)" style="background:var(--gold);color:#000;border:none;padding:7px 18px;border-radius:4px;font-family:'Outfit',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;letter-spacing:0.4px;display:flex;align-items:center;gap:6px;" data-lang-content="pi_get_quote">✦ Get Quote</button>
+    <button onclick="openGapChecker()" style="background:transparent;border:1px solid rgba(201,168,76,0.3);color:rgba(255,255,255,0.6);padding:6px 16px;border-radius:4px;font-family:'Outfit',sans-serif;font-size:12px;cursor:pointer;" data-lang-content="pi_check_gaps">🔍 Check Coverage Gaps</button>
+    <a href="#compare" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);padding:6px 16px;border-radius:4px;font-family:'Outfit',sans-serif;font-size:12px;text-decoration:none;" data-lang-content="pi_compare">📊 Compare Plans</a>
+    <a href="#renewal-reminder" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);padding:6px 16px;border-radius:4px;font-family:'Outfit',sans-serif;font-size:12px;text-decoration:none;" data-lang-content="pi_renew">🔔 Renew Policy</a>
+    <a href="tel:9068541300" style="margin-left:auto;background:transparent;color:var(--gold);font-size:12px;text-decoration:none;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;" data-lang-content="pi_call">📞 Call Expert</a>
+  </div>
+</div>
+
+<style>
+/* Premium Index */
+#premiumIndex { position:relative;z-index:10; }
+#premiumIndex div::-webkit-scrollbar { display:none; }
+.pi-cat {
+  background:transparent;border:none;color:rgba(255,255,255,0.45);
+  font-family:'Outfit',sans-serif;font-size:12.5px;font-weight:600;
+  padding:10px 14px;cursor:pointer;white-space:nowrap;
+  border-bottom:2px solid transparent;transition:all 0.2s;letter-spacing:0.3px;
+}
+.pi-cat:hover { color:var(--gold);border-bottom-color:rgba(201,168,76,0.4); }
+.pi-cat.active { color:var(--gold);border-bottom-color:var(--gold); }
+.pi-fact {
+  display:flex;align-items:center;gap:6px;
+  font-size:11.5px;color:rgba(255,255,255,0.5);white-space:nowrap;
+}
+.pi-fact strong { color:var(--gold2);font-weight:700; }
+.pi-fact-sep { color:rgba(255,255,255,0.12);font-size:10px; }
+</style>
+
+<!-- TRUST SIGNALS STRIP -->
+<div class="trust-signals-strip" id="trustSignals">
+  <div class="ts-item">
+    <div class="ts-icon">🏆</div>
+    <div>
+      <div class="ts-num">500+</div>
+      <div class="ts-label">Trusted Clients</div>
+    </div>
+  </div>
+  <div class="ts-item">
+    <div class="ts-icon">⚡</div>
+    <div>
+      <div class="ts-num">5 Min</div>
+      <div class="ts-label">Policy Issuance</div>
+    </div>
+  </div>
+  <div class="ts-item">
+    <div class="ts-icon">🤝</div>
+    <div>
+      <div class="ts-num">20+</div>
+      <div class="ts-label">Top Insurance Partners</div>
+    </div>
+  </div>
+  <div class="ts-item">
+    <div class="ts-icon">📋</div>
+    <div>
+      <div class="ts-num">24/7</div>
+      <div class="ts-label">Fast Claim Support</div>
+    </div>
+  </div>
+  <div class="ts-item">
+    <div class="ts-icon">💰</div>
+    <div>
+      <div class="ts-num">40%</div>
+      <div class="ts-label">Savings on Premium</div>
+    </div>
+  </div>
+</div>
+
+<!-- COVERAGE GAP CHECKER CTA STRIP -->
+<div style="background:linear-gradient(90deg,rgba(201,168,76,0.06),rgba(201,168,76,0.12),rgba(201,168,76,0.06));border-top:1px solid rgba(201,168,76,0.15);border-bottom:1px solid rgba(201,168,76,0.15);padding:14px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+  <div style="display:flex;align-items:center;gap:14px;">
+    <span style="font-size:24px;">🔍</span>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#fff;">Not sure if you're fully covered?</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.45);">Find hidden gaps in your insurance in 60 seconds</div>
+    </div>
+  </div>
+  <button onclick="openGapChecker()" style="background:var(--gold);color:#000;border:none;padding:11px 22px;border-radius:6px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:0.5px;white-space:nowrap;transition:all 0.3s;" onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'">Check My Gaps Free →</button>
+</div>
+
+<!-- STICKY MOBILE CTA BAR -->
+<div id="sticky-mobile-cta">
+  <a href="tel:9068541300" class="sticky-btn sticky-btn-call">
+    <span class="sticky-btn-icon">📞</span>
+    Call Now
+  </a>
+  <a href="https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20free%20insurance%20quote" target="_blank" class="sticky-btn sticky-btn-wa">
+    <span class="sticky-btn-icon">💬</span>
+    WhatsApp
+  </a>
+  <button class="sticky-btn sticky-btn-quote" onclick="openQuoteFlow(null)">
+    <span class="sticky-btn-icon">✦</span>
+    Get Quote
+  </button>
+</div>
+
+<!-- EXIT INTENT POPUP -->
+<div id="exit-popup">
+  <div class="exit-popup-box">
+    <button class="exit-popup-close" onclick="closeExitPopup()">✕</button>
+    <span class="exit-popup-emoji">🎁</span>
+    <div class="exit-popup-title">Wait! Get the <span>Best Deal</span> Today</div>
+    <p class="exit-popup-sub">Don't leave without getting your free personalised insurance quote. Our experts compare 20+ insurers to save you up to 40%.</p>
+    <div class="exit-popup-offer">🔥 Limited Offer: FREE Consultation + Best Price Guarantee</div>
+    <div class="exit-popup-btns">
+      <button class="btn-primary-glow" onclick="openQuoteFlow(null);closeExitPopup();" style="width:100%;justify-content:center;">
+        ✦ Get My Free Quote Now
+      </button>
+      <a href="https://wa.me/919068541300?text=Hello%2C%20I%20want%20the%20best%20insurance%20deal" target="_blank" class="btn-whatsapp" onclick="closeExitPopup();" style="justify-content:center;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Talk on WhatsApp
+      </a>
+    </div>
+    <button class="exit-dismiss" onclick="closeExitPopup()">No thanks, I'll pay full price</button>
   </div>
 </div>
 
@@ -3030,7 +3557,7 @@ html { scroll-behavior: smooth; }
     <div class="ic-section-head" id="icSectionHead">
       <div>
         <div class="ic-sh-title" id="icShTitle">Top Health Insurance Plans</div>
-        <div class="ic-sh-sub" id="icShSub">Comparing 6 trusted insurers · Updated April 2025</div>
+        <div class="ic-sh-sub" id="icShSub">Comparing 6 trusted insurers · Updated April 2026</div>
       </div>
       <div class="ic-sh-trust">
         <span class="ic-trust-badge">✦ IRDAI Regulated</span>
@@ -3182,15 +3709,39 @@ html { scroll-behavior: smooth; }
     </div>
     <div class="service-card reveal">
       <div class="service-icon">🚛</div>
-      <h3 class="service-name">Commercial Vehicle</h3>
+      <h3 class="service-name">Commercial Insurance</h3>
       <p class="service-desc">Fleet and commercial vehicle insurance for trucks, autos, taxis and all goods carriers.</p>
       <ul class="service-benefits">
         <li>Goods in transit coverage</li>
-        <li>Driver & passenger safety</li>
+        <li>Driver &amp; passenger safety</li>
         <li>Third-party liability</li>
         <li>Competitive fleet discounts</li>
       </ul>
-      <a onclick="openQuoteFlow('health')" class="service-cta-link" style="cursor:pointer;">Get Quote →</a>
+      <a onclick="openQuoteFlow('commercial')" class="service-cta-link" style="cursor:pointer;">Get Quote →</a>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon">🛡️</div>
+      <h3 class="service-name">Life Term Insurance</h3>
+      <p class="service-desc">Secure your family's future with high-cover term life plans at the lowest premiums — pure protection, no compromise.</p>
+      <ul class="service-benefits">
+        <li>Cover up to ₹5 Crore+</li>
+        <li>Starting at ₹500/month</li>
+        <li>99%+ claim settlement ratio</li>
+        <li>Critical illness rider available</li>
+      </ul>
+      <a onclick="openQuoteFlow('life')" class="service-cta-link" style="cursor:pointer;">Get Quote →</a>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon">👨‍👩‍👧</div>
+      <h3 class="service-name">Family Floater Health</h3>
+      <p class="service-desc">One policy covering your entire family — spouse, children, and parents — with a shared sum insured at the best price.</p>
+      <ul class="service-benefits">
+        <li>Entire family under one plan</li>
+        <li>Sum insured up to ₹1 Crore</li>
+        <li>Maternity &amp; newborn cover</li>
+        <li>Restore benefit on exhaustion</li>
+      </ul>
+      <a onclick="openQuoteFlow('family')" class="service-cta-link" style="cursor:pointer;">Get Quote →</a>
     </div>
     <div class="service-card reveal reveal-delay-1">
       <div class="service-icon">🔄</div>
@@ -3304,38 +3855,54 @@ html { scroll-behavior: smooth; }
         </div>
       </div>
       <div id="rqStep1" class="rq-body" style="display:none">
-        <div class="rq-question">What is your <em>age group?</em></div>
-        <div class="rq-hint">This helps us find age-appropriate plans</div>
-        <div class="rq-options">
-          <div class="rq-option" onclick="rqSelect(this,'age','18-25')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">🎓</div>
-            <div class="rq-opt-label">18–25 years</div>
-            <div class="rq-opt-sub">Young & healthy</div>
+        <!-- Person age — Health / Life / Family -->
+        <div id="rqStep1Person">
+          <div class="rq-question">What is your <em>age group?</em></div>
+          <div class="rq-hint">This helps us find age-appropriate plans</div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="rqSelect(this,'age','18-25')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">🎓</div>
+              <div class="rq-opt-label">18–25 years</div><div class="rq-opt-sub">Young & healthy</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'age','26-35')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">💼</div>
+              <div class="rq-opt-label">26–35 years</div><div class="rq-opt-sub">Building career</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'age','36-45')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">👨‍💼</div>
+              <div class="rq-opt-label">36–45 years</div><div class="rq-opt-sub">Peak earning years</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'age','46-60')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">🧑‍🦳</div>
+              <div class="rq-opt-label">46–60 years</div><div class="rq-opt-sub">Planning ahead</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'age','60+')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">👴</div>
+              <div class="rq-opt-label">60+ years</div><div class="rq-opt-sub">Senior citizen plans</div>
+            </div>
           </div>
-          <div class="rq-option" onclick="rqSelect(this,'age','26-35')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">💼</div>
-            <div class="rq-opt-label">26–35 years</div>
-            <div class="rq-opt-sub">Building career</div>
-          </div>
-          <div class="rq-option" onclick="rqSelect(this,'age','36-45')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">👨‍💼</div>
-            <div class="rq-opt-label">36–45 years</div>
-            <div class="rq-opt-sub">Peak earning years</div>
-          </div>
-          <div class="rq-option" onclick="rqSelect(this,'age','46-60')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">🧑‍🦳</div>
-            <div class="rq-opt-label">46–60 years</div>
-            <div class="rq-opt-sub">Planning ahead</div>
-          </div>
-          <div class="rq-option" onclick="rqSelect(this,'age','60+')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">👴</div>
-            <div class="rq-opt-label">60+ years</div>
-            <div class="rq-opt-sub">Senior citizen plans</div>
+        </div>
+        <!-- Vehicle age — Car / Bike / Commercial -->
+        <div id="rqStep1Vehicle" style="display:none">
+          <div class="rq-question">How old is your <em>vehicle?</em></div>
+          <div class="rq-hint">Vehicle age affects premium and add-on eligibility</div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="rqSelect(this,'age','new')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">🆕</div>
+              <div class="rq-opt-label">Brand New</div><div class="rq-opt-sub">Just purchased / within 1 year</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'age','1-3')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">✨</div>
+              <div class="rq-opt-label">1–3 Years Old</div><div class="rq-opt-sub">Still under manufacturer warranty</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'age','3-7')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">🚘</div>
+              <div class="rq-opt-label">3–7 Years Old</div><div class="rq-opt-sub">Mid-age vehicle</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'age','7+')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">🔧</div>
+              <div class="rq-opt-label">7+ Years Old</div><div class="rq-opt-sub">Older vehicle, value cover</div>
+            </div>
           </div>
         </div>
         <div class="rq-actions">
@@ -3344,32 +3911,50 @@ html { scroll-behavior: smooth; }
         </div>
       </div>
       <div id="rqStep2" class="rq-body" style="display:none">
-        <div class="rq-question">What's your <em>monthly budget?</em></div>
-        <div class="rq-hint">We'll find the best coverage within your range</div>
-        <div class="rq-options">
-          <div class="rq-option" onclick="rqSelect(this,'budget','500-1000')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">💚</div>
-            <div class="rq-opt-label">₹500–₹1,000</div>
-            <div class="rq-opt-sub">Budget-friendly plans</div>
+        <!-- Monthly budget — Health / Life / Family -->
+        <div id="rqStep2Person">
+          <div class="rq-question">What's your <em>monthly budget?</em></div>
+          <div class="rq-hint">We'll find the best coverage within your range</div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="rqSelect(this,'budget','500-1000')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">💚</div>
+              <div class="rq-opt-label">₹500–₹1,000/mo</div><div class="rq-opt-sub">Budget-friendly plans</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'budget','1000-2000')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">💛</div>
+              <div class="rq-opt-label">₹1,000–₹2,000/mo</div><div class="rq-opt-sub">Most popular range</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'budget','2000-4000')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">🧡</div>
+              <div class="rq-opt-label">₹2,000–₹4,000/mo</div><div class="rq-opt-sub">Comprehensive coverage</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'budget','4000+')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">💎</div>
+              <div class="rq-opt-label">₹4,000+/mo</div><div class="rq-opt-sub">Premium protection</div>
+            </div>
           </div>
-          <div class="rq-option" onclick="rqSelect(this,'budget','1000-2000')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">💛</div>
-            <div class="rq-opt-label">₹1,000–₹2,000</div>
-            <div class="rq-opt-sub">Most popular range</div>
-          </div>
-          <div class="rq-option" onclick="rqSelect(this,'budget','2000-4000')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">🧡</div>
-            <div class="rq-opt-label">₹2,000–₹4,000</div>
-            <div class="rq-opt-sub">Comprehensive coverage</div>
-          </div>
-          <div class="rq-option" onclick="rqSelect(this,'budget','4000+')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">💎</div>
-            <div class="rq-opt-label">₹4,000+</div>
-            <div class="rq-opt-sub">Premium protection</div>
+        </div>
+        <!-- Yearly budget — Car / Bike / Commercial -->
+        <div id="rqStep2Vehicle" style="display:none">
+          <div class="rq-question">What's your <em>yearly budget?</em></div>
+          <div class="rq-hint">Vehicle insurance is priced annually — pick your range</div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="rqSelect(this,'budget','under-3000')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">💚</div>
+              <div class="rq-opt-label">Under ₹3,000/yr</div><div class="rq-opt-sub">Basic / third-party cover</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'budget','3000-8000')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">💛</div>
+              <div class="rq-opt-label">₹3,000–₹8,000/yr</div><div class="rq-opt-sub">Most popular range</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'budget','8000-15000')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">🧡</div>
+              <div class="rq-opt-label">₹8,000–₹15,000/yr</div><div class="rq-opt-sub">Comprehensive + add-ons</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'budget','15000+')">
+              <div class="rq-check">✓</div><div class="rq-opt-icon">💎</div>
+              <div class="rq-opt-label">₹15,000+/yr</div><div class="rq-opt-sub">Premium / fleet cover</div>
+            </div>
           </div>
         </div>
         <div class="rq-actions">
@@ -3378,32 +3963,97 @@ html { scroll-behavior: smooth; }
         </div>
       </div>
       <div id="rqStep3" class="rq-body" style="display:none">
-        <div class="rq-question">Any existing <em>health conditions?</em></div>
-        <div class="rq-hint">This affects waiting periods and plan eligibility</div>
-        <div class="rq-options">
-          <div class="rq-option" onclick="rqSelect(this,'health','none')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">✅</div>
-            <div class="rq-opt-label">None</div>
-            <div class="rq-opt-sub">Perfectly healthy</div>
+        <!-- Health/Life/Family version -->
+        <div id="rqStep3Health" style="display:none">
+          <div class="rq-question">Any existing <em>health conditions?</em></div>
+          <div class="rq-hint">This affects waiting periods and plan eligibility</div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="rqSelect(this,'condition','none')">
+              <div class="rq-check">✓</div>
+              <div class="rq-opt-icon">✅</div>
+              <div class="rq-opt-label">None</div>
+              <div class="rq-opt-sub">Perfectly healthy</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'condition','diabetes')">
+              <div class="rq-check">✓</div>
+              <div class="rq-opt-icon">🩸</div>
+              <div class="rq-opt-label">Diabetes</div>
+              <div class="rq-opt-sub">Diabetic-friendly plans</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'condition','bp')">
+              <div class="rq-check">✓</div>
+              <div class="rq-opt-icon">❤️</div>
+              <div class="rq-opt-label">Blood Pressure</div>
+              <div class="rq-opt-sub">BP-inclusive coverage</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'condition','other')">
+              <div class="rq-check">✓</div>
+              <div class="rq-opt-icon">🏥</div>
+              <div class="rq-opt-label">Other Condition</div>
+              <div class="rq-opt-sub">We'll find the best fit</div>
+            </div>
           </div>
-          <div class="rq-option" onclick="rqSelect(this,'health','diabetes')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">🩸</div>
-            <div class="rq-opt-label">Diabetes</div>
-            <div class="rq-opt-sub">Diabetic-friendly plans</div>
+        </div>
+        <!-- Car/Bike version -->
+        <div id="rqStep3Vehicle" style="display:none">
+          <div class="rq-question">What <em>coverage type</em> do you need?</div>
+          <div class="rq-hint">Choose the level of protection for your vehicle</div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="rqSelect(this,'condition','comprehensive')">
+              <div class="rq-check">✓</div>
+              <div class="rq-opt-icon">🛡️</div>
+              <div class="rq-opt-label">Comprehensive</div>
+              <div class="rq-opt-sub">Own damage + third-party</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'condition','third-party')">
+              <div class="rq-check">✓</div>
+              <div class="rq-opt-icon">⚖️</div>
+              <div class="rq-opt-label">Third-Party Only</div>
+              <div class="rq-opt-sub">Mandatory minimum cover</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'condition','zero-dep')">
+              <div class="rq-check">✓</div>
+              <div class="rq-opt-icon">⭐</div>
+              <div class="rq-opt-label">Comprehensive + Zero Dep</div>
+              <div class="rq-opt-sub">Best protection, no depreciation</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'condition','not-sure')">
+              <div class="rq-check">✓</div>
+              <div class="rq-opt-icon">🤔</div>
+              <div class="rq-opt-label">Not Sure</div>
+              <div class="rq-opt-sub">We'll recommend the best</div>
+            </div>
           </div>
-          <div class="rq-option" onclick="rqSelect(this,'health','bp')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">❤️</div>
-            <div class="rq-opt-label">Blood Pressure</div>
-            <div class="rq-opt-sub">BP-inclusive coverage</div>
-          </div>
-          <div class="rq-option" onclick="rqSelect(this,'health','other')">
-            <div class="rq-check">✓</div>
-            <div class="rq-opt-icon">🏥</div>
-            <div class="rq-opt-label">Other Condition</div>
-            <div class="rq-opt-sub">We'll find the best fit</div>
+        </div>
+        <!-- Commercial version -->
+        <div id="rqStep3Commercial" style="display:none">
+          <div class="rq-question">What type of <em>commercial vehicle?</em></div>
+          <div class="rq-hint">Coverage differs by vehicle category</div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="rqSelect(this,'condition','truck')">
+              <div class="rq-check">✓</div>
+              <div class="rq-opt-icon">🚛</div>
+              <div class="rq-opt-label">Truck / Lorry</div>
+              <div class="rq-opt-sub">Goods transport vehicle</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'condition','bus')">
+              <div class="rq-check">✓</div>
+              <div class="rq-opt-icon">🚌</div>
+              <div class="rq-opt-label">Bus / Tempo</div>
+              <div class="rq-opt-sub">Passenger transport</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'condition','pickup')">
+              <div class="rq-check">✓</div>
+              <div class="rq-opt-icon">🚐</div>
+              <div class="rq-opt-label">Pickup / Delivery Van</div>
+              <div class="rq-opt-sub">Small commercial vehicle</div>
+            </div>
+            <div class="rq-option" onclick="rqSelect(this,'condition','fleet')">
+              <div class="rq-check">✓</div>
+              <div class="rq-opt-icon">🏭</div>
+              <div class="rq-opt-label">Fleet (Multiple Vehicles)</div>
+              <div class="rq-opt-sub">Bulk fleet discount available</div>
+            </div>
           </div>
         </div>
         <div class="rq-actions">
@@ -3946,16 +4596,16 @@ html { scroll-behavior: smooth; }
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Full Name</label>
-            <input class="form-control" type="text" name="name" placeholder="Your name" required/>
+            <input class="form-control" type="text" name="name" placeholder="Your name" required autocomplete="name"/>
           </div>
           <div class="form-group">
             <label class="form-label">Phone Number</label>
-            <input class="form-control" type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required/>
+            <input class="form-control" type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required autocomplete="tel" inputmode="tel"/>
           </div>
         </div>
         <div class="form-group">
           <label class="form-label">Email Address</label>
-          <input class="form-control" type="email" name="email" placeholder="your@email.com"/>
+          <input class="form-control" type="email" name="email" placeholder="your@email.com" autocomplete="email" inputmode="email"/>
         </div>
         <div class="form-group">
           <label class="form-label">Insurance Type</label>
@@ -4091,7 +4741,22 @@ html { scroll-behavior: smooth; }
 
 
 <!-- ═══════════════════════════════════════════════
-     INSTANT QUOTE MODAL
+     COVERAGE GAP CHECKER MODAL
+═══════════════════════════════════════════════ -->
+<div id="gapCheckerModal" style="display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)closeGapChecker()">
+  <div style="background:#111;border:1px solid rgba(201,168,76,0.3);border-radius:12px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;position:relative;animation:iqSlideUp 0.35s cubic-bezier(0.22,1,0.36,1) both;">
+    <div style="padding:28px 32px 0;">
+      <div style="font-size:10px;letter-spacing:3px;color:var(--gold);margin-bottom:8px;">⚡ COVERAGE GAP CHECKER</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#fff;margin-bottom:4px;">What Are You <em style="color:var(--gold);font-style:italic;">NOT</em> Covered For?</h3>
+      <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px;">Answer 5 quick questions to reveal hidden gaps in your coverage.</p>
+      <button onclick="closeGapChecker()" style="position:absolute;top:16px;right:20px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">✕</button>
+    </div>
+    <div id="gapQuizBody" style="padding:20px 32px 32px;"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     INSTANT QUOTE MODAL — 4 STEPS
 ═══════════════════════════════════════════════ -->
 <div id="quoteModal" class="iq-overlay" onclick="iqOverlayClick(event)">
   <div class="iq-modal" role="dialog" aria-modal="true" aria-label="Get Instant Quote">
@@ -4099,61 +4764,89 @@ html { scroll-behavior: smooth; }
     <!-- Header -->
     <div class="iq-header">
       <div class="iq-header-left">
-        <div class="iq-header-badge">✦ INSTANT ENQUIRY</div>
-        <h2 class="iq-title">Get Your <em>Best Quote</em></h2>
-        <p class="iq-subtitle">Fill in a few details — we'll connect you instantly on WhatsApp.</p>
+        <div class="iq-header-badge" id="iqHeaderBadge">✦ STEP 1 OF 4 · INSURANCE TYPE</div>
+        <h2 class="iq-title" id="iqHeaderTitle">Get Your <em>Best Quote</em></h2>
+        <p class="iq-subtitle" id="iqHeaderSub">Fill in 4 quick steps — get instant premium estimate on WhatsApp.</p>
       </div>
       <button class="iq-close" onclick="closeQuoteModal()" aria-label="Close">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="2" y1="2" x2="16" y2="16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="16" y1="2" x2="2" y2="16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       </button>
     </div>
 
+    <!-- Step dots progress -->
+    <div style="display:flex;align-items:center;gap:0;padding:16px 36px 0;">
+      <div class="iq4-dot active" id="iq4dot0"></div>
+      <div class="iq4-line" id="iq4line0"></div>
+      <div class="iq4-dot" id="iq4dot1"></div>
+      <div class="iq4-line" id="iq4line1"></div>
+      <div class="iq4-dot" id="iq4dot2"></div>
+      <div class="iq4-line" id="iq4line2"></div>
+      <div class="iq4-dot" id="iq4dot3"></div>
+    </div>
     <!-- Progress bar -->
-    <div class="iq-progress-bar">
-      <div class="iq-progress-fill" id="iqProgressFill"></div>
+    <div class="iq-progress-bar" style="margin-top:12px;">
+      <div class="iq-progress-fill" id="iqProgressFill" style="width:25%"></div>
     </div>
 
-    <!-- STEP 1: Type Selection -->
+    <!-- ═══ STEP 1: Type Selection (6 cards) ═══ -->
     <div class="iq-step" id="iqStep1">
-      <div class="iq-step-label">STEP 1 OF 3 · Select Insurance Type</div>
-      <div class="iq-type-grid">
-        <button class="iq-type-card" data-type="car" onclick="selectInsuranceType('car')">
+      <div class="iq-step-label">STEP 1 OF 4 · What do you want to insure?</div>
+      <div class="iq-type-grid" style="grid-template-columns:repeat(3,1fr);gap:12px;">
+        <button class="iq-type-card" data-type="car" onclick="iq4SelectType('car')">
           <div class="iq-type-icon">🚗</div>
-          <div class="iq-type-name">Car Insurance</div>
-          <div class="iq-type-desc">Comprehensive &amp; Third-Party</div>
+          <div class="iq-type-name">Car</div>
+          <div class="iq-type-desc">Comprehensive &amp; TP</div>
           <div class="iq-type-check">✓</div>
         </button>
-        <button class="iq-type-card" data-type="bike" onclick="selectInsuranceType('bike')">
+        <button class="iq-type-card" data-type="bike" onclick="iq4SelectType('bike')">
           <div class="iq-type-icon">🏍️</div>
-          <div class="iq-type-name">Bike Insurance</div>
-          <div class="iq-type-desc">Two-Wheeler Protection</div>
+          <div class="iq-type-name">Bike</div>
+          <div class="iq-type-desc">Two-Wheeler</div>
           <div class="iq-type-check">✓</div>
         </button>
-        <button class="iq-type-card" data-type="health" onclick="selectInsuranceType('health')">
+        <button class="iq-type-card" data-type="health" onclick="iq4SelectType('health')">
           <div class="iq-type-icon">🏥</div>
-          <div class="iq-type-name">Health Insurance</div>
-          <div class="iq-type-desc">Individual &amp; Family Plans</div>
+          <div class="iq-type-name">Health</div>
+          <div class="iq-type-desc">Individual &amp; Family</div>
+          <div class="iq-type-check">✓</div>
+        </button>
+        <button class="iq-type-card" data-type="life" onclick="iq4SelectType('life')">
+          <div class="iq-type-icon">🛡️</div>
+          <div class="iq-type-name">Life / Term</div>
+          <div class="iq-type-desc">Family Protection</div>
+          <div class="iq-type-check">✓</div>
+        </button>
+        <button class="iq-type-card" data-type="family" onclick="iq4SelectType('family')">
+          <div class="iq-type-icon">👨‍👩‍👧</div>
+          <div class="iq-type-name">Family Floater</div>
+          <div class="iq-type-desc">Entire Family</div>
+          <div class="iq-type-check">✓</div>
+        </button>
+        <button class="iq-type-card" data-type="commercial" onclick="iq4SelectType('commercial')">
+          <div class="iq-type-icon">🚛</div>
+          <div class="iq-type-name">Commercial</div>
+          <div class="iq-type-desc">Business Vehicles</div>
           <div class="iq-type-check">✓</div>
         </button>
       </div>
-      <div class="iq-step1-hint">Select an option above to proceed</div>
+      <div class="iq-step1-hint">Select a type above to continue →</div>
     </div>
 
-    <!-- STEP 2: Dynamic Form Fields -->
+    <!-- ═══ STEP 2: Smart Dynamic Fields ═══ -->
     <div class="iq-step" id="iqStep2" style="display:none;">
-      <div class="iq-step-label">STEP 2 OF 3 · Your Details</div>
+      <div class="iq-step-label" id="iq4step2label">STEP 2 OF 4 · Your Details</div>
       <div class="iq-selected-type-badge" id="iqSelectedBadge"></div>
 
-      <!-- Vehicle Form (Car / Bike) -->
+      <!-- Vehicle Form (Car / Bike / Commercial) -->
       <div id="iqVehicleForm" style="display:none;">
         <div class="iq-form-grid">
           <div class="iq-form-group iq-span-2">
             <label class="iq-label">Full Name <span class="iq-req">*</span></label>
-            <input class="iq-input" id="vName" type="text" placeholder="Enter your full name" autocomplete="off">
+            <input class="iq-input" id="vName" type="text" placeholder="Enter your full name" autocomplete="name">
           </div>
           <div class="iq-form-group">
             <label class="iq-label">Mobile Number <span class="iq-req">*</span></label>
-            <input class="iq-input" id="vPhone" type="tel" placeholder="10-digit mobile" maxlength="10" autocomplete="off">
+            <input class="iq-input" id="vPhone" type="tel" placeholder="10-digit mobile" maxlength="10" autocomplete="tel" inputmode="tel">
           </div>
           <div class="iq-form-group">
             <label class="iq-label">Vehicle Number <span class="iq-req">*</span></label>
@@ -4201,16 +4894,16 @@ html { scroll-behavior: smooth; }
         </div>
       </div>
 
-      <!-- Health Form -->
+      <!-- Health / Life / Family Form -->
       <div id="iqHealthForm" style="display:none;">
         <div class="iq-form-grid">
           <div class="iq-form-group iq-span-2">
             <label class="iq-label">Full Name <span class="iq-req">*</span></label>
-            <input class="iq-input" id="hName" type="text" placeholder="Enter your full name" autocomplete="off">
+            <input class="iq-input" id="hName" type="text" placeholder="Enter your full name" autocomplete="name">
           </div>
           <div class="iq-form-group">
             <label class="iq-label">Mobile Number <span class="iq-req">*</span></label>
-            <input class="iq-input" id="hPhone" type="tel" placeholder="10-digit mobile" maxlength="10" autocomplete="off">
+            <input class="iq-input" id="hPhone" type="tel" placeholder="10-digit mobile" maxlength="10" autocomplete="tel" inputmode="tel">
           </div>
           <div class="iq-form-group">
             <label class="iq-label">Age <span class="iq-req">*</span></label>
@@ -4254,38 +4947,70 @@ html { scroll-behavior: smooth; }
 
       <!-- Action buttons -->
       <div class="iq-form-actions">
-        <button class="iq-btn-back" onclick="iqGoBack()">← Back</button>
-        <button class="iq-btn-submit" id="iqSubmitBtn" onclick="iqSubmit()">
-          <span id="iqBtnText">Calculate My Premium ✦</span>
-          <span id="iqBtnLoader" style="display:none;" class="iq-loader"></span>
+        <button class="iq-btn-back" onclick="iq4GoTo(1)">← Back</button>
+        <button class="iq-btn-submit" id="iqSubmitBtn" onclick="iq4GoTo(3)">
+          <span id="iqBtnText">Next: See Plans ✦</span>
         </button>
       </div>
     </div>
 
-    <!-- LOADING SCREEN (Step 3a) -->
-    <div class="iq-loading-screen" id="iqLoadingScreen">
-      <div class="iq-loader-orb"></div>
-      <div class="iq-loading-title">Calculating Your Premium…</div>
-      <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:8px;">Comparing 20+ insurers for the best rates</p>
-      <div class="iq-loading-steps">
-        <div class="iq-loading-step">
-          <div class="iq-loading-step-icon">1</div>
-          <span>Analysing your details</span>
+    <!-- ═══ STEP 3: Health-Style Plan Cards (for ALL types) ═══ -->
+    <div class="iq-step" id="iqStep3" style="display:none;">
+      <div class="iq-step-label" id="iq4step3label">STEP 3 OF 4 · Compare Top Plans</div>
+      <!-- Premium Summary Bar -->
+      <div id="iq4PremiumBar" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase;">Estimated Annual Premium</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);font-weight:700;" id="iq4PremiumAmt">₹0</div>
         </div>
-        <div class="iq-loading-step">
-          <div class="iq-loading-step-icon">2</div>
-          <span>Running premium calculation</span>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <div style="text-align:center;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);">You Save</div>
+            <div style="font-size:14px;color:#4ade80;font-weight:700;" id="iq4Saving">₹0</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.4);">vs Direct</div>
+            <div style="font-size:14px;color:var(--gold2);font-weight:700;" id="iq4DirectPct">0%</div>
+          </div>
         </div>
-        <div class="iq-loading-step">
-          <div class="iq-loading-step-icon">3</div>
-          <span>Comparing top insurers</span>
-        </div>
+      </div>
+      <!-- Plan Cards Grid -->
+      <div id="iq4PlanCards" style="display:flex;flex-direction:column;gap:10px;max-height:340px;overflow-y:auto;padding-right:4px;"></div>
+      <div class="iq-form-actions" style="margin-top:18px;">
+        <button class="iq-btn-back" onclick="iq4GoTo(2)">← Back</button>
+        <button class="iq-btn-submit" id="iq4Step3Next" onclick="iq4GoTo(4)" disabled>Next: Get Quote ✦</button>
       </div>
     </div>
 
-    <!-- RESULTS SCREEN (Step 3b) -->
-    <div class="iq-results-screen" id="iqResultsScreen">
-      <!-- Premium hero -->
+    <!-- ═══ STEP 4: Contact + Confirm ═══ -->
+    <div class="iq-step" id="iqStep4" style="display:none;">
+      <div class="iq-step-label">STEP 4 OF 4 · Confirm &amp; Get Quote on WhatsApp</div>
+      <!-- Selected plan summary -->
+      <div id="iq4SelectedSummary" style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:8px;padding:14px 18px;margin-bottom:18px;"></div>
+      <!-- Confirm & WhatsApp -->
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <button class="iq-wa-cta" onclick="iqGetFinalQuoteOnWhatsApp()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          🎉 Get My Final Premium on WhatsApp
+        </button>
+        <button class="iq-restart-btn" onclick="iqRestart()">← Start Over / Different Insurance</button>
+      </div>
+    </div>
+
+    <!-- LOADING SCREEN -->
+    <div class="iq-loading-screen" id="iqLoadingScreen">
+      <div class="iq-loader-orb"></div>
+      <div class="iq-loading-title">Calculating Your Premium…</div>
+      <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:8px;">Comparing 20+ insurers for best rates</p>
+      <div class="iq-loading-steps">
+        <div class="iq-loading-step"><div class="iq-loading-step-icon">1</div><span>Analysing your details</span></div>
+        <div class="iq-loading-step"><div class="iq-loading-step-icon">2</div><span>Running premium calculation</span></div>
+        <div class="iq-loading-step"><div class="iq-loading-step-icon">3</div><span>Matching top insurer plans</span></div>
+      </div>
+    </div>
+
+    <!-- RESULTS SCREEN (legacy, hidden) -->
+    <div class="iq-results-screen" id="iqResultsScreen" style="display:none;">
       <div class="iq-premium-hero">
         <div class="iq-premium-fire">🔥</div>
         <div class="iq-premium-label">YOUR ESTIMATED ANNUAL PREMIUM</div>
@@ -4293,14 +5018,8 @@ html { scroll-behavior: smooth; }
         <div class="iq-premium-freq">per year</div>
         <div class="iq-premium-note">*Estimate based on your inputs. Actual may vary.</div>
       </div>
-
-      <!-- Company comparison -->
       <div class="iq-compare-title">SELECT YOUR PREFERRED INSURER</div>
-      <div class="iq-company-cards" id="iqCompanyCards">
-        <!-- Rendered by JS -->
-      </div>
-
-      <!-- Final CTA -->
+      <div class="iq-company-cards" id="iqCompanyCards"></div>
       <button class="iq-wa-cta" onclick="iqGetFinalQuoteOnWhatsApp()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Get Final Premium on WhatsApp
@@ -4310,6 +5029,44 @@ html { scroll-behavior: smooth; }
 
   </div>
 </div>
+
+<style>
+/* 4-step dot nav */
+.iq4-dot {
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);
+  flex-shrink:0;transition:all 0.4s ease;
+}
+.iq4-dot.active { background:var(--gold);border-color:var(--gold);color:#000; box-shadow:0 0 12px rgba(201,168,76,0.5); }
+.iq4-dot.done { background:rgba(201,168,76,0.3);border-color:rgba(201,168,76,0.5);color:var(--gold); }
+.iq4-line { flex:1;height:2px;background:rgba(255,255,255,0.08);transition:background 0.4s; }
+.iq4-line.done { background:rgba(201,168,76,0.4); }
+
+/* Plan cards for step 3 */
+.iq4-plan-card {
+  background:rgba(255,255,255,0.03);border:1.5px solid rgba(201,168,76,0.18);
+  border-radius:10px;padding:14px 16px;cursor:pointer;
+  display:flex;align-items:center;gap:14px;
+  transition:all 0.25s ease;position:relative;overflow:hidden;
+}
+.iq4-plan-card:hover { border-color:rgba(201,168,76,0.5);background:rgba(201,168,76,0.06); transform:translateX(3px); }
+.iq4-plan-card.selected { border-color:var(--gold);background:rgba(201,168,76,0.1);box-shadow:0 0 0 1px rgba(201,168,76,0.2); }
+.iq4-plan-card.best-val { border-color:var(--gold); }
+.iq4-plan-card.best-val::before { content:'⭐ BEST VALUE';position:absolute;top:0;right:0;background:var(--gold);color:#000;font-size:9px;font-weight:800;padding:3px 10px;border-bottom-left-radius:8px; }
+.iq4-logo { width:44px;height:44px;border-radius:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--gold);letter-spacing:-0.5px;flex-shrink:0; }
+.iq4-info { flex:1; }
+.iq4-name { font-size:14px;font-weight:600;color:#fff;margin-bottom:2px; }
+.iq4-plan { font-size:11.5px;color:rgba(255,255,255,0.45); }
+.iq4-feats { display:flex;flex-wrap:wrap;gap:4px;margin-top:6px; }
+.iq4-feat-tag { font-size:10px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.15);color:rgba(255,255,255,0.6);padding:2px 8px;border-radius:20px; }
+.iq4-pricing { text-align:right;flex-shrink:0; }
+.iq4-price { font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold);font-weight:700; }
+.iq4-csr { font-size:10.5px;color:rgba(255,255,255,0.4);margin-top:2px; }
+.iq4-select-ring { width:20px;height:20px;border-radius:50%;border:2px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s; }
+.iq4-plan-card.selected .iq4-select-ring { background:var(--gold);border-color:var(--gold);color:#000;font-size:10px;font-weight:800; }
+</style>
 
 <!-- POPUP OFFER -->
 <div class="popup-overlay" id="popup">
@@ -4331,30 +5088,85 @@ html { scroll-behavior: smooth; }
 </div>
 
 <script>
+// ── MEASURE BOTH TOP BARS HEIGHT DYNAMICALLY ──────────────────────────────
+(function() {
+  var ticker = document.getElementById('claimsTickerBar');
+  var urgency = document.querySelector('.urgency-bar');
+  var totalH = 0;
+  if (ticker) totalH += ticker.getBoundingClientRect().height;
+  if (urgency) totalH += urgency.getBoundingClientRect().height;
+  if (totalH > 0) {
+    document.documentElement.style.setProperty('--urgency-bar-height', totalH + 'px');
+  }
+})();
+
 // ── NAVBAR SCROLL
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
+function updateNavLayout() {
   const scrolled = window.scrollY > 60;
   navbar.classList.toggle('scrolled', scrolled);
-  // When scrolled, navbar moves to top:0 (urgency bar scrolls away naturally)
-  // Update mobile menu offset accordingly
+  // Dynamically position mobile menu directly below navbar
   const mobileMenu = document.getElementById('mobileMenu');
-  if (mobileMenu) {
-    mobileMenu.style.top = scrolled ? '70px' : '116px';
+  if (mobileMenu && mobileMenu.classList.contains('open')) {
+    mobileMenu.style.top = navbar.getBoundingClientRect().bottom + 'px';
   }
-});
+}
+window.addEventListener('scroll', updateNavLayout);
 
 // ── MOBILE MENU
 function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
+  var menu = document.getElementById('mobileMenu');
+  var hamburger = document.getElementById('hamburger');
+  var isOpen = menu.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  if (isOpen) {
+    // Position menu exactly below navbar
+    menu.style.top = navbar.getBoundingClientRect().bottom + 'px';
+    // Move focus into menu
+    var firstLink = menu.querySelector('a, button');
+    if (firstLink) firstLink.focus();
+  }
 }
+
+// ── KEYBOARD: close menu on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    var menu = document.getElementById('mobileMenu');
+    var hamburger = document.getElementById('hamburger');
+    if (menu && menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open navigation menu');
+      hamburger.focus();
+    }
+  }
+});
 
 // ── SCROLL REVEAL
 const revealEls = document.querySelectorAll('.reveal');
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
 }, { threshold: 0.12 });
-revealEls.forEach(el => revealObserver.observe(el));
+// Immediately show elements already in viewport (prevents flash of invisible content)
+revealEls.forEach(el => {
+  var rect = el.getBoundingClientRect();
+  if (rect.top < window.innerHeight) {
+    el.classList.add('visible');
+  } else {
+    revealObserver.observe(el);
+  }
+});
+
+// ── COMPARE TABLE SCROLL FADE INDICATOR
+document.querySelectorAll('.compare-table-wrap').forEach(function(wrap) {
+  function checkScroll() {
+    var atEnd = wrap.scrollLeft + wrap.clientWidth >= wrap.scrollWidth - 4;
+    wrap.classList.toggle('scrolled-end', atEnd);
+  }
+  wrap.addEventListener('scroll', checkScroll);
+  checkScroll();
+});
 
 // ── POPUP (shows after 5s)
 setTimeout(() => {
@@ -4445,8 +5257,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 // ═══════════════════════════════════════════════════════════════════════
-// SMART AUTO-CALCULATING LEAD SYSTEM — JavaScript
-// Core principle: User fills form → AUTO calculation → Show results
+// 4-STEP SMART LEAD SYSTEM — Complete Rewrite
+// Step 1: Type → Step 2: Details → Step 3: Health Cards → Step 4: Confirm+WA
 // ═══════════════════════════════════════════════════════════════════════
 
 let iqSelectedType = null;
@@ -4454,101 +5266,148 @@ let iqCalculatedPremium = 0;
 let iqSelectedCompany = null;
 let iqLeadData = {};
 
-// ── COMPANY DATA FOR RESULTS ──────────────────────────────────────────
+// ── COMPANY DATA (health-style cards for ALL types) ─────────────────────
 const IQ_COMPANIES = {
-  car:    [
-    { logo:'HDFC', name:'HDFC ERGO',    plan:'Comprehensive',    csr:'98.5%',  multiplier:1.05 },
-    { logo:'ICICI', name:'ICICI Lombard', plan:'Comprehensive',   csr:'86.73%', multiplier:1.12 },
-    { logo:'TATA', name:'Tata AIG',      plan:'Motor Secure',    csr:'95.42%', multiplier:0.97 },
-    { logo:'BAJAJ', name:'Bajaj Allianz', plan:'Car Secure',      csr:'92.05%', multiplier:0.93, best:true },
-    { logo:'REL',  name:'Reliance',      plan:'Comprehensive',   csr:'84.22%', multiplier:0.88 },
+  car: [
+    { logo:'HDFC', name:'HDFC ERGO', plan:'Motor Comprehensive', csr:'98.5%', multiplier:1.05, feats:['Zero Depreciation','24hr Roadside','Cashless Network'] },
+    { logo:'BAJAJ', name:'Bajaj Allianz', plan:'Car Secure Plus', csr:'92.05%', multiplier:0.93, best:true, feats:['Lowest Premium','NCB Protect','Engine Cover'] },
+    { logo:'TATA', name:'Tata AIG', plan:'Motor Secure', csr:'95.42%', multiplier:0.97, feats:['Spot Claim','Return to Invoice','PA Cover'] },
+    { logo:'ICICI', name:'ICICI Lombard', plan:'Comprehensive Plus', csr:'86.73%', multiplier:1.12, feats:['IMT-23 Add-ons','Key Replacement','Consumables'] },
+    { logo:'REL', name:'Reliance GI', plan:'Comprehensive', csr:'84.22%', multiplier:0.88, feats:['Budget Option','Wide Garage Network','Quick Claim'] },
   ],
-  bike:   [
-    { logo:'HDFC', name:'HDFC ERGO',    plan:'Bike Secure',     csr:'98.5%',  multiplier:1.08, best:true },
-    { logo:'BAJAJ', name:'Bajaj Allianz', plan:'Bike Guard',     csr:'92.05%', multiplier:0.94 },
-    { logo:'ICICI', name:'ICICI Lombard', plan:'Two Wheeler',    csr:'86.73%', multiplier:1.15 },
-    { logo:'TATA', name:'Tata AIG',      plan:'Bike Insurance',  csr:'95.42%', multiplier:0.97 },
+  bike: [
+    { logo:'HDFC', name:'HDFC ERGO', plan:'Bike Secure Pro', csr:'98.5%', multiplier:1.08, best:true, feats:['Zero Depreciation','Roadside Assist','Cashless Garage'] },
+    { logo:'BAJAJ', name:'Bajaj Allianz', plan:'Bike Guard', csr:'92.05%', multiplier:0.94, feats:['Best Price','NCB Protection','Accident Cover'] },
+    { logo:'TATA', name:'Tata AIG', plan:'Bike Insurance', csr:'95.42%', multiplier:0.97, feats:['Spot Claim','PA Rider','New Parts Cover'] },
+    { logo:'ICICI', name:'ICICI Lombard', plan:'Two Wheeler Plan', csr:'86.73%', multiplier:1.15, feats:['Comprehensive','Engine Protection','Mobile App Claims'] },
   ],
   health: [
-    { logo:'HDFC', name:'HDFC ERGO',    plan:'Optima Restore',  csr:'98.5%',  multiplier:1.08, best:true },
-    { logo:'STAR', name:'Star Health',   plan:'Comprehensive',   csr:'99.06%', multiplier:0.93 },
-    { logo:'NIVA', name:'Niva Bupa',     plan:'ReAssure 2.0',    csr:'91.06%', multiplier:1.02 },
-    { logo:'CARE', name:'Care Health',   plan:'Care Advantage',  csr:'89.36%', multiplier:0.82 },
-    { logo:'ICICI', name:'ICICI Lombard', plan:'Complete Health', csr:'86.73%', multiplier:1.12 },
+    { logo:'HDFC', name:'HDFC ERGO', plan:'Optima Restore', csr:'98.5%', multiplier:1.08, best:true, feats:['Restore Benefit','No Room Rent Cap','Maternity Cover'] },
+    { logo:'STAR', name:'Star Health', plan:'Comprehensive', csr:'99.06%', multiplier:0.93, feats:['Best CSR','Cashless Hospitals','Day Care Procedures'] },
+    { logo:'NIVA', name:'Niva Bupa', plan:'ReAssure 2.0', csr:'91.06%', multiplier:1.02, feats:['1 Crore Cover','No Co-Payment','Chronic Condition'] },
+    { logo:'CARE', name:'Care Health', plan:'Care Advantage', csr:'89.36%', multiplier:0.82, feats:['Budget Friendly','Annual Health Check','OPD Cover'] },
+    { logo:'ICICI', name:'ICICI Lombard', plan:'Complete Health+', csr:'86.73%', multiplier:1.12, feats:['Wide Network','Mental Health Cover','Teleconsult'] },
   ],
+  life: [
+    { logo:'HDFC', name:'HDFC Life', plan:'Click 2 Protect', csr:'99.07%', multiplier:1.05, best:true, feats:['₹1 Cr Cover','Critical Illness Rider','Return of Premium'] },
+    { logo:'ICICI', name:'ICICI Pru Life', plan:'iProtect Smart', csr:'97.82%', multiplier:1.12, feats:['Terminal Illness','Disability Waiver','Income Protection'] },
+    { logo:'MAX', name:'Max Life', plan:'Smart Term Plan', csr:'99.51%', multiplier:0.97, feats:['Highest CSR','Accidental Benefit','Joint Life Option'] },
+    { logo:'SBI', name:'SBI Life', plan:'eShield Next', csr:'97.05%', multiplier:0.88, feats:['Most Affordable','Increasing Cover','Widest Reach'] },
+  ],
+  family: [
+    { logo:'STAR', name:'Star Health', plan:'Family Health Optima', csr:'99.06%', multiplier:0.93, best:true, feats:['Restore Benefit','Entire Family','Maternity Cover'] },
+    { logo:'HDFC', name:'HDFC ERGO', plan:'Optima Restore Family', csr:'98.5%', multiplier:1.08, feats:['No Room Cap','Day Care','Senior Parent Option'] },
+    { logo:'NIVA', name:'Niva Bupa', plan:'Floater ReAssure', csr:'91.06%', multiplier:1.02, feats:['Lock at Entry Age','Chronic Cover','Newborn Cover'] },
+    { logo:'CARE', name:'Care Health', plan:'Care Supreme Family', csr:'89.36%', multiplier:0.82, feats:['Budget Option','Annual Check','OPD Cover'] },
+  ],
+  commercial: [
+    { logo:'HDFC', name:'HDFC ERGO', plan:'Commercial Vehicle', csr:'98.5%', multiplier:1.05, best:true, feats:['Fleet Discount','IMT Endorsements','Cashless Repairs'] },
+    { logo:'BAJAJ', name:'Bajaj Allianz', plan:'Commercial Secure', csr:'92.05%', multiplier:0.93, feats:['Best Rate','Pan India Network','GVW Based Premium'] },
+    { logo:'TATA', name:'Tata AIG', plan:'Commercial Pro', csr:'95.42%', multiplier:0.97, feats:['Spot Settlement','Transit Cover','3rd Party Unlimited'] },
+    { logo:'ICICI', name:'ICICI Lombard', plan:'Commercial Plus', csr:'86.73%', multiplier:1.12, feats:['All India Coverage','Driver PA Cover','No Claim Bonus'] },
+  ],
+};
+
+const IQ_TYPE_LABELS = {
+  car:'🚗 Car Insurance', bike:'🏍️ Bike Insurance', health:'🏥 Health Insurance',
+  life:'🛡️ Life / Term', family:'👨‍👩‍👧 Family Floater', commercial:'🚛 Commercial'
 };
 
 // ═══════════════════════════════════════
 // OPEN QUOTE FLOW — Universal entry point
-// ALL buttons/CTAs should call this
 // ═══════════════════════════════════════
+// ── FOCUS TRAP UTILITY ──────────────────────────────────────────────────
+var _focusTrapEl = null;
+var _focusTrapPrev = null;
+var _focusTrapHandler = null;
+function focusTrapInstall(el) {
+  _focusTrapPrev = document.activeElement;
+  _focusTrapEl = el;
+  var focusable = el.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])');
+  var first = focusable[0]; var last = focusable[focusable.length - 1];
+  if (first) first.focus();
+  _focusTrapHandler = function(e) {
+    if (e.key !== 'Tab') return;
+    var focused = document.activeElement;
+    if (e.shiftKey) { if (focused === first) { e.preventDefault(); last && last.focus(); } }
+    else { if (focused === last) { e.preventDefault(); first && first.focus(); } }
+  };
+  el.addEventListener('keydown', _focusTrapHandler);
+}
+function focusTrapRemove() {
+  if (_focusTrapEl && _focusTrapHandler) _focusTrapEl.removeEventListener('keydown', _focusTrapHandler);
+  if (_focusTrapPrev && _focusTrapPrev.focus) _focusTrapPrev.focus();
+  _focusTrapEl = _focusTrapHandler = _focusTrapPrev = null;
+}
+
 function openQuoteFlow(type) {
   const modal = document.getElementById('quoteModal');
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
-  iqSelectedType = null;
-  iqCalculatedPremium = 0;
-  iqSelectedCompany = null;
-  iqLeadData = {};
+  iqSelectedType = null; iqCalculatedPremium = 0; iqSelectedCompany = null; iqLeadData = {};
   document.querySelectorAll('.iq-type-card').forEach(c => c.classList.remove('selected'));
-  iqShowScreen('step1');
-  document.getElementById('iqProgressFill').style.width = '33%';
+  iq4ShowScreen('step1');
   document.querySelector('.iq-modal').scrollTop = 0;
-
-  // Auto-select type if passed
-  if (type && ['car','bike','health'].includes(type)) {
-    setTimeout(() => selectInsuranceType(type), 200);
-  }
+  if (type) setTimeout(() => iq4SelectType(type), 200);
+  setTimeout(() => focusTrapInstall(modal), 50);
 }
-
-// Keep backward compat for existing onclick="openQuoteFlow(null)"
 function openQuoteModal() { openQuoteFlow(null); }
 
 function closeQuoteModal() {
   document.getElementById('quoteModal').classList.remove('open');
   document.body.style.overflow = '';
+  focusTrapRemove();
 }
-function iqOverlayClick(e) {
-  if (e.target === e.currentTarget) closeQuoteModal();
+function iqOverlayClick(e) { if (e.target === e.currentTarget) closeQuoteModal(); }
+
+// ── 4-STEP DOT NAV ───────────────────────────────────────────────────
+function iq4UpdateDots(current) {
+  for (let i = 0; i < 4; i++) {
+    const dot = document.getElementById('iq4dot'+i);
+    const line = document.getElementById('iq4line'+i);
+    if (!dot) continue;
+    dot.className = 'iq4-dot' + (i < current ? ' done' : i === current ? ' active' : '');
+    dot.textContent = i < current ? '✓' : i+1;
+    if (line) line.className = 'iq4-line' + (i < current ? ' done' : '');
+  }
+  const pct = [25,50,75,100];
+  document.getElementById('iqProgressFill').style.width = (pct[current] || 25) + '%';
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQuoteModal(); });
 
-// ── SCREEN SWITCHER ───────────────────────────────────────────────────
-function iqShowScreen(screen) {
-  const step1    = document.getElementById('iqStep1');
-  const step2    = document.getElementById('iqStep2');
-  const loading  = document.getElementById('iqLoadingScreen');
-  const results  = document.getElementById('iqResultsScreen');
-  const pbar     = document.getElementById('iqProgressFill');
-
-  [step1, step2, loading, results].forEach(el => {
-    if (el) { el.style.display = 'none'; el.classList.remove('active'); }
-  });
-
-  if (screen === 'step1')   { step1.style.display = 'block'; pbar.style.width = '33%'; }
-  if (screen === 'step2')   { step2.style.display = 'block'; pbar.style.width = '66%'; }
-  if (screen === 'loading') { loading.style.display = 'block'; loading.classList.add('active'); pbar.style.width = '90%'; }
-  if (screen === 'results') { results.style.display = 'block'; results.classList.add('active'); pbar.style.width = '100%'; }
+// ── SCREEN SWITCHER ──────────────────────────────────────────────────
+function iq4ShowScreen(screen) {
+  const screens = ['iqStep1','iqStep2','iqStep3','iqStep4','iqLoadingScreen','iqResultsScreen'];
+  screens.forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+  const stepMap = {
+    step1: { id:'iqStep1', dot:0 },
+    step2: { id:'iqStep2', dot:1 },
+    step3: { id:'iqStep3', dot:2 },
+    step4: { id:'iqStep4', dot:3 },
+    loading: { id:'iqLoadingScreen', dot:2 },
+  };
+  const s = stepMap[screen];
+  if (s) {
+    document.getElementById(s.id).style.display = 'block';
+    iq4UpdateDots(s.dot);
+  }
   document.querySelector('.iq-modal').scrollTop = 0;
 }
 
-// ── TYPE SELECTION ────────────────────────────────────────────────────
-function selectInsuranceType(type) {
+// ── STEP 1: TYPE SELECTION ────────────────────────────────────────────
+function iq4SelectType(type) {
   iqSelectedType = type;
   document.querySelectorAll('.iq-type-card').forEach(c => c.classList.remove('selected'));
   const card = document.querySelector(`.iq-type-card[data-type="${type}"]`);
   if (card) card.classList.add('selected');
   setTimeout(() => {
-    iqShowScreen('step2');
-    const isVehicle = type === 'car' || type === 'bike';
+    iq4ShowScreen('step2');
+    const isVehicle = ['car','bike','commercial'].includes(type);
     document.getElementById('iqVehicleForm').style.display = isVehicle ? 'block' : 'none';
-    document.getElementById('iqHealthForm').style.display  = type === 'health' ? 'block' : 'none';
-    const labels = { car:'🚗 Car Insurance', bike:'🏍️ Bike Insurance', health:'🏥 Health Insurance' };
-    document.getElementById('iqSelectedBadge').textContent = labels[type] || type;
+    document.getElementById('iqHealthForm').style.display  = !isVehicle ? 'block' : 'none';
+    document.getElementById('iqSelectedBadge').textContent = IQ_TYPE_LABELS[type] || type;
+    document.getElementById('iq4step2label').textContent = 'STEP 2 OF 4 · ' + (IQ_TYPE_LABELS[type]||type) + ' Details';
   }, 180);
 }
-
-function iqGoBack() { iqShowScreen('step1'); }
 
 // ── HELPERS ───────────────────────────────────────────────────────────
 function iqGetVal(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
@@ -4561,290 +5420,275 @@ function iqMarkError(id) {
   el.addEventListener('change', () => el.classList.remove('iq-error'), { once: true });
 }
 
-// ═══════════════════════════════════════════════
-// STEP 1 — COLLECT DATA & VALIDATE
-// ═══════════════════════════════════════════════
-function collectFormData() {
-  let data = { type: iqSelectedType };
-  let valid = true;
-
-  if (iqSelectedType === 'car' || iqSelectedType === 'bike') {
-    data.name    = iqGetVal('vName');
-    data.phone   = iqGetVal('vPhone');
-    data.vno     = iqGetVal('vNumber');
-    data.model   = iqGetVal('vModel');
-    data.year    = iqGetVal('vYear');
-    data.expiry  = iqGetVal('vExpiry');
-    data.ncb     = iqGetVal('vNcb');
-    data.claim   = iqGetVal('vClaim');
-    data.insType = iqGetRadio('vInsType');
-
-    if (!data.name)               { iqMarkError('vName');   valid = false; }
-    if (!data.phone || data.phone.length < 10) { iqMarkError('vPhone'); valid = false; }
-    if (!data.vno)                { iqMarkError('vNumber'); valid = false; }
-    if (!data.model)              { iqMarkError('vModel');  valid = false; }
-    if (!data.year)               { iqMarkError('vYear');   valid = false; }
-    if (!data.claim)              { iqMarkError('vClaim');  valid = false; }
-    if (!data.insType)            { valid = false; }
-
-  } else if (iqSelectedType === 'health') {
-    data.name    = iqGetVal('hName');
-    data.phone   = iqGetVal('hPhone');
-    data.age     = iqGetVal('hAge');
-    data.city    = iqGetVal('hCity');
-    data.members = iqGetVal('hMembers');
-    data.cover   = iqGetVal('hCover');
-    data.disease = iqGetRadio('hDisease');
-
-    if (!data.name)               { iqMarkError('hName');    valid = false; }
-    if (!data.phone || data.phone.length < 10) { iqMarkError('hPhone'); valid = false; }
-    if (!data.age)                { iqMarkError('hAge');     valid = false; }
-    if (!data.city)               { iqMarkError('hCity');    valid = false; }
-    if (!data.members)            { iqMarkError('hMembers'); valid = false; }
-    if (!data.cover)              { iqMarkError('hCover');   valid = false; }
-    if (!data.disease)            { valid = false; }
-  }
-
-  return valid ? data : null;
-}
-
-// ═══════════════════════════════════════════════
-// STEP 2 — AUTO FILL EXISTING CALCULATOR & CALCULATE
-// Reuses the existing calculatePremium() logic
-// ═══════════════════════════════════════════════
-function fillCalculatorInputs(data) {
-  // Map form data → existing calculator fields
-  if (data.type === 'health') {
-    const ageEl   = document.getElementById('prem-age');
-    const typeEl  = document.getElementById('prem-type');
-    const coverEl = document.getElementById('prem-cover');
-    if (ageEl)   ageEl.value   = data.age || 30;
-    // Map members → type
-    const isFamily = data.members && data.members !== '1 (Individual)';
-    if (typeEl)  typeEl.value  = isFamily ? 'health_family' : 'health_individual';
-    // Map cover amount string → numeric
-    const coverMap = {
-      '₹3 Lakh': 300000, '₹5 Lakh': 500000,
-      '₹10 Lakh': 1000000, '₹15 Lakh': 1500000, '₹20 Lakh+': 2000000,
-    };
-    if (coverEl) coverEl.value = coverMap[data.cover] || 1000000;
-
-  } else if (data.type === 'car' || data.type === 'bike') {
-    const ageEl   = document.getElementById('prem-age');
-    const typeEl  = document.getElementById('prem-type');
-    const coverEl = document.getElementById('prem-cover');
-    if (ageEl)   ageEl.value   = 35; // average driver age
-    // Map policy type
-    const isCar = data.type === 'car';
-    const isComp = data.insType && data.insType.toLowerCase().includes('comp');
-    if (typeEl)  typeEl.value  = isCar ? (isComp ? 'car_comp' : 'car_tp') : (isComp ? 'bike_comp' : 'bike_tp');
-    // Estimate IDV from year
-    const currentYear = new Date().getFullYear();
-    const age = Math.max(0, currentYear - parseInt(data.year || currentYear));
-    const baseIDV = isCar ? 500000 : 80000;
-    const depreciation = Math.pow(0.85, age);
-    const idv = Math.round(baseIDV * depreciation / 100000) * 100000;
-    if (coverEl) coverEl.value = Math.max(isCar ? 200000 : 100000, idv);
-  }
-}
-
-function triggerCalculation() {
-  // Run existing premium calculator programmatically
-  const age   = parseFloat(document.getElementById('prem-age').value);
-  const cover = parseFloat(document.getElementById('prem-cover').value);
-  const type  = document.getElementById('prem-type').value;
-  if (!age || !cover || !type) return 0;
-
+// ── CALCULATE PREMIUM ────────────────────────────────────────────────
+function iq4CalcPremium(data) {
+  const age = parseInt(data.age || 35);
   const ageFactor = age < 30 ? 1.0 : age < 45 ? 1.3 : age < 55 ? 1.65 : 2.1;
+  const coverMap = { '₹3 Lakh':300000,'₹5 Lakh':500000,'₹10 Lakh':1000000,'₹15 Lakh':1500000,'₹20 Lakh+':2000000 };
+  const cover = coverMap[data.cover] || 1000000;
+  const isComp = data.insType && data.insType.toLowerCase().includes('comp');
+  const yr = parseInt(data.year || new Date().getFullYear());
+  const carAge = Math.max(0, new Date().getFullYear() - yr);
+  const idv = Math.round(500000 * Math.pow(0.85, carAge) / 100000) * 100000;
+  const bikeIdv = Math.round(80000 * Math.pow(0.85, carAge) / 100000) * 100000;
+  const comIdv = Math.round(1200000 * Math.pow(0.9, carAge) / 100000) * 100000;
+
   let base = 0;
-  if (type === 'health_individual') base = (cover * 0.018) * ageFactor;
-  else if (type === 'health_family') base = (cover * 0.025) * ageFactor;
-  else if (type === 'car_tp')   base = Math.max(2000, cover * 0.004);
-  else if (type === 'car_comp') base = Math.max(6000, cover * 0.025);
-  else if (type === 'bike_tp')  base = Math.max(1300, cover * 0.003);
-  else if (type === 'bike_comp') base = Math.max(3000, cover * 0.018);
-  else if (type === 'commercial') base = Math.max(8000, cover * 0.035);
-
-  return Math.round(base);
+  const t = iqSelectedType;
+  if (t === 'health') { const isFamily = data.members && data.members !== '1 (Individual)'; base = (cover * (isFamily ? 0.025 : 0.018)) * ageFactor; }
+  else if (t === 'family') { base = (cover * 0.025) * ageFactor; }
+  else if (t === 'car')  { base = isComp ? Math.max(6000, idv*0.025) : Math.max(2000, idv*0.004); }
+  else if (t === 'bike') { base = isComp ? Math.max(3000, bikeIdv*0.018) : Math.max(1300, bikeIdv*0.003); }
+  else if (t === 'commercial') { base = Math.max(8000, comIdv*0.035); }
+  else if (t === 'life') { base = Math.max(5000, cover * 0.003 * ageFactor); }
+  return Math.round(base || 8500);
 }
 
-function getPremiumValue() {
-  return triggerCalculation();
-}
+// ── STEP 2→3: Validate form then show plan cards ──────────────────────
+function iq4GoTo(step) {
+  if (step === 2) { iq4ShowScreen('step2'); return; }
+  if (step === 1) { iq4ShowScreen('step1'); return; }
 
-// ═══════════════════════════════════════════════
-// STEP 3 — LOADING ANIMATION
-// ═══════════════════════════════════════════════
-function runLoadingAnimation() {
-  return new Promise(resolve => {
+  if (step === 3) {
+    // Validate step 2 data
+    let data = { type: iqSelectedType };
+    let valid = true;
+    if (['car','bike','commercial'].includes(iqSelectedType)) {
+      data.name = iqGetVal('vName'); data.phone = iqGetVal('vPhone');
+      data.vno = iqGetVal('vNumber'); data.model = iqGetVal('vModel');
+      data.year = iqGetVal('vYear'); data.expiry = iqGetVal('vExpiry');
+      data.ncb = iqGetVal('vNcb'); data.claim = iqGetVal('vClaim');
+      data.insType = iqGetRadio('vInsType');
+      if (!data.name) { iqMarkError('vName'); valid=false; }
+      if (!data.phone || data.phone.length < 10) { iqMarkError('vPhone'); valid=false; }
+      if (!data.vno) { iqMarkError('vNumber'); valid=false; }
+      if (!data.model) { iqMarkError('vModel'); valid=false; }
+      if (!data.year) { iqMarkError('vYear'); valid=false; }
+      if (!data.claim) { iqMarkError('vClaim'); valid=false; }
+      if (!data.insType) { valid=false; alert('Please select insurance type (Comprehensive/Third Party)'); }
+    } else {
+      data.name = iqGetVal('hName'); data.phone = iqGetVal('hPhone');
+      data.age = iqGetVal('hAge'); data.city = iqGetVal('hCity');
+      data.members = iqGetVal('hMembers'); data.cover = iqGetVal('hCover');
+      data.disease = iqGetRadio('hDisease');
+      if (!data.name) { iqMarkError('hName'); valid=false; }
+      if (!data.phone || data.phone.length < 10) { iqMarkError('hPhone'); valid=false; }
+      if (!data.age) { iqMarkError('hAge'); valid=false; }
+      if (!data.city) { iqMarkError('hCity'); valid=false; }
+      if (!data.members) { iqMarkError('hMembers'); valid=false; }
+      if (!data.cover) { iqMarkError('hCover'); valid=false; }
+      if (!data.disease) { valid=false; alert('Please answer existing disease question'); }
+    }
+    if (!valid) return;
+    iqLeadData = data;
+
+    // Show loading briefly then render cards
+    iq4ShowScreen('loading');
     const steps = document.querySelectorAll('.iq-loading-step');
     let i = 0;
-    const interval = setInterval(() => {
-      if (i < steps.length) {
-        steps[i].classList.add('done');
-        i++;
-      } else {
-        clearInterval(interval);
-        setTimeout(resolve, 300);
-      }
-    }, 500);
-  });
+    const iv = setInterval(() => { if (i < steps.length) { steps[i++].classList.add('done'); } else { clearInterval(iv); setTimeout(() => iq4RenderPlanCards(data), 300); } }, 500);
+    return;
+  }
+
+  if (step === 4) {
+    // Need a plan selected
+    if (!iqSelectedCompany) { alert('Please select a plan above to continue.'); return; }
+    iq4ShowScreen('step4');
+    // Render summary
+    const d = iqLeadData;
+    const co = iqSelectedCompany;
+    const isV = ['car','bike','commercial'].includes(d.type);
+    const summary = document.getElementById('iq4SelectedSummary');
+    summary.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.4);margin-bottom:4px;">YOUR SELECTED PLAN</div>
+          <div style="font-size:16px;font-weight:700;color:#fff;">${co.name}</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.5);">${co.plan}</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px;">CSR: ${co.csr} | ${IQ_TYPE_LABELS[d.type]||d.type}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:10px;color:rgba(255,255,255,0.4);">Est. Annual Premium</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold);font-weight:700;">₹${co.price.toLocaleString('en-IN')}</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(201,168,76,0.15);font-size:12px;color:rgba(255,255,255,0.45);">
+        ${isV ? `${d.name} · ${d.phone} · ${d.model||''} · ${d.year||''}` : `${d.name} · ${d.phone} · Age ${d.age} · ${d.city}`}
+      </div>`;
+    iqCalculatedPremium = co.price;
+    // Fire Formspree silently
+    try { fetch('https://formspree.io/f/xaqllkaq', { method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'}, body: JSON.stringify({ _subject:`New ${d.type} Enquiry — Taman Care`, Name:d.name, Phone:d.phone, Type:d.type, Company:co.name, Plan:co.plan, Premium:'₹'+co.price.toLocaleString('en-IN') }) }); } catch(e) {}
+  }
 }
 
-// ═══════════════════════════════════════════════
-// STEP 4 — RENDER RESULTS with count-up animation
-// ═══════════════════════════════════════════════
-function renderResults(premium, data) {
+// ── RENDER HEALTH-STYLE PLAN CARDS (Step 3) ──────────────────────────
+function iq4RenderPlanCards(data) {
+  const premium = iq4CalcPremium(data);
   iqCalculatedPremium = premium;
+  const companies = IQ_COMPANIES[iqSelectedType] || IQ_COMPANIES.health;
+  const directPremium = Math.round(premium * 1.18);
+  const saving = directPremium - premium;
 
-  // Count-up animation
-  const el = document.getElementById('iqPremiumAmount');
-  const target = premium;
-  const duration = 1200;
-  const start = Date.now();
-  el.classList.add('animating');
+  // Count-up for premium bar
+  const premEl = document.getElementById('iq4PremiumAmt');
+  iq4CountUp(premEl, premium, '₹');
+  document.getElementById('iq4Saving').textContent = '₹' + saving.toLocaleString('en-IN');
+  document.getElementById('iq4DirectPct').textContent = '18% cheaper';
 
-  function countUp() {
-    const elapsed = Date.now() - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-    const current = Math.round(eased * target);
-    el.textContent = '₹' + current.toLocaleString('en-IN');
-    if (progress < 1) requestAnimationFrame(countUp);
-    else {
-      el.textContent = '₹' + target.toLocaleString('en-IN');
-      el.classList.remove('animating');
-    }
-  }
-  requestAnimationFrame(countUp);
-
-  // Render company cards
-  const companies = IQ_COMPANIES[data.type] || IQ_COMPANIES.health;
-  const cardsHtml = companies.map((co, idx) => {
-    const coPrice = Math.round(premium * co.multiplier);
-    const isBest = co.best || false;
-    return `<div class="iq-company-card${isBest ? ' best-val' : ''}" onclick="iqSelectCompany(this,'${co.name}','${co.plan}',${coPrice})">
-      <div class="iq-co-logo">${co.logo}</div>
-      <div class="iq-co-info">
-        <div class="iq-co-name">${co.name}</div>
-        <div class="iq-co-plan">${co.plan}</div>
+  // Render cards
+  const html = companies.map((co, idx) => {
+    const price = Math.round(premium * co.multiplier);
+    const featsHtml = (co.feats||[]).map(f => `<span class="iq4-feat-tag">${f}</span>`).join('');
+    return `<div class="iq4-plan-card${co.best?' best-val':''}" onclick="iq4SelectPlan(this,'${co.name}','${co.plan}','${co.csr}',${price})">
+      <div class="iq4-logo">${co.logo}</div>
+      <div class="iq4-info">
+        <div class="iq4-name">${co.name}</div>
+        <div class="iq4-plan">${co.plan}</div>
+        <div class="iq4-feats">${featsHtml}</div>
       </div>
-      <div style="text-align:right;">
-        <div class="iq-co-price">₹${coPrice.toLocaleString('en-IN')}</div>
-        <div class="iq-co-csr">CSR: ${co.csr}</div>
+      <div class="iq4-pricing">
+        <div class="iq4-price">₹${price.toLocaleString('en-IN')}</div>
+        <div class="iq4-csr">CSR ${co.csr}</div>
       </div>
-      <div class="iq-co-select-dot"></div>
+      <div class="iq4-select-ring"></div>
     </div>`;
   }).join('');
-  document.getElementById('iqCompanyCards').innerHTML = cardsHtml;
 
-  // Auto-select best value
-  const bestCard = document.querySelector('.iq-company-card.best-val') || document.querySelector('.iq-company-card');
+  document.getElementById('iq4PlanCards').innerHTML = html;
+  document.getElementById('iq4step3label').textContent = 'STEP 3 OF 4 · Choose Your ' + (IQ_TYPE_LABELS[iqSelectedType]||'') + ' Plan';
+  document.getElementById('iq4Step3Next').disabled = true;
+  iq4ShowScreen('step3');
+
+  // Auto-select best
+  const bestCard = document.querySelector('.iq4-plan-card.best-val') || document.querySelector('.iq4-plan-card');
   if (bestCard) bestCard.click();
 }
 
-function iqSelectCompany(el, name, plan, price) {
-  document.querySelectorAll('.iq-company-card').forEach(c => c.classList.remove('selected'));
+function iq4SelectPlan(el, name, plan, csr, price) {
+  document.querySelectorAll('.iq4-plan-card').forEach(c => { c.classList.remove('selected'); c.querySelector('.iq4-select-ring').textContent = ''; });
   el.classList.add('selected');
-  iqSelectedCompany = { name, plan, price };
+  el.querySelector('.iq4-select-ring').textContent = '✓';
+  iqSelectedCompany = { name, plan, csr, price };
+  document.getElementById('iq4Step3Next').disabled = false;
 }
 
-// ═══════════════════════════════════════════════
-// MAIN SUBMIT — Auto-calculate flow
-// ═══════════════════════════════════════════════
-async function iqSubmit() {
-  // 1. Collect & validate
-  const data = collectFormData();
-  if (!data) return;
-  iqLeadData = data;
-
-  // 2. Show loading screen
-  iqShowScreen('loading');
-
-  // 3. Fill existing calculator inputs (background)
-  fillCalculatorInputs(data);
-
-  // 4. Run loading animation (1.5 seconds UX delay)
-  await runLoadingAnimation();
-
-  // 5. Get calculated premium
-  const premium = getPremiumValue();
-
-  // 6. Show results
-  iqShowScreen('results');
-  renderResults(premium, data);
-
-  // 7. Fire Formspree in background
-  const formspreeData = buildFormspreeData(data, premium);
-  try {
-    fetch('https://formspree.io/f/xaqllkaq', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify(formspreeData),
-    });
-  } catch(e) { /* silent fail */ }
-}
-
-function buildFormspreeData(data, premium) {
-  const base = {
-    _subject: `New ${data.type} Insurance Enquiry — Taman Care`,
-    'Insurance Type': data.type,
-    'Name': data.name,
-    'Phone': data.phone,
-    'Calculated Premium': '₹' + premium.toLocaleString('en-IN'),
-  };
-  if (data.type === 'car' || data.type === 'bike') {
-    return { ...base, 'Vehicle No': data.vno, 'Model': data.model, 'Year': data.year,
-      'NCB': data.ncb || 'N/A', 'Claim Last Year': data.claim, 'Insurance Type': data.insType };
+function iq4CountUp(el, target, prefix) {
+  const dur = 1200; const start = Date.now();
+  function frame() {
+    const p = Math.min((Date.now()-start)/dur,1);
+    const e = 1-Math.pow(1-p,3);
+    el.textContent = prefix + Math.round(e*target).toLocaleString('en-IN');
+    if (p < 1) requestAnimationFrame(frame);
+    else el.textContent = prefix + target.toLocaleString('en-IN');
   }
-  return { ...base, 'Age': data.age, 'City': data.city, 'Members': data.members,
-    'Coverage': data.cover, 'Existing Disease': data.disease };
+  requestAnimationFrame(frame);
 }
 
-// ═══════════════════════════════════════════════
-// FINAL CTA — WhatsApp with full details
-// ═══════════════════════════════════════════════
-function generateWhatsAppLink() {
-  const d = iqLeadData;
-  const co = iqSelectedCompany || { name: 'Best Available', plan: '', price: iqCalculatedPremium };
-  const divider = '%0A━━━━━━━━━━━━━━━%0A';
-
-  let msg = `New Insurance Enquiry 🔥%0A${divider}`;
-  msg += `Type: ${d.type ? d.type.charAt(0).toUpperCase() + d.type.slice(1) : ''} Insurance%0A`;
-  msg += `Name: ${d.name}%0A`;
-  msg += `Phone: ${d.phone}%0A`;
-  msg += divider;
-
-  if (d.type === 'car' || d.type === 'bike') {
-    msg += `Vehicle No: ${d.vno}%0A`;
-    msg += `Model: ${d.model}%0A`;
-    msg += `Year: ${d.year}%0A`;
-    if (d.ncb) msg += `NCB: ${d.ncb}%0A`;
-    msg += `Claim Last Year: ${d.claim}%0A`;
-    msg += `Policy Type: ${d.insType}%0A`;
-  } else {
-    msg += `Age: ${d.age}%0A`;
-    msg += `City: ${d.city}%0A`;
-    msg += `Members: ${d.members}%0A`;
-    msg += `Coverage: ${d.cover}%0A`;
-    msg += `Existing Disease: ${d.disease}%0A`;
-  }
-  msg += divider;
-  msg += `Calculated Premium: ₹${iqCalculatedPremium.toLocaleString('en-IN')}%0A`;
-  msg += `Selected Company: ${co.name}%0A`;
-  msg += `Plan: ${co.plan}%0A`;
-  msg += divider;
-  msg += `Source: Website`;
-
-  return `https://wa.me/919068541300?text=${msg}`;
-}
-
+// ── WHATSAPP CTA ─────────────────────────────────────────────────────
 function iqGetFinalQuoteOnWhatsApp() {
-  window.open(generateWhatsAppLink(), '_blank');
+  const d = iqLeadData;
+  const co = iqSelectedCompany || { name:'Best Available', plan:'', csr:'', price: iqCalculatedPremium };
+  const divider = '%0A━━━━━━━━━━━━━━━%0A';
+  const isV = ['car','bike','commercial'].includes(d.type);
+  let msg = `New Insurance Enquiry 🔥%0A${divider}`;
+  msg += `Type: ${IQ_TYPE_LABELS[d.type]||d.type}%0AName: ${d.name}%0APhone: ${d.phone}%0A${divider}`;
+  if (isV) { msg += `Vehicle: ${d.model||''}%0AYear: ${d.year||''}%0AVehicle No: ${d.vno||''}%0APolicy Type: ${d.insType||''}%0AClaim History: ${d.claim||''}%0A`; }
+  else { msg += `Age: ${d.age||''}%0ACity: ${d.city||''}%0AMembers: ${d.members||''}%0ACoverage: ${d.cover||''}%0AExisting Disease: ${d.disease||''}%0A`; }
+  msg += `${divider}Selected Plan: ${co.name}%0APlan: ${co.plan}%0AEst. Premium: ₹${(co.price||iqCalculatedPremium).toLocaleString('en-IN')}%0ACSRatio: ${co.csr||''}%0A${divider}Source: Website`;
+  window.open(`https://wa.me/919068541300?text=${msg}`, '_blank');
 }
 
-function iqRestart() {
-  openQuoteFlow(null);
+function iqRestart() { openQuoteFlow(null); }
+
+// Legacy compat
+function selectInsuranceType(type) { iq4SelectType(type); }
+function iqGoBack() { iq4ShowScreen('step1'); }
+function iqSubmit() { iq4GoTo(3); }
+
+// ═══════════════════════════════════════════════════
+// CLAIMS TICKER — Animated live counter
+// ═══════════════════════════════════════════════════
+(function() {
+  const el = document.getElementById('claimsCounter');
+  if (!el) return;
+  let val = 21500000;
+  function tick() {
+    val += Math.round(Math.random() * 38000 + 8000);
+    if (val > 24100000) val = 21800000;
+    el.textContent = '₹' + (val / 100000).toFixed(1) + ' Lakh';
+  }
+  tick();
+  setInterval(tick, 3500);
+})();
+
+// ═══════════════════════════════════════════════════
+// COVERAGE GAP CHECKER
+// ═══════════════════════════════════════════════════
+const GAP_QUIZ = [
+  { q:'Do you have a health insurance policy?', opts:['Yes, active policy','Had one, lapsed','No policy at all'] },
+  { q:'Does your policy cover your parents?', opts:['Yes, covered','No, they\'re not included','I don\'t know'] },
+  { q:'What\'s your current health cover amount?', opts:['Under ₹5 Lakh','₹5-10 Lakh','₹10 Lakh+','No health cover'] },
+  { q:'Do you have a term life insurance?', opts:['Yes, above ₹50 Lakh cover','Yes, but under ₹25 Lakh','No term policy'] },
+  { q:'Is your vehicle comprehensively insured?', opts:['Yes, comprehensive','Only third party','Not insured / lapsed'] },
+];
+let gapAnswers = [];
+let gapCurrent = 0;
+
+function openGapChecker() {
+  gapAnswers = []; gapCurrent = 0;
+  const modal = document.getElementById('gapCheckerModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  gapRenderQuestion();
+}
+function closeGapChecker() {
+  document.getElementById('gapCheckerModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function gapRenderQuestion() {
+  const body = document.getElementById('gapQuizBody');
+  if (gapCurrent >= GAP_QUIZ.length) { gapShowResult(); return; }
+  const q = GAP_QUIZ[gapCurrent];
+  body.innerHTML = `
+    <div style="font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:12px;">QUESTION ${gapCurrent+1} OF ${GAP_QUIZ.length}</div>
+    <div style="background:rgba(255,255,255,0.04);height:3px;border-radius:2px;margin-bottom:20px;"><div style="background:var(--gold);height:100%;width:${(gapCurrent/GAP_QUIZ.length)*100}%;border-radius:2px;transition:width 0.4s;"></div></div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;margin-bottom:20px;">${q.q}</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      ${q.opts.map((o,i) => `<button onclick="gapAnswer(${i})" style="background:rgba(255,255,255,0.03);border:1.5px solid rgba(201,168,76,0.2);border-radius:8px;padding:13px 18px;color:rgba(255,255,255,0.8);font-family:'Outfit',sans-serif;font-size:13.5px;cursor:pointer;text-align:left;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(201,168,76,0.6)';this.style.background='rgba(201,168,76,0.06)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.2)';this.style.background='rgba(255,255,255,0.03)'">${o}</button>`).join('')}
+    </div>`;
+}
+function gapAnswer(i) {
+  gapAnswers.push({ q:GAP_QUIZ[gapCurrent].q, a:GAP_QUIZ[gapCurrent].opts[i], idx:i });
+  gapCurrent++;
+  gapRenderQuestion();
+}
+function gapShowResult() {
+  const gaps = [];
+  if (gapAnswers[0]?.idx >= 1) gaps.push({ icon:'🏥', gap:'No Active Health Cover', risk:'HIGH', fix:'Get a basic health plan from ₹500/month' });
+  if (gapAnswers[1]?.idx >= 1) gaps.push({ icon:'👴', gap:'Parents Not Covered', risk:'HIGH', fix:'Add parent floater — covers up to ₹10L' });
+  if (gapAnswers[2]?.idx !== 2 && gapAnswers[2]?.idx !== 1) {} else if (gapAnswers[2]?.idx >= 2) gaps.push({ icon:'💰', gap:'Coverage Below Recommended', risk:'MEDIUM', fix:'Upgrade to ₹10L+ for full protection' });
+  if (gapAnswers[3]?.idx >= 1) gaps.push({ icon:'🛡️', gap:'No/Low Life Insurance', risk:'HIGH', fix:'₹1 Cr term plan starts at just ₹750/month' });
+  if (gapAnswers[4]?.idx >= 1) gaps.push({ icon:'🚗', gap:'Vehicle Not Comprehensively Covered', risk:'MEDIUM', fix:'Switch to comprehensive for full protection' });
+
+  const body = document.getElementById('gapQuizBody');
+  if (!gaps.length) {
+    body.innerHTML = `<div style="text-align:center;padding:20px 0;"><div style="font-size:48px;margin-bottom:16px;">🎉</div><div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold);margin-bottom:8px;">Great Coverage!</div><p style="color:rgba(255,255,255,0.5);font-size:13.5px;margin-bottom:24px;">Based on your answers, you seem well-covered. Want a free expert review to confirm?</p><button onclick="closeGapChecker();openQuoteFlow(null);" style="background:var(--gold);color:#000;border:none;padding:14px 28px;border-radius:6px;font-weight:700;cursor:pointer;font-size:14px;">Get Free Expert Review</button></div>`;
+    return;
+  }
+  body.innerHTML = `
+    <div style="font-size:10px;letter-spacing:2px;color:#e05656;margin-bottom:8px;">⚠️ ${gaps.length} COVERAGE GAP${gaps.length>1?'S':''} FOUND</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;margin-bottom:16px;">You may be <em style="color:#e05656;">unprotected</em> in these areas:</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+      ${gaps.map(g => `<div style="background:rgba(255,255,255,0.03);border:1px solid ${g.risk==='HIGH'?'rgba(224,86,86,0.3)':'rgba(201,168,76,0.2)'};border-radius:8px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;">
+        <span style="font-size:22px;">${g.icon}</span>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px;">${g.gap} <span style="font-size:9px;padding:2px 8px;border-radius:20px;background:${g.risk==='HIGH'?'rgba(224,86,86,0.2)':'rgba(201,168,76,0.15)'};color:${g.risk==='HIGH'?'#e05656':'var(--gold)'};">${g.risk}</span></div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:3px;">${g.fix}</div>
+        </div>
+      </div>`).join('')}
+    </div>
+    <button onclick="closeGapChecker();openQuoteFlow(null);" style="width:100%;background:var(--gold);color:#000;border:none;padding:14px 20px;border-radius:6px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">✦ Fix My Coverage Gaps Now</button>
+    <button onclick="closeGapChecker();" style="width:100%;background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:11px 20px;border-radius:6px;font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer;margin-top:8px;">Maybe Later</button>`;
 }
 </script>
 
@@ -5434,121 +6278,180 @@ function closePremiumPopup() {
      SMART PLAN RECOMMENDER JS
      ══════════════════════════════════════════════ -->
 <script>
-(function() {
-  var rqAnswers = { type: null, age: null, budget: null, health: null };
-  var rqStepKeys = ['type','age','budget','health'];
+  // ── PLAN RECOMMENDER QUIZ — flat globals, zero closures ───────────
+  var rq_type      = '';
+  var rq_age       = '';
+  var rq_budget    = '';
+  var rq_condition = '';
 
-  window.rqSelect = function(el, key, val) {
-    var opts = el.closest('.rq-options').querySelectorAll('.rq-option');
-    opts.forEach(function(o){ o.classList.remove('selected'); });
-    el.classList.add('selected');
-    rqAnswers[key] = val;
-    var stepIdx = rqStepKeys.indexOf(key);
-    var nextBtn = document.getElementById('rqNext' + stepIdx);
-    if (nextBtn) nextBtn.disabled = false;
-  };
-
-  window.rqGoTo = function(step) {
-    for (var i = 0; i < 4; i++) {
-      var s = document.getElementById('rqStep' + i);
-      if (s) s.style.display = (i === step) ? 'block' : 'none';
-      var dot = document.getElementById('rqdot' + i);
-      if (dot) {
-        dot.classList.remove('active','done');
-        if (i < step) dot.classList.add('done');
-        if (i === step) dot.classList.add('active');
-      }
-    }
-    document.getElementById('rqResult').style.display = 'none';
-    document.getElementById('rqStepLabel').textContent = 'Step ' + (step + 1) + ' of 4';
-    document.getElementById('rqProgress').style.width = (step * 25) + '%';
-  };
-
-  var PLANS = {
+  var rq_plans = {
     health: [
-      { icon:'🏥', name:'Star Health Comprehensive', desc:'Best for individuals & families. Zero co-pay, 10,000+ hospitals.', price:'₹8,200', freq:'/year', top:true },
-      { icon:'🛡️', name:'HDFC ERGO Optima Restore', desc:'Automatic sum restoration every year. Ideal for young families.', price:'₹9,800', freq:'/year', top:false },
-      { icon:'💊', name:'Niva Bupa ReAssure', desc:'Unlimited restore, direct claim settlement, no TPA.', price:'₹11,400', freq:'/year', top:false }
+      { icon:'🏥', name:'Star Health Comprehensive',  desc:'Zero co-pay · 14,000+ cashless hospitals · 99% CSR.',  price:'₹8,200/yr',  freq:'per year', top:true  },
+      { icon:'💊', name:'HDFC ERGO Optima Restore',   desc:'Automatic sum restore · No room rent cap · Tax benefit.',price:'₹9,800/yr',  freq:'per year', top:false },
+      { icon:'🩺', name:'Niva Bupa ReAssure 2.0',     desc:'Unlimited restore · Direct claim · No TPA hassle.',      price:'₹11,400/yr', freq:'per year', top:false }
     ],
     car: [
-      { icon:'🚗', name:'HDFC ERGO Comprehensive', desc:'Zero depreciation, engine protect, roadside assistance included.', price:'₹6,500', freq:'/year', top:true },
-      { icon:'🛡️', name:'Bajaj Allianz Own Damage', desc:'Fast cashless claims at 7,500+ garages. Great NCB discount.', price:'₹5,800', freq:'/year', top:false },
-      { icon:'⚡', name:'ICICI Lombard Complete', desc:'Instant claim settlement, return to invoice cover available.', price:'₹7,200', freq:'/year', top:false }
+      { icon:'🚗', name:'HDFC ERGO Car Comprehensive', desc:'Zero depreciation · Engine protect · 6,800+ garages.',  price:'₹6,500/yr',  freq:'per year', top:true  },
+      { icon:'🔧', name:'Bajaj Allianz Car Insurance', desc:'Spot claim settlement · 7,500+ network garages · NCB.',  price:'₹5,800/yr',  freq:'per year', top:false },
+      { icon:'⚡', name:'ICICI Lombard Complete Cover', desc:'Return-to-invoice · Roadside assist · Instant renewal.', price:'₹7,200/yr',  freq:'per year', top:false }
     ],
     bike: [
-      { icon:'🏍️', name:'Bajaj Allianz Bike Plan', desc:'Comprehensive cover with personal accident. Best value.', price:'₹1,800', freq:'/year', top:true },
-      { icon:'🛡️', name:'HDFC ERGO Two-Wheeler', desc:'Zero depreciation add-on available. Quick renewal.', price:'₹2,100', freq:'/year', top:false },
-      { icon:'⚡', name:'ICICI Lombard Bike', desc:'Instant policy, wide garage network in Punjab.', price:'₹1,950', freq:'/year', top:false }
-    ],
-    family: [
-      { icon:'👨‍👩‍👧', name:'Star Family Delite', desc:'Family floater with maternity cover. Best for young families.', price:'₹15,000', freq:'/year', top:true },
-      { icon:'🏥', name:'Care Supreme Family', desc:'Unlimited restore, no room rent capping, day care covered.', price:'₹18,500', freq:'/year', top:false },
-      { icon:'💎', name:'HDFC ERGO Family', desc:'₹25L cover with international emergency cover.', price:'₹20,200', freq:'/year', top:false }
+      { icon:'🏍️', name:'Bajaj Allianz Bike Shield',  desc:'Comprehensive + PA cover · 4,000+ cashless garages.',    price:'₹1,800/yr',  freq:'per year', top:true  },
+      { icon:'🛵', name:'HDFC ERGO Two-Wheeler Plan',  desc:'Zero dep add-on · 5-min online renewal · Wide network.',  price:'₹2,100/yr',  freq:'per year', top:false },
+      { icon:'🔩', name:'ICICI Lombard Bike Cover',    desc:'Instant policy · Punjab-wide garage network · Low cost.', price:'₹1,950/yr',  freq:'per year', top:false }
     ],
     life: [
-      { icon:'💼', name:'HDFC Life Click2Protect', desc:'₹1 Cr cover at lowest premium. Best claim settlement ratio.', price:'₹9,500', freq:'/year', top:true },
-      { icon:'🛡️', name:'ICICI Pru iProtect Smart', desc:'Terminal illness benefit + accidental death rider included.', price:'₹10,800', freq:'/year', top:false },
-      { icon:'⭐', name:'Max Life Smart Secure', desc:'Joint life option for couples, premium waiver on disability.', price:'₹11,200', freq:'/year', top:false }
+      { icon:'💼', name:'HDFC Life Click2Protect',     desc:'₹1 Cr cover · Lowest premium · Critical illness rider.',  price:'₹9,500/yr',  freq:'per year', top:true  },
+      { icon:'🛡️', name:'ICICI Pru iProtect Smart',    desc:'Terminal illness payout · Accidental death rider incl.', price:'₹10,800/yr', freq:'per year', top:false },
+      { icon:'⭐', name:'Max Life Smart Secure Plus',   desc:'Joint life option · Premium waiver on disability.',       price:'₹11,200/yr', freq:'per year', top:false }
+    ],
+    family: [
+      { icon:'👨‍👩‍👧', name:'Star Family Health Optima', desc:'Entire family covered · Maternity · 14,000+ hospitals.', price:'₹15,000/yr', freq:'per year', top:true  },
+      { icon:'🏠', name:'Care Supreme Family Floater',  desc:'Unlimited restore · No room rent cap · 6 members.',       price:'₹18,500/yr', freq:'per year', top:false },
+      { icon:'💎', name:'HDFC ERGO Family Plan',        desc:'₹25L cover · International emergency · Restore benefit.', price:'₹20,200/yr', freq:'per year', top:false }
     ],
     commercial: [
-      { icon:'🚛', name:'Bajaj Allianz Commercial', desc:'Comprehensive fleet cover with goods in transit.', price:'₹18,000', freq:'/year', top:true },
-      { icon:'🛡️', name:'HDFC ERGO Truck Plan', desc:'All-India coverage, breakdown assistance, legal liability.', price:'₹20,500', freq:'/year', top:false },
-      { icon:'⚡', name:'New India Commercial', desc:'Government-backed insurer, wide network, trusted by fleets.', price:'₹16,500', freq:'/year', top:false }
+      { icon:'🚛', name:'Bajaj Allianz Commercial',     desc:'Fleet cover · Goods-in-transit · All-India network.',     price:'₹18,000/yr', freq:'per year', top:true  },
+      { icon:'🏭', name:'New India Commercial Vehicle', desc:'Govt-backed · Unlimited TP liability · Trusted by fleets.',price:'₹16,500/yr', freq:'per year', top:false },
+      { icon:'🚌', name:'HDFC ERGO Truck & Bus Plan',   desc:'All vehicle types · Driver PA included · Breakdown assist.',price:'₹20,500/yr', freq:'per year', top:false }
     ]
   };
 
-  var typeMap = { health:'health', car:'car', bike:'bike', life:'life', family:'family', commercial:'commercial' };
+  var rq_labels = {
+    health:'Health Insurance', car:'Car Insurance', bike:'Bike Insurance',
+    life:'Life / Term Insurance', family:'Family Floater', commercial:'Commercial Vehicle Insurance'
+  };
 
-  window.rqShowResult = function() {
+  function rqSelect(el, key, val) {
+    // Deselect all options in the active visible sub-panel only
+    var activePanel = null;
+    if (key === 'condition') {
+      // find the visible sub-panel
+      var panels = ['rqStep3Health','rqStep3Vehicle','rqStep3Commercial'];
+      for (var p = 0; p < panels.length; p++) {
+        var pan = document.getElementById(panels[p]);
+        if (pan && pan.style.display !== 'none') { activePanel = pan; break; }
+      }
+    }
+    var scope = activePanel || el.parentNode;
+    var siblings = scope.querySelectorAll('.rq-option');
+    for (var i = 0; i < siblings.length; i++) siblings[i].classList.remove('selected');
+    el.classList.add('selected');
+
+    if (key === 'type')      { rq_type      = val; document.getElementById('rqNext0').disabled = false; }
+    if (key === 'age')       { rq_age       = val; document.getElementById('rqNext1').disabled = false; }
+    if (key === 'budget')    { rq_budget    = val; document.getElementById('rqNext2').disabled = false; }
+    if (key === 'condition') { rq_condition = val; document.getElementById('rqNext3').disabled = false; }
+  }
+
+  function rqGoTo(step) {
+    document.getElementById('rqResult').style.display = 'none';
     for (var i = 0; i < 4; i++) {
-      var s = document.getElementById('rqStep' + i);
-      if (s) s.style.display = 'none';
+      document.getElementById('rqStep' + i).style.display = (i === step) ? 'block' : 'none';
       var dot = document.getElementById('rqdot' + i);
-      if (dot) { dot.classList.remove('active'); dot.classList.add('done'); }
+      dot.className = 'rq-dot' + (i < step ? ' done' : '') + (i === step ? ' active' : '');
+    }
+
+    var isVehicle    = (rq_type === 'car' || rq_type === 'bike' || rq_type === 'commercial');
+    var isCommercial = (rq_type === 'commercial');
+    var isHealthLike = !isVehicle;
+
+    if (step === 1) {
+      // Reset age when entering step 1
+      rq_age = '';
+      document.getElementById('rqNext1').disabled = true;
+      var allOpts1 = document.getElementById('rqStep1').querySelectorAll('.rq-option');
+      for (var a = 0; a < allOpts1.length; a++) allOpts1[a].classList.remove('selected');
+      // Show correct sub-panel: vehicle age vs person age
+      document.getElementById('rqStep1Person').style.display  = isHealthLike ? 'block' : 'none';
+      document.getElementById('rqStep1Vehicle').style.display = isVehicle    ? 'block' : 'none';
+    }
+
+    if (step === 2) {
+      // Reset budget when entering step 2
+      rq_budget = '';
+      document.getElementById('rqNext2').disabled = true;
+      var allOpts2 = document.getElementById('rqStep2').querySelectorAll('.rq-option');
+      for (var b = 0; b < allOpts2.length; b++) allOpts2[b].classList.remove('selected');
+      // Show correct sub-panel: yearly budget vs monthly budget
+      document.getElementById('rqStep2Person').style.display  = isHealthLike ? 'block' : 'none';
+      document.getElementById('rqStep2Vehicle').style.display = isVehicle    ? 'block' : 'none';
+    }
+
+    if (step === 3) {
+      // Reset condition answer when entering step 3
+      rq_condition = '';
+      document.getElementById('rqNext3').disabled = true;
+      // Clear all selections in step 3
+      var allOpts3 = document.getElementById('rqStep3').querySelectorAll('.rq-option');
+      for (var c = 0; c < allOpts3.length; c++) allOpts3[c].classList.remove('selected');
+      // Show correct sub-panel based on insurance type
+      document.getElementById('rqStep3Health').style.display     = isHealthLike && !isCommercial ? 'block' : 'none';
+      document.getElementById('rqStep3Vehicle').style.display    = (rq_type === 'car' || rq_type === 'bike') ? 'block' : 'none';
+      document.getElementById('rqStep3Commercial').style.display = isCommercial ? 'block' : 'none';
+    }
+
+    document.getElementById('rqStepLabel').textContent = 'Step ' + (step + 1) + ' of 4';
+    document.getElementById('rqProgress').style.width = ((step + 1) * 25) + '%';
+    document.querySelector('.recommender-quiz').scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+
+  function rqShowResult() {
+    if (!rq_type)      { rqGoTo(0); return; }
+    if (!rq_age)       { rqGoTo(1); return; }
+    if (!rq_budget)    { rqGoTo(2); return; }
+    if (!rq_condition) { rqGoTo(3); return; }
+
+    for (var i = 0; i < 4; i++) {
+      document.getElementById('rqStep' + i).style.display = 'none';
+      var dot = document.getElementById('rqdot' + i);
+      dot.className = 'rq-dot done';
     }
     document.getElementById('rqProgress').style.width = '100%';
     document.getElementById('rqStepLabel').textContent = 'Your Results';
 
-    var type = rqAnswers.type || 'health';
-    var plansKey = typeMap[type] || 'health';
-    var plans = PLANS[plansKey] || PLANS.health;
+    var plans = rq_plans[rq_type];
+    var label = rq_labels[rq_type] || rq_type;
+
+    if (!plans) { rqGoTo(0); return; } // safety: go back to step 1 if type is somehow invalid
+
     var html = '';
-    plans.forEach(function(p) {
-      html += '<div class="rq-rec-card' + (p.top ? ' top-pick' : '') + '">' +
-        '<div class="rq-rec-icon">' + p.icon + '</div>' +
-        '<div class="rq-rec-info">' +
-          '<div class="rq-rec-name">' + p.name + '</div>' +
-          '<div class="rq-rec-desc">' + p.desc + '</div>' +
-        '</div>' +
-        '<div class="rq-rec-premium">' +
-          '<div class="rq-rec-price">' + p.price + '</div>' +
-          '<div class="rq-rec-freq">' + p.freq + '</div>' +
-        '</div>' +
-      '</div>';
-    });
+    for (var p = 0; p < plans.length; p++) {
+      var pl = plans[p];
+      html += '<div class="rq-rec-card' + (pl.top ? ' top-pick' : '') + '" style="cursor:pointer;" onclick="openQuoteFlow(\'' + rq_type + '\')">'
+            +   '<div class="rq-rec-icon">' + pl.icon + '</div>'
+            +   '<div class="rq-rec-info"><div class="rq-rec-name">' + pl.name + '</div><div class="rq-rec-desc">' + pl.desc + '</div></div>'
+            +   '<div class="rq-rec-premium"><div class="rq-rec-price">' + pl.price + '</div><div class="rq-rec-freq">estimated · ' + pl.freq + '</div></div>'
+            + '</div>';
+    }
     document.getElementById('rqRecCards').innerHTML = html;
+    var isVeh = (rq_type === 'car' || rq_type === 'bike' || rq_type === 'commercial');
+    var ageLabel  = isVeh ? 'Vehicle Age: ' + rq_age + ' yrs' : 'Age: ' + rq_age;
+    var budgLabel = isVeh ? '₹' + rq_budget + '/yr' : '₹' + rq_budget + '/mo';
+    document.getElementById('rqResultSub').textContent = 'Top picks for ' + label + ' · ' + ageLabel + ' · Budget ' + budgLabel;
+    document.getElementById('rqWaBtn').href = 'https://wa.me/919068541300?text=' + encodeURIComponent('Hi, I need ' + label + ' insurance. ' + ageLabel + ', Budget: ' + budgLabel + '. Please share a quote.');
 
-    var ageLabel = rqAnswers.age ? ' for age ' + rqAnswers.age : '';
-    var budgetLabel = rqAnswers.budget ? ', budget ₹' + rqAnswers.budget + '/mo' : '';
-    document.getElementById('rqResultSub').textContent =
-      'Top picks for ' + (type.charAt(0).toUpperCase() + type.slice(1)) + ' Insurance' + ageLabel + budgetLabel + ':';
+    var res = document.getElementById('rqResult');
+    res.style.display = 'block';
+    res.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
 
-    var waText = encodeURIComponent('Hello, I completed the plan recommender. I need ' + type + ' insurance' + ageLabel + budgetLabel + '. Please share an exact quote.');
-    document.getElementById('rqWaBtn').href = 'https://wa.me/919068541300?text=' + waText;
-
-    document.getElementById('rqResult').style.display = 'block';
-  };
-
-  window.rqRestart = function() {
-    rqAnswers = { type: null, age: null, budget: null, health: null };
+  function rqRestart() {
+    rq_type = ''; rq_age = ''; rq_budget = ''; rq_condition = '';
+    var opts = document.querySelectorAll('.rq-option');
+    for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
+    var btns = ['rqNext0','rqNext1','rqNext2','rqNext3'];
+    for (var j = 0; j < btns.length; j++) document.getElementById(btns[j]).disabled = true;
+    // Reset sub-panels to defaults (person panels visible, vehicle panels hidden)
+    document.getElementById('rqStep1Person').style.display  = 'block';
+    document.getElementById('rqStep1Vehicle').style.display = 'none';
+    document.getElementById('rqStep2Person').style.display  = 'block';
+    document.getElementById('rqStep2Vehicle').style.display = 'none';
+    document.getElementById('rqStep3Health').style.display     = 'none';
+    document.getElementById('rqStep3Vehicle').style.display    = 'none';
+    document.getElementById('rqStep3Commercial').style.display = 'none';
     rqGoTo(0);
-    document.querySelectorAll('.rq-option').forEach(function(o){ o.classList.remove('selected'); });
-    ['rqNext0','rqNext1','rqNext2','rqNext3'].forEach(function(id){
-      var b = document.getElementById(id);
-      if (b) b.disabled = true;
-    });
-  };
-})();
+  }
 </script>
 
 <!-- ══════════════════════════════════════════════
@@ -5713,157 +6616,180 @@ function handleRenewalSubmit(e) {
   var form = document.getElementById('renewalForm');
   var successEl = document.getElementById('renewal-success');
   var submitBtn = form.querySelector('.renewal-submit-btn');
-
   submitBtn.textContent = 'Submitting...';
   submitBtn.disabled = true;
-
   var formData = new FormData(form);
-
-  fetch(form.action, {
-    method: 'POST',
-    body: formData,
-    headers: { 'Accept': 'application/json' }
-  })
+  fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } })
   .then(function(response) {
-    if (response.ok) {
-      form.style.display = 'none';
-      successEl.style.display = 'block';
-    } else {
-      submitBtn.textContent = '🔔 Set My Free Reminder';
-      submitBtn.disabled = false;
-      alert('Something went wrong. Please call us at +91 90685 41300.');
-    }
+    if (response.ok) { form.style.display = 'none'; successEl.style.display = 'block'; }
+    else { submitBtn.textContent = '🔔 Set My Free Reminder'; submitBtn.disabled = false; alert('Something went wrong. Please call us at +91 90685 41300.'); }
   })
-  .catch(function() {
-    submitBtn.textContent = '🔔 Set My Free Reminder';
-    submitBtn.disabled = false;
-    // Graceful fallback — still show success so user isn't stuck
-    form.style.display = 'none';
-    successEl.style.display = 'block';
-  });
+  .catch(function() { submitBtn.textContent = '🔔 Set My Free Reminder'; submitBtn.disabled = false; form.style.display = 'none'; successEl.style.display = 'block'; });
 }
 </script>
 <script>
-// ══════════════════════════════════════════════
-// LANGUAGE SWITCHER — English / Hindi / Punjabi
-// ══════════════════════════════════════════════
-(function() {
-  var TRANSLATIONS = {
-    en: {
-      nav_about:    'About',
-      nav_compare:  'Compare Plans',
-      nav_services: 'Services',
-      nav_claim:    '🛡️ Claim Help',
-      nav_renewal:  '🔔 Renewal',
-      nav_reviews:  'Reviews',
-      nav_contact:  'Contact',
-      nav_cta:      'Get Free Quote',
+// ══════════════════════════════════════════════════════════════════════
+// PREMIUM INDEX + FULL-SITE LANGUAGE SYSTEM — EN / हिं / ਪੰਜ
+// ══════════════════════════════════════════════════════════════════════
+var piActiveType = 'health';
+var PI_DATA = {
+  health:{ price:'₹499/mo', facts:[{label:'Cover',val:'Up to ₹1 Crore'},{label:'Hospitals',val:'10,000+ Cashless'},{label:'CSR',val:'98.5% Star Health'},{label:'Tax Benefit',val:'Sec 80D ₹25,000'},{label:'Waiting',val:'0 days (some plans)'}] },
+  car:{ price:'₹2,199/yr', facts:[{label:'Cover',val:'Comprehensive + TP'},{label:'Garages',val:'5,000+ Network'},{label:'Zero Dep',val:'Available'},{label:'NCB',val:'Up to 50%'},{label:'Claim',val:'Spot settlement'}] },
+  bike:{ price:'₹749/yr', facts:[{label:'Cover',val:'Comprehensive + TP'},{label:'Cashless',val:'4,000+ Garages'},{label:'Own Damage',val:'Full Coverage'},{label:'PA Cover',val:'₹15 Lakh incl.'},{label:'Renew',val:'In 5 Minutes'}] },
+  life:{ price:'₹750/mo', facts:[{label:'Cover',val:'Up to ₹5 Crore'},{label:'CSR',val:'99.51% Max Life'},{label:'Tax',val:'Sec 80C ₹1.5L'},{label:'CI Rider',val:'Available'},{label:'Term',val:'10–40 years'}] },
+  family:{ price:'₹999/mo', facts:[{label:'Cover',val:'Entire Family'},{label:'Sum Insured',val:'Up to ₹1 Crore'},{label:'Restore',val:'Benefit included'},{label:'Maternity',val:'Available'},{label:'Members',val:'Up to 6 included'}] },
+  commercial:{ price:'₹4,999/yr', facts:[{label:'Cover',val:'All vehicle types'},{label:'Fleet',val:'Discount available'},{label:'TP Liability',val:'Unlimited'},{label:'Transit',val:'Goods cover'},{label:'Driver PA',val:'Included'}] }
+};
+
+function piSetActive(btn,type){ piActiveType=type; document.querySelectorAll('.pi-cat').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); piRenderFacts(type); }
+function piRenderFacts(type){
+  var d=PI_DATA[type]||PI_DATA.health;
+  var priceEl=document.getElementById('piLivePrice');
+  if(priceEl) priceEl.textContent=d.price;
+  var factsEl=document.getElementById('piFactsRow');
+  if(factsEl){ var html=d.facts.map(function(f,i){ return '<div class="pi-fact"><span>'+f.label+':</span><strong>'+f.val+'</strong></div>'+(i<d.facts.length-1?'<span class="pi-fact-sep">•</span>':''); }).join(''); factsEl.innerHTML=html; }
+}
+document.addEventListener('DOMContentLoaded',function(){ piRenderFacts('health'); });
+
+// ── FULL LANGUAGE SYSTEM ─────────────────────────────────────────────
+(function(){
+  var T3={
+    en:{
+      nav_about:'About',nav_compare:'Compare Plans',nav_services:'Services',nav_claim:'🛡️ Claim Help',nav_renewal:'🔔 Renewal',nav_reviews:'Reviews',nav_contact:'Contact',nav_cta:'Get Free Quote',
+      pi_health:'🏥 Health',pi_car:'🚗 Car',pi_bike:'🏍️ Bike',pi_life:'🛡️ Life',pi_family:'👨‍👩‍👧 Family',pi_commercial:'🚛 Commercial',pi_starts:'Starts from',
+      pi_get_quote:'✦ Get Quote',pi_check_gaps:'🔍 Check Coverage Gaps',pi_compare:'📊 Compare Plans',pi_renew:'🔔 Renew Policy',pi_call:'📞 Call Expert',
     },
-    hi: {
-      nav_about:    'हमारे बारे में',
-      nav_compare:  'प्लान तुलना',
-      nav_services: 'सेवाएँ',
-      nav_claim:    '🛡️ क्लेम सहायता',
-      nav_renewal:  '🔔 नवीनीकरण',
-      nav_reviews:  'समीक्षाएँ',
-      nav_contact:  'संपर्क करें',
-      nav_cta:      'मुफ़्त कोटेशन पाएँ',
+    hi:{
+      nav_about:'हमारे बारे में',nav_compare:'प्लान तुलना',nav_services:'सेवाएँ',nav_claim:'🛡️ क्लेम सहायता',nav_renewal:'🔔 नवीनीकरण',nav_reviews:'समीक्षाएँ',nav_contact:'संपर्क करें',nav_cta:'मुफ़्त कोटेशन पाएँ',
+      pi_health:'🏥 स्वास्थ्य',pi_car:'🚗 कार',pi_bike:'🏍️ बाइक',pi_life:'🛡️ जीवन',pi_family:'👨‍👩‍👧 परिवार',pi_commercial:'🚛 व्यावसायिक',pi_starts:'शुरू होता है',
+      pi_get_quote:'✦ कोटेशन पाएं',pi_check_gaps:'🔍 कवरेज गैप जांचें',pi_compare:'📊 प्लान तुलना',pi_renew:'🔔 नवीनीकरण',pi_call:'📞 विशेषज्ञ से बात',
     },
-    pa: {
-      nav_about:    'ਸਾਡੇ ਬਾਰੇ',
-      nav_compare:  'ਯੋਜਨਾ ਤੁਲਨਾ',
-      nav_services: 'ਸੇਵਾਵਾਂ',
-      nav_claim:    '🛡️ ਕਲੇਮ ਸਹਾਇਤਾ',
-      nav_renewal:  '🔔 ਨਵੀਨੀਕਰਨ',
-      nav_reviews:  'ਸਮੀਖਿਆਵਾਂ',
-      nav_contact:  'ਸੰਪਰਕ ਕਰੋ',
-      nav_cta:      'ਮੁਫ਼ਤ ਕੋਟੇਸ਼ਨ ਲਓ',
+    pa:{
+      nav_about:'ਸਾਡੇ ਬਾਰੇ',nav_compare:'ਯੋਜਨਾ ਤੁਲਨਾ',nav_services:'ਸੇਵਾਵਾਂ',nav_claim:'🛡️ ਕਲੇਮ ਸਹਾਇਤਾ',nav_renewal:'🔔 ਨਵੀਨੀਕਰਨ',nav_reviews:'ਸਮੀਖਿਆਵਾਂ',nav_contact:'ਸੰਪਰਕ ਕਰੋ',nav_cta:'ਮੁਫ਼ਤ ਕੋਟੇਸ਼ਨ ਲਓ',
+      pi_health:'🏥 ਸਿਹਤ',pi_car:'🚗 ਕਾਰ',pi_bike:'🏍️ ਬਾਈਕ',pi_life:'🛡️ ਜੀਵਨ',pi_family:'👨‍👩‍👧 ਪਰਿਵਾਰ',pi_commercial:'🚛 ਵਪਾਰਕ',pi_starts:'ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ',
+      pi_get_quote:'✦ ਕੋਟੇਸ਼ਨ ਪ੍ਰਾਪਤ ਕਰੋ',pi_check_gaps:'🔍 ਕਵਰੇਜ ਗੈਪ ਜਾਂਚੋ',pi_compare:'📊 ਯੋਜਨਾਵਾਂ ਤੁਲਨਾ',pi_renew:'🔔 ਨਵੀਨੀਕਰਨ',pi_call:'📞 ਮਾਹਰ ਨਾਲ ਗੱਲ',
     }
   };
+  var curLang='en';
 
-  var currentLang = 'en';
-
-  window.setLang = function(lang) {
-    if (!TRANSLATIONS[lang] || lang === currentLang) return;
-    currentLang = lang;
-
-    // Animate out
-    document.body.classList.add('lang-switching');
-
-    setTimeout(function() {
-      // Update all tagged elements
-      document.querySelectorAll('[data-lang-content]').forEach(function(el) {
-        var key = el.getAttribute('data-lang-content');
-        if (TRANSLATIONS[lang][key]) {
-          el.textContent = TRANSLATIONS[lang][key];
-        }
-      });
-
-      // Update desktop lang buttons
-      document.querySelectorAll('.lang-btn').forEach(function(btn) {
-        btn.classList.remove('active');
-      });
-      var activeBtn = document.getElementById('lang' + lang.charAt(0).toUpperCase() + lang.slice(1));
-      if (activeBtn) activeBtn.classList.add('active');
-
-      // Update mobile lang buttons
-      document.querySelectorAll('.lang-btn-mobile').forEach(function(btn) {
-        btn.classList.remove('active');
-        var btnLang = btn.onclick ? null : null;
-        var onclickStr = btn.getAttribute('onclick') || '';
-        if (onclickStr.indexOf("'" + lang + "'") !== -1) {
-          btn.classList.add('active');
-        }
-      });
-
-      // Set HTML lang attribute
-      document.documentElement.lang = lang === 'pa' ? 'pa' : (lang === 'hi' ? 'hi' : 'en');
-
-      // Animate back in
-      document.body.classList.remove('lang-switching');
-    }, 200);
+  // Hero translations (section-specific content)
+  var HERO={
+    en:{ badge:'🎯 Save up to 40% on Your Premium Today', h1:'Protect <em>Today,</em><br>Secure Tomorrow', sub:"Chandigarh's most trusted insurance advisor. Compare Car, Bike, Life, Commercial & Family Health Plans — with 500+ happy clients across India.", cats:['Car Insurance','Bike Insurance','Health Insurance','Life Insurance','Family Floater','Commercial'], btn_quote:'Get Instant Quote', btn_wa:'Talk on WhatsApp', btn_gaps:'🔍 Check My Coverage Gaps' },
+    hi:{ badge:'🎯 आज अपने प्रीमियम पर 40% तक बचाएं', h1:'करें रक्षा <em>आज,</em><br>सुरक्षित करें कल', sub:'चंडीगढ़ के सबसे विश्वसनीय बीमा सलाहकार। कार, बाइक, जीवन, वाणिज्यिक और परिवार स्वास्थ्य योजनाओं की तुलना करें।', cats:['कार बीमा','बाइक बीमा','स्वास्थ्य बीमा','जीवन बीमा','फैमिली फ्लोटर','व्यावसायिक'], btn_quote:'तुरंत कोटेशन पाएं', btn_wa:'WhatsApp पर बात करें', btn_gaps:'🔍 अपने कवरेज गैप जांचें' },
+    pa:{ badge:'🎯 ਅੱਜ ਆਪਣੇ ਪ੍ਰੀਮੀਅਮ ਤੇ 40% ਤੱਕ ਬਚਾਓ', h1:'ਸੁਰੱਖਿਆ ਕਰੋ <em>ਅੱਜ,</em><br>ਕੱਲ੍ਹ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰੋ', sub:'ਚੰਡੀਗੜ੍ਹ ਦੇ ਸਭ ਤੋਂ ਭਰੋਸੇਮੰਦ ਬੀਮਾ ਸਲਾਹਕਾਰ। ਕਾਰ, ਬਾਈਕ, ਜੀਵਨ, ਵਪਾਰਕ ਅਤੇ ਪਰਿਵਾਰਕ ਸਿਹਤ ਯੋਜਨਾਵਾਂ ਦੀ ਤੁਲਨਾ ਕਰੋ।', cats:['ਕਾਰ ਬੀਮਾ','ਬਾਈਕ ਬੀਮਾ','ਸਿਹਤ ਬੀਮਾ','ਜੀਵਨ ਬੀਮਾ','ਪਰਿਵਾਰ ਫਲੋਟਰ','ਵਪਾਰਕ'], btn_quote:'ਤੁਰੰਤ ਕੋਟੇਸ਼ਨ ਪ੍ਰਾਪਤ ਕਰੋ', btn_wa:'WhatsApp ਤੇ ਗੱਲ ਕਰੋ', btn_gaps:'🔍 ਕਵਰੇਜ ਗੈਪ ਜਾਂਚੋ' }
   };
+
+  // Section titles
+  var SECTIONS={
+    en:{ about:['About Us','Meet <em>Taman</em><br>Aggarwal'], services:['What We Offer','Our <em>Services</em>'], why:['Why Choose Us','The <em>Taman Care</em><br>Advantage'], claim:['Claims Process','Fast & <em>Hassle-Free</em><br>Claims'], renewal:['Policy Renewal','Never Miss a <em>Renewal</em>'], compare:['Compare & Save','Find Your <em>Best</em> Plan'], testimonials:['Client Reviews','What Our <em>Clients</em> Say'], contact:['Get In Touch',"Let's <em>Connect</em>"] },
+    hi:{ about:['हमारे बारे में','मिलिए <em>तमन</em><br>अग्रवाल से'], services:['हम क्या ऑफर करते हैं','हमारी <em>सेवाएं</em>'], why:['हमें क्यों चुनें','<em>तमन केयर</em><br>लाभ'], claim:['क्लेम प्रक्रिया','तेज़ और <em>आसान</em><br>क्लेम'], renewal:['पॉलिसी नवीनीकरण','कभी न चूकें <em>नवीनीकरण</em>'], compare:['तुलना करें & बचाएं','खोजें <em>सर्वश्रेष्ठ</em> प्लान'], testimonials:['ग्राहक समीक्षाएं','हमारे <em>ग्राहक</em> क्या कहते हैं'], contact:['संपर्क करें','आइए <em>जुड़ें</em>'] },
+    pa:{ about:['ਸਾਡੇ ਬਾਰੇ','ਮਿਲੋ <em>ਤਮਨ</em><br>ਅਗਰਵਾਲ ਨਾਲ'], services:['ਅਸੀਂ ਕੀ ਪੇਸ਼ ਕਰਦੇ ਹਾਂ','ਸਾਡੀਆਂ <em>ਸੇਵਾਵਾਂ</em>'], why:['ਸਾਨੂੰ ਕਿਉਂ ਚੁਣੋ','<em>ਤਮਨ ਕੇਅਰ</em><br>ਫ਼ਾਇਦਾ'], claim:['ਕਲੇਮ ਪ੍ਰਕਿਰਿਆ','ਤੇਜ਼ ਅਤੇ <em>ਆਸਾਨ</em><br>ਕਲੇਮ'], renewal:['ਪਾਲਿਸੀ ਨਵੀਨੀਕਰਨ','ਕਦੇ ਨਾ ਖੁੰਝਾਓ <em>ਨਵੀਨੀਕਰਨ</em>'], compare:['ਤੁਲਨਾ ਕਰੋ & ਬਚਾਓ','ਲੱਭੋ <em>ਸਭ ਤੋਂ ਵਧੀਆ</em> ਪਲਾਨ'], testimonials:['ਗਾਹਕ ਸਮੀਖਿਆਵਾਂ','ਸਾਡੇ <em>ਗਾਹਕ</em> ਕੀ ਕਹਿੰਦੇ ਹਨ'], contact:['ਸੰਪਰਕ ਕਰੋ','ਆਓ <em>ਜੁੜੀਏ</em>'] }
+  };
+
+  var SEC_IDS=['about','services','why','claim-support','renewal-reminder','compare','testimonials','contact'];
+  var SEC_KEYS=['about','services','why','claim','renewal','compare','testimonials','contact'];
+
+  window.setLang=function(lang){
+    if(!T3[lang]||lang===curLang) return;
+    curLang=lang;
+    // Persist language choice
+    try { localStorage.setItem('tc_lang', lang); } catch(e) {}
+    document.body.classList.add('lang-switching');
+    setTimeout(function(){
+      var T=T3[lang]; var H=HERO[lang]||HERO.en; var S=SECTIONS[lang]||SECTIONS.en;
+
+      // 1. data-lang-content elements
+      document.querySelectorAll('[data-lang-content]').forEach(function(el){
+        var k=el.getAttribute('data-lang-content');
+        if(T[k]!==undefined) el.textContent=T[k];
+      });
+
+      // 2. Hero badge
+      var saveBadge=document.querySelector('.save-badge');
+      if(saveBadge) saveBadge.textContent=H.badge;
+
+      // 3. Hero headline
+      var hl=document.querySelector('.hero-headline');
+      if(hl) hl.innerHTML=H.h1;
+
+      // 4. Hero sub
+      var hs=document.querySelector('.hero-sub');
+      if(hs) hs.textContent=H.sub;
+
+      // 5. Hero category cards
+      var catIcons=['🚗','🏍️','🏥','🛡️','👨‍👩‍👧','🚛'];
+      document.querySelectorAll('.hero-cat-card').forEach(function(c,i){
+        if(H.cats[i]){ c.innerHTML='<span class="hero-cat-icon">'+catIcons[i]+'</span> '+H.cats[i]; }
+      });
+
+      // 6. Hero buttons
+      var btnIQ=document.querySelector('.btn-instant-quote');
+      if(btnIQ) btnIQ.innerHTML='<span class="btn-iq-icon">✦</span> '+H.btn_quote+' <span class="btn-iq-arrow">→</span>';
+      var btnGaps=document.querySelector('.hero-btns .btn-outline');
+      if(btnGaps) btnGaps.textContent=H.btn_gaps;
+      document.querySelectorAll('.hero-btns .btn-whatsapp').forEach(function(b){
+        var svg=b.querySelector('svg'); b.innerHTML=''; if(svg)b.appendChild(svg); b.appendChild(document.createTextNode(' '+H.btn_wa));
+      });
+
+      // 7. Sections — tag + title
+      SEC_IDS.forEach(function(secId,idx){
+        var sec=document.getElementById(secId); if(!sec)return;
+        var sKey=SEC_KEYS[idx]; var sData=S[sKey]; if(!sData)return;
+        var tag=sec.querySelector('.section-tag'); var title=sec.querySelector('.section-title');
+        if(tag) tag.textContent=sData[0];
+        if(title) title.innerHTML=sData[1];
+      });
+
+      // 8. Sticky mobile CTA
+      var sc=document.querySelector('.sticky-btn-call'); if(sc) sc.innerHTML='<span class="sticky-btn-icon">📞</span> '+(lang==='hi'?'अभी कॉल':lang==='pa'?'ਹੁਣੇ ਕਾਲ':'Call Now');
+      var sq=document.querySelector('.sticky-btn-quote'); if(sq) sq.innerHTML='<span class="sticky-btn-icon">✦</span> '+(lang==='hi'?'कोटेशन':lang==='pa'?'ਕੋਟੇਸ਼ਨ':'Get Quote');
+
+      // 9. Lang button active state
+      document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');});
+      var ab=document.getElementById('lang'+lang.charAt(0).toUpperCase()+lang.slice(1));
+      if(ab) ab.classList.add('active');
+      document.querySelectorAll('.lang-btn-mobile').forEach(function(b){
+        b.classList.remove('active');
+        if((b.getAttribute('onclick')||'').indexOf("'"+lang+"'")!==-1) b.classList.add('active');
+      });
+
+      // 10. HTML lang
+      document.documentElement.lang=lang==='pa'?'pa':(lang==='hi'?'hi':'en');
+
+      document.body.classList.remove('lang-switching');
+    },200);
+  };
+
+  // Restore saved language on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
+      var saved = localStorage.getItem('tc_lang');
+      if (saved && T3[saved] && saved !== 'en') window.setLang(saved);
+    } catch(e) {}
+  });
 })();
 
-// ══════════════════════════════════════════════
-// BUG FIXES
-// ══════════════════════════════════════════════
-
-// Fix 1: Mobile menu lang buttons active state sync
-document.querySelectorAll('.lang-btn-mobile').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.lang-btn-mobile').forEach(function(b) { b.classList.remove('active'); });
+// Mobile menu lang sync
+document.querySelectorAll('.lang-btn-mobile').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.lang-btn-mobile').forEach(function(b){b.classList.remove('active');});
     btn.classList.add('active');
-    // also close mobile menu after lang change
     document.getElementById('mobileMenu').classList.remove('open');
   });
 });
 
-// Fix 2: Ensure hamburger closes menu on outside click
-document.addEventListener('click', function(e) {
-  var menu = document.getElementById('mobileMenu');
-  var hamburger = document.getElementById('hamburger');
-  if (menu && menu.classList.contains('open')) {
-    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+// Outside click closes mobile menu
+document.addEventListener('click',function(e){
+  var menu=document.getElementById('mobileMenu');
+  var hamburger=document.getElementById('hamburger');
+  if(menu&&menu.classList.contains('open')){
+    if(!menu.contains(e.target)&&!hamburger.contains(e.target)){
       menu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded','false');
+      hamburger.setAttribute('aria-label','Open navigation menu');
     }
   }
 });
-
-// Fix 3: Navbar responsive — hide lang switcher label on very small screens
-(function() {
-  function checkWidth() {
-    var sw = document.getElementById('langSwitcher');
-    if (!sw) return;
-    if (window.innerWidth < 380) {
-      sw.style.display = 'none';
-    } else {
-      sw.style.display = '';
-    }
-  }
-  checkWidth();
-  window.addEventListener('resize', checkWidth);
-})();
 </script>
 </body>
 </html>
