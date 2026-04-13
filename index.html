@@ -6736,8 +6736,10 @@ function piRenderFacts(type){
 }
 document.addEventListener('DOMContentLoaded',function(){ piRenderFacts('health'); });
 
-// ── FULL LANGUAGE SYSTEM ─────────────────────────────────────────────
+// ── FULL LANGUAGE SYSTEM (ALL SECTIONS) ──────────────────────────────
 (function(){
+
+  // ── NAV + PI BAR TOKENS ──────────────────────────────────────────────
   var T3={
     en:{
       nav_about:'About',nav_compare:'Compare Plans',nav_services:'Services',nav_claim:'🛡️ Claim Help',nav_renewal:'🔔 Renewal',nav_reviews:'Reviews',nav_contact:'Contact',nav_cta:'Get Free Quote',
@@ -6755,51 +6757,173 @@ document.addEventListener('DOMContentLoaded',function(){ piRenderFacts('health')
       pi_get_quote:'✦ ਕੋਟੇਸ਼ਨ ਪ੍ਰਾਪਤ ਕਰੋ',pi_check_gaps:'🔍 ਕਵਰੇਜ ਗੈਪ ਜਾਂਚੋ',pi_compare:'📊 ਯੋਜਨਾਵਾਂ ਤੁਲਨਾ',pi_renew:'🔔 ਨਵੀਨੀਕਰਨ',pi_call:'📞 ਮਾਹਰ ਨਾਲ ਗੱਲ',
     }
   };
-  var curLang='en';
 
-  // Hero translations (section-specific content)
+  // ── HERO ──────────────────────────────────────────────────────────────
   var HERO={
     en:{ badge:'🎯 Save up to 40% on Your Premium Today', h1:'Protect <em>Today,</em><br>Secure Tomorrow', sub:"Chandigarh's most trusted insurance advisor. Compare Car, Bike, Life, Commercial & Family Health Plans — with 500+ happy clients across India.", cats:['Car Insurance','Bike Insurance','Health Insurance','Life Insurance','Family Floater','Commercial'], btn_quote:'Get Instant Quote', btn_wa:'Talk on WhatsApp', btn_gaps:'🔍 Check My Coverage Gaps' },
     hi:{ badge:'🎯 आज अपने प्रीमियम पर 40% तक बचाएं', h1:'करें रक्षा <em>आज,</em><br>सुरक्षित करें कल', sub:'चंडीगढ़ के सबसे विश्वसनीय बीमा सलाहकार। कार, बाइक, जीवन, वाणिज्यिक और परिवार स्वास्थ्य योजनाओं की तुलना करें।', cats:['कार बीमा','बाइक बीमा','स्वास्थ्य बीमा','जीवन बीमा','फैमिली फ्लोटर','व्यावसायिक'], btn_quote:'तुरंत कोटेशन पाएं', btn_wa:'WhatsApp पर बात करें', btn_gaps:'🔍 अपने कवरेज गैप जांचें' },
     pa:{ badge:'🎯 ਅੱਜ ਆਪਣੇ ਪ੍ਰੀਮੀਅਮ ਤੇ 40% ਤੱਕ ਬਚਾਓ', h1:'ਸੁਰੱਖਿਆ ਕਰੋ <em>ਅੱਜ,</em><br>ਕੱਲ੍ਹ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰੋ', sub:'ਚੰਡੀਗੜ੍ਹ ਦੇ ਸਭ ਤੋਂ ਭਰੋਸੇਮੰਦ ਬੀਮਾ ਸਲਾਹਕਾਰ। ਕਾਰ, ਬਾਈਕ, ਜੀਵਨ, ਵਪਾਰਕ ਅਤੇ ਪਰਿਵਾਰਕ ਸਿਹਤ ਯੋਜਨਾਵਾਂ ਦੀ ਤੁਲਨਾ ਕਰੋ।', cats:['ਕਾਰ ਬੀਮਾ','ਬਾਈਕ ਬੀਮਾ','ਸਿਹਤ ਬੀਮਾ','ਜੀਵਨ ਬੀਮਾ','ਪਰਿਵਾਰ ਫਲੋਟਰ','ਵਪਾਰਕ'], btn_quote:'ਤੁਰੰਤ ਕੋਟੇਸ਼ਨ ਪ੍ਰਾਪਤ ਕਰੋ', btn_wa:'WhatsApp ਤੇ ਗੱਲ ਕਰੋ', btn_gaps:'🔍 ਕਵਰੇਜ ਗੈਪ ਜਾਂਚੋ' }
   };
 
-  // Section titles
+  // ── TRUST BADGES (hero strip) ─────────────────────────────────────────
+  var TRUST={
+    en:['✅ <strong>500+</strong> Clients Served','⚡ Compare Plans <strong>Instantly</strong>','🛡️ Fast <strong>Claim Support</strong>'],
+    hi:['✅ <strong>500+</strong> ग्राहक','⚡ प्लान तुरंत <strong>तुलना करें</strong>','🛡️ तेज़ <strong>क्लेम सहायता</strong>'],
+    pa:['✅ <strong>500+</strong> ਗਾਹਕ','⚡ ਪਲਾਨ ਤੁਰੰਤ <strong>ਤੁਲਨਾ</strong>','🛡️ ਤੇਜ਼ <strong>ਕਲੇਮ ਸਹਾਇਤਾ</strong>']
+  };
+
+  // ── SECTION TITLES ───────────────────────────────────────────────────
   var SECTIONS={
     en:{ about:['About Us','Meet <em>Taman</em><br>Aggarwal'], services:['What We Offer','Our <em>Services</em>'], why:['Why Choose Us','The <em>Taman Care</em><br>Advantage'], claim:['Claims Process','Fast & <em>Hassle-Free</em><br>Claims'], renewal:['Policy Renewal','Never Miss a <em>Renewal</em>'], compare:['Compare & Save','Find Your <em>Best</em> Plan'], testimonials:['Client Reviews','What Our <em>Clients</em> Say'], contact:['Get In Touch',"Let's <em>Connect</em>"] },
     hi:{ about:['हमारे बारे में','मिलिए <em>तमन</em><br>अग्रवाल से'], services:['हम क्या ऑफर करते हैं','हमारी <em>सेवाएं</em>'], why:['हमें क्यों चुनें','<em>तमन केयर</em><br>लाभ'], claim:['क्लेम प्रक्रिया','तेज़ और <em>आसान</em><br>क्लेम'], renewal:['पॉलिसी नवीनीकरण','कभी न चूकें <em>नवीनीकरण</em>'], compare:['तुलना करें & बचाएं','खोजें <em>सर्वश्रेष्ठ</em> प्लान'], testimonials:['ग्राहक समीक्षाएं','हमारे <em>ग्राहक</em> क्या कहते हैं'], contact:['संपर्क करें','आइए <em>जुड़ें</em>'] },
     pa:{ about:['ਸਾਡੇ ਬਾਰੇ','ਮਿਲੋ <em>ਤਮਨ</em><br>ਅਗਰਵਾਲ ਨਾਲ'], services:['ਅਸੀਂ ਕੀ ਪੇਸ਼ ਕਰਦੇ ਹਾਂ','ਸਾਡੀਆਂ <em>ਸੇਵਾਵਾਂ</em>'], why:['ਸਾਨੂੰ ਕਿਉਂ ਚੁਣੋ','<em>ਤਮਨ ਕੇਅਰ</em><br>ਫ਼ਾਇਦਾ'], claim:['ਕਲੇਮ ਪ੍ਰਕਿਰਿਆ','ਤੇਜ਼ ਅਤੇ <em>ਆਸਾਨ</em><br>ਕਲੇਮ'], renewal:['ਪਾਲਿਸੀ ਨਵੀਨੀਕਰਨ','ਕਦੇ ਨਾ ਖੁੰਝਾਓ <em>ਨਵੀਨੀਕਰਨ</em>'], compare:['ਤੁਲਨਾ ਕਰੋ & ਬਚਾਓ','ਲੱਭੋ <em>ਸਭ ਤੋਂ ਵਧੀਆ</em> ਪਲਾਨ'], testimonials:['ਗਾਹਕ ਸਮੀਖਿਆਵਾਂ','ਸਾਡੇ <em>ਗਾਹਕ</em> ਕੀ ਕਹਿੰਦੇ ਹਨ'], contact:['ਸੰਪਰਕ ਕਰੋ','ਆਓ <em>ਜੁੜੀਏ</em>'] }
   };
 
+  // ── SECTION SUBTITLES ────────────────────────────────────────────────
+  var SUBTITLES={
+    en:{
+      about:"Chandigarh's most trusted independent insurance advisor with deep expertise across all major insurance categories.",
+      services:"Everything you need under one roof — expert advice, instant quotes, hassle-free claims.",
+      why:"We don't just sell policies — we protect lives and livelihoods with genuine care.",
+      claim:"We handle the entire claims process for you, ensuring maximum settlement in minimum time.",
+      renewal:"Never let your coverage lapse. We track all your policies and alert you before renewal dates.",
+      compare:"Use our smart comparison tool to find the plan that fits your budget and needs perfectly.",
+      testimonials:"Real stories from real clients across Chandigarh and Punjab.",
+      contact:"Have questions? Our team is available 7 days a week for free consultations."
+    },
+    hi:{
+      about:"चंडीगढ़ के सबसे विश्वसनीय स्वतंत्र बीमा सलाहकार, सभी प्रमुख बीमा श्रेणियों में गहन विशेषज्ञता के साथ।",
+      services:"एक छत के नीचे सब कुछ — विशेषज्ञ सलाह, तत्काल कोटेशन, परेशानी मुक्त क्लेम।",
+      why:"हम सिर्फ पॉलिसी नहीं बेचते — हम वास्तविक देखभाल के साथ जीवन और आजीविका की रक्षा करते हैं।",
+      claim:"हम आपके लिए पूरी क्लेम प्रक्रिया संभालते हैं, कम से कम समय में अधिकतम निपटान सुनिश्चित करते हैं।",
+      renewal:"अपनी कवरेज को कभी न चूकने दें। हम आपकी सभी पॉलिसियों को ट्रैक करते हैं और नवीनीकरण से पहले अलर्ट करते हैं।",
+      compare:"हमारे स्मार्ट तुलना टूल का उपयोग करें और अपने बजट और जरूरतों के अनुकूल योजना खोजें।",
+      testimonials:"चंडीगढ़ और पंजाब के असली ग्राहकों की असली कहानियां।",
+      contact:"कोई सवाल है? हमारी टीम मुफ्त परामर्श के लिए सप्ताह में 7 दिन उपलब्ध है।"
+    },
+    pa:{
+      about:"ਚੰਡੀਗੜ੍ਹ ਦੇ ਸਭ ਤੋਂ ਭਰੋਸੇਮੰਦ ਸੁਤੰਤਰ ਬੀਮਾ ਸਲਾਹਕਾਰ, ਸਾਰੀਆਂ ਪ੍ਰਮੁੱਖ ਬੀਮਾ ਸ਼੍ਰੇਣੀਆਂ ਵਿੱਚ ਡੂੰਘੀ ਮੁਹਾਰਤ ਦੇ ਨਾਲ।",
+      services:"ਇੱਕ ਛੱਤ ਹੇਠ ਸਭ ਕੁਝ — ਮਾਹਰ ਸਲਾਹ, ਤੁਰੰਤ ਕੋਟੇਸ਼ਨ, ਝੰਝਟ-ਮੁਕਤ ਕਲੇਮ।",
+      why:"ਅਸੀਂ ਸਿਰਫ਼ ਪਾਲਿਸੀਆਂ ਨਹੀਂ ਵੇਚਦੇ — ਅਸੀਂ ਅਸਲੀ ਦੇਖਭਾਲ ਨਾਲ ਜ਼ਿੰਦਗੀ ਅਤੇ ਰੋਜ਼ੀ-ਰੋਟੀ ਦੀ ਰੱਖਿਆ ਕਰਦੇ ਹਾਂ।",
+      claim:"ਅਸੀਂ ਤੁਹਾਡੇ ਲਈ ਪੂਰੀ ਕਲੇਮ ਪ੍ਰਕਿਰਿਆ ਸੰਭਾਲਦੇ ਹਾਂ, ਘੱਟ ਤੋਂ ਘੱਟ ਸਮੇਂ ਵਿੱਚ ਵੱਧ ਤੋਂ ਵੱਧ ਨਿਪਟਾਰਾ ਯਕੀਨੀ ਕਰਦੇ ਹਾਂ।",
+      renewal:"ਆਪਣੀ ਕਵਰੇਜ ਕਦੇ ਨਾ ਖੁੰਝਾਓ। ਅਸੀਂ ਤੁਹਾਡੀਆਂ ਸਾਰੀਆਂ ਪਾਲਿਸੀਆਂ ਟਰੈਕ ਕਰਦੇ ਹਾਂ ਅਤੇ ਨਵੀਨੀਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਚੇਤਾਵਨੀ ਦਿੰਦੇ ਹਾਂ।",
+      compare:"ਸਾਡੇ ਸਮਾਰਟ ਤੁਲਨਾ ਟੂਲ ਦੀ ਵਰਤੋਂ ਕਰੋ ਅਤੇ ਆਪਣੇ ਬਜਟ ਅਤੇ ਲੋੜਾਂ ਦੇ ਅਨੁਕੂਲ ਯੋਜਨਾ ਲੱਭੋ।",
+      testimonials:"ਚੰਡੀਗੜ੍ਹ ਅਤੇ ਪੰਜਾਬ ਦੇ ਅਸਲੀ ਗਾਹਕਾਂ ਦੀਆਂ ਅਸਲੀ ਕਹਾਣੀਆਂ।",
+      contact:"ਕੋਈ ਸਵਾਲ ਹੈ? ਸਾਡੀ ਟੀਮ ਮੁਫ਼ਤ ਸਲਾਹ ਲਈ ਹਫ਼ਤੇ ਵਿੱਚ 7 ਦਿਨ ਉਪਲਬਧ ਹੈ।"
+    }
+  };
+
+  // ── ABOUT SECTION BODY TEXT ──────────────────────────────────────────
+  var ABOUT={
+    en:{
+      quote:'"Insurance is not about policies — it\'s about peace of mind for your family."',
+      body1:'With over a decade of experience, Taman Aggarwal has helped 500+ families and businesses across Chandigarh and Punjab find the right insurance coverage at the best prices.',
+      body2:'As an independent advisor, I work for YOU — not for any single insurance company. That means unbiased advice, genuine comparison, and claims support when you need it most.',
+      stat1_num:'500+', stat1_lbl:'Happy Clients',
+      stat2_num:'10+',  stat2_lbl:'Years Experience',
+      stat3_num:'15+',  stat3_lbl:'Insurance Partners',
+      stat4_num:'98%',  stat4_lbl:'Claims Settled'
+    },
+    hi:{
+      quote:'"बीमा पॉलिसियों के बारे में नहीं है — यह आपके परिवार के मन की शांति के बारे में है।"',
+      body1:'एक दशक से अधिक अनुभव के साथ, तमन अग्रवाल ने चंडीगढ़ और पंजाब में 500+ परिवारों और व्यवसायों को सर्वोत्तम मूल्य पर सही बीमा कवरेज खोजने में मदद की है।',
+      body2:'एक स्वतंत्र सलाहकार के रूप में, मैं आपके लिए काम करता हूं — किसी एक बीमा कंपनी के लिए नहीं। इसका मतलब है निष्पक्ष सलाह, वास्तविक तुलना और जब आपको सबसे अधिक जरूरत हो क्लेम सहायता।',
+      stat1_num:'500+', stat1_lbl:'खुश ग्राहक',
+      stat2_num:'10+',  stat2_lbl:'वर्षों का अनुभव',
+      stat3_num:'15+',  stat3_lbl:'बीमा साझेदार',
+      stat4_num:'98%',  stat4_lbl:'क्लेम सफलता'
+    },
+    pa:{
+      quote:'"ਬੀਮਾ ਪਾਲਿਸੀਆਂ ਬਾਰੇ ਨਹੀਂ ਹੈ — ਇਹ ਤੁਹਾਡੇ ਪਰਿਵਾਰ ਦੀ ਮਨ ਦੀ ਸ਼ਾਂਤੀ ਬਾਰੇ ਹੈ।"',
+      body1:'ਇੱਕ ਦਹਾਕੇ ਤੋਂ ਵੱਧ ਤਜ਼ਰਬੇ ਨਾਲ, ਤਮਨ ਅਗਰਵਾਲ ਨੇ ਚੰਡੀਗੜ੍ਹ ਅਤੇ ਪੰਜਾਬ ਵਿੱਚ 500+ ਪਰਿਵਾਰਾਂ ਅਤੇ ਕਾਰੋਬਾਰਾਂ ਨੂੰ ਸਭ ਤੋਂ ਵਧੀਆ ਕੀਮਤ ਤੇ ਸਹੀ ਬੀਮਾ ਕਵਰੇਜ ਲੱਭਣ ਵਿੱਚ ਮਦਦ ਕੀਤੀ ਹੈ।',
+      body2:'ਇੱਕ ਸੁਤੰਤਰ ਸਲਾਹਕਾਰ ਵਜੋਂ, ਮੈਂ ਤੁਹਾਡੇ ਲਈ ਕੰਮ ਕਰਦਾ ਹਾਂ — ਕਿਸੇ ਇੱਕ ਬੀਮਾ ਕੰਪਨੀ ਲਈ ਨਹੀਂ। ਇਸਦਾ ਮਤਲਬ ਹੈ ਨਿਰਪੱਖ ਸਲਾਹ, ਅਸਲੀ ਤੁਲਨਾ ਅਤੇ ਜਦੋਂ ਤੁਹਾਨੂੰ ਸਭ ਤੋਂ ਵੱਧ ਲੋੜ ਹੋਵੇ ਕਲੇਮ ਸਹਾਇਤਾ।',
+      stat1_num:'500+', stat1_lbl:'ਖੁਸ਼ ਗਾਹਕ',
+      stat2_num:'10+',  stat2_lbl:'ਸਾਲਾਂ ਦਾ ਤਜ਼ਰਬਾ',
+      stat3_num:'15+',  stat3_lbl:'ਬੀਮਾ ਸਾਂਝੇਦਾਰ',
+      stat4_num:'98%',  stat4_lbl:'ਕਲੇਮ ਸਫਲਤਾ'
+    }
+  };
+
+  // ── WHY CARDS ────────────────────────────────────────────────────────
+  var WHY={
+    en:[
+      {icon:'🎯',title:'Unbiased Advice',text:'We compare plans from 15+ insurers to find you the best value — not the highest commission.'},
+      {icon:'⚡',title:'Fast Claims',text:'98% claims settled successfully. We handle all paperwork and follow-up on your behalf.'},
+      {icon:'📞',title:'24/7 Support',text:'Real humans, not bots. Call, WhatsApp or email — we respond within minutes.'},
+      {icon:'💰',title:'Best Prices',text:'Access exclusive rates and discounts not available directly from insurers.'}
+    ],
+    hi:[
+      {icon:'🎯',title:'निष्पक्ष सलाह',text:'हम 15+ बीमाकर्ताओं की योजनाओं की तुलना करते हैं — सबसे अच्छा मूल्य, सबसे ज़्यादा कमीशन नहीं।'},
+      {icon:'⚡',title:'तेज़ क्लेम',text:'98% क्लेम सफलतापूर्वक निपटाए। हम आपकी तरफ से सभी कागजी कार्रवाई और फॉलो-अप संभालते हैं।'},
+      {icon:'📞',title:'24/7 सहायता',text:'असली लोग, बॉट नहीं। कॉल करें, WhatsApp करें या ईमेल करें — हम मिनटों में जवाब देते हैं।'},
+      {icon:'💰',title:'सर्वोत्तम मूल्य',text:'विशेष दरें और छूट प्राप्त करें जो बीमाकर्ताओं से सीधे उपलब्ध नहीं हैं।'}
+    ],
+    pa:[
+      {icon:'🎯',title:'ਨਿਰਪੱਖ ਸਲਾਹ',text:'ਅਸੀਂ 15+ ਬੀਮਾਕਰਤਾਵਾਂ ਦੀਆਂ ਯੋਜਨਾਵਾਂ ਦੀ ਤੁਲਨਾ ਕਰਦੇ ਹਾਂ — ਸਭ ਤੋਂ ਵਧੀਆ ਕੀਮਤ, ਸਭ ਤੋਂ ਵੱਧ ਕਮਿਸ਼ਨ ਨਹੀਂ।'},
+      {icon:'⚡',title:'ਤੇਜ਼ ਕਲੇਮ',text:'98% ਕਲੇਮ ਸਫਲਤਾਪੂਰਵਕ ਨਿਪਟਾਏ। ਅਸੀਂ ਤੁਹਾਡੀ ਤਰਫ਼ੋਂ ਸਾਰੀ ਕਾਗਜ਼ੀ ਕਾਰਵਾਈ ਅਤੇ ਫਾਲੋ-ਅੱਪ ਕਰਦੇ ਹਾਂ।'},
+      {icon:'📞',title:'24/7 ਸਹਾਇਤਾ',text:'ਅਸਲੀ ਲੋਕ, ਬੋਟ ਨਹੀਂ। ਕਾਲ ਕਰੋ, WhatsApp ਕਰੋ ਜਾਂ ਈਮੇਲ ਕਰੋ — ਅਸੀਂ ਮਿੰਟਾਂ ਵਿੱਚ ਜਵਾਬ ਦਿੰਦੇ ਹਾਂ।'},
+      {icon:'💰',title:'ਸਭ ਤੋਂ ਵਧੀਆ ਕੀਮਤ',text:'ਵਿਸ਼ੇਸ਼ ਦਰਾਂ ਅਤੇ ਛੋਟਾਂ ਪ੍ਰਾਪਤ ਕਰੋ ਜੋ ਬੀਮਾਕਰਤਾਵਾਂ ਤੋਂ ਸਿੱਧੇ ਉਪਲਬਧ ਨਹੀਂ ਹਨ।'}
+    ]
+  };
+
+  // ── TRUST SIGNALS STRIP ───────────────────────────────────────────────
+  var TSTRIP={
+    en:[{num:'500+',lbl:'Trusted Clients'},{num:'48 hrs',lbl:'Avg Claim Time'},{num:'15+',lbl:'Insurer Partners'},{num:'5 Min',lbl:'Policy Issuance'},{num:'Free',lbl:'Consultation'}],
+    hi:[{num:'500+',lbl:'विश्वसनीय ग्राहक'},{num:'48 घंटे',lbl:'औसत क्लेम समय'},{num:'15+',lbl:'बीमा साझेदार'},{num:'5 मिनट',lbl:'पॉलिसी जारी'},{num:'मुफ्त',lbl:'परामर्श'}],
+    pa:[{num:'500+',lbl:'ਭਰੋਸੇਮੰਦ ਗਾਹਕ'},{num:'48 ਘੰਟੇ',lbl:'ਔਸਤ ਕਲੇਮ ਸਮਾਂ'},{num:'15+',lbl:'ਬੀਮਾ ਸਾਂਝੇਦਾਰ'},{num:'5 ਮਿੰਟ',lbl:'ਪਾਲਿਸੀ ਜਾਰੀ'},{num:'ਮੁਫ਼ਤ',lbl:'ਸਲਾਹ'}]
+  };
+
+  // ── CONTACT FORM LABELS ───────────────────────────────────────────────
+  var CONTACT={
+    en:{name:'Full Name',phone:'Phone Number',interest:'I\'m interested in',msg:'Your Message (optional)',btn:'Send Message →',note:'We respond within 2 hours during business hours'},
+    hi:{name:'पूरा नाम',phone:'फ़ोन नंबर',interest:'मुझे रुचि है',msg:'आपका संदेश (वैकल्पिक)',btn:'संदेश भेजें →',note:'हम कार्यालय समय में 2 घंटे के भीतर उत्तर देते हैं'},
+    pa:{name:'ਪੂਰਾ ਨਾਮ',phone:'ਫ਼ੋਨ ਨੰਬਰ',interest:'ਮੈਨੂੰ ਦਿਲਚਸਪੀ ਹੈ',msg:'ਤੁਹਾਡਾ ਸੁਨੇਹਾ (ਵਿਕਲਪਿਕ)',btn:'ਸੁਨੇਹਾ ਭੇਜੋ →',note:'ਅਸੀਂ ਕਾਰੋਬਾਰੀ ਘੰਟਿਆਂ ਵਿੱਚ 2 ਘੰਟਿਆਂ ਦੇ ਅੰਦਰ ਜਵਾਬ ਦਿੰਦੇ ਹਾਂ'}
+  };
+
+  // ── FOOTER / MISC ─────────────────────────────────────────────────────
+  var MISC={
+    en:{urgency:'🔥 Limited Time Offer — Get <strong>FREE Consultation</strong> + Exclusive Premium Benefits',call_now:'Call Now: 9068541300',compare_cta:'Compare & Save',faq_heading:'Frequently Asked Questions'},
+    hi:{urgency:'🔥 सीमित समय का ऑफर — <strong>मुफ़्त परामर्श</strong> + विशेष प्रीमियम लाभ',call_now:'अभी कॉल करें: 9068541300',compare_cta:'तुलना करें & बचाएं',faq_heading:'अक्सर पूछे जाने वाले सवाल'},
+    pa:{urgency:'🔥 ਸੀਮਤ ਸਮੇਂ ਦੀ ਪੇਸ਼ਕਸ਼ — <strong>ਮੁਫ਼ਤ ਸਲਾਹ</strong> + ਵਿਸ਼ੇਸ਼ ਪ੍ਰੀਮੀਅਮ ਲਾਭ',call_now:'ਹੁਣੇ ਕਾਲ ਕਰੋ: 9068541300',compare_cta:'ਤੁਲਨਾ ਕਰੋ & ਬਚਾਓ',faq_heading:'ਅਕਸਰ ਪੁੱਛੇ ਜਾਣ ਵਾਲੇ ਸਵਾਲ'}
+  };
+
   var SEC_IDS=['about','services','why','claim-support','renewal-reminder','compare','testimonials','contact'];
   var SEC_KEYS=['about','services','why','claim','renewal','compare','testimonials','contact'];
 
+  var curLang='en';
+
+  // ── Helper: set innerHTML safely ──────────────────────────────────────
+  function setHTML(sel,html){ var el=document.querySelector(sel); if(el) el.innerHTML=html; }
+  function setText(sel,txt){ var el=document.querySelector(sel); if(el) el.textContent=txt; }
+  function setAllText(sel,txt){ document.querySelectorAll(sel).forEach(function(el){ el.textContent=txt; }); }
+
+  // ── MAIN setLang ──────────────────────────────────────────────────────
   window.setLang=function(lang){
     if(!T3[lang]||lang===curLang) return;
     curLang=lang;
-    // Persist language choice
     try { localStorage.setItem('tc_lang', lang); } catch(e) {}
     document.body.classList.add('lang-switching');
     setTimeout(function(){
       var T=T3[lang]; var H=HERO[lang]||HERO.en; var S=SECTIONS[lang]||SECTIONS.en;
+      var AB=ABOUT[lang]||ABOUT.en; var WH=WHY[lang]||WHY.en;
+      var TS=TSTRIP[lang]||TSTRIP.en; var CT=CONTACT[lang]||CONTACT.en;
+      var MI=MISC[lang]||MISC.en; var SB=SUBTITLES[lang]||SUBTITLES.en;
+      var TR=TRUST[lang]||TRUST.en;
 
-      // 1. data-lang-content elements
+      // 1. data-lang-content tokens
       document.querySelectorAll('[data-lang-content]').forEach(function(el){
         var k=el.getAttribute('data-lang-content');
         if(T[k]!==undefined) el.textContent=T[k];
       });
 
       // 2. Hero badge
-      var saveBadge=document.querySelector('.save-badge');
-      if(saveBadge) saveBadge.textContent=H.badge;
+      setText('.save-badge', H.badge);
 
       // 3. Hero headline
-      var hl=document.querySelector('.hero-headline');
-      if(hl) hl.innerHTML=H.h1;
+      setHTML('.hero-headline', H.h1);
 
       // 4. Hero sub
-      var hs=document.querySelector('.hero-sub');
-      if(hs) hs.textContent=H.sub;
+      setText('.hero-sub', H.sub);
 
       // 5. Hero category cards
       var catIcons=['🚗','🏍️','🏥','🛡️','👨‍👩‍👧','🚛'];
@@ -6807,7 +6931,12 @@ document.addEventListener('DOMContentLoaded',function(){ piRenderFacts('health')
         if(H.cats[i]){ c.innerHTML='<span class="hero-cat-icon">'+catIcons[i]+'</span> '+H.cats[i]; }
       });
 
-      // 6. Hero buttons
+      // 6. Hero trust badges
+      document.querySelectorAll('.htb-item').forEach(function(el,i){
+        if(TR[i]) el.innerHTML=TR[i];
+      });
+
+      // 7. Hero buttons
       var btnIQ=document.querySelector('.btn-instant-quote');
       if(btnIQ) btnIQ.innerHTML='<span class="btn-iq-icon">✦</span> '+H.btn_quote+' <span class="btn-iq-arrow">→</span>';
       var btnGaps=document.querySelector('.hero-btns .btn-outline');
@@ -6816,20 +6945,91 @@ document.addEventListener('DOMContentLoaded',function(){ piRenderFacts('health')
         var svg=b.querySelector('svg'); b.innerHTML=''; if(svg)b.appendChild(svg); b.appendChild(document.createTextNode(' '+H.btn_wa));
       });
 
-      // 7. Sections — tag + title
+      // 8. Section titles + subtitles
       SEC_IDS.forEach(function(secId,idx){
         var sec=document.getElementById(secId); if(!sec)return;
         var sKey=SEC_KEYS[idx]; var sData=S[sKey]; if(!sData)return;
-        var tag=sec.querySelector('.section-tag'); var title=sec.querySelector('.section-title');
+        var tag=sec.querySelector('.section-tag');
+        var title=sec.querySelector('.section-title');
+        var sub=sec.querySelector('.section-subtitle');
         if(tag) tag.textContent=sData[0];
         if(title) title.innerHTML=sData[1];
+        if(sub && SB[sKey]) sub.textContent=SB[sKey];
       });
 
-      // 8. Sticky mobile CTA
-      var sc=document.querySelector('.sticky-btn-call'); if(sc) sc.innerHTML='<span class="sticky-btn-icon">📞</span> '+(lang==='hi'?'अभी कॉल':lang==='pa'?'ਹੁਣੇ ਕਾਲ':'Call Now');
-      var sq=document.querySelector('.sticky-btn-quote'); if(sq) sq.innerHTML='<span class="sticky-btn-icon">✦</span> '+(lang==='hi'?'कोटेशन':lang==='pa'?'ਕੋਟੇਸ਼ਨ':'Get Quote');
+      // 9. About section body
+      var aQuote=document.querySelector('.about-quote');
+      if(aQuote) aQuote.textContent=AB.quote;
+      var aBodies=document.querySelectorAll('.about-body');
+      if(aBodies[0]) aBodies[0].textContent=AB.body1;
+      if(aBodies[1]) aBodies[1].textContent=AB.body2;
+      var statNums=document.querySelectorAll('.stat-num');
+      var statLbls=document.querySelectorAll('.stat-label');
+      var sKeys=['stat1_num','stat2_num','stat3_num','stat4_num'];
+      var lKeys=['stat1_lbl','stat2_lbl','stat3_lbl','stat4_lbl'];
+      sKeys.forEach(function(k,i){ if(statNums[i] && AB[k]) statNums[i].textContent=AB[k]; });
+      lKeys.forEach(function(k,i){ if(statLbls[i] && AB[k]) statLbls[i].textContent=AB[k]; });
 
-      // 9. Lang button active state
+      // 10. Why cards
+      var whyCards=document.querySelectorAll('.why-card');
+      whyCards.forEach(function(card,i){
+        if(!WH[i]) return;
+        var ico=card.querySelector('.why-card-icon');
+        var ttl=card.querySelector('.why-card-title');
+        var txt=card.querySelector('.why-card-text');
+        if(ico) ico.textContent=WH[i].icon;
+        if(ttl) ttl.textContent=WH[i].title;
+        if(txt) txt.textContent=WH[i].text;
+      });
+
+      // 11. Trust signals strip
+      var tsItems=document.querySelectorAll('.ts-item');
+      tsItems.forEach(function(item,i){
+        if(!TS[i]) return;
+        var num=item.querySelector('.ts-num');
+        var lbl=item.querySelector('.ts-label');
+        if(num) num.textContent=TS[i].num;
+        if(lbl) lbl.textContent=TS[i].lbl;
+      });
+
+      // 12. Urgency bar
+      var urg=document.querySelector('.urgency-bar');
+      if(urg){
+        urg.innerHTML=MI.urgency+' | <a href="tel:9068541300">'+MI.call_now+'</a>';
+      }
+
+      // 13. Contact form labels
+      var cForm=document.getElementById('contact');
+      if(cForm){
+        var inputs=cForm.querySelectorAll('.calc-label, .form-label, label');
+        // Try to find labels by for attribute or nearby structure
+        var nameL=cForm.querySelector('label[for="cName"], .form-label:first-of-type');
+        if(!nameL){ var labels=cForm.querySelectorAll('label'); if(labels[0]) nameL=labels[0]; }
+        // Update placeholder texts if inputs exist
+        var nameIn=cForm.querySelector('input[name="name"], input[placeholder*="Name"], input[placeholder*="नाम"], input[placeholder*="ਨਾਮ"]');
+        var phoneIn=cForm.querySelector('input[name="phone"], input[type="tel"], input[placeholder*="Phone"], input[placeholder*="ਫ਼ੋਨ"], input[placeholder*="फ़ोन"]');
+        var msgIn=cForm.querySelector('textarea');
+        var submitBtn=cForm.querySelector('button[type="submit"], .calc-btn, .submit-btn');
+        if(nameIn) nameIn.placeholder=CT.name;
+        if(phoneIn) phoneIn.placeholder=CT.phone;
+        if(msgIn) msgIn.placeholder=CT.msg;
+        if(submitBtn) submitBtn.textContent=CT.btn;
+      }
+
+      // 14. Sticky mobile CTA
+      var sc=document.querySelector('.sticky-btn-call');
+      if(sc) sc.innerHTML='<span class="sticky-btn-icon">📞</span> '+(lang==='hi'?'अभी कॉल':lang==='pa'?'ਹੁਣੇ ਕਾਲ':'Call Now');
+      var sq=document.querySelector('.sticky-btn-quote');
+      if(sq) sq.innerHTML='<span class="sticky-btn-icon">✦</span> '+(lang==='hi'?'कोटेशन':lang==='pa'?'ਕੋਟੇਸ਼ਨ':'Get Quote');
+
+      // 15. FAQ heading
+      var faqSec=document.getElementById('faq');
+      if(faqSec){
+        var faqTitle=faqSec.querySelector('.section-title');
+        if(faqTitle) faqTitle.textContent=MI.faq_heading;
+      }
+
+      // 16. Lang button active state
       document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');});
       var ab=document.getElementById('lang'+lang.charAt(0).toUpperCase()+lang.slice(1));
       if(ab) ab.classList.add('active');
@@ -6838,7 +7038,7 @@ document.addEventListener('DOMContentLoaded',function(){ piRenderFacts('health')
         if((b.getAttribute('onclick')||'').indexOf("'"+lang+"'")!==-1) b.classList.add('active');
       });
 
-      // 10. HTML lang
+      // 17. HTML lang attribute
       document.documentElement.lang=lang==='pa'?'pa':(lang==='hi'?'hi':'en');
 
       document.body.classList.remove('lang-switching');
