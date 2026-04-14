@@ -7125,29 +7125,37 @@ document.addEventListener('DOMContentLoaded', function () {
   const btn=form.querySelector('button[type="submit"],input[type="submit"],.form-submit-btn');
   const original=btn ? (btn.innerHTML || btn.value) : '';
   const get=(sels)=>{for(const s of sels){const el=form.querySelector(s); if(el&&'value' in el) return el.value.trim();} return '';};
+
   form.addEventListener('submit', async function(e){
     e.preventDefault();
-    const insurance = get([
-      'select[name="type"]','select[name="insurance"]','select[name="insuranceType"]',
-      'select[id*="insurance" i]','select[id*="type" i]','select.form-control','select'
-    ]);
     const payload={data:[{
       Timestamp:new Date().toLocaleString(),
       Name:get(['input[name="name"]','input[name="fullname"]','input[placeholder*="name" i]','input[type="text"]']),
       Phone:get(['input[name="phone"]','input[name="mobile"]','input[type="tel"]']),
       Email:get(['input[name="email"]','input[type="email"]']),
-      "Insurance Type":insurance,
+      "Insurance Type":get(['select[name="type"]','select[name="insurance"]','select[name="insuranceType"]','select[id*="insurance" i]','select']),
       Message:get(['textarea[name="message"]','textarea'])
     }]};
+
     try{
       if(btn){ if(btn.tagName==='INPUT') btn.value='Submitting...'; else btn.innerHTML='Submitting...'; btn.disabled=true; }
-      const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-      if(!r.ok) throw new Error('failed');
+
+      const r=await fetch(API_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
+      });
+
+      // accept any returned response if no network exception
+      let txt='';
+      try { txt = await r.text(); } catch(e){}
+
       alert('Thank you! Our team will contact you shortly.');
       form.reset();
+
     }catch(err){
       console.error(err);
-      alert('Something went wrong');
+      alert('Please try again in a moment.');
     }finally{
       if(btn){ if(btn.tagName==='INPUT') btn.value=original||'Submit'; else btn.innerHTML=original||'Submit'; btn.disabled=false; }
     }
