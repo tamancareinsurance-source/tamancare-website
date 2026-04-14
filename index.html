@@ -7120,19 +7120,23 @@ document.addEventListener('click',function(e){
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const API_URL='https://sheetdb.io/api/v1/pt2cff8dw51k2';
-  const form=document.querySelector('.contact-form form, form.contact-form, .contact-form')||document.querySelector('form');
+  const form=document.querySelector('.contact-form form, form.contact-form, .contact-form')||document.querySelector('#contact form')||document.querySelector('form');
   if(!form) return;
   const btn=form.querySelector('button[type="submit"],input[type="submit"],.form-submit-btn');
   const original=btn ? (btn.innerHTML || btn.value) : '';
   const get=(sels)=>{for(const s of sels){const el=form.querySelector(s); if(el&&'value' in el) return el.value.trim();} return '';};
   form.addEventListener('submit', async function(e){
     e.preventDefault();
+    const insurance = get([
+      'select[name="type"]','select[name="insurance"]','select[name="insuranceType"]',
+      'select[id*="insurance" i]','select[id*="type" i]','select.form-control','select'
+    ]);
     const payload={data:[{
       Timestamp:new Date().toLocaleString(),
-      Name:get(['input[name="name"]','input[name="fullname"]','input[placeholder*="name" i]']),
+      Name:get(['input[name="name"]','input[name="fullname"]','input[placeholder*="name" i]','input[type="text"]']),
       Phone:get(['input[name="phone"]','input[name="mobile"]','input[type="tel"]']),
       Email:get(['input[name="email"]','input[type="email"]']),
-      "Insurance Type":get(['select[name="type"]','select[name="insurance"]']),
+      "Insurance Type":insurance,
       Message:get(['textarea[name="message"]','textarea'])
     }]};
     try{
@@ -7141,8 +7145,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if(!r.ok) throw new Error('failed');
       alert('Thank you! Our team will contact you shortly.');
       form.reset();
-    }catch(err){ alert('Something went wrong. Please try again.'); }
-    finally{
+    }catch(err){
+      console.error(err);
+      alert('Something went wrong');
+    }finally{
       if(btn){ if(btn.tagName==='INPUT') btn.value=original||'Submit'; else btn.innerHTML=original||'Submit'; btn.disabled=false; }
     }
   });
