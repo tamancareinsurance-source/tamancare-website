@@ -5317,24 +5317,64 @@ function calculatePremium() {
   res.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-// ── CONTACT FORM
-document.getElementById('contactForm').addEventListener('submit', async (e) => {
+// ── CONTACT FORM — SheetDB Lead Capture
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button[type="submit"]');
-  btn.textContent = 'Sending…';
+  var form = e.target;
+  var btn = form.querySelector('button[type="submit"]');
+  var successBox = document.getElementById('form-success');
+
+  // Loading state
+  var originalBtnText = btn.textContent;
+  btn.textContent = 'Submitting...';
   btn.disabled = true;
+
+  // Capture fields — map to SheetDB column names
+  var data = {
+    Name:    (form.querySelector('[name="name"]') || {}).value || '',
+    Phone:   (form.querySelector('[name="phone"]') || {}).value || '',
+    Type:    (form.querySelector('[name="insurance_type"]') || {}).value || '',
+    City:    '',   // No city field in form; leave blank or update if added later
+    Message: (form.querySelector('[name="message"]') || {}).value || ''
+  };
+
   try {
-    const res = await fetch(e.target.action, {
-      method: 'POST', body: new FormData(e.target),
-      headers: { 'Accept': 'application/json' }
+    var res = await fetch('https://sheetdb.io/api/v1/7lq6lzupmd1qf', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ data: data })
     });
+
     if (res.ok) {
-      document.getElementById('form-success').style.display = 'block';
-      e.target.reset(); btn.textContent = 'Send Message →'; btn.disabled = false;
-    } else { throw new Error(); }
-  } catch {
-    btn.textContent = 'Send Message →'; btn.disabled = false;
-    alert('Something went wrong. Please call us at 9068541300 or WhatsApp us.');
+      // Success: show premium message, hide any old success state first
+      successBox.innerHTML =
+        '<div style="text-align:center;padding:24px;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.3);border-radius:10px;margin-top:16px;">' +
+        '<div style="font-size:40px;margin-bottom:10px;">✅</div>' +
+        '<div style="font-family:\'Cormorant Garamond\',serif;font-size:22px;color:var(--gold);margin-bottom:8px;">Thank you!</div>' +
+        '<p style="font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:16px;">Our team will contact you shortly.</p>' +
+        '<a href="https://wa.me/919068541300?text=I%20just%20submitted%20the%20contact%20form%20and%20need%20urgent%20help" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:11px 22px;border-radius:6px;font-weight:700;font-size:13px;text-decoration:none;" target="_blank">💬 WhatsApp for Instant Help</a>' +
+        '</div>';
+      successBox.style.display = 'block';
+      form.reset();
+      btn.textContent = originalBtnText;
+      btn.disabled = false;
+    } else {
+      throw new Error('Server error: ' + res.status);
+    }
+  } catch(err) {
+    btn.textContent = originalBtnText;
+    btn.disabled = false;
+    // Show inline error message below the button
+    var errEl = document.getElementById('form-error-msg');
+    if (!errEl) {
+      errEl = document.createElement('div');
+      errEl.id = 'form-error-msg';
+      errEl.style.cssText = 'margin-top:12px;padding:12px 16px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-radius:6px;color:#f87171;font-size:13.5px;text-align:center;';
+      btn.parentNode.insertBefore(errEl, btn.nextSibling);
+    }
+    errEl.textContent = 'Something went wrong. Please try again.';
+    errEl.style.display = 'block';
+    setTimeout(function(){ errEl.style.display = 'none'; }, 5000);
   }
 });
 
