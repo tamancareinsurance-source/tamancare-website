@@ -7124,10 +7124,38 @@ document.addEventListener('DOMContentLoaded', function () {
   if(!form) return;
   const btn=form.querySelector('button[type="submit"],input[type="submit"],.form-submit-btn');
   const original=btn ? (btn.innerHTML || btn.value) : '';
+
   const get=(sels)=>{for(const s of sels){const el=form.querySelector(s); if(el&&'value' in el) return el.value.trim();} return '';};
+
+  function hardReset(){
+    try{ form.reset(); }catch(e){}
+    form.querySelectorAll('input, textarea').forEach(el=>{ 
+      if(el.type!=='submit' && el.type!=='button' && el.type!=='hidden') el.value='';
+    });
+    form.querySelectorAll('select').forEach(el=>{ el.selectedIndex=0; });
+  }
+
+  function showMsg(text, ok=true){
+    let box=form.querySelector('.custom-status-msg');
+    if(!box){
+      box=document.createElement('div');
+      box.className='custom-status-msg';
+      box.style.marginTop='12px';
+      box.style.padding='12px';
+      box.style.borderRadius='8px';
+      box.style.fontSize='14px';
+      form.appendChild(box);
+    }
+    box.style.display='block';
+    box.style.background= ok ? 'rgba(0,128,0,.08)' : 'rgba(255,0,0,.08)';
+    box.style.border= ok ? '1px solid rgba(0,128,0,.25)' : '1px solid rgba(255,0,0,.25)';
+    box.style.color= ok ? '#7CFC00' : '#ff8080';
+    box.textContent=text;
+  }
 
   form.addEventListener('submit', async function(e){
     e.preventDefault();
+
     const payload={data:[{
       Timestamp:new Date().toLocaleString(),
       Name:get(['input[name="name"]','input[name="fullname"]','input[placeholder*="name" i]','input[type="text"]']),
@@ -7140,22 +7168,18 @@ document.addEventListener('DOMContentLoaded', function () {
     try{
       if(btn){ if(btn.tagName==='INPUT') btn.value='Submitting...'; else btn.innerHTML='Submitting...'; btn.disabled=true; }
 
-      const r=await fetch(API_URL,{
+      await fetch(API_URL,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(payload)
       });
 
-      // accept any returned response if no network exception
-      let txt='';
-      try { txt = await r.text(); } catch(e){}
-
-      alert('Thank you! Our team will contact you shortly.');
-      form.reset();
+      hardReset();
+      showMsg('Thank you! Our team will contact you shortly.', true);
 
     }catch(err){
       console.error(err);
-      alert('Please try again in a moment.');
+      showMsg('Please try again in a moment.', false);
     }finally{
       if(btn){ if(btn.tagName==='INPUT') btn.value=original||'Submit'; else btn.innerHTML=original||'Submit'; btn.disabled=false; }
     }
