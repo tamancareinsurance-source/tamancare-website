@@ -7119,7 +7119,7 @@ document.addEventListener('click',function(e){
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  const API_URL='https://sheetdb.io/api/v1/o2oy4zw3zaou5';
+  const API_URL='https://sheetdb.io/api/v1/pt2cff8dw51k2';
   const form=document.querySelector('.contact-form form, form.contact-form, .contact-form')||document.querySelector('form');
   if(!form) return;
   const btn=form.querySelector('button[type="submit"],input[type="submit"],.form-submit-btn');
@@ -7128,10 +7128,11 @@ document.addEventListener('DOMContentLoaded', function () {
   form.addEventListener('submit', async function(e){
     e.preventDefault();
     const payload={data:[{
+      Timestamp:new Date().toLocaleString(),
       Name:get(['input[name="name"]','input[name="fullname"]','input[placeholder*="name" i]']),
       Phone:get(['input[name="phone"]','input[name="mobile"]','input[type="tel"]']),
       Email:get(['input[name="email"]','input[type="email"]']),
-      Type:get(['select[name="type"]','select[name="insurance"]']),
+      "Insurance Type":get(['select[name="type"]','select[name="insurance"]']),
       Message:get(['textarea[name="message"]','textarea'])
     }]};
     try{
