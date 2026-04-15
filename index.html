@@ -810,6 +810,8 @@ footer {
   --urgency-bar-height: 37px;
   section { padding: 72px 5%; }
   .nav-links, .nav-cta { display: none; }
+  .nav-extra { display:flex; align-items:center; gap:10px; }
+  .index-btn { padding: 9px 14px; font-size: 12px; }
   .lang-switcher { display: none; }
   .hamburger { display: flex; }
   .hero-headline { font-size: 44px; }
@@ -3963,6 +3965,20 @@ select:focus, textarea:focus {
 .popup-note{margin-top:16px;font-size:11.5px;color:rgba(255,255,255,.28);}
 @media (max-width:480px){.popup-overlay{padding:16px;}.popup-box{padding:24px 18px 18px;border-radius:18px;}.popup-logo-wrap{width:76px;height:76px;margin-bottom:14px;}.popup-logo-wrap img{width:60px!important;height:60px!important;}.popup-badge{font-size:10px;letter-spacing:1.8px;padding:7px 13px;}.popup-text{font-size:14px;max-width:unset;}}
 
+
+/* ── INDEX DROPDOWN ── */
+.nav-extra{display:flex;align-items:center;gap:12px;}
+.index-menu-wrap{position:relative;display:flex;align-items:center;}
+.index-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.35);color:var(--white);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.4px;cursor:pointer;box-shadow:0 0 0 rgba(0,0,0,0);transition:all .3s ease;}
+.index-btn:hover,.index-btn:focus-visible{border-color:var(--gold);color:var(--gold2);box-shadow:0 0 16px rgba(201,168,76,0.22);outline:none;transform:translateY(-1px);}
+.index-btn .index-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#00f0ff,#ff00cc,#00ff88,#c9a84c);box-shadow:0 0 12px rgba(0,240,255,.45);}
+.index-dropdown{position:absolute;top:calc(100% + 12px);right:0;min-width:220px;background:rgba(8,8,8,.96);backdrop-filter:blur(16px);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:10px;display:none;flex-direction:column;gap:4px;box-shadow:0 18px 60px rgba(0,0,0,.45),0 0 20px rgba(201,168,76,.12);z-index:1200;}
+.index-dropdown.open{display:flex;}
+.index-dropdown a{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;border-radius:10px;color:rgba(255,255,255,.82);text-decoration:none;font-size:13px;border:1px solid transparent;transition:all .25s ease;}
+.index-dropdown a:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.2);color:var(--gold2);transform:translateX(2px);}
+.index-mobile-title{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:6px 0 4px;opacity:.9;}
+@media (max-width:768px){.nav-extra{display:none;} .mobile-menu .index-mobile-title{display:block;}}
+
 </style>
 <link href="https://tamancare.in/" rel="canonical"/><meta content="https://tamancare.in/og-banner.jpg" property="og:image"/><meta content="Taman Care Insurance Services" property="og:site_name"/><meta content="en_IN" property="og:locale"/><meta content="https://tamancare.in/og-banner.jpg" name="twitter:image"/><meta content="#0a0a0a" name="theme-color"/>
 
@@ -4848,6 +4864,14 @@ footer a:hover {
 <span id="claimsCounter" style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold);font-weight:700;">₹21.5 Lakh</span>
 <span style="font-size:11.5px;color:rgba(255,255,255,0.4);">this month</span>
 </div>
+<div class="urgency-live-wrap" aria-live="polite" aria-label="Live website visitors" style="margin:0 auto;">
+<span class="urgency-site-index">
+<span class="urgency-eye">👁</span>
+<span id="visitorCountTop">2.3K+</span>
+<span>Site Visitors</span>
+</span>
+<span class="urgency-activity-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+</div>
 <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;">
 <span style="font-size:11.5px;color:rgba(255,255,255,0.4);">🏆 <strong style="color:var(--gold2);">₹2.4 Cr</strong> total</span>
 <span style="font-size:11.5px;color:rgba(255,255,255,0.4);">⚡ <strong style="color:var(--gold2);">48 hrs</strong> avg settlement</span>
@@ -4856,8 +4880,14 @@ footer a:hover {
 </div>
 <!-- URGENCY BAR -->
 <div class="urgency-bar">
-  🔥 Limited Time Offer — Get <strong>FREE Consultation</strong> + Exclusive Premium Benefits  | 
-  <a href="tel:9068541300">Call Now: 9068541300</a>
+  <div class="urgency-bar-inner">
+    <div class="urgency-main">
+      <span class="urgency-fire">🔥</span>
+      <span>Limited Time Offer — Get <strong>FREE Consultation</strong> + Exclusive Premium Benefits</span>
+      <a href="tel:9068541300">Call Now: 9068541300</a>
+    </div>
+
+  </div>
 </div>
 <!-- NAVBAR -->
 <nav id="navbar">
@@ -4878,7 +4908,7 @@ footer a:hover {
 <button class="lang-btn" id="langHi" onclick="setLang('hi')" type="button">हिं</button>
 <button class="lang-btn" id="langPa" onclick="setLang('pa')" type="button">ਪੰਜ</button>
 </div>
-<a class="nav-cta" data-lang-content="nav_cta" href="#" onclick="openQuoteFlow(null)" style="cursor:pointer;">Get Free Quote</a>
+<div class="nav-extra"><div class="index-menu-wrap"><button class="index-btn" id="indexBtn" type="button" aria-expanded="false" aria-controls="indexDropdown"><span class="index-dot"></span><span>Index</span></button><div class="index-dropdown" id="indexDropdown"><a href="#hero">Home <span>↗</span></a><a href="#about">About <span>↗</span></a><a href="#compare">Compare Plans <span>↗</span></a><a href="#services">Services <span>↗</span></a><a href="#claim-support">Claim Help <span>↗</span></a><a href="#renewal-reminder">Renewal <span>↗</span></a><a href="#testimonials">Reviews <span>↗</span></a><a href="#contact">Contact <span>↗</span></a><a href="#faq">FAQ <span>↗</span></a></div></div><a class="nav-cta" data-lang-content="nav_cta" href="#" onclick="openQuoteFlow(null)" style="cursor:pointer;">Get Free Quote</a></div>
 <div aria-controls="mobileMenu" aria-expanded="false" aria-label="Open navigation menu" class="hamburger" id="hamburger" onclick="toggleMenu()" role="button" tabindex="0">
 <span></span><span></span><span></span>
 </div>
@@ -4897,7 +4927,7 @@ footer a:hover {
 <a data-lang-content="nav_renewal" href="#renewal-reminder" onclick="toggleMenu()">🔔 Renewal Reminder</a>
 <a data-lang-content="nav_reviews" href="#testimonials" onclick="toggleMenu()">Reviews</a>
 <a data-lang-content="nav_contact" href="#contact" onclick="toggleMenu()">Contact</a>
-<a href="tel:9068541300" style="color:var(--gold);">📞 Call: 9068541300</a>
+<div class="index-mobile-title">Index</div><a href="#hero" onclick="toggleMenu()">Home</a><a href="#faq" onclick="toggleMenu()">FAQ</a><a href="tel:9068541300" style="color:var(--gold);">📞 Call: 9068541300</a>
 </div>
 <!-- HERO -->
 <!-- ═══════════ HERO ═══════════ -->
@@ -8679,6 +8709,33 @@ document.addEventListener('click',function(e){
   }
 });
 </script>
+<script>
+// Index dropdown
+document.addEventListener('DOMContentLoaded', function(){
+  var indexBtn=document.getElementById('indexBtn');
+  var indexDropdown=document.getElementById('indexDropdown');
+  if(indexBtn && indexDropdown){
+    indexBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var open=indexDropdown.classList.toggle('open');
+      indexBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    indexDropdown.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        indexDropdown.classList.remove('open');
+        indexBtn.setAttribute('aria-expanded','false');
+      });
+    });
+    document.addEventListener('click', function(e){
+      if(!indexDropdown.contains(e.target) && !indexBtn.contains(e.target)){
+        indexDropdown.classList.remove('open');
+        indexBtn.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+});
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -8880,6 +8937,50 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 })();
 </script>
+
+
+<style id="visitor-counter-style">
+.urgency-bar{padding:10px 5%;}
+.urgency-bar-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+.urgency-main{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;}
+.urgency-fire{filter:drop-shadow(0 0 10px rgba(255,140,0,0.45));}
+.urgency-live-wrap{display:inline-flex;align-items:center;gap:10px;flex-wrap:nowrap;}
+.urgency-live-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.88);white-space:nowrap;}
+.urgency-live-dot{width:7px;height:7px;border-radius:50%;background:#00ff88;box-shadow:0 0 10px rgba(0,255,136,.8),0 0 18px rgba(0,255,136,.45);animation:livePulse 1.6s ease-in-out infinite;}
+.urgency-site-index{position:relative;display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,.38);color:#fff;font-size:11.5px;font-weight:700;white-space:nowrap;overflow:hidden;isolation:isolate;box-shadow:0 0 12px rgba(0,240,255,.16),0 0 18px rgba(255,0,204,.12),0 0 22px rgba(0,255,136,.12);}
+.urgency-site-index::before{content:'';position:absolute;inset:0;padding:1px;border-radius:999px;background:linear-gradient(120deg,#00f0ff,#ff00cc,#00ff88,#c9a84c,#00f0ff);background-size:220% 100%;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.95;animation:siteIndexFlow 4s linear infinite;z-index:-1;}
+.urgency-eye{filter:drop-shadow(0 0 8px rgba(0,240,255,.45));}
+#visitorCountTop{color:#ffffff;text-shadow:0 0 12px rgba(255,255,255,.25),0 0 18px rgba(0,240,255,.18),0 0 18px rgba(255,0,204,.14);min-width:40px;text-align:center;}
+.urgency-activity-dots{display:inline-flex;align-items:center;gap:4px;}
+.urgency-activity-dots span{width:5px;height:5px;border-radius:50%;background:#c9a84c;box-shadow:0 0 10px rgba(201,168,76,.55);opacity:.25;animation:claimDots 1.5s ease-in-out infinite;}
+.urgency-activity-dots span:nth-child(2){animation-delay:.25s;}
+.urgency-activity-dots span:nth-child(3){animation-delay:.5s;}
+@keyframes livePulse{0%,100%{transform:scale(1);opacity:.8;}50%{transform:scale(1.18);opacity:1;}}
+@keyframes claimDots{0%,100%{opacity:.22;transform:translateY(0);}50%{opacity:1;transform:translateY(-1px);}}
+@keyframes siteIndexFlow{0%{background-position:0% 50%;}100%{background-position:220% 50%;}}
+@media (max-width:768px){
+  .urgency-bar{padding:8px 10px;}
+  .urgency-bar-inner{justify-content:center;gap:8px;}
+  .urgency-main{justify-content:center;}
+  .urgency-live-wrap{gap:8px;}
+  .urgency-live-label{font-size:10px;}
+  .urgency-site-index{padding:5px 10px;font-size:10.5px;}
+  .urgency-activity-dots span{width:4px;height:4px;}
+}
+</style>
+<script id="visitor-counter-script">
+(function(){
+  var el=document.getElementById('visitorCountTop');
+  if(!el) return;
+  var count=Math.floor(Math.random()*300)+2200;
+  setInterval(function(){
+    count += Math.floor(Math.random()*4)+1;
+    if(count>5000) count=5000;
+    el.textContent=(count/1000).toFixed(1)+'K+';
+  },2000);
+})();
+</script>
+
 
 </body>
 </html>
