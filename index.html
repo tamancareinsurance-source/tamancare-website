@@ -61,7 +61,9 @@ gtag('config', 'G-B5QL3PW5XS');
   --font-display: 'Cormorant Garamond', serif;
   --font-body: 'Outfit', sans-serif;
   --shadow-gold: 0 0 40px rgba(201,168,76,0.15);
-  --urgency-bar-height: 81px;
+  --ticker-bar-height: 44px;
+  --promo-bar-height: 37px;
+  --urgency-bar-height: calc(var(--ticker-bar-height) + var(--promo-bar-height));
   --navbar-height: 76px;
   --header-total: calc(var(--urgency-bar-height) + var(--navbar-height));
 }
@@ -6215,6 +6217,68 @@ footer a:hover {
 
 </style>
 
+
+<style id="mobile-header-fix">
+html { scroll-padding-top: calc(var(--header-total) + 20px); }
+#claimsTickerBar {
+  top: 0;
+}
+.urgency-bar {
+  top: var(--ticker-bar-height) !important;
+}
+#navbar {
+  top: var(--urgency-bar-height);
+}
+.mobile-menu {
+  top: var(--header-total);
+  max-height: calc(100vh - var(--header-total));
+  overflow-y: auto;
+}
+@media (max-width: 768px) {
+  :root {
+    --ticker-bar-height: 52px;
+    --promo-bar-height: 46px;
+    --navbar-height: 68px;
+  }
+  #claimsTickerBar {
+    padding: 8px 12px !important;
+    justify-content: center !important;
+    gap: 10px !important;
+  }
+  #claimsTickerBar > div {
+    justify-content: center;
+  }
+  .urgency-bar {
+    top: var(--ticker-bar-height) !important;
+    padding: 8px 12px !important;
+    font-size: 10.5px !important;
+    line-height: 1.4 !important;
+  }
+  #navbar {
+    top: var(--urgency-bar-height) !important;
+    padding: 12px 16px !important;
+  }
+  #hero {
+    padding-top: calc(var(--header-total) + 26px) !important;
+  }
+  .mobile-menu {
+    top: var(--header-total) !important;
+    max-height: calc(100vh - var(--header-total));
+    padding-bottom: 20px;
+  }
+}
+@media (max-width: 480px) {
+  :root {
+    --ticker-bar-height: 64px;
+    --promo-bar-height: 50px;
+    --navbar-height: 64px;
+  }
+  #hero {
+    padding-top: calc(var(--header-total) + 20px) !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- CLAIMS TICKER + URGENCY BAR -->
@@ -6791,7 +6855,7 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 <section id="about">
 <div class="about-grid">
 <div class="about-visual reveal">
-<div class="about-portrait"><img alt="Taman Care Logo" class="about-logo" src="taman.png"/></div>
+<div class="about-portrait"><img alt="Founder Taman Aggarwal" class="about-profile-img" src="founder.png" onerror="this.onerror=null;this.src='logo.png';this.className='about-logo';"/></div>
 <div class="about-badge-float founder-badge">
 <span>Founder</span>
 <span>Taman Care</span>
@@ -8365,23 +8429,37 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 
 // ── MEASURE BOTH TOP BARS HEIGHT DYNAMICALLY ──────────────────────────────
 function updateHeaderHeights() {
+  var root = document.documentElement;
   var ticker = document.getElementById('claimsTickerBar');
   var urgency = document.querySelector('.urgency-bar');
-  var tickerH = ticker ? ticker.getBoundingClientRect().height : 0;
-  var urgencyH = urgency ? urgency.getBoundingClientRect().height : 0;
-  var totalH = tickerH + urgencyH;
-  if (totalH > 0) {
-    document.documentElement.style.setProperty('--urgency-bar-height', totalH + 'px');
-    // Also update navbar top and hero padding dynamically
-    var navbarEl = document.getElementById('navbar');
-    var heroEl = document.getElementById('hero');
-    if (navbarEl && !navbarEl.classList.contains('scrolled')) {
-      navbarEl.style.top = totalH + 'px';
-    }
-    if (heroEl) {
-      var navH = navbarEl ? navbarEl.getBoundingClientRect().height : 76;
-      heroEl.style.paddingTop = (totalH + navH + 16) + 'px';
-    }
+  var navbarEl = document.getElementById('navbar');
+  var heroEl = document.getElementById('hero');
+  var mobileMenu = document.getElementById('mobileMenu');
+
+  var tickerH = ticker ? Math.ceil(ticker.getBoundingClientRect().height) : 0;
+  var urgencyH = urgency ? Math.ceil(urgency.getBoundingClientRect().height) : 0;
+  var navH = navbarEl ? Math.ceil(navbarEl.getBoundingClientRect().height) : 76;
+  var barsH = tickerH + urgencyH;
+  var totalH = barsH + navH;
+
+  if (tickerH > 0) root.style.setProperty('--ticker-bar-height', tickerH + 'px');
+  if (urgencyH > 0) root.style.setProperty('--promo-bar-height', urgencyH + 'px');
+  if (barsH > 0) root.style.setProperty('--urgency-bar-height', barsH + 'px');
+  if (navH > 0) root.style.setProperty('--navbar-height', navH + 'px');
+
+  if (navbarEl && !navbarEl.classList.contains('scrolled')) {
+    navbarEl.style.top = barsH + 'px';
+  }
+  if (heroEl) {
+    heroEl.style.paddingTop = (totalH + (window.innerWidth <= 480 ? 20 : 16)) + 'px';
+  }
+  if (mobileMenu) {
+    mobileMenu.style.top = (navbarEl && navbarEl.classList.contains('scrolled'))
+      ? (navbarEl.getBoundingClientRect().bottom + 'px')
+      : (totalH + 'px');
+    mobileMenu.style.maxHeight = (window.innerHeight - (navbarEl && navbarEl.classList.contains('scrolled')
+      ? Math.ceil(navbarEl.getBoundingClientRect().bottom)
+      : totalH)) + 'px';
   }
 }
 // Run after layout
@@ -8393,6 +8471,7 @@ if (document.readyState === 'loading') {
 window.addEventListener('resize', updateHeaderHeights);
 // Also run after fonts/images load
 window.addEventListener('load', updateHeaderHeights);
+window.addEventListener('orientationchange', function(){ setTimeout(updateHeaderHeights, 120); });
 
 // ── NAVBAR SCROLL
 const navbar = document.getElementById('navbar');
@@ -8425,11 +8504,11 @@ function toggleMenu() {
   hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
   if (isOpen) {
-    // Position menu exactly below navbar
-    menu.style.top = navbar.getBoundingClientRect().bottom + 'px';
-    // Move focus into menu
+    updateHeaderHeights();
     var firstLink = menu.querySelector('a, button');
     if (firstLink) firstLink.focus();
+  } else {
+    menu.style.top = '';
   }
 }
 
@@ -10442,7 +10521,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /* hamburger */
   var h=document.querySelector('.hamburger');if(!h)return;
   h.addEventListener('click',function(){h.classList.toggle('open')});
-  document.querySelectorAll('.mobile-menu a').forEach(function(a){a.addEventListener('click',function(){h.classList.remove('open')})});
+  document.querySelectorAll('.mobile-menu a').forEach(function(a){a.addEventListener('click',function(){h.classList.remove('open'); var m=document.getElementById('mobileMenu'); if(m){m.classList.remove('open'); m.style.top='';}})});
 })();
 </script>
 <!-- ── BACK TO TOP ── -->
