@@ -37,12 +37,12 @@ gtag('config', 'G-B5QL3PW5XS');
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "5",
-    "reviewCount": "2500"
+    "reviewCount": "2547"
   }
 }
 </script>
 <meta content="Taman Care Insurance Services | Chandigarh" property="og:title"/>
-<meta content="Protect Today, Secure Tomorrow. Premium insurance services with 2,500+ happy clients across India." property="og:description"/>
+<meta content="Protect Today, Secure Tomorrow. Premium insurance services with 2,547+ happy clients across India." property="og:description"/>
 <meta content="website" property="og:type"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -479,7 +479,12 @@ section { padding: 100px 5%; }
 
 /* ── CALCULATORS ── */
 #calculators { background: var(--black); }
-.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 56px; }
+.calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 56px; }
+.calc-mini-note { font-size: 12px; color: rgba(255,255,255,0.42); margin-top: 10px; line-height: 1.7; }
+.calc-helper-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 18px; }
+.calc-helper-list li { font-size: 12.5px; color: rgba(255,255,255,0.55); display:flex; gap:8px; align-items:flex-start; }
+.calc-helper-list li::before { content:'✦'; color: var(--gold); font-size: 8px; margin-top: 7px; flex-shrink: 0; }
+.calc-result-sub { margin-top: 8px; font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; }
 .calc-card {
   background: var(--black2); border: 1px solid var(--border);
   border-radius: 4px; padding: 40px 36px;
@@ -4166,6 +4171,610 @@ select:focus, textarea:focus {
   margin: auto;
   filter: drop-shadow(0 6px 25px rgba(201,168,76,0.5));
 }
+
+/* Company Logos Upgrade */
+.company-logo-box img {
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(1.2);
+  transition: all 0.3s ease;
+}
+.company-logo-box:hover img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.05);
+}
+
+
+/* Companies section cleaned fix */
+.company-logo-media{
+  width:100%;
+  min-height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.company-logo-box img{
+  display:block;
+  max-width:96px;
+  max-height:40px;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  filter:grayscale(100%) brightness(1.15);
+  transition:all .3s ease;
+}
+.company-logo-box:hover img{
+  filter:grayscale(0%) brightness(1);
+  transform:scale(1.05);
+}
+
+
+/* === 2026 premium brand system === */
+.companies-logos{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr))!important;
+  gap:18px!important;
+  margin-top:56px;
+}
+.company-logo-box{
+  position:relative;
+  padding:16px 14px 14px!important;
+  border-radius:18px!important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    radial-gradient(circle at top, rgba(255,255,255,0.10), transparent 42%),
+    rgba(10,10,14,0.86)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  backdrop-filter:blur(18px)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 14px 34px rgba(0,0,0,0.34),
+    0 0 0 1px rgba(201,168,76,0.05)!important;
+}
+.company-logo-box::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  padding:1px;
+  background:linear-gradient(135deg, rgba(255,255,255,0.16), rgba(201,168,76,0.16), rgba(255,255,255,0.04));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  pointer-events:none;
+  opacity:.95;
+}
+.company-logo-box:hover{
+  transform:translateY(-7px) scale(1.03)!important;
+  border-color:rgba(255,255,255,0.18)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 22px 46px rgba(0,0,0,0.42),
+    0 0 40px rgba(201,168,76,0.12),
+    0 0 0 1px rgba(201,168,76,0.09)!important;
+}
+.company-logo-media{
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:10px;
+}
+.company-logo-box img,
+.logo-chip img,
+.cmp-company-badge img,
+.ic-card-logo img{
+  object-fit:contain;
+  image-rendering:auto;
+}
+.company-logo-box img{
+  max-width:120px!important;
+  max-height:44px!important;
+  width:auto!important;
+  height:auto!important;
+  filter:grayscale(0%) brightness(1.32) contrast(1.14) saturate(1.15) drop-shadow(0 0 10px rgba(255,255,255,0.10))!important;
+}
+.company-logo-box:hover img{
+  filter:grayscale(0%) brightness(1.42) contrast(1.18) saturate(1.24) drop-shadow(0 0 18px rgba(201,168,76,0.18))!important;
+  transform:translateY(-1px) scale(1.04)!important;
+}
+.company-logo-name{
+  font-size:12px!important;
+  color:rgba(255,255,255,0.82)!important;
+  text-align:center;
+  letter-spacing:.4px;
+}
+.company-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.05)!important;
+  border:1px solid rgba(255,255,255,0.08)!important;
+  color:rgba(255,255,255,0.86)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05),0 8px 18px rgba(0,0,0,0.22);
+}
+.logo-chip{
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.10);
+  overflow:hidden;
+  flex-shrink:0;
+}
+.logo-chip img{
+  width:18px;
+  height:18px;
+  filter:brightness(1.35) contrast(1.15);
+}
+.ic-card-logo{
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)), rgba(16,16,22,0.88);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 14px 24px rgba(0,0,0,0.28);
+}
+.ic-card-logo img{
+  width:34px;
+  height:34px;
+  filter:brightness(1.38) contrast(1.14) saturate(1.08);
+}
+.cmp-company-badge{
+  width:54px!important;
+  height:54px!important;
+  border-radius:16px!important;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)), rgba(16,16,22,0.88)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 28px rgba(0,0,0,0.28)!important;
+}
+.cmp-company-badge img{
+  width:34px;
+  height:34px;
+  filter:brightness(1.4) contrast(1.16) saturate(1.08);
+}
+
+
+
+/* ===== Apple-level Homepage Refresh 2026 ===== */
+:root{
+  --surface-1: rgba(255,255,255,0.04);
+  --surface-2: rgba(255,255,255,0.06);
+  --surface-3: rgba(255,255,255,0.08);
+  --line-soft: rgba(255,255,255,0.10);
+  --line-gold-soft: rgba(201,168,76,0.22);
+  --blur-xl: blur(24px);
+  --shadow-soft: 0 24px 80px rgba(0,0,0,0.30);
+  --shadow-premium: 0 30px 120px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.03) inset;
+}
+body{
+  background:
+    radial-gradient(circle at 15% 0%, rgba(255,255,255,0.045), transparent 28%),
+    radial-gradient(circle at 85% 10%, rgba(201,168,76,0.10), transparent 24%),
+    linear-gradient(180deg, #050505 0%, #0a0a0a 28%, #0d0d0d 58%, #080808 100%);
+}
+section{padding: 118px 5%; position: relative;}
+.section-title{letter-spacing:-0.03em;}
+.section-subtitle,.about-tagline,.hero-sub{max-width: 720px;}
+#navbar{
+  background: rgba(10,10,10,0.24);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+#navbar.scrolled{
+  background: rgba(7,7,7,0.72);
+  box-shadow: 0 16px 60px rgba(0,0,0,0.28);
+}
+.nav-cta,.btn-primary,.calc-btn,.form-submit-btn,.svc-btn-primary,.cmp-get-btn{
+  border-radius: 999px !important;
+  box-shadow: 0 10px 28px rgba(201,168,76,0.18);
+}
+.btn-outline,.svc-btn-outline,.btn-google-reviews,.rq-restart,.calc-switch-btn{
+  border-radius: 999px !important;
+}
+#hero{
+  min-height: 108vh;
+  padding-top: calc(var(--header-total) + 34px);
+  padding-bottom: 70px;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255,255,255,0.06), transparent 20%),
+    radial-gradient(circle at 82% 22%, rgba(201,168,76,0.16), transparent 18%),
+    linear-gradient(180deg, #090909 0%, #0d0d0d 100%);
+}
+.hero-inner{max-width: 1280px; margin: 0 auto; display:grid; grid-template-columns: 1.05fr 0.95fr; gap: 46px; align-items:center;}
+.hero-left{max-width: 680px;}
+.hero-eyebrow{
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+}
+.hero-headline{font-size: clamp(56px, 7vw, 98px); line-height: .94; letter-spacing: -.05em;}
+.hero-hl-gradient{
+  background: linear-gradient(180deg, #ffffff 0%, #f1dfab 55%, #c9a84c 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-sub{font-size: 18px; color: rgba(255,255,255,0.72); max-width: 620px;}
+.hero-trust-micro{
+  margin-top: 24px; display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  padding: 14px 16px; border-radius: 999px; width: fit-content;
+  background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); backdrop-filter: blur(18px);
+}
+.htm-item{font-size:13px; color: rgba(255,255,255,0.76);}
+.htm-sep{opacity:.28;}
+.hero-right, .hb-gap, .hero-right > *{
+  filter: saturate(.95);
+}
+.hb-gap, .hero-bento-card, .calc-shell, .claim-right, .renewal-form-card, .testi-card, .service-card, .why-card, .company-logo-box, .contact-form-wrap, .contact-info-item, .reviews-cta-strip {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 100%) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(20px);
+}
+.hero-bento-card, .service-card, .why-card, .testi-card, .company-logo-box, .calc-shell, .claim-right, .renewal-form-card, .reviews-cta-strip{
+  border-radius: 26px !important;
+}
+.service-card:hover,.why-card:hover,.testi-card:hover,.company-logo-box:hover{
+  transform: translateY(-7px);
+  border-color: rgba(201,168,76,0.34) !important;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.38), 0 0 0 1px rgba(201,168,76,0.10) inset;
+}
+.services-grid,.why-features,.testi-grid,.companies-logos{gap: 22px !important;}
+.service-icon,.why-card-icon,.contact-info-icon,.rq-rec-icon,.calc-kpi{
+  background: linear-gradient(180deg, rgba(201,168,76,0.16), rgba(255,255,255,0.04)) !important;
+  border:1px solid rgba(201,168,76,0.22) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+#services::before,#why::before,#companies::before,#testimonials::before,#calculators::before,#contact::before{
+  content:''; position:absolute; top:0; left:5%; right:5%; height:1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent);
+}
+#companies{
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+}
+.company-logo-box{
+  min-height: 132px;
+  justify-content: center;
+}
+.company-logo-media img{
+  filter: brightness(1.25) contrast(1.12) saturate(1.02) !important;
+}
+.company-logo-box:hover .company-logo-media img{
+  filter: brightness(1.42) contrast(1.18) saturate(1.15) !important;
+}
+.apple-trust-strip{
+  max-width: 1280px; margin: 28px auto 0; padding: 18px 20px; border-radius: 999px;
+  display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:center;
+  background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-soft);
+}
+.apple-trust-pill{
+  display:inline-flex; align-items:center; gap:10px; padding: 8px 14px; border-radius:999px;
+  background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.78); font-size: 13px; white-space: nowrap;
+}
+.apple-trust-pill strong{color:#fff; font-weight:700;}
+.apple-logo-marquee{
+  max-width:1280px; margin: 22px auto 0; overflow:hidden; position:relative; display:block;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.apple-logo-track{
+  display:flex; align-items:center; gap:36px; width:max-content; animation: appleLogoFlow 26s linear infinite;
+}
+.apple-logo-chip{
+  height:58px; min-width: 172px; padding: 0 20px; border-radius: 999px; display:flex; align-items:center; justify-content:center; gap:14px;
+  background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.apple-logo-chip img{
+  height:28px; width:auto; display:block; max-width:84px; object-fit:contain;
+  filter: brightness(1.28) contrast(1.08);
+}
+.apple-logo-fallback{
+  width:30px; height:30px; border-radius:999px; display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(180deg, rgba(201,168,76,0.22), rgba(201,168,76,0.10));
+  border:1px solid rgba(201,168,76,0.28); color: var(--gold2); font-size:10px; font-weight:700;
+  letter-spacing:.08em; flex-shrink:0;
+}
+.apple-logo-chip span{font-size:12px; color: rgba(255,255,255,0.82); letter-spacing:.04em; text-transform: uppercase;}
+@keyframes appleLogoFlow { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.testi-card{padding: 34px 30px !important;}
+.calc-2026-wrap .calc-2026-top{
+  margin-bottom: 26px; align-items:flex-end;
+}
+.calc-shell{padding: 18px;}
+.calc-switcher{gap:10px; margin-bottom: 18px;}
+.calc-switch-btn{background: rgba(255,255,255,0.05) !important; color:rgba(255,255,255,0.76) !important; border:1px solid rgba(255,255,255,0.08) !important;}
+.calc-switch-btn.active{background: linear-gradient(180deg, rgba(201,168,76,0.26), rgba(201,168,76,0.12)) !important; color:#fff !important; border-color: rgba(201,168,76,0.32) !important;}
+.contact-grid{gap: 42px;}
+.contact-info-item{padding: 20px 20px; border-radius: 20px; border-bottom: none !important;}
+footer{
+  background: linear-gradient(180deg, #050505 0%, #090909 100%);
+}
+.footer-grid{align-items:flex-start;}
+@media (max-width: 1024px){
+  .hero-inner{grid-template-columns:1fr; gap:28px;}
+  .hero-left{max-width:none;}
+  .apple-trust-strip{border-radius: 28px;}
+}
+@media (max-width: 768px){
+  section{padding: 88px 5%;}
+  #hero{min-height: auto; padding-bottom: 40px;}
+  .hero-headline{font-size: 54px;}
+  .hero-trust-micro{border-radius: 28px; width:100%;}
+  .apple-trust-strip{padding:14px; gap:10px;}
+  .apple-logo-chip{min-width: 148px; height:52px;}
+}
+
+
+
+/* ===== Mobile optimization pack ===== */
+img, svg, video, canvas { max-width: 100%; height: auto; }
+body { overflow-x: hidden; }
+html, body { max-width: 100%; }
+
+@media (max-width: 768px) {
+  :root{
+    --urgency-bar-height: 46px;
+    --navbar-height: 68px;
+  }
+
+  .urgency-bar{
+    top: 0 !important;
+    padding: 8px 12px !important;
+    font-size: 10.5px !important;
+    line-height: 1.4 !important;
+    white-space: normal !important;
+  }
+
+  #navbar{
+    top: var(--urgency-bar-height) !important;
+    padding: 12px 16px !important;
+  }
+
+  #hero{
+    min-height: auto !important;
+    padding: calc(var(--urgency-bar-height) + var(--navbar-height) + 26px) 16px 44px !important;
+  }
+
+  .hero-content{max-width: 100% !important;}
+  .hero-headline{
+    font-size: clamp(34px, 10vw, 46px) !important;
+    line-height: 1.06 !important;
+    letter-spacing: -0.5px !important;
+  }
+  .hero-sub{
+    font-size: 14px !important;
+    max-width: 100% !important;
+    line-height: 1.7 !important;
+  }
+  .hero-trust{
+    gap: 12px !important;
+    margin-top: 24px !important;
+  }
+  .hero-trust-item{
+    width: calc(50% - 6px);
+    min-width: 0;
+    align-items: flex-start !important;
+  }
+  .hero-trust-text strong{
+    font-size: 14px !important;
+  }
+
+  .hero-btns{
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+  .hero-btns .btn-primary,
+  .hero-btns .btn-outline,
+  .hero-btns .btn-whatsapp,
+  .hero-btns .btn-instant-quote,
+  .hero-btns a,
+  .hero-btns button{
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  section{
+    padding: 64px 16px !important;
+  }
+
+  .section-title{
+    font-size: clamp(30px, 8vw, 40px) !important;
+    line-height: 1.1 !important;
+  }
+  .section-subtitle{
+    font-size: 14px !important;
+    max-width: 100% !important;
+  }
+
+  .services-header,
+  .reviews-cta-strip,
+  .footer-bottom{
+    gap: 16px !important;
+  }
+
+  .services-grid,
+  .testi-grid,
+  .companies-logos{
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .company-logo-box,
+  .service-card,
+  .testi-card,
+  .calc-card,
+  .why-card,
+  .renewal-form-card,
+  .claim-right,
+  .popup-box{
+    border-radius: 18px !important;
+  }
+
+  .company-logo-box{
+    padding: 18px 14px !important;
+  }
+  .company-logo-box img{
+    max-height: 34px !important;
+  }
+
+  .apple-logo-marquee{
+    margin-top: 18px !important;
+    overflow: hidden !important;
+  }
+  .apple-logo-track,
+  .logo-track{
+    gap: 14px !important;
+    animation-duration: 34s !important;
+    width: max-content;
+  }
+  .apple-logo-chip{
+    padding: 10px 12px !important;
+    min-width: unset !important;
+    gap: 8px !important;
+  }
+  .apple-logo-chip img{
+    height: 22px !important;
+    max-width: 56px !important;
+  }
+  .apple-logo-chip span{
+    font-size: 10px !important;
+    letter-spacing: 0.03em !important;
+  }
+
+  .why-features,
+  .about-stats,
+  .claim-stat-row,
+  .form-row,
+  .rq-options,
+  .compare-selector{
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+  }
+
+  .calc-grid,
+  .about-grid,
+  .why-grid,
+  .contact-grid,
+  .claim-grid,
+  .renewal-grid,
+  .footer-grid{
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .calc-card{
+    padding: 24px 16px !important;
+  }
+  .calc-title,
+  .renewal-form-title,
+  .claim-right-title{
+    font-size: 22px !important;
+  }
+
+  .compare-table-wrap{
+    border-radius: 14px !important;
+  }
+
+  .popup-overlay{
+    padding: 12px !important;
+    align-items: flex-end !important;
+  }
+  .popup-box{
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 82vh !important;
+    overflow-y: auto !important;
+    padding: 24px 18px 20px !important;
+  }
+  .popup-title{
+    font-size: 26px !important;
+  }
+  .popup-btns{
+    gap: 10px !important;
+  }
+
+  .footer-social{
+    flex-wrap: wrap !important;
+  }
+
+  .marquee-inner span{
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+  }
+
+  .nav-logo-img{
+    height: 38px !important;
+  }
+
+  .contact-info-item{
+    padding: 18px 0 !important;
+  }
+
+  .form-control,
+  .renewal-input,
+  .renewal-select,
+  .calc-input,
+  .calc-select{
+    min-height: 46px !important;
+    font-size: 16px !important;
+  }
+
+  .cmp-cat-btn,
+  .rq-btn-next,
+  .rq-btn-back,
+  .btn-google-reviews,
+  .nav-cta{
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .compare-selector{
+    display: flex !important;
+    gap: 10px !important;
+  }
+
+  .claim-stat-row{
+    display: grid !important;
+    gap: 14px !important;
+    justify-content: stretch !important;
+  }
+}
+
+@media (max-width: 480px) {
+  :root{
+    --urgency-bar-height: 50px;
+  }
+  #hero{
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+  section{
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+  .hero-trust-item{
+    width: 100% !important;
+  }
+  .hero-headline{
+    font-size: 32px !important;
+  }
+  .section-title{
+    font-size: 28px !important;
+  }
+  .popup-title{
+    font-size: 24px !important;
+  }
+}
+
 </style>
 <link href="https://tamancare.in/" rel="canonical"/><meta content="https://tamancare.in/og-banner.jpg" property="og:image"/><meta content="Taman Care Insurance Services" property="og:site_name"/><meta content="en_IN" property="og:locale"/><meta content="https://tamancare.in/og-banner.jpg" name="twitter:image"/><meta content="#0a0a0a" name="theme-color"/>
 <style id="tc2026">
@@ -5006,6 +5615,151 @@ footer a:hover {
   border-color: rgba(232,201,110,0.5);
 }
 
+
+/* Company Logos Upgrade */
+.company-logo-box img {
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(1.2);
+  transition: all 0.3s ease;
+}
+.company-logo-box:hover img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.05);
+}
+
+
+/* === 2026 premium brand system === */
+.companies-logos{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr))!important;
+  gap:18px!important;
+  margin-top:56px;
+}
+.company-logo-box{
+  position:relative;
+  padding:16px 14px 14px!important;
+  border-radius:18px!important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    radial-gradient(circle at top, rgba(255,255,255,0.10), transparent 42%),
+    rgba(10,10,14,0.86)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  backdrop-filter:blur(18px)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 14px 34px rgba(0,0,0,0.34),
+    0 0 0 1px rgba(201,168,76,0.05)!important;
+}
+.company-logo-box::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  padding:1px;
+  background:linear-gradient(135deg, rgba(255,255,255,0.16), rgba(201,168,76,0.16), rgba(255,255,255,0.04));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  pointer-events:none;
+  opacity:.95;
+}
+.company-logo-box:hover{
+  transform:translateY(-7px) scale(1.03)!important;
+  border-color:rgba(255,255,255,0.18)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 22px 46px rgba(0,0,0,0.42),
+    0 0 40px rgba(201,168,76,0.12),
+    0 0 0 1px rgba(201,168,76,0.09)!important;
+}
+.company-logo-media{
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:10px;
+}
+.company-logo-box img,
+.logo-chip img,
+.cmp-company-badge img,
+.ic-card-logo img{
+  object-fit:contain;
+  image-rendering:auto;
+}
+.company-logo-box img{
+  max-width:120px!important;
+  max-height:44px!important;
+  width:auto!important;
+  height:auto!important;
+  filter:grayscale(0%) brightness(1.32) contrast(1.14) saturate(1.15) drop-shadow(0 0 10px rgba(255,255,255,0.10))!important;
+}
+.company-logo-box:hover img{
+  filter:grayscale(0%) brightness(1.42) contrast(1.18) saturate(1.24) drop-shadow(0 0 18px rgba(201,168,76,0.18))!important;
+  transform:translateY(-1px) scale(1.04)!important;
+}
+.company-logo-name{
+  font-size:12px!important;
+  color:rgba(255,255,255,0.82)!important;
+  text-align:center;
+  letter-spacing:.4px;
+}
+.company-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.05)!important;
+  border:1px solid rgba(255,255,255,0.08)!important;
+  color:rgba(255,255,255,0.86)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05),0 8px 18px rgba(0,0,0,0.22);
+}
+.logo-chip{
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.10);
+  overflow:hidden;
+  flex-shrink:0;
+}
+.logo-chip img{
+  width:18px;
+  height:18px;
+  filter:brightness(1.35) contrast(1.15);
+}
+.ic-card-logo{
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)), rgba(16,16,22,0.88);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 14px 24px rgba(0,0,0,0.28);
+}
+.ic-card-logo img{
+  width:34px;
+  height:34px;
+  filter:brightness(1.38) contrast(1.14) saturate(1.08);
+}
+.cmp-company-badge{
+  width:54px!important;
+  height:54px!important;
+  border-radius:16px!important;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)), rgba(16,16,22,0.88)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 28px rgba(0,0,0,0.28)!important;
+}
+.cmp-company-badge img{
+  width:34px;
+  height:34px;
+  filter:brightness(1.4) contrast(1.16) saturate(1.08);
+}
+
 </style>
 <style id="pi-multi-neon-upgrade">
 .pi-cat{
@@ -5105,7 +5859,362 @@ footer a:hover {
   border-color: rgba(232,201,110,0.5);
 }
 
+
+/* Company Logos Upgrade */
+.company-logo-box img {
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(1.2);
+  transition: all 0.3s ease;
+}
+.company-logo-box:hover img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.05);
+}
+
+
+/* === 2026 premium brand system === */
+.companies-logos{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr))!important;
+  gap:18px!important;
+  margin-top:56px;
+}
+.company-logo-box{
+  position:relative;
+  padding:16px 14px 14px!important;
+  border-radius:18px!important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    radial-gradient(circle at top, rgba(255,255,255,0.10), transparent 42%),
+    rgba(10,10,14,0.86)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  backdrop-filter:blur(18px)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 14px 34px rgba(0,0,0,0.34),
+    0 0 0 1px rgba(201,168,76,0.05)!important;
+}
+.company-logo-box::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  padding:1px;
+  background:linear-gradient(135deg, rgba(255,255,255,0.16), rgba(201,168,76,0.16), rgba(255,255,255,0.04));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  pointer-events:none;
+  opacity:.95;
+}
+.company-logo-box:hover{
+  transform:translateY(-7px) scale(1.03)!important;
+  border-color:rgba(255,255,255,0.18)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 22px 46px rgba(0,0,0,0.42),
+    0 0 40px rgba(201,168,76,0.12),
+    0 0 0 1px rgba(201,168,76,0.09)!important;
+}
+.company-logo-media{
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:10px;
+}
+.company-logo-box img,
+.logo-chip img,
+.cmp-company-badge img,
+.ic-card-logo img{
+  object-fit:contain;
+  image-rendering:auto;
+}
+.company-logo-box img{
+  max-width:120px!important;
+  max-height:44px!important;
+  width:auto!important;
+  height:auto!important;
+  filter:grayscale(0%) brightness(1.32) contrast(1.14) saturate(1.15) drop-shadow(0 0 10px rgba(255,255,255,0.10))!important;
+}
+.company-logo-box:hover img{
+  filter:grayscale(0%) brightness(1.42) contrast(1.18) saturate(1.24) drop-shadow(0 0 18px rgba(201,168,76,0.18))!important;
+  transform:translateY(-1px) scale(1.04)!important;
+}
+.company-logo-name{
+  font-size:12px!important;
+  color:rgba(255,255,255,0.82)!important;
+  text-align:center;
+  letter-spacing:.4px;
+}
+.company-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.05)!important;
+  border:1px solid rgba(255,255,255,0.08)!important;
+  color:rgba(255,255,255,0.86)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05),0 8px 18px rgba(0,0,0,0.22);
+}
+.logo-chip{
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.10);
+  overflow:hidden;
+  flex-shrink:0;
+}
+.logo-chip img{
+  width:18px;
+  height:18px;
+  filter:brightness(1.35) contrast(1.15);
+}
+.ic-card-logo{
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)), rgba(16,16,22,0.88);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 14px 24px rgba(0,0,0,0.28);
+}
+.ic-card-logo img{
+  width:34px;
+  height:34px;
+  filter:brightness(1.38) contrast(1.14) saturate(1.08);
+}
+.cmp-company-badge{
+  width:54px!important;
+  height:54px!important;
+  border-radius:16px!important;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)), rgba(16,16,22,0.88)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 28px rgba(0,0,0,0.28)!important;
+}
+.cmp-company-badge img{
+  width:34px;
+  height:34px;
+  filter:brightness(1.4) contrast(1.16) saturate(1.08);
+}
+
 </style>
+
+<style id="tc-calc-2026">
+/* 2026 calculator upgrade */
+.calc-2026-wrap{max-width:1120px;margin:0 auto;}
+.calc-2026-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:28px;}
+.calc-2026-kpis{display:grid;grid-template-columns:repeat(3,minmax(120px,1fr));gap:12px;max-width:430px;width:100%;}
+.calc-kpi{border:1px solid rgba(201,168,76,.16);background:rgba(255,255,255,.03);border-radius:14px;padding:14px 16px;}
+.calc-kpi strong{display:block;font-size:20px;font-family:var(--font-display);color:var(--gold2);line-height:1;}
+.calc-kpi span{display:block;margin-top:4px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.45);}
+.calc-shell{border:1px solid rgba(201,168,76,.18);border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));box-shadow:0 40px 100px rgba(0,0,0,.38),0 0 0 1px rgba(201,168,76,.04);overflow:hidden;}
+.calc-switcher{display:flex;gap:10px;flex-wrap:wrap;padding:18px;border-bottom:1px solid rgba(201,168,76,.14);background:rgba(0,0,0,.18);}
+.calc-switch-btn{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.14);color:rgba(255,255,255,.68);border-radius:999px;padding:12px 16px;font:600 13px var(--font-body);cursor:pointer;transition:all .28s var(--spring);display:inline-flex;align-items:center;gap:8px;}
+.calc-switch-btn:hover{transform:translateY(-2px);border-color:rgba(201,168,76,.4);color:#fff;background:rgba(201,168,76,.08);}
+.calc-switch-btn.active{background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(201,168,76,.08));color:#fff;border-color:rgba(201,168,76,.6);box-shadow:0 10px 30px rgba(201,168,76,.12);}
+.calc-panels{padding:22px;}
+.calc-2026-panel{display:none;animation:fadePanel .45s ease;}
+.calc-2026-panel.active{display:block;}
+@keyframes fadePanel{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.calc-hero-card{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch;}
+.calc-main-card,.calc-side-card{border:1px solid rgba(201,168,76,.14);background:rgba(255,255,255,.02);border-radius:18px;padding:24px;}
+.calc-mode-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.22);padding:6px 12px;border-radius:999px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);margin-bottom:16px;}
+.calc-2026-title{font-family:var(--font-display);font-size:34px;line-height:1.05;color:#fff;margin-bottom:8px;}
+.calc-2026-title em{color:var(--gold);font-style:italic;}
+.calc-2026-sub{font-size:14px;color:rgba(255,255,255,.58);line-height:1.8;max-width:620px;}
+.calc-insights-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;}
+.calc-insight{background:rgba(255,255,255,.025);border:1px solid rgba(201,168,76,.1);border-radius:14px;padding:14px;}
+.calc-insight strong{display:block;font-size:20px;color:#fff;font-family:var(--font-display);}
+.calc-insight span{display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:4px;}
+.calc-mini-steps{display:flex;flex-direction:column;gap:12px;justify-content:center;height:100%;}
+.calc-mini-step{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(201,168,76,.08);}
+.calc-mini-step:last-child{border-bottom:none;}
+.calc-mini-step b{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.24);color:var(--gold2);font-size:12px;flex-shrink:0;}
+.calc-mini-step span{font-size:13px;color:rgba(255,255,255,.58);line-height:1.6;}
+.calc-form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px;}
+.calc-chip-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+.calc-chip{border:1px solid rgba(201,168,76,.14);background:rgba(255,255,255,.03);padding:9px 12px;border-radius:999px;font-size:12px;color:rgba(255,255,255,.62);}
+.calc-btn-2026{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;font-weight:800;letter-spacing:.4px;cursor:pointer;transition:transform .28s var(--spring),box-shadow .28s var(--spring);margin-top:18px;}
+.calc-btn-2026:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(201,168,76,.24);}
+.calc-live-status{display:none;margin-top:16px;padding:14px 16px;border:1px solid rgba(201,168,76,.16);border-radius:14px;background:rgba(201,168,76,.06);}
+.calc-live-status.show{display:block;}
+.calc-live-status ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.calc-live-status li{font-size:12.5px;color:rgba(255,255,255,.68);display:flex;gap:10px;align-items:center;}
+.calc-live-status li::before{content:'✦';color:var(--gold2);font-size:8px;}
+.calc-result-2026{display:none;margin-top:18px;border:1px solid rgba(201,168,76,.18);border-radius:18px;background:linear-gradient(180deg,rgba(201,168,76,.09),rgba(201,168,76,.03));padding:20px;}
+.calc-result-2026.show{display:block;animation:fadePanel .35s ease;}
+.calc-result-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.calc-result-kicker{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:8px;}
+.calc-result-main{font-family:var(--font-display);font-size:42px;line-height:1;color:var(--gold3);}
+.calc-result-summary{font-size:14px;color:rgba(255,255,255,.75);line-height:1.7;margin-top:10px;max-width:660px;}
+.calc-ai-note{margin-top:16px;padding:16px;border-radius:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.07);font-size:13.5px;line-height:1.75;color:rgba(255,255,255,.74);}
+.calc-ai-note strong{color:var(--gold2);}
+.calc-bento{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;}
+.calc-bento-card{padding:16px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);}
+.calc-bento-card .label{font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.42);display:block;margin-bottom:8px;}
+.calc-bento-card .value{font-size:20px;font-family:var(--font-display);color:#fff;display:block;}
+.calc-bento-card .tiny{font-size:12px;color:rgba(255,255,255,.48);margin-top:6px;display:block;line-height:1.55;}
+.calc-action-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;}
+.calc-secondary-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:#fff;padding:12px 16px;border-radius:12px;text-decoration:none;font-size:13px;font-weight:700;}
+.calc-sticky-offer{margin-top:18px;padding:14px 16px;border-radius:14px;border:1px solid rgba(201,168,76,.16);background:linear-gradient(90deg,rgba(201,168,76,.1),rgba(201,168,76,.04));display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.calc-sticky-offer strong{font-size:14px;color:#fff;}
+.calc-sticky-offer span{font-size:12px;color:rgba(255,255,255,.58);display:block;margin-top:2px;}
+@media (max-width: 980px){.calc-hero-card{grid-template-columns:1fr}.calc-2026-kpis{max-width:none}.calc-form-grid,.calc-bento,.calc-insights-row{grid-template-columns:1fr 1fr;}}
+@media (max-width: 640px){.calc-panels{padding:14px}.calc-main-card,.calc-side-card{padding:18px}.calc-2026-title{font-size:28px}.calc-form-grid,.calc-bento,.calc-insights-row,.calc-2026-kpis{grid-template-columns:1fr}.calc-switcher{padding:14px}.calc-switch-btn{width:100%;justify-content:center}.calc-action-row>*{width:100%}.calc-sticky-offer{align-items:flex-start}}
+
+/* Company Logos Upgrade */
+.company-logo-box img {
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(1.2);
+  transition: all 0.3s ease;
+}
+.company-logo-box:hover img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.05);
+}
+
+
+/* === 2026 premium brand system === */
+.companies-logos{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr))!important;
+  gap:18px!important;
+  margin-top:56px;
+}
+.company-logo-box{
+  position:relative;
+  padding:16px 14px 14px!important;
+  border-radius:18px!important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    radial-gradient(circle at top, rgba(255,255,255,0.10), transparent 42%),
+    rgba(10,10,14,0.86)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  backdrop-filter:blur(18px)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 14px 34px rgba(0,0,0,0.34),
+    0 0 0 1px rgba(201,168,76,0.05)!important;
+}
+.company-logo-box::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  padding:1px;
+  background:linear-gradient(135deg, rgba(255,255,255,0.16), rgba(201,168,76,0.16), rgba(255,255,255,0.04));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  pointer-events:none;
+  opacity:.95;
+}
+.company-logo-box:hover{
+  transform:translateY(-7px) scale(1.03)!important;
+  border-color:rgba(255,255,255,0.18)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 22px 46px rgba(0,0,0,0.42),
+    0 0 40px rgba(201,168,76,0.12),
+    0 0 0 1px rgba(201,168,76,0.09)!important;
+}
+.company-logo-media{
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:10px;
+}
+.company-logo-box img,
+.logo-chip img,
+.cmp-company-badge img,
+.ic-card-logo img{
+  object-fit:contain;
+  image-rendering:auto;
+}
+.company-logo-box img{
+  max-width:120px!important;
+  max-height:44px!important;
+  width:auto!important;
+  height:auto!important;
+  filter:grayscale(0%) brightness(1.32) contrast(1.14) saturate(1.15) drop-shadow(0 0 10px rgba(255,255,255,0.10))!important;
+}
+.company-logo-box:hover img{
+  filter:grayscale(0%) brightness(1.42) contrast(1.18) saturate(1.24) drop-shadow(0 0 18px rgba(201,168,76,0.18))!important;
+  transform:translateY(-1px) scale(1.04)!important;
+}
+.company-logo-name{
+  font-size:12px!important;
+  color:rgba(255,255,255,0.82)!important;
+  text-align:center;
+  letter-spacing:.4px;
+}
+.company-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.05)!important;
+  border:1px solid rgba(255,255,255,0.08)!important;
+  color:rgba(255,255,255,0.86)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05),0 8px 18px rgba(0,0,0,0.22);
+}
+.logo-chip{
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.10);
+  overflow:hidden;
+  flex-shrink:0;
+}
+.logo-chip img{
+  width:18px;
+  height:18px;
+  filter:brightness(1.35) contrast(1.15);
+}
+.ic-card-logo{
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)), rgba(16,16,22,0.88);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 14px 24px rgba(0,0,0,0.28);
+}
+.ic-card-logo img{
+  width:34px;
+  height:34px;
+  filter:brightness(1.38) contrast(1.14) saturate(1.08);
+}
+.cmp-company-badge{
+  width:54px!important;
+  height:54px!important;
+  border-radius:16px!important;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)), rgba(16,16,22,0.88)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 28px rgba(0,0,0,0.28)!important;
+}
+.cmp-company-badge img{
+  width:34px;
+  height:34px;
+  filter:brightness(1.4) contrast(1.16) saturate(1.08);
+}
+
+</style>
+
 </head>
 <body>
 <!-- CLAIMS TICKER + URGENCY BAR -->
@@ -5113,7 +6222,7 @@ footer a:hover {
 <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
 <span style="width:7px;height:7px;border-radius:50%;background:#4ade80;display:inline-block;box-shadow:0 0 8px rgba(74,222,128,0.8);animation:tickerPulse 1.5s infinite;"></span>
 <span style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);">Live · Claims Settled</span>
-<span id="claimsCounter" style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold);font-weight:700;">₹21.5 Lakh</span>
+<span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold);font-weight:700;">₹7 Lakhs</span>
 <span style="font-size:11.5px;color:rgba(255,255,255,0.4);">this month</span>
 </div>
 <div aria-label="Live website visitors" aria-live="polite" class="urgency-live-wrap" style="margin:0 auto;">
@@ -5125,7 +6234,7 @@ footer a:hover {
 <span aria-hidden="true" class="urgency-activity-dots"><span></span><span></span><span></span></span>
 </div>
 <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;">
-<span style="font-size:11.5px;color:rgba(255,255,255,0.4);">🏆 <strong style="color:var(--gold2);">₹2.4 Cr</strong> total</span>
+<span style="font-size:11.5px;color:rgba(255,255,255,0.4);">🏆 <strong style="color:var(--gold2);">₹50 Lakhs</strong> total</span>
 <span style="font-size:11.5px;color:rgba(255,255,255,0.4);">⚡ <strong style="color:var(--gold2);">48 hrs</strong> avg settlement</span>
 <span style="font-size:11.5px;color:rgba(255,255,255,0.4);">✅ <strong style="color:var(--gold2);">98.5%</strong> success rate</span>
 </div>
@@ -5198,18 +6307,21 @@ footer a:hover {
 <div class="hero-left">
 <div class="hero-eyebrow">
 <span class="hero-eyebrow-dot"></span>
-        Chandigarh's Most Trusted Insurance Advisor
+        Premium Insurance Advisory · Chandigarh & Pan India
       </div>
 <h1 class="hero-headline">
         Protect Today,<br/>
 <span class="hero-hl-gradient">Secure Tomorrow</span>
 </h1>
 <p class="hero-sub">
-        Expert insurance guidance — transparent pricing,
-        fast claims, zero paperwork. Your protection, perfected.
+        <p class="hero-sub">Compare smarter. <span class="gold">Save more.</span> Get expert claim support when it matters.</p>
       </p>
+<div class="hero-btns" style="margin-top:30px;">
+  <a class="btn-primary" href="#calculators">Get My Estimate</a>
+  <a class="btn-outline" href="#companies">See Trusted Brands</a>
+</div>
 <div class="hero-trust-micro">
-<span class="htm-item"><span class="htm-icon">✅</span><strong>2,500+</strong> Clients</span>
+<span class="htm-item"><span class="htm-icon">✅</span><strong>2,547+</strong> Clients</span>
 <span class="htm-sep">·</span>
 <span class="htm-item"><span class="htm-icon">⚡</span>Compare <strong>Instantly</strong></span>
 <span class="htm-sep">·</span>
@@ -5246,7 +6358,7 @@ footer a:hover {
 <div class="hb-stat" data-stat="clients">
 <div class="hb-stat-inner">
 <div class="hb-stat-icon">👥</div>
-<div class="hb-stat-val">2,500+</div>
+<div class="hb-stat-val">2,547+</div>
 <div class="hb-stat-label">Happy Clients</div>
 <div class="hb-stat-mini">Families protected across India</div>
 </div>
@@ -5381,7 +6493,7 @@ footer a:hover {
 <span>✦ Instant Renewal</span>
 <span>✦ Claim Support</span>
 <span>✦ Free Consultation</span>
-<span>✦ 2,500+ Happy Clients</span>
+<span>✦ 2,547+ happy clients</span>
 <span>✦ Pan India Services</span>
 <span>✦ Health Insurance</span>
 <span>✦ Car Insurance</span>
@@ -5392,7 +6504,7 @@ footer a:hover {
 <span>✦ Instant Renewal</span>
 <span>✦ Claim Support</span>
 <span>✦ Free Consultation</span>
-<span>✦ 2,500+ Happy Clients</span>
+<span>✦ 2,547+ happy clients</span>
 <span>✦ Pan India Services</span>
 </div>
 </div>
@@ -5488,7 +6600,7 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 <div class="ts-item">
 <div class="ts-icon">🏆</div>
 <div>
-<div class="ts-num">2,500+</div>
+<div class="ts-num">2,547+</div>
 <div class="ts-label">Trusted Clients</div>
 </div>
 </div>
@@ -5694,11 +6806,11 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 <hr class="about-divider"/>
 <div class="gold-divider"></div>
 <div class="about-quote">"Insurance is not just a policy — it's a promise I make to protect what matters most to you."</div>
-<div style="float:right;margin:0 0 20px 28px;max-width:150px;"><img alt="Taman Care Insurance Logo" src="logo.png" style="width:100%;display:block;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,0.28);"/></div><p class="about-body">With over a decade of expertise in the insurance industry, Taman Aggarwal has helped 2,500+ families and businesses across India find the right coverage at the most competitive prices. Based in Chandigarh with a Pan India reach, Taman Care Insurance Services is built on trust, transparency, and dedicated client service.</p>
+<div style="float:right;margin:0 0 20px 28px;max-width:150px;"><img alt="Taman Care Insurance Logo" src="logo.png" style="width:100%;display:block;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,0.28);"/></div><p class="about-body">With over a decade of expertise in the insurance industry, Taman Aggarwal has helped 2,547+ families and businesses across India find the right coverage at the most competitive prices. Based in Chandigarh with a Pan India reach, Taman Care Insurance Services is built on trust, transparency, and dedicated client service.</p>
 <p class="about-body">We partner with 20+ leading insurance companies including HDFC ERGO, ICICI Lombard, Star Health, Bajaj Allianz, and Tata AIG — giving you the power of choice, backed by expert guidance.</p>
 <div class="about-stats">
 <div class="stat-box">
-<div class="stat-num">2,500+</div>
+<div class="stat-num">2,547+</div>
 <div class="stat-label">Happy Clients</div>
 </div>
 <div class="stat-box">
@@ -5718,11 +6830,35 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 </div>
 </section>
 <!-- SERVICES -->
+
+<div class="apple-trust-strip reveal">
+  <div class="apple-trust-pill">✦ <strong>2,547+</strong> protected clients</div>
+  <div class="apple-trust-pill">⚡ compare top insurers in minutes</div>
+  <div class="apple-trust-pill">🛟 claim assistance when you need it most</div>
+  <div class="apple-trust-pill">🔒 simple, transparent, no-pressure advice</div>
+</div>
+<div class="apple-logo-marquee reveal">
+  <div class="apple-logo-track">
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/hdfcergo.com" alt="HDFC ERGO" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=hdfcergo.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>HDF</div>';}" /><span>HDFC ERGO</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/icicilombard.com" alt="ICICI Lombard" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=icicilombard.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>ICI</div>';}" /><span>ICICI Lombard</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/starhealth.in" alt="Star Health" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=starhealth.in&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>STA</div>';}" /><span>Star Health</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/nivabupa.com" alt="Niva Bupa" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=nivabupa.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>NIV</div>';}" /><span>Niva Bupa</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/bajajallianz.com" alt="Bajaj Allianz" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=bajajallianz.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>BAJ</div>';}" /><span>Bajaj Allianz</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/tataaig.com" alt="TATA AIG" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=tataaig.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>TAT</div>';}" /><span>TATA AIG</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/hdfcergo.com" alt="HDFC ERGO" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=hdfcergo.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>HDF</div>';}" /><span>HDFC ERGO</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/icicilombard.com" alt="ICICI Lombard" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=icicilombard.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>ICI</div>';}" /><span>ICICI Lombard</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/starhealth.in" alt="Star Health" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=starhealth.in&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>STA</div>';}" /><span>Star Health</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/nivabupa.com" alt="Niva Bupa" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=nivabupa.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>NIV</div>';}" /><span>Niva Bupa</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/bajajallianz.com" alt="Bajaj Allianz" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=bajajallianz.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>BAJ</div>';}" /><span>Bajaj Allianz</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/tataaig.com" alt="TATA AIG" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=tataaig.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>TAT</div>';}" /><span>TATA AIG</span></div>
+  </div>
+</div>
+
 <section id="services">
 <div class="services-header reveal">
 <div>
 <div class="section-tag">What We Offer</div>
-<h2 class="section-title">Our <em>Services</em></h2>
+<h2 class="section-title">Coverage <em>Solutions</em></h2>
 <p class="about-tagline">
 Helping clients save 30–40% on insurance with smarter coverage decisions.
 </p>
@@ -6190,7 +7326,7 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 <div class="why-grid">
 <div class="why-left reveal">
 <div class="section-tag">Why Choose Us</div>
-<h2 class="section-title">The <em>Taman Care</em><br>Advantage</br></h2>
+<h2 class="section-title">Why <em>Taman Care</em> feels different</h2>
 <p class="about-tagline">
 Helping clients save 30–40% on insurance with smarter coverage decisions.
 </p>
@@ -6220,7 +7356,7 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 <div class="card-neon-hover"></div>🤝</div>
 <div class="why-card-title">
 <div class="card-neon-hover"></div>Trusted Service</div>
-<p class="why-card-text">2,500+ happy clients and 10+ years of trusted advisory services.</p>
+<p class="why-card-text">2,547+ happy clients and 10+ years of trusted advisory services.</p>
 </div>
 <div class="why-card">
 <div class="card-neon-hover"></div>
@@ -6250,7 +7386,7 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 </div>
 <div class="why-right reveal reveal-delay-2">
 <div class="why-big-stat">
-<span class="why-big-num">2,500+</span>
+<span class="why-big-num">2,547+</span>
 <p class="why-big-label">Happy Clients &amp; Counting</p>
 <div style="width:60px;height:2px;background:var(--gold);margin:16px auto 20px;"></div>
 <p style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.8;">From families in Chandigarh to businesses across Pan India — Taman Care Insurance is the name people trust when it matters most.</p>
@@ -6258,16 +7394,7 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 <a class="btn-primary" href="https://wa.me/919068541300?text=Hello%2C%20I%20want%20a%20free%20insurance%20consultation" rel="noreferrer noopener" style="display:inline-block;" target="_blank">Get Free Consultation</a>
 </div>
 </div>
-<div class="why-companies-strip" style="margin-top:24px;">
-<span class="company-tag">HDFC ERGO</span>
-<span class="company-tag">ICICI Lombard</span>
-<span class="company-tag">Star Health</span>
-<span class="company-tag">Bajaj Allianz</span>
-<span class="company-tag">Tata AIG</span>
-<span class="company-tag">Niva Bupa</span>
-<span class="company-tag">Care Health</span>
-<span class="company-tag">+ More</span>
-</div>
+<div class="why-companies-strip" style="margin-top:24px;"><span class="company-tag"><span class="logo-chip"><img alt="HDFC ERGO logo" loading="lazy" src="https://www.google.com/s2/favicons?domain=hdfcergo.com&sz=128"></span>HDFC ERGO</span><span class="company-tag"><span class="logo-chip"><img alt="ICICI Lombard logo" loading="lazy" src="https://www.google.com/s2/favicons?domain=icicilombard.com&sz=128"></span>ICICI Lombard</span><span class="company-tag"><span class="logo-chip"><img alt="Star Health logo" loading="lazy" src="https://www.google.com/s2/favicons?domain=starhealth.in&sz=128"></span>Star Health</span><span class="company-tag"><span class="logo-chip"><img alt="Bajaj Allianz logo" loading="lazy" src="https://www.google.com/s2/favicons?domain=bajajallianz.com&sz=128"></span>Bajaj Allianz</span><span class="company-tag"><span class="logo-chip"><img alt="Tata AIG logo" loading="lazy" src="https://www.google.com/s2/favicons?domain=tataaig.com&sz=128"></span>Tata AIG</span><span class="company-tag"><span class="logo-chip"><img alt="Niva Bupa logo" loading="lazy" src="https://www.google.com/s2/favicons?domain=nivabupa.com&sz=128"></span>Niva Bupa</span><span class="company-tag"><span class="logo-chip"><img alt="Care Health logo" loading="lazy" src="https://www.google.com/s2/favicons?domain=careinsurance.com&sz=128"></span>Care Health</span><span class="company-tag">+ More</span></div>
 </div>
 </div>
 </section>
@@ -6324,11 +7451,11 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 <div class="claim-stat-label">Claim Success Rate</div>
 </div>
 <div class="claim-stat">
-<div class="claim-stat-num">₹10L+</div>
+<div class="claim-stat-num">₹50 Lakhs</div>
 <div class="claim-stat-label">Total Claims Settled</div>
 </div>
 <div class="claim-stat">
-<div class="claim-stat-num">2,500+</div>
+<div class="claim-stat-num">2,547+</div>
 <div class="claim-stat-label">Claims Assisted</div>
 </div>
 </div>
@@ -6344,73 +7471,150 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 </p>
 <hr class="about-divider"/><div style="width:48px;height:2px;background:var(--gold);margin:16px auto 0;"></div><p style="color:rgba(255,255,255,0.4);font-size:14px;margin-top:14px;">While portals disappear after you buy — we stay until the last rupee is settled.</p></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;"><div class="reveal" style="background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.15);border-radius:12px;padding:28px;position:relative;overflow:hidden;"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));"></div><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;"><span style="font-size:30px;">🚗</span><div><div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.35);text-transform:uppercase;">Car Insurance Claim</div><div style="font-size:12px;color:rgba(255,255,255,0.4);">Chandigarh · 2024</div></div></div><p style="font-family:'Cormorant Garamond',serif;font-size:17px;color:#fff;line-height:1.6;margin-bottom:18px;">"Ramesh's total-loss claim was rejected citing 'policy lapse'. We proved the payment was made on time and recovered the full amount."</p><div style="display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;"><div><div style="font-size:10px;color:rgba(255,255,255,0.35);">Settlement</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold);font-weight:700;">₹2.2 Lakh</div></div><div style="text-align:right;"><div style="font-size:10px;color:rgba(255,255,255,0.35);">Settled In</div><div style="font-size:20px;font-weight:700;color:#4ade80;">11 Days</div></div></div></div><div class="reveal" style="background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.15);border-radius:12px;padding:28px;position:relative;overflow:hidden;"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));"></div><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;"><span style="font-size:30px;">🏥</span><div><div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.35);text-transform:uppercase;">Health Insurance Claim</div><div style="font-size:12px;color:rgba(255,255,255,0.4);">Mohali · 2024</div></div></div><p style="font-family:'Cormorant Garamond',serif;font-size:17px;color:#fff;line-height:1.6;margin-bottom:18px;">"Gurpreet's mother needed emergency surgery. We got cashless approval in 4 hours when the hospital said it would take 2 days."</p><div style="display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;"><div><div style="font-size:10px;color:rgba(255,255,255,0.35);">Cashless Approved</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold);font-weight:700;">₹4.5 Lakh</div></div><div style="text-align:right;"><div style="font-size:10px;color:rgba(255,255,255,0.35);">Approval In</div><div style="font-size:20px;font-weight:700;color:#4ade80;">4 Hours</div></div></div></div><div class="reveal" style="background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.15);border-radius:12px;padding:28px;position:relative;overflow:hidden;"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));"></div><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;"><span style="font-size:30px;">🚛</span><div><div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.35);text-transform:uppercase;">Commercial Vehicle Claim</div><div style="font-size:12px;color:rgba(255,255,255,0.4);">Panchkula · 2023</div></div></div><p style="font-family:'Cormorant Garamond',serif;font-size:17px;color:#fff;line-height:1.6;margin-bottom:18px;">"Sukhwinder's truck was undervalued by ₹2L by the surveyor. We escalated and got the full correct settlement."</p><div style="display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;"><div><div style="font-size:10px;color:rgba(255,255,255,0.35);">Full Settlement</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold);font-weight:700;">₹3.3 Lakh</div></div><div style="text-align:right;"><div style="font-size:10px;color:rgba(255,255,255,0.35);">Extra Recovered</div><div style="font-size:20px;font-weight:700;color:#4ade80;">₹2 Lakh</div></div></div></div></div></div></section>
 <!-- COMPANIES -->
+
 <section id="companies">
-<div class="reveal">
-<div class="section-tag">Our Partners</div>
-<h2 class="section-title">Trusted Insurance <em>Companies</em></h2>
-<p class="about-tagline">
-Helping clients save 30–40% on insurance with smarter coverage decisions.
-</p>
-<hr class="about-divider"/>
-<div class="gold-divider"></div>
-<p class="section-subtitle">We work with all leading insurance providers so you always have the best options at your fingertips.</p>
-</div>
-<div class="companies-logos">
-<div class="company-logo-box reveal">
-<div class="company-logo-abbr"><img alt="HDFC ERGO Insurance Logo" decoding="async" height="36" loading="lazy" onerror="this.style.display='none'" src="https://logo.clearbit.com/hdfcergo.com" style="width:80px;height:36px;object-fit:contain;filter:grayscale(100%) brightness(1.8);transition:filter 0.3s ease;" width="80"/></div>
-<div class="company-logo-name">HDFC ERGO</div>
-</div>
-<div class="company-logo-box reveal reveal-delay-1">
-<div class="company-logo-abbr"><img alt="ICICI Lombard Insurance Logo" decoding="async" height="36" loading="lazy" onerror="this.style.display='none'" src="https://logo.clearbit.com/icicilombard.com" style="width:80px;height:36px;object-fit:contain;filter:grayscale(100%) brightness(1.8);transition:filter 0.3s ease;" width="80"/></div>
-<div class="company-logo-name">ICICI Lombard</div>
-</div>
-<div class="company-logo-box reveal reveal-delay-2">
-<div class="company-logo-abbr"><img alt="Star Health Insurance Logo" decoding="async" height="36" loading="lazy" onerror="this.style.display='none'" src="https://logo.clearbit.com/starhealth.in" style="width:80px;height:36px;object-fit:contain;filter:grayscale(100%) brightness(1.8);transition:filter 0.3s ease;" width="80"/></div>
-<div class="company-logo-name">Star Health</div>
-</div>
-<div class="company-logo-box reveal reveal-delay-3">
-<div class="company-logo-abbr"><img alt="Bajaj Allianz Insurance Logo" decoding="async" height="36" loading="lazy" onerror="this.style.display='none'" src="https://logo.clearbit.com/bajajallianz.com" style="width:80px;height:36px;object-fit:contain;filter:grayscale(100%) brightness(1.8);transition:filter 0.3s ease;" width="80"/></div>
-<div class="company-logo-name">Bajaj Allianz</div>
-</div>
-<div class="company-logo-box reveal">
-<div class="company-logo-abbr"><img alt="Tata AIG Insurance Logo" decoding="async" height="36" loading="lazy" onerror="this.style.display='none'" src="https://logo.clearbit.com/tataaig.com" style="width:80px;height:36px;object-fit:contain;filter:grayscale(100%) brightness(1.8);transition:filter 0.3s ease;" width="80"/></div>
-<div class="company-logo-name">Tata AIG</div>
-</div>
-<div class="company-logo-box reveal reveal-delay-1">
-<div class="company-logo-abbr"><img alt="Niva Bupa Insurance Logo" decoding="async" height="36" loading="lazy" onerror="this.style.display='none'" src="https://logo.clearbit.com/nivabupa.com" style="width:80px;height:36px;object-fit:contain;filter:grayscale(100%) brightness(1.8);transition:filter 0.3s ease;" width="80"/></div>
-<div class="company-logo-name">Niva Bupa</div>
-</div>
-<div class="company-logo-box reveal reveal-delay-2">
-<div class="company-logo-abbr"><img alt="Care Health Insurance Logo" decoding="async" height="36" loading="lazy" onerror="this.style.display='none'" src="https://logo.clearbit.com/careinsurance.com" style="width:80px;height:36px;object-fit:contain;filter:grayscale(100%) brightness(1.8);transition:filter 0.3s ease;" width="80"/></div>
-<div class="company-logo-name">Care Health</div>
-</div>
-<div class="company-logo-box reveal reveal-delay-3">
-<div class="company-logo-abbr"><img alt="Max Life Insurance Logo" decoding="async" height="36" loading="lazy" onerror="this.style.display='none'" src="https://logo.clearbit.com/maxlifeinsurance.com" style="width:80px;height:36px;object-fit:contain;filter:grayscale(100%) brightness(1.8);transition:filter 0.3s ease;" width="80"/></div>
-<div class="company-logo-name">Max Bupa</div>
-</div>
-<div class="company-logo-box reveal">
-<div class="company-logo-abbr"><img alt="National Insurance Insurance Logo" decoding="async" height="36" loading="lazy" onerror="this.style.display='none'" src="https://logo.clearbit.com/nationalinsurance.nic.co.in" style="width:80px;height:36px;object-fit:contain;filter:grayscale(100%) brightness(1.8);transition:filter 0.3s ease;" width="80"/></div>
-<div class="company-logo-name">National Insurance</div>
-</div>
-<div class="company-logo-box reveal reveal-delay-1">
-<div class="company-logo-abbr"><img alt="Reliance General Insurance Logo" decoding="async" height="36" loading="lazy" onerror="this.style.display='none'" src="https://logo.clearbit.com/reliancegeneral.co.in" style="width:80px;height:36px;object-fit:contain;filter:grayscale(100%) brightness(1.8);transition:filter 0.3s ease;" width="80"/></div>
-<div class="company-logo-name">Reliance General</div>
-</div>
-<div class="company-logo-box reveal reveal-delay-2">
-<div class="company-logo-abbr"><img alt="SBI Life Insurance Logo" decoding="async" height="36" loading="lazy" onerror="this.style.display='none'" src="https://logo.clearbit.com/sbilife.co.in" style="width:80px;height:36px;object-fit:contain;filter:grayscale(100%) brightness(1.8);transition:filter 0.3s ease;" width="80"/></div>
-<div class="company-logo-name">SBI General</div>
-</div>
-<div class="company-logo-box reveal reveal-delay-3">
-<div class="company-logo-abbr"><img alt="Oriental Insurance Insurance Logo" decoding="async" height="36" loading="lazy" onerror="this.style.display='none'" src="https://logo.clearbit.com/orientalinsurance.org.in" style="width:80px;height:36px;object-fit:contain;filter:grayscale(100%) brightness(1.8);transition:filter 0.3s ease;" width="80"/></div>
-<div class="company-logo-name">Oriental Insurance</div>
-</div>
-</div>
+  <div class="reveal">
+    <div class="section-tag">Our Partners</div>
+    <h2 class="section-title">Trusted Insurance <em>Brands</em></h2>
+    <p class="section-subtitle">A cleaner, smarter shortlist of leading insurers — so you compare better plans faster without the clutter.</p>
+  </div>
+
+  <div class="companies-logos">
+    
+    <div class="company-logo-box reveal">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="HDFC ERGO logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/hdfcergo.com"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=hdfcergo.com&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">HDFC ERGO</div>
+    </div>
+
+    <div class="company-logo-box reveal reveal-delay-1">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="ICICI Lombard logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/icicilombard.com"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=icicilombard.com&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">ICICI Lombard</div>
+    </div>
+
+    <div class="company-logo-box reveal reveal-delay-2">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="Star Health logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/starhealth.in"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=starhealth.in&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">Star Health</div>
+    </div>
+
+    <div class="company-logo-box reveal reveal-delay-3">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="Bajaj Allianz logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/bajajallianz.com"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=bajajallianz.com&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">Bajaj Allianz</div>
+    </div>
+
+    <div class="company-logo-box reveal">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="Tata AIG logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/tataaig.com"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=tataaig.com&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">Tata AIG</div>
+    </div>
+
+    <div class="company-logo-box reveal reveal-delay-1">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="Niva Bupa logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/nivabupa.com"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=nivabupa.com&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">Niva Bupa</div>
+    </div>
+
+    <div class="company-logo-box reveal reveal-delay-2">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="Care Health logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/careinsurance.com"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=careinsurance.com&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">Care Health</div>
+    </div>
+
+    <div class="company-logo-box reveal reveal-delay-3">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="SBI General logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/sbigeneral.in"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=sbigeneral.in&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">SBI General</div>
+    </div>
+
+    <div class="company-logo-box reveal">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="HDFC Life logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/hdfclife.com"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=hdfclife.com&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">HDFC Life</div>
+    </div>
+
+    <div class="company-logo-box reveal reveal-delay-1">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="ICICI Pru logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/iciciprulife.com"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=iciciprulife.com&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">ICICI Pru</div>
+    </div>
+
+    <div class="company-logo-box reveal reveal-delay-2">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="Max Life logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/maxlifeinsurance.com"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=maxlifeinsurance.com&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">Max Life</div>
+    </div>
+
+    <div class="company-logo-box reveal reveal-delay-3">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="SBI Life logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/sbilife.co.in"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=sbilife.co.in&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">SBI Life</div>
+    </div>
+
+    <div class="company-logo-box reveal">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="National Insurance logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/nationalinsurance.nic.co.in"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=nationalinsurance.nic.co.in&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">National Insurance</div>
+    </div>
+
+    <div class="company-logo-box reveal reveal-delay-1">
+      <div class="company-logo-abbr company-logo-media">
+        <img alt="New India Assurance logo" loading="lazy" width="128" height="48"
+             src="https://logo.clearbit.com/newindia.co.in"
+             onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=newindia.co.in&sz=128';this.style.width='34px';this.style.height='34px';this.style.borderRadius='9px';this.style.padding='6px';this.style.background='rgba(255,255,255,0.08)';">
+      </div>
+      <div class="company-logo-name">New India Assurance</div>
+    </div>
+  </div>
 </section>
+
+
 <!-- TESTIMONIALS -->
 <section id="testimonials">
 <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 56px;">
 <div class="section-tag">Client Reviews</div>
-<h2 class="section-title">What Our <em>Clients</em> Say</h2>
+<h2 class="section-title">What clients <em>love</em> most</h2>
 <p class="about-tagline">
 Helping clients save 30–40% on insurance with smarter coverage decisions.
 </p>
@@ -6499,7 +7703,7 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 <div>
 <div class="reviews-stars">★★★★★</div>
 <div class="reviews-cta-title">See Our Real Google Reviews</div>
-<div class="reviews-cta-sub">2,500+ happy clients. Real names, real stories — not hardcoded text.</div>
+<div class="reviews-cta-sub">2,547+ happy clients. Real names, real stories — not hardcoded text.</div>
 </div>
 </div>
 <a class="btn-google-reviews" href="https://g.co/kgs/tamancare" rel="noreferrer noopener" target="_blank">
@@ -6514,199 +7718,144 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
 Helping clients save 30–40% on insurance with smarter coverage decisions.
 </p>
 <hr class="about-divider"/><div style="width:48px;height:2px;background:var(--gold);margin:16px auto 0;"></div></div><div class="faq-item" style="border:1px solid rgba(201,168,76,0.15);border-radius:8px;overflow:hidden;margin-bottom:8px;"><button onclick="toggleFaq(this)" style="width:100%;background:rgba(255,255,255,0.02);border:none;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-align:left;gap:12px;" type="button"><span style="font-size:15px;font-weight:600;color:#fff;">How long does a claim take to settle?</span><span class="faq-icon" style="color:var(--gold);font-size:22px;flex-shrink:0;">+</span></button><div class="faq-body" style="display:none;padding:0 24px 20px;color:rgba(255,255,255,0.55);font-size:14px;line-height:1.8;">Most cashless health claims settle in <strong style="color:#fff">24–48 hours</strong>. Reimbursement claims take 7–15 days. Car/bike claims typically settle in <strong style="color:#fff">3–7 working days</strong>. We follow up with insurers on your behalf at every step.</div></div><div class="faq-item" style="border:1px solid rgba(201,168,76,0.15);border-radius:8px;overflow:hidden;margin-bottom:8px;"><button onclick="toggleFaq(this)" style="width:100%;background:rgba(255,255,255,0.02);border:none;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-align:left;gap:12px;" type="button"><span style="font-size:15px;font-weight:600;color:#fff;">Can I switch insurer at renewal without losing NCB?</span><span class="faq-icon" style="color:var(--gold);font-size:22px;flex-shrink:0;">+</span></button><div class="faq-body" style="display:none;padding:0 24px 20px;color:rgba(255,255,255,0.55);font-size:14px;line-height:1.8;">Yes. You can switch at every renewal without losing your <strong style="color:#fff">No Claim Bonus</strong>. For health, your waiting period carries over too. We handle the full portability process at zero extra cost.</div></div><div class="faq-item" style="border:1px solid rgba(201,168,76,0.15);border-radius:8px;overflow:hidden;margin-bottom:8px;"><button onclick="toggleFaq(this)" style="width:100%;background:rgba(255,255,255,0.02);border:none;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-align:left;gap:12px;" type="button"><span style="font-size:15px;font-weight:600;color:#fff;">What documents do I need for a car insurance claim?</span><span class="faq-icon" style="color:var(--gold);font-size:22px;flex-shrink:0;">+</span></button><div class="faq-body" style="display:none;padding:0 24px 20px;color:rgba(255,255,255,0.55);font-size:14px;line-height:1.8;">You'll typically need: <strong style="color:#fff">RC, Driving Licence, Insurance Policy, FIR (if theft/third-party), and repair estimates</strong>. We tell you exactly what's needed for your specific case and help you fill every form.</div></div><div class="faq-item" style="border:1px solid rgba(201,168,76,0.15);border-radius:8px;overflow:hidden;margin-bottom:8px;"><button onclick="toggleFaq(this)" style="width:100%;background:rgba(255,255,255,0.02);border:none;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-align:left;gap:12px;" type="button"><span style="font-size:15px;font-weight:600;color:#fff;">Do you charge any fees?</span><span class="faq-icon" style="color:var(--gold);font-size:22px;flex-shrink:0;">+</span></button><div class="faq-body" style="display:none;padding:0 24px 20px;color:rgba(255,255,255,0.55);font-size:14px;line-height:1.8;"><strong style="color:#fff">Nothing at all.</strong> Consultation, comparison and claim support are 100% free. We earn a commission from the insurer — you get expert service at the same price as buying directly, usually cheaper.</div></div><div class="faq-item" style="border:1px solid rgba(201,168,76,0.15);border-radius:8px;overflow:hidden;margin-bottom:8px;"><button onclick="toggleFaq(this)" style="width:100%;background:rgba(255,255,255,0.02);border:none;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-align:left;gap:12px;" type="button"><span style="font-size:15px;font-weight:600;color:#fff;">Can I cover my parents under my health insurance?</span><span class="faq-icon" style="color:var(--gold);font-size:22px;flex-shrink:0;">+</span></button><div class="faq-body" style="display:none;padding:0 24px 20px;color:rgba(255,255,255,0.55);font-size:14px;line-height:1.8;">Yes — through a <strong style="color:#fff">Family Floater</strong> (one sum insured for all) or a separate <strong style="color:#fff">Senior Citizen plan</strong> for parents above 60. We recommend the best fit based on age, health, and budget.</div></div><div class="faq-item" style="border:1px solid rgba(201,168,76,0.15);border-radius:8px;overflow:hidden;margin-bottom:8px;"><button onclick="toggleFaq(this)" style="width:100%;background:rgba(255,255,255,0.02);border:none;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-align:left;gap:12px;" type="button"><span style="font-size:15px;font-weight:600;color:#fff;">What if my claim gets rejected?</span><span class="faq-icon" style="color:var(--gold);font-size:22px;flex-shrink:0;">+</span></button><div class="faq-body" style="display:none;padding:0 24px 20px;color:rgba(255,255,255,0.55);font-size:14px;line-height:1.8;">We fight it. We help you file a <strong style="color:#fff">formal grievance with the insurer</strong>, and if needed escalate to the <strong style="color:#fff">IRDAI Bima Bharosa portal</strong> or Insurance Ombudsman. We have reversed several rejections for our clients.</div></div><div style="text-align:center;margin-top:32px;"><a href="https://wa.me/919068541300?text=I%20have%20a%20question%20about%20insurance" rel="noopener noreferrer" style="color:var(--gold);font-size:13.5px;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);padding-bottom:2px;" target="_blank">💬 Have another question? Ask on WhatsApp →</a></div></div></section><script>function toggleFaq(b){var bd=b.nextElementSibling,ic=b.querySelector(".faq-icon"),op=bd.style.display==="block";document.querySelectorAll(".faq-body").forEach(function(x){x.style.display="none";});document.querySelectorAll(".faq-icon").forEach(function(x){x.textContent="+";});if(!op){bd.style.display="block";ic.textContent="−";}}</script><section id="calculators">
-<div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 16px;">
-<div class="section-tag">Smart Tools</div>
-<h2 class="section-title">Insurance <em>Calculators</em></h2>
-<p class="about-tagline">
-Helping clients save 30–40% on insurance with smarter coverage decisions.
-</p>
-<hr class="about-divider"/>
-<div class="gold-divider" style="margin:16px auto;"></div>
-<p class="section-subtitle" style="margin:0 auto;">Get instant estimates for your EMI or insurance premium — no signup required.</p>
-</div>
-<div class="calc-grid" style="margin-top:56px;">
-<!-- EMI CALCULATOR -->
-<div class="calc-card reveal">
-<h3 class="calc-title">EMI Calculator</h3>
-<p class="calc-sub">Calculate your monthly insurance premium EMI</p>
-<div class="calc-group">
-<label class="calc-label">Loan / Policy Amount (₹)</label>
-<input class="calc-input" id="emi-amount" min="1000" name="emi_amount" placeholder="e.g. 100000" type="number"/>
-</div>
-<div class="calc-group">
-<label class="calc-label">Annual Interest Rate (%)</label>
-<input class="calc-input" id="emi-rate" min="0.1" name="emi_rate" placeholder="e.g. 12" step="0.1" type="number"/>
-</div>
-<div class="calc-group">
-<label class="calc-label">Tenure (Months)</label>
-<input class="calc-input" id="emi-tenure" min="1" name="emi_tenure" placeholder="e.g. 12" type="number"/>
-</div>
-<button class="calc-btn" onclick="calculateEMI()" type="button">Calculate EMI</button>
-<div class="calc-result" id="emi-result">
-<div class="calc-result-label">Monthly EMI</div>
-<div class="calc-result-value" id="emi-value">₹0</div>
-<div style="margin-top:10px;font-size:13px;color:rgba(255,255,255,0.45);">
-          Total Amount: <span id="emi-total" style="color:var(--gold);">₹0</span>  | 
-          Total Interest: <span id="emi-interest" style="color:var(--gold);">₹0</span>
-</div>
-<div style="margin-top:18px;padding:16px;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.2);border-radius:8px;text-align:center;"><p style="font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:12px;">This is an estimate. Get your <strong style="color:var(--gold2);">exact premium</strong> with a free expert check.</p><a href="https://wa.me/919068541300?text=I%20used%20the%20calculator%20on%20your%20website%20and%20want%20an%20exact%20quote" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#000;padding:11px 22px;border-radius:6px;font-weight:700;font-size:13px;text-decoration:none;" target="_blank">💬 Get Exact Quote from Taman →</a></div></div>
-<a class="calc-wa-btn" href="https://wa.me/919068541300?text=Hello%2C%20I%20want%20an%20exact%20insurance%20quote%20with%20EMI%20options" rel="noreferrer noopener" target="_blank">
-<svg fill="white" height="16" viewbox="0 0 24 24" width="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
-        Get Exact Quote on WhatsApp
-      </a>
-</div>
-<!-- PREMIUM ESTIMATOR -->
-<div class="calc-card reveal reveal-delay-2">
-<h3 class="calc-title">Premium Estimator</h3>
-<p class="calc-sub">Estimate your annual insurance premium instantly</p>
-<div class="calc-group">
-<label class="calc-label">Your Age (Years)</label>
-<input class="calc-input" id="prem-age" max="80" min="18" name="prem_age" placeholder="e.g. 35" type="number"/>
-</div>
-<div class="calc-group">
-<label class="calc-label">Sum Insured / Cover (₹)</label>
-<select class="calc-select" id="prem-cover">
-<option value="">Select Cover Amount</option>
-<option value="200000">₹2 Lakh</option>
-<option value="300000">₹3 Lakh</option>
-<option value="500000">₹5 Lakh</option>
-<option value="1000000">₹10 Lakh</option>
-<option value="2000000">₹20 Lakh</option>
-<option value="5000000">₹50 Lakh</option>
-<option value="10000000">₹1 Crore</option>
-</select>
-</div>
-<div class="calc-group">
-<label class="calc-label">Insurance Type</label>
-<select class="calc-select" id="prem-type">
-<option value="">Select Type</option>
-<option value="health_individual">Health – Individual</option>
-<option value="health_family">Health – Family Floater</option>
-<option value="car_tp">Car – Third Party</option>
-<option value="car_comp">Car – Comprehensive</option>
-<option value="bike_tp">Bike – Third Party</option>
-<option value="bike_comp">Bike – Comprehensive</option>
-<option value="commercial">Commercial Vehicle</option>
-</select>
-</div>
-<button class="calc-btn" onclick="calculatePremium()" type="button">Estimate Premium</button>
-<div class="calc-result" id="prem-result">
-<div class="calc-result-label">Estimated Annual Premium</div>
-<div class="calc-result-value" id="prem-value">₹0</div>
-<div style="margin-top:10px;font-size:12px;color:rgba(255,255,255,0.4);">
-          *This is an estimate. Actual premium may vary based on insurer, history &amp; add-ons.
+  <div class="calc-2026-wrap reveal">
+    <div class="calc-2026-top">
+      <div style="max-width:650px;">
+        <div class="section-tag">2026 Smart Tools</div>
+        <h2 class="section-title">Smart <em>Decision Tools</em></h2>
+        <p class="about-tagline">Modern, conversion-focused tools that feel more like a product than a plain form.</p>
+        <hr class="about-divider"/>
+        <p class="section-subtitle">Switch between health, term and car. Each tool gives a fast estimate, an AI-style recommendation, and a WhatsApp handoff with the user’s exact inputs.</p>
+      </div>
+      <div class="calc-2026-kpis">
+        <div class="calc-kpi"><strong>3</strong><span>Smart Modes</span></div>
+        <div class="calc-kpi"><strong>30s</strong><span>Avg. Completion</span></div>
+        <div class="calc-kpi"><strong>WA</strong><span>Lead Handoff</span></div>
+      </div>
+    </div>
+
+    <div class="calc-shell">
+      <div class="calc-switcher">
+        <button class="calc-switch-btn active" type="button" data-calc-target="health-panel" onclick="switchCalcPanel('health-panel', this)">🩺 Health Advisor</button>
+        <button class="calc-switch-btn" type="button" data-calc-target="term-panel" onclick="switchCalcPanel('term-panel', this)">🛡️ Term Cover Advisor</button>
+        <button class="calc-switch-btn" type="button" data-calc-target="car-panel" onclick="switchCalcPanel('car-panel', this)">🚘 Car Renewal Advisor</button>
+      </div>
+
+      <div class="calc-panels">
+        <div class="calc-2026-panel active" id="health-panel">
+          <div class="calc-hero-card">
+            <div class="calc-main-card">
+              <div class="calc-mode-badge">2026 Estimate Flow</div>
+              <h3 class="calc-2026-title">Health insurance, but <em>smarter</em></h3>
+              <p class="calc-2026-sub">Help visitors get a realistic annual premium, recommended cover size, and a cleaner WhatsApp message with their profile already summarized.</p>
+              <div class="calc-insights-row">
+                <div class="calc-insight"><strong>Family</strong><span>Individual, floater, parents</span></div>
+                <div class="calc-insight"><strong>City</strong><span>Tier-based pricing logic</span></div>
+                <div class="calc-insight"><strong>Cover</strong><span>₹5L to ₹50L guidance</span></div>
+              </div>
+              <div class="calc-form-grid">
+                <div class="calc-group"><label class="calc-label">Oldest Member Age</label><input class="calc-input" id="health-age" min="18" max="85" placeholder="e.g. 34" type="number"/></div>
+                <div class="calc-group"><label class="calc-label">Who Needs Cover?</label><select class="calc-select" id="health-family"><option value="">Select option</option><option value="individual">Just Me</option><option value="couple">Me + Spouse</option><option value="family">Family Floater</option><option value="parents">Parents / Senior Citizens</option></select></div>
+                <div class="calc-group"><label class="calc-label">Coverage Amount</label><select class="calc-select" id="health-cover"><option value="">Select cover</option><option value="500000">₹5 Lakh</option><option value="1000000">₹10 Lakh</option><option value="1500000">₹15 Lakh</option><option value="2000000">₹20 Lakh</option><option value="5000000">₹50 Lakhs</option></select></div>
+                <div class="calc-group"><label class="calc-label">City Tier</label><select class="calc-select" id="health-city"><option value="">Select city tier</option><option value="tier1">Metro / Tier 1</option><option value="tier2">Tier 2</option><option value="tier3">Tier 3 / Smaller City</option></select></div>
+              </div>
+              <div class="calc-chip-row"><span class="calc-chip">Fast quote intent</span><span class="calc-chip">Family floater guidance</span><span class="calc-chip">Better WhatsApp conversion</span></div>
+              <button class="calc-btn-2026" onclick="calculateHealthInsurance()" type="button">Analyze Health Profile</button>
+              <div class="calc-live-status" id="health-status"><ul><li>Checking age and family risk band</li><li>Adjusting cover and city factors</li><li>Preparing advisor recommendation</li></ul></div>
+              <div class="calc-result-2026" id="health-result">
+                <div class="calc-result-top"><div><div class="calc-result-kicker">Estimated annual premium</div><div class="calc-result-main" id="health-value">₹0</div><p class="calc-result-summary" id="health-summary">Recommended cover will appear here.</p></div></div>
+                <div class="calc-ai-note" id="health-ai"><strong>AI Suggestion:</strong> Your recommendation will appear here.</div>
+                <div class="calc-bento">
+                  <div class="calc-bento-card"><span class="label">Cover Style</span><span class="value" id="health-bento-1">—</span><span class="tiny" id="health-bento-1-sub">Structured recommendation</span></div>
+                  <div class="calc-bento-card"><span class="label">Risk Band</span><span class="value" id="health-bento-2">—</span><span class="tiny" id="health-bento-2-sub">Based on age and member mix</span></div>
+                  <div class="calc-bento-card"><span class="label">Best Next Step</span><span class="value" id="health-bento-3">—</span><span class="tiny" id="health-bento-3-sub">Talk to advisor with details</span></div>
+                </div>
+                <div class="calc-action-row"><a id="health-wa" class="btn-whatsapp" href="https://wa.me/919068541300?text=Hi%20Taman%2C%20I%20need%20a%20health%20insurance%20quote" rel="noopener noreferrer" target="_blank">💬 Get Exact Quote on WhatsApp</a><a class="calc-secondary-cta" href="#contact">Request Call Back</a></div>
+                <div class="calc-sticky-offer"><div><strong>Popular with families in Chandigarh & nearby cities</strong><span>Use this as a premium estimate, then send exact insurer options on WhatsApp.</span></div><a class="calc-secondary-cta" href="#plan-compare">Compare Plans →</a></div>
+              </div>
+            </div>
+            <div class="calc-side-card"><div class="calc-mode-badge">How it feels</div><div class="calc-mini-steps"><div class="calc-mini-step"><b>1</b><span>User picks cover type, age, amount and city tier.</span></div><div class="calc-mini-step"><b>2</b><span>A short “analyzing” state makes the interaction feel premium and current.</span></div><div class="calc-mini-step"><b>3</b><span>Result appears with recommendation blocks instead of one plain number.</span></div></div></div>
+          </div>
         </div>
-<div style="margin-top:18px;padding:16px;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.2);border-radius:8px;text-align:center;"><p style="font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:12px;">This is an estimate. Get your <strong style="color:var(--gold2);">exact premium</strong> with a free expert check.</p><a href="https://wa.me/919068541300?text=I%20used%20the%20calculator%20on%20your%20website%20and%20want%20an%20exact%20quote" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#000;padding:11px 22px;border-radius:6px;font-weight:700;font-size:13px;text-decoration:none;" target="_blank">💬 Get Exact Quote from Taman →</a></div></div>
-<a class="calc-wa-btn" href="https://wa.me/919068541300?text=Hello%2C%20I%20want%20an%20exact%20insurance%20premium%20quote" rel="noreferrer noopener" target="_blank">
-<svg fill="white" height="16" viewbox="0 0 24 24" width="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.758-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
-        Get Exact Quote on WhatsApp
-      </a>
-</div>
-</div>
+
+        <div class="calc-2026-panel" id="term-panel">
+          <div class="calc-hero-card">
+            <div class="calc-main-card">
+              <div class="calc-mode-badge">Protection Planning</div>
+              <h3 class="calc-2026-title">A term cover tool that feels <em>advisory</em></h3>
+              <p class="calc-2026-sub">This is framed like a real financial protection conversation, not a boring calculator. It shows cover need, income replacement logic, and urgency for families.</p>
+              <div class="calc-insights-row">
+                <div class="calc-insight"><strong>Income</strong><span>Monthly earning based</span></div>
+                <div class="calc-insight"><strong>Loans</strong><span>Debt protection built in</span></div>
+                <div class="calc-insight"><strong>Dependents</strong><span>Family safety factor</span></div>
+              </div>
+              <div class="calc-form-grid">
+                <div class="calc-group"><label class="calc-label">Monthly Income (₹)</label><input class="calc-input" id="term-income" min="10000" placeholder="e.g. 60000" type="number"/></div>
+                <div class="calc-group"><label class="calc-label">Outstanding Loans (₹)</label><input class="calc-input" id="term-loans" min="0" placeholder="e.g. 1500000" type="number"/></div>
+                <div class="calc-group"><label class="calc-label">Dependents</label><select class="calc-select" id="term-dependents"><option value="">Select dependents</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4+</option></select></div>
+                <div class="calc-group"><label class="calc-label">Current Savings / Investments (₹)</label><input class="calc-input" id="term-savings" min="0" placeholder="e.g. 500000" type="number"/></div>
+              </div>
+              <div class="calc-chip-row"><span class="calc-chip">Income replacement</span><span class="calc-chip">Loan cover</span><span class="calc-chip">Family-first positioning</span></div>
+              <button class="calc-btn-2026" onclick="calculateTermCover()" type="button">Analyze Protection Need</button>
+              <div class="calc-live-status" id="term-status"><ul><li>Projecting family support horizon</li><li>Adding loan and emergency buffer</li><li>Preparing recommended sum assured</li></ul></div>
+              <div class="calc-result-2026" id="term-result">
+                <div class="calc-result-top"><div><div class="calc-result-kicker">Recommended sum assured</div><div class="calc-result-main" id="term-value">₹0</div><p class="calc-result-summary" id="term-summary">Your protection summary will appear here.</p></div></div>
+                <div class="calc-ai-note" id="term-ai"><strong>AI Suggestion:</strong> Your recommendation will appear here.</div>
+                <div class="calc-bento"><div class="calc-bento-card"><span class="label">Protection Horizon</span><span class="value" id="term-bento-1">—</span><span class="tiny" id="term-bento-1-sub">Years of support</span></div><div class="calc-bento-card"><span class="label">Priority</span><span class="value" id="term-bento-2">—</span><span class="tiny" id="term-bento-2-sub">Main reason for cover</span></div><div class="calc-bento-card"><span class="label">Action</span><span class="value" id="term-bento-3">—</span><span class="tiny" id="term-bento-3-sub">Compare term plans next</span></div></div>
+                <div class="calc-action-row"><a id="term-wa" class="btn-whatsapp" href="https://wa.me/919068541300?text=Hi%20Taman%2C%20I%20need%20a%20term%20insurance%20quote" rel="noopener noreferrer" target="_blank">💬 Get Exact Quote on WhatsApp</a><a class="calc-secondary-cta" href="#contact">Talk to Advisor</a></div>
+                <div class="calc-sticky-offer"><div><strong>Most useful for salaried clients with family responsibilities</strong><span>Share exact premium options only after the user sees a strong cover amount.</span></div><a class="calc-secondary-cta" href="#contact">Book Expert Help →</a></div>
+              </div>
+            </div>
+            <div class="calc-side-card"><div class="calc-mode-badge">2026 UX note</div><div class="calc-mini-steps"><div class="calc-mini-step"><b>1</b><span>Feels like a guided advisor, not a traditional insurance form.</span></div><div class="calc-mini-step"><b>2</b><span>Users get a large cover number plus the reason behind it.</span></div><div class="calc-mini-step"><b>3</b><span>Great for collecting warm term insurance leads.</span></div></div></div>
+          </div>
+        </div>
+
+        <div class="calc-2026-panel" id="car-panel">
+          <div class="calc-hero-card">
+            <div class="calc-main-card">
+              <div class="calc-mode-badge">Renewal Optimizer</div>
+              <h3 class="calc-2026-title">Car renewal with a more <em>modern</em> savings view</h3>
+              <p class="calc-2026-sub">Instead of just a savings number, show likely renewal range, NCB opportunity, and what kind of cover setup the user should explore next.</p>
+              <div class="calc-insights-row">
+                <div class="calc-insight"><strong>Current Premium</strong><span>Benchmarks renewal range</span></div>
+                <div class="calc-insight"><strong>Claim History</strong><span>NCB and risk impact</span></div>
+                <div class="calc-insight"><strong>Cover Type</strong><span>Third-party vs comprehensive</span></div>
+              </div>
+              <div class="calc-form-grid">
+                <div class="calc-group"><label class="calc-label">Current Annual Premium (₹)</label><input class="calc-input" id="car-current-premium" min="1000" placeholder="e.g. 24000" type="number"/></div>
+                <div class="calc-group"><label class="calc-label">Car Age</label><select class="calc-select" id="car-age"><option value="">Select age</option><option value="0-1">0–1 Year</option><option value="2-4">2–4 Years</option><option value="5-7">5–7 Years</option><option value="8plus">8+ Years</option></select></div>
+                <div class="calc-group"><label class="calc-label">Any Claim in Last Year?</label><select class="calc-select" id="car-claim"><option value="">Select option</option><option value="no">No Claim</option><option value="yes">Yes, Claimed</option></select></div>
+                <div class="calc-group"><label class="calc-label">Preferred Cover Type</label><select class="calc-select" id="car-cover-type"><option value="">Select type</option><option value="comprehensive">Comprehensive</option><option value="third-party">Third Party</option><option value="not-sure">Not Sure Yet</option></select></div>
+              </div>
+              <div class="calc-chip-row"><span class="calc-chip">Renewal savings</span><span class="calc-chip">NCB awareness</span><span class="calc-chip">WhatsApp-ready renewal lead</span></div>
+              <button class="calc-btn-2026" onclick="calculateCarSavings()" type="button">Analyze Renewal Savings</button>
+              <div class="calc-live-status" id="car-status"><ul><li>Checking age and claim impact</li><li>Adjusting for cover type preference</li><li>Preparing expected renewal range</li></ul></div>
+              <div class="calc-result-2026" id="car-result">
+                <div class="calc-result-top"><div><div class="calc-result-kicker">Potential yearly savings</div><div class="calc-result-main" id="car-value">₹0</div><p class="calc-result-summary" id="car-summary">Your renewal advice will appear here.</p></div></div>
+                <div class="calc-ai-note" id="car-ai"><strong>AI Suggestion:</strong> Your recommendation will appear here.</div>
+                <div class="calc-bento"><div class="calc-bento-card"><span class="label">Renewal Range</span><span class="value" id="car-bento-1">—</span><span class="tiny" id="car-bento-1-sub">Estimated next premium</span></div><div class="calc-bento-card"><span class="label">NCB View</span><span class="value" id="car-bento-2">—</span><span class="tiny" id="car-bento-2-sub">Impact of claim history</span></div><div class="calc-bento-card"><span class="label">Best Move</span><span class="value" id="car-bento-3">—</span><span class="tiny" id="car-bento-3-sub">Switch or renew guidance</span></div></div>
+                <div class="calc-action-row"><a id="car-wa" class="btn-whatsapp" href="https://wa.me/919068541300?text=Hi%20Taman%2C%20I%20need%20help%20with%20my%20car%20insurance%20renewal" rel="noopener noreferrer" target="_blank">💬 Renew on WhatsApp</a><a class="calc-secondary-cta" href="#contact">Get Call Back</a></div>
+                <div class="calc-sticky-offer"><div><strong>Great for visitors already comparing renewal prices</strong><span>Use it to push exact quote, IDV discussion and add-on advice on WhatsApp.</span></div><a class="calc-secondary-cta" href="#companies">See Insurers →</a></div>
+              </div>
+            </div>
+            <div class="calc-side-card"><div class="calc-mode-badge">Designed for conversion</div><div class="calc-mini-steps"><div class="calc-mini-step"><b>1</b><span>User sees likely savings instead of only raw premium math.</span></div><div class="calc-mini-step"><b>2</b><span>Bento cards make the result feel richer and more premium.</span></div><div class="calc-mini-step"><b>3</b><span>WhatsApp CTA carries the renewal context automatically.</span></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- ══════════════════════════════════════════════
-     PLAN COMPARE TOOL
-     ══════════════════════════════════════════════ -->
-<section id="plan-compare">
-<div class="compare-wrap">
-<div class="compare-header reveal">
-<div class="section-tag">Side-by-Side Comparison</div>
-<h2 class="section-title">Compare <em>Plans</em> Instantly</h2>
-<p class="about-tagline">
-Helping clients save 30–40% on insurance with smarter coverage decisions.
-</p>
-<hr class="about-divider"/>
-<div class="gold-divider" style="margin:16px auto;"></div>
-<p class="section-subtitle" style="margin:0 auto;text-align:center;">See exactly what each plan covers. No fine print surprises — just clear, honest comparisons.</p>
-</div>
-<div class="compare-selector reveal">
-<button class="cmp-cat-btn active" onclick="cmpSelect(this,'health')" type="button">🏥 Health</button>
-<button class="cmp-cat-btn" onclick="cmpSelect(this,'car')" type="button">🚗 Car</button>
-<button class="cmp-cat-btn" onclick="cmpSelect(this,'bike')" type="button">🏍️ Bike</button>
-<button class="cmp-cat-btn" onclick="cmpSelect(this,'term')" type="button">💼 Term Life</button>
-</div>
-<div class="compare-table-wrap reveal" id="cmpTableWrap">
-<!-- injected by JS -->
-</div>
-<p class="compare-footer-note">Premiums shown are indicative estimates for a 35-year-old individual. Actual premiums depend on age, health history, add-ons &amp; insurer terms.<br/>Talk to Taman for an exact quote: <a href="tel:9068541300" style="color:var(--gold);text-decoration:none;">+91 90685 41300</a></p>
-</div>
-</section>
-<!-- RENEWAL REMINDER -->
-<section id="renewal-reminder">
-<div class="renewal-grid">
-<div class="reveal">
-<div class="section-tag">Never Miss a Renewal</div>
-<h2 class="section-title">Set Your <em>Free</em><br/>Renewal Reminder</h2>
-<p class="about-tagline">
-Helping clients save 30–40% on insurance with smarter coverage decisions.
-</p>
-<hr class="about-divider"/>
-<div class="gold-divider"></div>
-<p class="section-subtitle" style="margin-bottom:40px;">A lapsed policy means zero coverage at the worst moment. We'll remind you 30, 15, and 7 days before your policy expires — by call or WhatsApp, whichever you prefer.</p>
-<ul class="renewal-benefits">
-<li class="renewal-benefit">
-<div class="renewal-benefit-icon">📅</div>
-<div>
-<div class="renewal-benefit-title">3-Step Reminder System</div>
-<p class="renewal-benefit-text">We alert you at 30 days, 15 days, and 7 days before expiry — so you're never caught off guard.</p>
-</div>
-</li>
-<li class="renewal-benefit">
-<div class="renewal-benefit-icon">💰</div>
-<div>
-<div class="renewal-benefit-title">Protect Your No-Claim Bonus</div>
-<p class="renewal-benefit-text">Lapsing even by 1 day can wipe out years of NCB. We ensure you renew on time and keep every rupee saved.</p>
-</div>
-</li>
-<li class="renewal-benefit">
-<div class="renewal-benefit-icon">🤝</div>
-<div>
-<div class="renewal-benefit-title">Personal Follow-Up</div>
-<p class="renewal-benefit-text">Unlike automated bots, Taman personally calls clients. You get real advice, not just a reminder SMS.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="renewal-form-card reveal reveal-delay-2">
-<h3 class="renewal-form-title">Set My Reminder</h3>
-<p class="renewal-form-sub">Fill in your details below — completely free, no obligation. We'll reach out before your policy expires.</p>
-<form action="https://formspree.io/f/xaqllkaq" id="renewalForm" method="POST" onsubmit="handleRenewalSubmit(event)">
-<input name="_subject" type="hidden" value="Renewal Reminder Request — Taman Care"/>
-<input class="renewal-input" name="name" placeholder="Your Full Name" required="" type="text"/>
-<input class="renewal-input" name="phone" placeholder="+91 XXXXX XXXXX" required="" type="tel"/>
-<select class="renewal-select" name="insurance_type" required="">
-<option value="">Select Insurance Type</option>
-<option>Health Insurance</option>
-<option>Car Insurance</option>
-<option>Bike Insurance</option>
-<option>Commercial Vehicle Insurance</option>
-<option>Term Life Insurance</option>
-<option>Other</option>
-</select>
-<input aria-label="Input field" class="renewal-input" name="renewal_date" required="" style="color-scheme: dark;" type="date"/>
-<select class="renewal-select" name="reminder_via">
-<option value="">Remind me via...</option>
-<option>WhatsApp</option>
-<option>Phone Call</option>
-<option>Both</option>
-</select>
-<button class="renewal-submit-btn" type="submit">🔔 Set My Free Reminder</button>
-</form>
-<div id="renewal-success">✅ Done! We'll remind you before your policy expires. Thank you!</div>
-<p style="font-size:11.5px;color:rgba(255,255,255,0.25);margin-top:16px;text-align:center;">100% free. No spam. No obligation. We only contact you about your renewal.</p>
-</div>
-</div>
-<div id="expiry-tool" style="background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:28px;margin-top:32px;"><div style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;">⏰ Policy Expiry Checker</div><div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;"><div style="flex:1;min-width:180px;"><label for="expiryDateInput" style="font-size:12px;color:rgba(255,255,255,0.45);display:block;margin-bottom:6px;">Your policy expiry date</label><input aria-label="Policy expiry date" id="expiryDateInput" name="expiry_date" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.25);border-radius:6px;padding:11px 14px;color:#fff;font-family:'Outfit',sans-serif;font-size:14px;color-scheme:dark;" type="date"/></div><button onclick="checkExpiry()" style="background:var(--gold);color:#000;border:none;padding:11px 22px;border-radius:6px;font-weight:700;font-size:13.5px;cursor:pointer;" type="button">Check →</button></div><div id="expiryResult" style="margin-top:16px;display:none;"></div></div><script>function checkExpiry(){var v=document.getElementById("expiryDateInput").value,r=document.getElementById("expiryResult");if(!v){alert("Please select your policy expiry date.");return;}var exp=new Date(v),now=new Date();now.setHours(0,0,0,0);var d=Math.ceil((exp-now)/864e5),col,ic,msg,sub;if(d<0){col="#ef4444";ic="🚨";msg="Expired "+Math.abs(d)+" day"+(Math.abs(d)===1?"":"s")+" ago!";sub="You are currently <strong>uninsured</strong>. Renew immediately.";}else if(d===0){col="#ef4444";ic="🚨";msg="Expires TODAY!";sub="Renew right now — driving uninsured is illegal.";}else if(d<=7){col="#f97316";ic="⚠️";msg=d+" day"+(d===1?"":"s")+" left — Renew Urgently";sub="Very little time left. Renew today to protect your NCB.";}else if(d<=30){col="#facc15";ic="⏰";msg=d+" days — Renewal Due Soon";sub="Time to compare and renew. We'll find you the best rate in minutes.";}else{col="#4ade80";ic="✅";msg=d+" days remaining — You're Covered";sub="Great! Save our number for renewal time: 9068541300.";}r.style.display="block";r.innerHTML='<div style="background:rgba(255,255,255,0.03);border:1px solid '+col+'44;border-radius:8px;padding:16px;"><div style="font-size:20px;color:'+col+';font-weight:700;margin-bottom:6px;">'+ic+" "+msg+'</div><p style="font-size:13.5px;color:rgba(255,255,255,0.55);margin-bottom:14px;line-height:1.7;">'+sub+'</p><a href="https://wa.me/919068541300?text=My%20policy%20expires%20in%20'+d+'%20days.%20Please%20help%20me%20renew." target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:10px 20px;border-radius:6px;font-weight:700;font-size:13px;text-decoration:none;">💬 WhatsApp Taman to Renew Now →</a></div>';}</script></section>
+
 <!-- CONTACT -->
 <section id="book-call" style="background:linear-gradient(135deg,#111100,#1a1400 50%,#0a0a0a);padding:64px 5%;text-align:center;border-top:1px solid rgba(201,168,76,0.2);border-bottom:1px solid rgba(201,168,76,0.2);"><div style="max-width:600px;margin:0 auto;"><div style="font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;">Free Expert Session</div><h2 style="font-family:'Cormorant Garamond',serif;font-size:38px;color:#fff;margin-bottom:12px;line-height:1.25;">Book a <em style="color:var(--gold);">Free 15-Min Call</em> With Taman</h2>
 <p class="about-tagline">
 Helping clients save 30–40% on insurance with smarter coverage decisions.
 </p>
-<hr class="about-divider"/><p style="color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:28px;line-height:1.7;">No sales pitch. No pressure. Just honest advice on which plan suits you — from someone who has seen 2,500+ claims up close.</p><div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;"><a href="tel:9068541300" style="display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#000;padding:14px 28px;border-radius:6px;font-weight:700;font-size:14px;text-decoration:none;">📞 Call: 9068541300</a><a href="https://wa.me/919068541300?text=Hi%2C%20I%20want%20to%20book%20a%20free%2015-min%20consultation" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,0.45);padding:14px 28px;border-radius:6px;font-weight:600;font-size:14px;text-decoration:none;" target="_blank">💬 WhatsApp to Schedule</a></div><p style="margin-top:18px;font-size:12px;color:rgba(255,255,255,0.28);">Mon – Sat · 9 AM – 7 PM · 24/7 for claim emergencies</p></div></section><section id="contact">
+<hr class="about-divider"/><p style="color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:28px;line-height:1.7;">No sales pitch. No pressure. Just honest advice on which plan suits you — from someone who has seen 2,547+ claims up close.</p><div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;"><a href="tel:9068541300" style="display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#000;padding:14px 28px;border-radius:6px;font-weight:700;font-size:14px;text-decoration:none;">📞 Call: 9068541300</a><a href="https://wa.me/919068541300?text=Hi%2C%20I%20want%20to%20book%20a%20free%2015-min%20consultation" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,0.45);padding:14px 28px;border-radius:6px;font-weight:600;font-size:14px;text-decoration:none;" target="_blank">💬 WhatsApp to Schedule</a></div><p style="margin-top:18px;font-size:12px;color:rgba(255,255,255,0.28);">Mon – Sat · 9 AM – 7 PM · 24/7 for claim emergencies</p></div></section><section id="contact">
 <div class="contact-grid">
 <div class="reveal">
 <div class="section-tag">Get In Touch</div>
-<h2 class="section-title">Let's <em>Talk</em><br/>Insurance</h2>
+<h2 class="section-title">Get <em>expert help</em><br/>without the confusion</h2>
 <p class="about-tagline">
 Helping clients save 30–40% on insurance with smarter coverage decisions.
 </p>
@@ -6894,6 +8043,24 @@ Helping clients save 30–40% on insurance with smarter coverage decisions.
       ⚠️ <strong style="color:var(--gold);">Fraud Alert:</strong> Taman Care Insurance never asks for OTP, CVV, or advance cash payments. Always verify before transferring money. Beware of fraudsters impersonating our brand. Report suspicious activity: <a href="tel:9068541300" style="color:var(--gold);text-decoration:none;font-weight:600;">90685 41300</a>
 </p>
 </div>
+
+<div class="apple-logo-marquee" style="margin-top:0;margin-bottom:30px;">
+  <div class="apple-logo-track">
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/hdfcergo.com" alt="HDFC ERGO" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=hdfcergo.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>HDF</div>';}" /><span>HDFC ERGO</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/icicilombard.com" alt="ICICI Lombard" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=icicilombard.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>ICI</div>';}" /><span>ICICI Lombard</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/starhealth.in" alt="Star Health" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=starhealth.in&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>STA</div>';}" /><span>Star Health</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/nivabupa.com" alt="Niva Bupa" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=nivabupa.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>NIV</div>';}" /><span>Niva Bupa</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/tataaig.com" alt="TATA AIG" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=tataaig.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>TAT</div>';}" /><span>TATA AIG</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/bajajallianz.com" alt="Bajaj Allianz" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=bajajallianz.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>BAJ</div>';}" /><span>Bajaj Allianz</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/hdfcergo.com" alt="HDFC ERGO" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=hdfcergo.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>HDF</div>';}" /><span>HDFC ERGO</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/icicilombard.com" alt="ICICI Lombard" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=icicilombard.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>ICI</div>';}" /><span>ICICI Lombard</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/starhealth.in" alt="Star Health" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=starhealth.in&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>STA</div>';}" /><span>Star Health</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/nivabupa.com" alt="Niva Bupa" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=nivabupa.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>NIV</div>';}" /><span>Niva Bupa</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/tataaig.com" alt="TATA AIG" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=tataaig.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>TAT</div>';}" /><span>TATA AIG</span></div>
+    <div class="apple-logo-chip"><img src="https://logo.clearbit.com/bajajallianz.com" alt="Bajaj Allianz" loading="lazy" onerror="if(!this.dataset.favicon){this.dataset.favicon=1;this.src='https://www.google.com/s2/favicons?domain=bajajallianz.com&sz=128';this.style.width='28px';this.style.height='28px';this.style.borderRadius='8px';this.style.padding='4px';this.style.background='rgba(255,255,255,0.08)';}else{this.outerHTML='<div class=&quot;apple-logo-fallback&quot;>BAJ</div>';}" /><span>Bajaj Allianz</span></div>
+  </div>
+</div>
+
 <div class="footer-bottom">
 <div class="footer-copy">© 2025 Taman Care Insurance Services. All rights reserved. | Taman Aggarwal, Chandigarh</div>
 <div class="footer-rera">Insurance products offered through licensed partners. IRDA regulated.</div>
@@ -7325,52 +8492,123 @@ function closePopup() {
   _po.addEventListener('click', function(e){ if(e.target === e.currentTarget) closePopup(); });
   var seen = false;
   try { seen = sessionStorage.getItem('tc_consult_popup_seen') === '1'; } catch(e) {}
-  if(!seen){ setTimeout(openPopup, 2400); }
+  if(!seen){ setTimeout(openPopup, 15000); }
 })();
 
-// ── EMI CALCULATOR
-function calculateEMI() {
-  const P = parseFloat(document.getElementById('emi-amount').value);
-  const R = parseFloat(document.getElementById('emi-rate').value) / 12 / 100;
-  const N = parseFloat(document.getElementById('emi-tenure').value);
-  if (!P || !R || !N || P <= 0 || N <= 0) {
-    alert('Please fill all fields correctly.'); return;
-  }
-  const emi = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
-  const total = emi * N;
-  const interest = total - P;
-  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
-  document.getElementById('emi-value').textContent = fmt(emi);
-  document.getElementById('emi-total').textContent = fmt(total);
-  document.getElementById('emi-interest').textContent = fmt(interest);
-  const res = document.getElementById('emi-result');
-  res.classList.add('show');
-  res.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+// ── CALCULATOR HELPERS
+function formatINR(value) {
+  return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(Math.round(value || 0), 'en-IN').replace(/^/, '₹');
 }
 
-// ── PREMIUM CALCULATOR
-function calculatePremium() {
-  const age = parseFloat(document.getElementById('prem-age').value);
-  const cover = parseFloat(document.getElementById('prem-cover').value);
-  const type = document.getElementById('prem-type').value;
-  if (!age || !cover || !type) { alert('Please fill all fields.'); return; }
-  let base = 0;
-  const ageFactor = age < 30 ? 1.0 : age < 45 ? 1.3 : age < 55 ? 1.65 : 2.1;
-  if (type === 'health_individual') base = (cover * 0.018) * ageFactor;
-  else if (type === 'health_family') base = (cover * 0.025) * ageFactor;
-  else if (type === 'car_tp') base = Math.max(2000, cover * 0.004);
-  else if (type === 'car_comp') base = Math.max(6000, cover * 0.025);
-  else if (type === 'bike_tp') base = Math.max(1300, cover * 0.003);
-  else if (type === 'bike_comp') base = Math.max(3000, cover * 0.018);
-  else if (type === 'commercial') base = Math.max(8000, cover * 0.035);
-  const range_low = Math.round(base * 0.88);
-  const range_high = Math.round(base * 1.12);
-  document.getElementById('prem-value').textContent =
-    '₹' + range_low.toLocaleString('en-IN') + ' – ₹' + range_high.toLocaleString('en-IN');
-  const res = document.getElementById('prem-result');
-  res.classList.add('show');
-  res.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+function switchCalcPanel(panelId, button) {
+  document.querySelectorAll('.calc-2026-panel').forEach(function(panel){ panel.classList.remove('active'); });
+  document.querySelectorAll('.calc-switch-btn').forEach(function(btn){ btn.classList.remove('active'); });
+  var target = document.getElementById(panelId);
+  if (target) target.classList.add('active');
+  if (button) button.classList.add('active');
 }
+
+function runCalcReveal(statusId, resultId, callback) {
+  var status = document.getElementById(statusId);
+  var result = document.getElementById(resultId);
+  if (result) result.classList.remove('show');
+  if (status) status.classList.add('show');
+  setTimeout(function(){
+    if (status) status.classList.remove('show');
+    callback();
+    if (result) result.classList.add('show');
+  }, 950);
+}
+
+function calculateHealthInsurance() {
+  const age = parseFloat(document.getElementById('health-age').value);
+  const family = document.getElementById('health-family').value;
+  const cover = parseFloat(document.getElementById('health-cover').value);
+  const city = document.getElementById('health-city').value;
+  if (!age || !family || !cover || !city) {
+    alert('Please complete all health insurance fields.');
+    return;
+  }
+  runCalcReveal('health-status','health-result', function(){
+    const ageFactor = age <= 25 ? 0.82 : age <= 35 ? 1 : age <= 45 ? 1.28 : age <= 55 ? 1.72 : age <= 65 ? 2.35 : 3.2;
+    const familyFactor = family === 'individual' ? 1 : family === 'couple' ? 1.42 : family === 'family' ? 1.75 : 2.6;
+    const cityFactor = city === 'tier1' ? 1.18 : city === 'tier2' ? 1 : 0.9;
+    const base = Math.max(6500, (cover / 100000) * 1100);
+    const premium = base * ageFactor * familyFactor * cityFactor;
+    const band = age <= 35 ? 'Low–Moderate' : age <= 50 ? 'Moderate' : age <= 65 ? 'Elevated' : 'High';
+    const coverStyle = family === 'parents' ? 'Senior Cover' : family === 'family' ? 'Floater' : family === 'couple' ? 'Couple Plan' : 'Individual';
+    const nextStep = cover >= 2000000 ? 'Exact Quote' : 'Upgrade Cover';
+    document.getElementById('health-value').textContent = formatINR(premium);
+    document.getElementById('health-summary').textContent = 'Estimated for ' + age + ' years, ' + coverStyle.toLowerCase() + ' profile and ' + (city === 'tier1' ? 'metro' : city === 'tier2' ? 'tier 2' : 'smaller city') + ' pricing zone.';
+    document.getElementById('health-ai').innerHTML = '<strong>AI Suggestion:</strong> ' + (family === 'parents' ? 'For parent cover, shortlist plans with strong room-rent and pre-existing disease handling.' : 'A ' + coverStyle.toLowerCase() + ' setup with ' + formatINR(cover) + ' cover looks practical here.') + ' Ask for exact insurer comparison next.';
+    document.getElementById('health-bento-1').textContent = coverStyle;
+    document.getElementById('health-bento-1-sub').textContent = 'Best fit around ' + formatINR(cover) + ' cover';
+    document.getElementById('health-bento-2').textContent = band;
+    document.getElementById('health-bento-2-sub').textContent = 'Premium influenced mostly by age and member type';
+    document.getElementById('health-bento-3').textContent = nextStep;
+    document.getElementById('health-bento-3-sub').textContent = 'Share exact insurers on WhatsApp';
+    document.getElementById('health-wa').href = 'https://wa.me/919068541300?text=' + encodeURIComponent('Hi Taman, I used the Health Advisor calculator. Age: ' + age + ', Profile: ' + coverStyle + ', Cover: ' + formatINR(cover) + ', City tier: ' + city + ', Estimated annual premium: ' + formatINR(premium) + '. Please share the best exact plans.');
+  });
+}
+
+function calculateTermCover() {
+  const monthlyIncome = parseFloat(document.getElementById('term-income').value);
+  const loans = parseFloat(document.getElementById('term-loans').value) || 0;
+  const dependents = parseFloat(document.getElementById('term-dependents').value);
+  const savings = parseFloat(document.getElementById('term-savings').value) || 0;
+  if (!monthlyIncome || isNaN(dependents)) {
+    alert('Please fill income and dependents correctly.');
+    return;
+  }
+  runCalcReveal('term-status','term-result', function(){
+    const annualIncome = monthlyIncome * 12;
+    const multiplier = dependents >= 4 ? 20 : dependents === 3 ? 18 : dependents === 2 ? 15 : dependents === 1 ? 12 : 8;
+    const recommended = Math.max(2547000, (annualIncome * multiplier) + loans - savings + (annualIncome * 2));
+    const horizon = dependents >= 3 ? '15–20 yrs' : dependents === 2 ? '12–15 yrs' : dependents === 1 ? '10–12 yrs' : '8–10 yrs';
+    const priority = loans > annualIncome ? 'Loan Shield' : dependents > 0 ? 'Family Income' : 'Wealth Safety';
+    document.getElementById('term-value').textContent = formatINR(recommended);
+    document.getElementById('term-summary').textContent = 'Built using income replacement, ' + dependents + ' dependent(s), loan cover and your current savings position.';
+    document.getElementById('term-ai').innerHTML = '<strong>AI Suggestion:</strong> A cover near ' + formatINR(recommended) + ' helps protect ' + (dependents > 0 ? 'family lifestyle and liabilities' : 'future liabilities and long-term financial goals') + '. Compare level term plans next, then review claim settlement quality.';
+    document.getElementById('term-bento-1').textContent = horizon;
+    document.getElementById('term-bento-1-sub').textContent = 'Suggested support window for dependents';
+    document.getElementById('term-bento-2').textContent = priority;
+    document.getElementById('term-bento-2-sub').textContent = 'Main driver of recommended cover';
+    document.getElementById('term-bento-3').textContent = 'Compare';
+    document.getElementById('term-bento-3-sub').textContent = 'Get exact term options on WhatsApp';
+    document.getElementById('term-wa').href = 'https://wa.me/919068541300?text=' + encodeURIComponent('Hi Taman, I used the Term Cover Advisor. Monthly income: ' + formatINR(monthlyIncome) + ', Loans: ' + formatINR(loans) + ', Dependents: ' + dependents + ', Savings: ' + formatINR(savings) + ', Recommended cover: ' + formatINR(recommended) + '. Please suggest the best term plans.');
+  });
+}
+
+function calculateCarSavings() {
+  const currentPremium = parseFloat(document.getElementById('car-current-premium').value);
+  const carAge = document.getElementById('car-age').value;
+  const claim = document.getElementById('car-claim').value;
+  const coverType = document.getElementById('car-cover-type').value;
+  if (!currentPremium || !carAge || !claim || !coverType) {
+    alert('Please fill all car insurance fields.');
+    return;
+  }
+  runCalcReveal('car-status','car-result', function(){
+    const ageFactor = carAge === '0-1' ? 0.96 : carAge === '2-4' ? 0.89 : carAge === '5-7' ? 0.83 : 0.77;
+    const claimFactor = claim === 'no' ? 0.84 : 0.97;
+    const coverFactor = coverType === 'third-party' ? 0.61 : coverType === 'comprehensive' ? 0.93 : 0.86;
+    const suggested = currentPremium * ageFactor * claimFactor * coverFactor;
+    const savings = Math.max(0, currentPremium - suggested);
+    const ncbView = claim === 'no' ? 'NCB Friendly' : 'Claim Impact';
+    const move = savings > 2547 ? 'Switch Quote' : coverType === 'third-party' ? 'Review Cover' : 'Renew Smart';
+    document.getElementById('car-value').textContent = savings > 0 ? formatINR(savings) : formatINR(0);
+    document.getElementById('car-summary').textContent = 'Expected renewal range around ' + formatINR(suggested * 0.95) + ' to ' + formatINR(suggested * 1.05) + ' for this profile and cover preference.';
+    document.getElementById('car-ai').innerHTML = '<strong>AI Suggestion:</strong> ' + (claim === 'no' ? 'Since there was no claim, you may have stronger room to negotiate or switch for better pricing.' : 'Because a claim was made, balance price with garage network, IDV and add-ons instead of chasing only the lowest premium.') ;
+    document.getElementById('car-bento-1').textContent = formatINR(suggested);
+    document.getElementById('car-bento-1-sub').textContent = 'Midpoint renewal estimate';
+    document.getElementById('car-bento-2').textContent = ncbView;
+    document.getElementById('car-bento-2-sub').textContent = claim === 'no' ? 'No-claim bonus can support lower renewal' : 'Recent claim may reduce savings headroom';
+    document.getElementById('car-bento-3').textContent = move;
+    document.getElementById('car-bento-3-sub').textContent = 'Send exact renewal options on WhatsApp';
+    document.getElementById('car-wa').href = 'https://wa.me/919068541300?text=' + encodeURIComponent('Hi Taman, I used the Car Renewal Advisor. Current premium: ' + formatINR(currentPremium) + ', Car age: ' + carAge + ', Claim last year: ' + claim + ', Cover type: ' + coverType + ', Potential savings: ' + formatINR(savings) + ', Suggested renewal range: ' + formatINR(suggested * 0.95) + ' to ' + formatINR(suggested * 1.05) + '. Please share the best renewal quote.');
+  });
+}
+
 
 // ── CONTACT FORM — SheetDB Lead Capture
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
@@ -7817,7 +9055,7 @@ const GAP_QUIZ = [
   { q:'Do you have a health insurance policy?', opts:['Yes, active policy','Had one, lapsed','No policy at all'] },
   { q:'Does your policy cover your parents?', opts:['Yes, covered','No, they\'re not included','I don\'t know'] },
   { q:'What\'s your current health cover amount?', opts:['Under ₹5 Lakh','₹5-10 Lakh','₹10 Lakh+','No health cover'] },
-  { q:'Do you have a term life insurance?', opts:['Yes, above ₹50 Lakh cover','Yes, but under ₹25 Lakh','No term policy'] },
+  { q:'Do you have a term life insurance?', opts:['Yes, above ₹50 Lakhs cover','Yes, but under ₹25 Lakh','No term policy'] },
   { q:'Is your vehicle comprehensively insured?', opts:['Yes, comprehensive','Only third party','Not insured / lapsed'] },
 ];
 let gapAnswers = [];
@@ -7855,7 +9093,7 @@ function gapShowResult() {
   const gaps = [];
   if (gapAnswers[0]?.idx >= 1) gaps.push({ icon:'🏥', gap:'No Active Health Cover', risk:'HIGH', fix:'Get a basic health plan from ₹500/month' });
   if (gapAnswers[1]?.idx >= 1) gaps.push({ icon:'👴', gap:'Parents Not Covered', risk:'HIGH', fix:'Add parent floater — covers up to ₹10L' });
-  if (gapAnswers[2]?.idx !== 2 && gapAnswers[2]?.idx !== 1) {} else if (gapAnswers[2]?.idx >= 2) gaps.push({ icon:'💰', gap:'Coverage Below Recommended', risk:'MEDIUM', fix:'Upgrade to ₹10L+ for full protection' });
+  if (gapAnswers[2]?.idx !== 2 && gapAnswers[2]?.idx !== 1) {} else if (gapAnswers[2]?.idx >= 2) gaps.push({ icon:'💰', gap:'Coverage Below Recommended', risk:'MEDIUM', fix:'Upgrade to ₹50 Lakhs for full protection' });
   if (gapAnswers[3]?.idx >= 1) gaps.push({ icon:'🛡️', gap:'No/Low Life Insurance', risk:'HIGH', fix:'₹1 Cr term plan starts at just ₹750/month' });
   if (gapAnswers[4]?.idx >= 1) gaps.push({ icon:'🚗', gap:'Vehicle Not Comprehensively Covered', risk:'MEDIUM', fix:'Switch to comprehensive for full protection' });
 
@@ -8108,13 +9346,46 @@ var IC_TITLES = {
   critical:   'Top Critical Illness Plans'
 };
 var IC_SUBS = {
-  health:     'Comparing 6 trusted health insurers · Updated 2025',
-  car:        'Comparing 5 top car insurers · Updated 2025',
-  bike:       'Comparing 4 trusted bike insurers · Updated 2025',
-  term:       'Comparing 5 top term life plans · Updated 2025',
-  commercial: 'Comparing 4 commercial insurers · Updated 2025',
-  critical:   'Comparing 4 critical illness plans · Updated 2025'
+  health:     'Comparing 6 trusted health insurers · Updated 2026',
+  car:        'Comparing 5 top car insurers · Updated 2026',
+  bike:       'Comparing 4 trusted bike insurers · Updated 2026',
+  term:       'Comparing 5 top term life plans · Updated 2026',
+  commercial: 'Comparing 4 commercial insurers · Updated 2026',
+  critical:   'Comparing 4 critical illness plans · Updated 2026'
 };
+
+
+var INSURER_LOGO_MAP = {
+  "HDFC ERGO":"hdfcergo.com",
+  "ICICI Lombard":"icicilombard.com",
+  "Star Health":"starhealth.in",
+  "Bajaj Allianz":"bajajallianz.com",
+  "Tata AIG":"tataaig.com",
+  "Niva Bupa":"nivabupa.com",
+  "Care Health":"careinsurance.com",
+  "SBI General":"sbigeneral.in",
+  "HDFC Life":"hdfclife.com",
+  "ICICI Pru":"iciciprulife.com",
+  "Max Life":"maxlifeinsurance.com",
+  "SBI Life":"sbilife.co.in",
+  "National Insurance":"nationalinsurance.nic.co.in",
+  "New India Assurance":"newindia.co.in",
+  "United India":"uiic.co.in",
+  "Oriental Insurance":"orientalinsurance.org.in",
+  "Future Generali":"futuregenerali.in",
+  "Liberty Insurance":"libertyinsurance.in",
+  "Max Bupa":"nivabupa.com"
+};
+function getInsurerDomain(name){
+  return INSURER_LOGO_MAP[name] || '';
+}
+function getInsurerLogoHtml(name, cls){
+  var domain = getInsurerDomain(name);
+  if(!domain){
+    return '<span class="' + cls + '-fallback">' + (name || '').substring(0,2).toUpperCase() + '</span>';
+  }
+  return '<img alt="' + name + ' logo" loading="lazy" src="https://logo.clearbit.com/' + domain + '" onerror="this.onerror=null;this.src=\'https://www.google.com/s2/favicons?domain=' + domain + '&sz=128\';this.style.width=\'28px\';this.style.height=\'28px\';this.style.borderRadius=\'8px\';this.style.padding=\'4px\';this.style.background=\'rgba(255,255,255,0.08)\';">';
+}
 
 // ── Render cards ────────────────────────────────────────────
 function icRenderCards(cat) {
@@ -8127,7 +9398,7 @@ function icRenderCards(cat) {
     }).join('');
     html += '<div class="ic-card' + bestClass + '">' +
       '<div class="ic-card-head">' +
-        '<div class="ic-card-logo">' + p.logo.substring(0,4) + '</div>' +
+        '<div class="ic-card-logo">' + getInsurerLogoHtml(p.insurer,'ic-card-logo') + '</div>' +
         '<div><div class="ic-card-insurer">' + p.insurer + '</div>' +
         '<div class="ic-card-plan">' + p.plan + '</div></div>' +
       '</div>' +
@@ -8565,7 +9836,7 @@ if (navCta && !navCta.onclick) {
     d.companies.forEach(function(c, i) {
       html += '<th><div class="cmp-th-inner' + (c.best ? ' best-col' : '') + '">' +
         (c.best ? '<div class="cmp-best-badge">BEST VALUE</div>' : '') +
-        '<div class="cmp-company-badge">' + c.abbr + '</div>' +
+        '<div class="cmp-company-badge">' + getInsurerLogoHtml(c.name,'cmp-company-badge') + '</div>' +
         '<div class="cmp-company-name">' + c.name + '</div>' +
         '<div class="cmp-company-plan">' + c.plan + '</div>' +
       '</div></th>';
@@ -8695,14 +9966,14 @@ function piRenderFacts(type){
 
   // ── TRUST BADGES (hero strip) ─────────────────────────────────────────
   var TRUST={
-    en:['✅ <strong>2,500+</strong> Clients Served','⚡ Compare Plans <strong>Instantly</strong>','🛡️ Fast <strong>Claim Support</strong>'],
-    hi:['✅ <strong>2,500+</strong> ग्राहक','⚡ प्लान तुरंत <strong>तुलना करें</strong>','🛡️ तेज़ <strong>क्लेम सहायता</strong>'],
-    pa:['✅ <strong>2,500+</strong> ਗਾਹਕ','⚡ ਪਲਾਨ ਤੁਰੰਤ <strong>ਤੁਲਨਾ</strong>','🛡️ ਤੇਜ਼ <strong>ਕਲੇਮ ਸਹਾਇਤਾ</strong>']
+    en:['✅ <strong>2,547+</strong> Clients Served','⚡ Compare Plans <strong>Instantly</strong>','🛡️ Fast <strong>Claim Support</strong>'],
+    hi:['✅ <strong>2,547+</strong> ग्राहक','⚡ प्लान तुरंत <strong>तुलना करें</strong>','🛡️ तेज़ <strong>क्लेम सहायता</strong>'],
+    pa:['✅ <strong>2,547+</strong> ਗਾਹਕ','⚡ ਪਲਾਨ ਤੁਰੰਤ <strong>ਤੁਲਨਾ</strong>','🛡️ ਤੇਜ਼ <strong>ਕਲੇਮ ਸਹਾਇਤਾ</strong>']
   };
 
   // ── SECTION TITLES ───────────────────────────────────────────────────
   var SECTIONS={
-    en:{ about:['About Us','Meet <em>Taman</em><br>Aggarwal'], services:['What We Offer','Our <em>Services</em>'], why:['Why Choose Us','The <em>Taman Care</em><br>Advantage'], claim:['Claims Process','Fast & <em>Hassle-Free</em><br>Claims'], renewal:['Policy Renewal','Never Miss a <em>Renewal</em>'], compare:['Compare & Save','Find Your <em>Best</em> Plan'], testimonials:['Client Reviews','What Our <em>Clients</em> Say'], contact:['Get In Touch',"Let's <em>Connect</em>"] },
+    en:{ about:['About Us','Meet <em>Taman</em><br>Aggarwal'], services:['What We Offer','Coverage <em>Solutions</em>'], why:['Why Choose Us','The <em>Taman Care</em><br>Advantage'], claim:['Claims Process','Fast & <em>Hassle-Free</em><br>Claims'], renewal:['Policy Renewal','Never Miss a <em>Renewal</em>'], compare:['Compare & Save','Find Your <em>Best</em> Plan'], testimonials:['Client Reviews','What clients <em>love</em> most'], contact:['Get In Touch',"Let's <em>Connect</em>"] },
     hi:{ about:['हमारे बारे में','मिलिए <em>तमन</em><br>अग्रवाल से'], services:['हम क्या ऑफर करते हैं','हमारी <em>सेवाएं</em>'], why:['हमें क्यों चुनें','<em>तमन केयर</em><br>लाभ'], claim:['क्लेम प्रक्रिया','तेज़ और <em>आसान</em><br>क्लेम'], renewal:['पॉलिसी नवीनीकरण','कभी न चूकें <em>नवीनीकरण</em>'], compare:['तुलना करें & बचाएं','खोजें <em>सर्वश्रेष्ठ</em> प्लान'], testimonials:['ग्राहक समीक्षाएं','हमारे <em>ग्राहक</em> क्या कहते हैं'], contact:['संपर्क करें','आइए <em>जुड़ें</em>'] },
     pa:{ about:['ਸਾਡੇ ਬਾਰੇ','ਮਿਲੋ <em>ਤਮਨ</em><br>ਅਗਰਵਾਲ ਨਾਲ'], services:['ਅਸੀਂ ਕੀ ਪੇਸ਼ ਕਰਦੇ ਹਾਂ','ਸਾਡੀਆਂ <em>ਸੇਵਾਵਾਂ</em>'], why:['ਸਾਨੂੰ ਕਿਉਂ ਚੁਣੋ','<em>ਤਮਨ ਕੇਅਰ</em><br>ਫ਼ਾਇਦਾ'], claim:['ਕਲੇਮ ਪ੍ਰਕਿਰਿਆ','ਤੇਜ਼ ਅਤੇ <em>ਆਸਾਨ</em><br>ਕਲੇਮ'], renewal:['ਪਾਲਿਸੀ ਨਵੀਨੀਕਰਨ','ਕਦੇ ਨਾ ਖੁੰਝਾਓ <em>ਨਵੀਨੀਕਰਨ</em>'], compare:['ਤੁਲਨਾ ਕਰੋ & ਬਚਾਓ','ਲੱਭੋ <em>ਸਭ ਤੋਂ ਵਧੀਆ</em> ਪਲਾਨ'], testimonials:['ਗਾਹਕ ਸਮੀਖਿਆਵਾਂ','ਸਾਡੇ <em>ਗਾਹਕ</em> ਕੀ ਕਹਿੰਦੇ ਹਨ'], contact:['ਸੰਪਰਕ ਕਰੋ','ਆਓ <em>ਜੁੜੀਏ</em>'] }
   };
@@ -8745,9 +10016,9 @@ function piRenderFacts(type){
   var ABOUT={
     en:{
       quote:'"Insurance is not about policies — it\'s about peace of mind for your family."',
-      body1:'With over a decade of experience, Taman Aggarwal has helped 2,500+ families and businesses across Chandigarh and Punjab find the right insurance coverage at the best prices.',
+      body1:'With over a decade of experience, Taman Aggarwal has helped 2,547+ families and businesses across Chandigarh and Punjab find the right insurance coverage at the best prices.',
       body2:'As an independent advisor, I work for YOU — not for any single insurance company. That means unbiased advice, genuine comparison, and claims support when you need it most.',
-      stat1_num:'2,500+', stat1_lbl:'Happy Clients',
+      stat1_num:'2,547+', stat1_lbl:'Happy Clients',
       stat2_num:'10+',  stat2_lbl:'Years Experience',
       stat3_num:'15+',  stat3_lbl:'Insurance Partners',
       stat4_num:'98%',  stat4_lbl:'Claims Settled'
@@ -8756,7 +10027,7 @@ function piRenderFacts(type){
       quote:'"बीमा पॉलिसियों के बारे में नहीं है — यह आपके परिवार के मन की शांति के बारे में है।"',
       body1:'एक दशक से अधिक अनुभव के साथ, तमन अग्रवाल ने चंडीगढ़ और पंजाब में 500+ परिवारों और व्यवसायों को सर्वोत्तम मूल्य पर सही बीमा कवरेज खोजने में मदद की है।',
       body2:'एक स्वतंत्र सलाहकार के रूप में, मैं आपके लिए काम करता हूं — किसी एक बीमा कंपनी के लिए नहीं। इसका मतलब है निष्पक्ष सलाह, वास्तविक तुलना और जब आपको सबसे अधिक जरूरत हो क्लेम सहायता।',
-      stat1_num:'2,500+', stat1_lbl:'खुश ग्राहक',
+      stat1_num:'2,547+', stat1_lbl:'खुश ग्राहक',
       stat2_num:'10+',  stat2_lbl:'वर्षों का अनुभव',
       stat3_num:'15+',  stat3_lbl:'बीमा साझेदार',
       stat4_num:'98%',  stat4_lbl:'क्लेम सफलता'
@@ -8765,7 +10036,7 @@ function piRenderFacts(type){
       quote:'"ਬੀਮਾ ਪਾਲਿਸੀਆਂ ਬਾਰੇ ਨਹੀਂ ਹੈ — ਇਹ ਤੁਹਾਡੇ ਪਰਿਵਾਰ ਦੀ ਮਨ ਦੀ ਸ਼ਾਂਤੀ ਬਾਰੇ ਹੈ।"',
       body1:'ਇੱਕ ਦਹਾਕੇ ਤੋਂ ਵੱਧ ਤਜ਼ਰਬੇ ਨਾਲ, ਤਮਨ ਅਗਰਵਾਲ ਨੇ ਚੰਡੀਗੜ੍ਹ ਅਤੇ ਪੰਜਾਬ ਵਿੱਚ 500+ ਪਰਿਵਾਰਾਂ ਅਤੇ ਕਾਰੋਬਾਰਾਂ ਨੂੰ ਸਭ ਤੋਂ ਵਧੀਆ ਕੀਮਤ ਤੇ ਸਹੀ ਬੀਮਾ ਕਵਰੇਜ ਲੱਭਣ ਵਿੱਚ ਮਦਦ ਕੀਤੀ ਹੈ।',
       body2:'ਇੱਕ ਸੁਤੰਤਰ ਸਲਾਹਕਾਰ ਵਜੋਂ, ਮੈਂ ਤੁਹਾਡੇ ਲਈ ਕੰਮ ਕਰਦਾ ਹਾਂ — ਕਿਸੇ ਇੱਕ ਬੀਮਾ ਕੰਪਨੀ ਲਈ ਨਹੀਂ। ਇਸਦਾ ਮਤਲਬ ਹੈ ਨਿਰਪੱਖ ਸਲਾਹ, ਅਸਲੀ ਤੁਲਨਾ ਅਤੇ ਜਦੋਂ ਤੁਹਾਨੂੰ ਸਭ ਤੋਂ ਵੱਧ ਲੋੜ ਹੋਵੇ ਕਲੇਮ ਸਹਾਇਤਾ।',
-      stat1_num:'2,500+', stat1_lbl:'ਖੁਸ਼ ਗਾਹਕ',
+      stat1_num:'2,547+', stat1_lbl:'ਖੁਸ਼ ਗਾਹਕ',
       stat2_num:'10+',  stat2_lbl:'ਸਾਲਾਂ ਦਾ ਤਜ਼ਰਬਾ',
       stat3_num:'15+',  stat3_lbl:'ਬੀਮਾ ਸਾਂਝੇਦਾਰ',
       stat4_num:'98%',  stat4_lbl:'ਕਲੇਮ ਸਫਲਤਾ'
@@ -8796,9 +10067,9 @@ function piRenderFacts(type){
 
   // ── TRUST SIGNALS STRIP ───────────────────────────────────────────────
   var TSTRIP={
-    en:[{num:'2,500+',lbl:'Trusted Clients'},{num:'48 hrs',lbl:'Avg Claim Time'},{num:'15+',lbl:'Insurer Partners'},{num:'5 Min',lbl:'Policy Issuance'},{num:'Free',lbl:'Consultation'}],
-    hi:[{num:'2,500+',lbl:'विश्वसनीय ग्राहक'},{num:'48 घंटे',lbl:'औसत क्लेम समय'},{num:'15+',lbl:'बीमा साझेदार'},{num:'5 मिनट',lbl:'पॉलिसी जारी'},{num:'मुफ्त',lbl:'परामर्श'}],
-    pa:[{num:'2,500+',lbl:'ਭਰੋਸੇਮੰਦ ਗਾਹਕ'},{num:'48 ਘੰਟੇ',lbl:'ਔਸਤ ਕਲੇਮ ਸਮਾਂ'},{num:'15+',lbl:'ਬੀਮਾ ਸਾਂਝੇਦਾਰ'},{num:'5 ਮਿੰਟ',lbl:'ਪਾਲਿਸੀ ਜਾਰੀ'},{num:'ਮੁਫ਼ਤ',lbl:'ਸਲਾਹ'}]
+    en:[{num:'2,547+',lbl:'Trusted Clients'},{num:'48 hrs',lbl:'Avg Claim Time'},{num:'15+',lbl:'Insurer Partners'},{num:'5 Min',lbl:'Policy Issuance'},{num:'Free',lbl:'Consultation'}],
+    hi:[{num:'2,547+',lbl:'विश्वसनीय ग्राहक'},{num:'48 घंटे',lbl:'औसत क्लेम समय'},{num:'15+',lbl:'बीमा साझेदार'},{num:'5 मिनट',lbl:'पॉलिसी जारी'},{num:'मुफ्त',lbl:'परामर्श'}],
+    pa:[{num:'2,547+',lbl:'ਭਰੋਸੇਮੰਦ ਗਾਹਕ'},{num:'48 ਘੰਟੇ',lbl:'ਔਸਤ ਕਲੇਮ ਸਮਾਂ'},{num:'15+',lbl:'ਬੀਮਾ ਸਾਂਝੇਦਾਰ'},{num:'5 ਮਿੰਟ',lbl:'ਪਾਲਿਸੀ ਜਾਰੀ'},{num:'ਮੁਫ਼ਤ',lbl:'ਸਲਾਹ'}]
   };
 
   // ── CONTACT FORM LABELS ───────────────────────────────────────────────
@@ -9283,12 +10554,157 @@ document.addEventListener('DOMContentLoaded', function () {
   border-color: rgba(232,201,110,0.5);
 }
 
+
+/* Company Logos Upgrade */
+.company-logo-box img {
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(1.2);
+  transition: all 0.3s ease;
+}
+.company-logo-box:hover img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.05);
+}
+
+
+/* === 2026 premium brand system === */
+.companies-logos{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr))!important;
+  gap:18px!important;
+  margin-top:56px;
+}
+.company-logo-box{
+  position:relative;
+  padding:16px 14px 14px!important;
+  border-radius:18px!important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    radial-gradient(circle at top, rgba(255,255,255,0.10), transparent 42%),
+    rgba(10,10,14,0.86)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  backdrop-filter:blur(18px)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 14px 34px rgba(0,0,0,0.34),
+    0 0 0 1px rgba(201,168,76,0.05)!important;
+}
+.company-logo-box::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  padding:1px;
+  background:linear-gradient(135deg, rgba(255,255,255,0.16), rgba(201,168,76,0.16), rgba(255,255,255,0.04));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  pointer-events:none;
+  opacity:.95;
+}
+.company-logo-box:hover{
+  transform:translateY(-7px) scale(1.03)!important;
+  border-color:rgba(255,255,255,0.18)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 22px 46px rgba(0,0,0,0.42),
+    0 0 40px rgba(201,168,76,0.12),
+    0 0 0 1px rgba(201,168,76,0.09)!important;
+}
+.company-logo-media{
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:10px;
+}
+.company-logo-box img,
+.logo-chip img,
+.cmp-company-badge img,
+.ic-card-logo img{
+  object-fit:contain;
+  image-rendering:auto;
+}
+.company-logo-box img{
+  max-width:120px!important;
+  max-height:44px!important;
+  width:auto!important;
+  height:auto!important;
+  filter:grayscale(0%) brightness(1.32) contrast(1.14) saturate(1.15) drop-shadow(0 0 10px rgba(255,255,255,0.10))!important;
+}
+.company-logo-box:hover img{
+  filter:grayscale(0%) brightness(1.42) contrast(1.18) saturate(1.24) drop-shadow(0 0 18px rgba(201,168,76,0.18))!important;
+  transform:translateY(-1px) scale(1.04)!important;
+}
+.company-logo-name{
+  font-size:12px!important;
+  color:rgba(255,255,255,0.82)!important;
+  text-align:center;
+  letter-spacing:.4px;
+}
+.company-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.05)!important;
+  border:1px solid rgba(255,255,255,0.08)!important;
+  color:rgba(255,255,255,0.86)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05),0 8px 18px rgba(0,0,0,0.22);
+}
+.logo-chip{
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.10);
+  overflow:hidden;
+  flex-shrink:0;
+}
+.logo-chip img{
+  width:18px;
+  height:18px;
+  filter:brightness(1.35) contrast(1.15);
+}
+.ic-card-logo{
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)), rgba(16,16,22,0.88);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 14px 24px rgba(0,0,0,0.28);
+}
+.ic-card-logo img{
+  width:34px;
+  height:34px;
+  filter:brightness(1.38) contrast(1.14) saturate(1.08);
+}
+.cmp-company-badge{
+  width:54px!important;
+  height:54px!important;
+  border-radius:16px!important;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)), rgba(16,16,22,0.88)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 28px rgba(0,0,0,0.28)!important;
+}
+.cmp-company-badge img{
+  width:34px;
+  height:34px;
+  filter:brightness(1.4) contrast(1.16) saturate(1.08);
+}
+
 </style>
 <script id="visitor-counter-script">
 (function(){
   var el=document.getElementById('visitorCountTop');
   if(!el) return;
-  var count=Math.floor(Math.random()*300)+2500;
+  var count=Math.floor(Math.random()*300)+2547;
   setInterval(function(){
     count += Math.floor(Math.random()*4)+1;
     if(count>5000) count=5000;
@@ -9528,6 +10944,151 @@ document.addEventListener('DOMContentLoaded', function () {
 .stat-box:hover {
   transform: translateY(-4px);
   border-color: rgba(232,201,110,0.5);
+}
+
+
+/* Company Logos Upgrade */
+.company-logo-box img {
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(1.2);
+  transition: all 0.3s ease;
+}
+.company-logo-box:hover img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.05);
+}
+
+
+/* === 2026 premium brand system === */
+.companies-logos{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr))!important;
+  gap:18px!important;
+  margin-top:56px;
+}
+.company-logo-box{
+  position:relative;
+  padding:16px 14px 14px!important;
+  border-radius:18px!important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    radial-gradient(circle at top, rgba(255,255,255,0.10), transparent 42%),
+    rgba(10,10,14,0.86)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  backdrop-filter:blur(18px)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 14px 34px rgba(0,0,0,0.34),
+    0 0 0 1px rgba(201,168,76,0.05)!important;
+}
+.company-logo-box::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  padding:1px;
+  background:linear-gradient(135deg, rgba(255,255,255,0.16), rgba(201,168,76,0.16), rgba(255,255,255,0.04));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  pointer-events:none;
+  opacity:.95;
+}
+.company-logo-box:hover{
+  transform:translateY(-7px) scale(1.03)!important;
+  border-color:rgba(255,255,255,0.18)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 22px 46px rgba(0,0,0,0.42),
+    0 0 40px rgba(201,168,76,0.12),
+    0 0 0 1px rgba(201,168,76,0.09)!important;
+}
+.company-logo-media{
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:10px;
+}
+.company-logo-box img,
+.logo-chip img,
+.cmp-company-badge img,
+.ic-card-logo img{
+  object-fit:contain;
+  image-rendering:auto;
+}
+.company-logo-box img{
+  max-width:120px!important;
+  max-height:44px!important;
+  width:auto!important;
+  height:auto!important;
+  filter:grayscale(0%) brightness(1.32) contrast(1.14) saturate(1.15) drop-shadow(0 0 10px rgba(255,255,255,0.10))!important;
+}
+.company-logo-box:hover img{
+  filter:grayscale(0%) brightness(1.42) contrast(1.18) saturate(1.24) drop-shadow(0 0 18px rgba(201,168,76,0.18))!important;
+  transform:translateY(-1px) scale(1.04)!important;
+}
+.company-logo-name{
+  font-size:12px!important;
+  color:rgba(255,255,255,0.82)!important;
+  text-align:center;
+  letter-spacing:.4px;
+}
+.company-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.05)!important;
+  border:1px solid rgba(255,255,255,0.08)!important;
+  color:rgba(255,255,255,0.86)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05),0 8px 18px rgba(0,0,0,0.22);
+}
+.logo-chip{
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.10);
+  overflow:hidden;
+  flex-shrink:0;
+}
+.logo-chip img{
+  width:18px;
+  height:18px;
+  filter:brightness(1.35) contrast(1.15);
+}
+.ic-card-logo{
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)), rgba(16,16,22,0.88);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 14px 24px rgba(0,0,0,0.28);
+}
+.ic-card-logo img{
+  width:34px;
+  height:34px;
+  filter:brightness(1.38) contrast(1.14) saturate(1.08);
+}
+.cmp-company-badge{
+  width:54px!important;
+  height:54px!important;
+  border-radius:16px!important;
+  background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)), rgba(16,16,22,0.88)!important;
+  border:1px solid rgba(255,255,255,0.09)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 28px rgba(0,0,0,0.28)!important;
+}
+.cmp-company-badge img{
+  width:34px;
+  height:34px;
+  filter:brightness(1.4) contrast(1.16) saturate(1.08);
 }
 
 </style>
@@ -9812,7 +11373,7 @@ var QA = [
 ["what is final settlement","Final settlement is the last payment from insurer closing a claim. For health: hospital bill settlement. For car: repair bill settlement. For life: death benefit payment."],
 
 // === TAMAN CARE SPECIFIC (30 Q&A) ===
-["who is taman care","Taman Care Insurance Services is Chandigarh's most trusted insurance advisory. Founded by Taman Aggarwal with 10+ years of experience, we help 2,500+ clients find the best insurance."],
+["who is taman care","Taman Care Insurance Services is Chandigarh's most trusted insurance advisory. Founded by Taman Aggarwal with 10+ years of experience, we help 2,547+ clients find the best insurance."],
 ["how can taman care help me","Taman Care helps you compare 20+ insurance companies, find the best plan for your needs and budget, handle all paperwork, provide 24/7 claim support, and renew your policies on time."],
 ["does taman care charge fees","Zero fees! Consultation, comparison, claim support, and renewal assistance are all completely free. We earn commission from insurers — same price as buying directly."],
 ["how to contact taman care","Call/WhatsApp: +91 90685 41300 | Email: info@tamancare.in | Based in Chandigarh, Pan India services. Office hours: Mon–Sat 9AM–7PM | Emergency claim support: 24/7."],
@@ -9939,5 +11500,8 @@ window.aiAskQuick = aiAskQuick;
 
 })();
 </script>
+
+
+
 </body>
 </html>
